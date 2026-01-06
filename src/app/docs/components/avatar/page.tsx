@@ -8,7 +8,9 @@ export default function AvatarPage() {
     <div className="space-y-12">
       {/* Header */}
       <div>
-        <Badge variant="primary" className="mb-4">COMPONENT</Badge>
+        <Badge variant="primary" className="mb-4">
+          COMPONENT
+        </Badge>
         <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
           AVATAR
         </h1>
@@ -29,7 +31,10 @@ export default function AvatarPage() {
 </Avatar>`}
       >
         <Avatar>
-          <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="User" />
+          <AvatarImage
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
+            alt="User"
+          />
           <AvatarFallback>JD</AvatarFallback>
         </Avatar>
       </ComponentPreview>
@@ -57,10 +62,18 @@ export default function AvatarPage() {
 <Avatar size="xl"><AvatarFallback>XL</AvatarFallback></Avatar>`}
       >
         <div className="flex items-center gap-4">
-          <Avatar size="sm"><AvatarFallback>SM</AvatarFallback></Avatar>
-          <Avatar size="md"><AvatarFallback>MD</AvatarFallback></Avatar>
-          <Avatar size="lg"><AvatarFallback>LG</AvatarFallback></Avatar>
-          <Avatar size="xl"><AvatarFallback>XL</AvatarFallback></Avatar>
+          <Avatar size="sm">
+            <AvatarFallback>SM</AvatarFallback>
+          </Avatar>
+          <Avatar size="md">
+            <AvatarFallback>MD</AvatarFallback>
+          </Avatar>
+          <Avatar size="lg">
+            <AvatarFallback>LG</AvatarFallback>
+          </Avatar>
+          <Avatar size="xl">
+            <AvatarFallback>XL</AvatarFallback>
+          </Avatar>
         </div>
       </ComponentPreview>
 
@@ -93,10 +106,12 @@ export default function AvatarPage() {
       {/* Full Code */}
       <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">FULL COMPONENT CODE</h3>
+          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+            FULL COMPONENT CODE
+          </h3>
         </div>
         <pre className="p-6 overflow-x-auto text-sm font-mono bg-[#171717] text-[#f5f5f5]">
-{`import { HTMLAttributes, forwardRef } from "react";
+          {`import { HTMLAttributes, forwardRef } from "react";
 
 export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
   size?: "sm" | "md" | "lg" | "xl";

@@ -36,7 +36,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         {...props}
       >
         <div className="flex items-start gap-3">
-          <span className="text-2xl font-bold flex-shrink-0">{icons[variant]}</span>
+          <span className="text-2xl font-bold flex-shrink-0">
+            {icons[variant]}
+          </span>
           <div className="flex-1">{children}</div>
         </div>
       </div>
@@ -46,31 +48,29 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
 
 Alert.displayName = "Alert";
 
-const AlertTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
-  ({ className = "", children, ...props }, ref) => (
-    <h4
-      ref={ref}
-      className={`text-lg font-extrabold uppercase tracking-wide mb-1 ${className}`}
-      {...props}
-    >
-      {children}
-    </h4>
-  )
-);
+const AlertTitle = forwardRef<
+  HTMLHeadingElement,
+  HTMLAttributes<HTMLHeadingElement>
+>(({ className = "", children, ...props }, ref) => (
+  <h4
+    ref={ref}
+    className={`text-lg font-extrabold uppercase tracking-wide mb-1 ${className}`}
+    {...props}
+  >
+    {children}
+  </h4>
+));
 
 AlertTitle.displayName = "AlertTitle";
 
-const AlertDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
-  ({ className = "", children, ...props }, ref) => (
-    <p
-      ref={ref}
-      className={`text-sm font-medium ${className}`}
-      {...props}
-    >
-      {children}
-    </p>
-  )
-);
+const AlertDescription = forwardRef<
+  HTMLParagraphElement,
+  HTMLAttributes<HTMLParagraphElement>
+>(({ className = "", children, ...props }, ref) => (
+  <p ref={ref} className={`text-sm font-medium ${className}`} {...props}>
+    {children}
+  </p>
+));
 
 AlertDescription.displayName = "AlertDescription";
 

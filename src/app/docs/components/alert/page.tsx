@@ -8,7 +8,9 @@ export default function AlertPage() {
     <div className="space-y-12">
       {/* Header */}
       <div>
-        <Badge variant="primary" className="mb-4">COMPONENT</Badge>
+        <Badge variant="primary" className="mb-4">
+          COMPONENT
+        </Badge>
         <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
           ALERT
         </h1>
@@ -36,23 +38,33 @@ export default function AlertPage() {
         <div className="w-full space-y-4">
           <Alert variant="default">
             <AlertTitle>DEFAULT ALERT</AlertTitle>
-            <AlertDescription>This is a default alert message.</AlertDescription>
+            <AlertDescription>
+              This is a default alert message.
+            </AlertDescription>
           </Alert>
           <Alert variant="info">
             <AlertTitle>INFO</AlertTitle>
-            <AlertDescription>Here&apos;s some useful information for you.</AlertDescription>
+            <AlertDescription>
+              Here&apos;s some useful information for you.
+            </AlertDescription>
           </Alert>
           <Alert variant="success">
             <AlertTitle>SUCCESS</AlertTitle>
-            <AlertDescription>Your action was completed successfully!</AlertDescription>
+            <AlertDescription>
+              Your action was completed successfully!
+            </AlertDescription>
           </Alert>
           <Alert variant="warning">
             <AlertTitle>WARNING</AlertTitle>
-            <AlertDescription>Please be aware of this important notice.</AlertDescription>
+            <AlertDescription>
+              Please be aware of this important notice.
+            </AlertDescription>
           </Alert>
           <Alert variant="danger">
             <AlertTitle>DANGER</AlertTitle>
-            <AlertDescription>Something went wrong. Please try again.</AlertDescription>
+            <AlertDescription>
+              Something went wrong. Please try again.
+            </AlertDescription>
           </Alert>
         </div>
       </ComponentPreview>
@@ -75,10 +87,12 @@ export default function AlertPage() {
       {/* Full Code */}
       <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">FULL COMPONENT CODE</h3>
+          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+            FULL COMPONENT CODE
+          </h3>
         </div>
         <pre className="p-6 overflow-x-auto text-sm font-mono bg-[#171717] text-[#f5f5f5]">
-{`import { HTMLAttributes, forwardRef } from "react";
+          {`import { HTMLAttributes, forwardRef } from "react";
 
 export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   variant?: "default" | "info" | "success" | "warning" | "danger";

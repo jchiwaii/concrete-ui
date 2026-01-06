@@ -1,12 +1,21 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "primary" | "secondary" | "danger" | "ghost" | "outline";
+  variant?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "danger"
+    | "ghost"
+    | "outline";
   size?: "sm" | "md" | "lg";
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className = "", variant = "default", size = "md", children, ...props }, ref) => {
+  (
+    { className = "", variant = "default", size = "md", children, ...props },
+    ref
+  ) => {
     const baseStyles = `
       inline-flex items-center justify-center
       font-bold uppercase tracking-wider
@@ -26,8 +35,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       primary: "bg-[#FFFF00] text-black shadow-[4px_4px_0_0_#000]",
       secondary: "bg-[#00FFFF] text-black shadow-[4px_4px_0_0_#000]",
       danger: "bg-[#FF0000] text-white shadow-[4px_4px_0_0_#000]",
-      ghost: "bg-transparent text-black border-transparent shadow-none hover:bg-gray-100 hover:shadow-none",
-      outline: "bg-transparent text-black shadow-[4px_4px_0_0_#000] hover:bg-black hover:text-white",
+      ghost:
+        "bg-transparent text-black border-transparent shadow-none hover:bg-gray-100 hover:shadow-none",
+      outline:
+        "bg-transparent text-black shadow-[4px_4px_0_0_#000] hover:bg-black hover:text-white",
     };
 
     const sizes = {

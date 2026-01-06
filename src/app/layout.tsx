@@ -3,8 +3,15 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Concrete UI - Neo Brutalist Component Library",
-  description: "Bold, unapologetic UI components with thick borders, hard shadows, and raw aesthetics. Copy & paste React components for the brutalist web.",
-  keywords: ["ui library", "react components", "brutalist design", "neo brutalism", "tailwind css"],
+  description:
+    "Bold, unapologetic UI components with thick borders, hard shadows, and raw aesthetics. Copy & paste React components for the brutalist web.",
+  keywords: [
+    "ui library",
+    "react components",
+    "brutalist design",
+    "neo brutalism",
+    "tailwind css",
+  ],
 };
 
 export default function RootLayout({
@@ -14,9 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-display antialiased">
-        {children}
-      </body>
+      <body className="font-display antialiased">{children}</body>
     </html>
   );
 }

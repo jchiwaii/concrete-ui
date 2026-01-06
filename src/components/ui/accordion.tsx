@@ -1,6 +1,12 @@
 "use client";
 
-import { HTMLAttributes, forwardRef, useState, createContext, useContext } from "react";
+import {
+  HTMLAttributes,
+  forwardRef,
+  useState,
+  createContext,
+  useContext,
+} from "react";
 
 interface AccordionContextValue {
   openItems: string[];
@@ -16,7 +22,10 @@ export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
-  ({ className = "", type = "single", defaultValue = [], children, ...props }, ref) => {
+  (
+    { className = "", type = "single", defaultValue = [], children, ...props },
+    ref
+  ) => {
     const [openItems, setOpenItems] = useState<string[]>(defaultValue);
 
     const toggleItem = (value: string) => {
@@ -50,7 +59,8 @@ export interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
 const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   ({ className = "", value, children, ...props }, ref) => {
     const context = useContext(AccordionContext);
-    if (!context) throw new Error("AccordionItem must be used within Accordion");
+    if (!context)
+      throw new Error("AccordionItem must be used within Accordion");
 
     const isOpen = context.openItems.includes(value);
 
@@ -69,14 +79,16 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
 
 AccordionItem.displayName = "AccordionItem";
 
-export interface AccordionTriggerProps extends HTMLAttributes<HTMLButtonElement> {
+export interface AccordionTriggerProps
+  extends HTMLAttributes<HTMLButtonElement> {
   value: string;
 }
 
 const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
   ({ className = "", value, children, ...props }, ref) => {
     const context = useContext(AccordionContext);
-    if (!context) throw new Error("AccordionTrigger must be used within Accordion");
+    if (!context)
+      throw new Error("AccordionTrigger must be used within Accordion");
 
     const isOpen = context.openItems.includes(value);
 
@@ -118,7 +130,8 @@ export interface AccordionContentProps extends HTMLAttributes<HTMLDivElement> {
 const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   ({ className = "", value, children, ...props }, ref) => {
     const context = useContext(AccordionContext);
-    if (!context) throw new Error("AccordionContent must be used within Accordion");
+    if (!context)
+      throw new Error("AccordionContent must be used within Accordion");
 
     const isOpen = context.openItems.includes(value);
 

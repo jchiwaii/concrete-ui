@@ -79,41 +79,35 @@ const ModalHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 
 ModalHeader.displayName = "ModalHeader";
 
-const ModalTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
-  ({ className = "", children, ...props }, ref) => (
-    <h2
-      ref={ref}
-      className={`text-2xl font-extrabold uppercase tracking-tight ${className}`}
-      {...props}
-    >
-      {children}
-    </h2>
-  )
-);
+const ModalTitle = forwardRef<
+  HTMLHeadingElement,
+  HTMLAttributes<HTMLHeadingElement>
+>(({ className = "", children, ...props }, ref) => (
+  <h2
+    ref={ref}
+    className={`text-2xl font-extrabold uppercase tracking-tight ${className}`}
+    {...props}
+  >
+    {children}
+  </h2>
+));
 
 ModalTitle.displayName = "ModalTitle";
 
-const ModalDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
-  ({ className = "", children, ...props }, ref) => (
-    <p
-      ref={ref}
-      className={`mt-2 text-base ${className}`}
-      {...props}
-    >
-      {children}
-    </p>
-  )
-);
+const ModalDescription = forwardRef<
+  HTMLParagraphElement,
+  HTMLAttributes<HTMLParagraphElement>
+>(({ className = "", children, ...props }, ref) => (
+  <p ref={ref} className={`mt-2 text-base ${className}`} {...props}>
+    {children}
+  </p>
+));
 
 ModalDescription.displayName = "ModalDescription";
 
 const ModalContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={`p-6 ${className}`}
-      {...props}
-    >
+    <div ref={ref} className={`p-6 ${className}`} {...props}>
       {children}
     </div>
   )
@@ -165,4 +159,12 @@ const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>(
 
 ModalClose.displayName = "ModalClose";
 
-export { Modal, ModalHeader, ModalTitle, ModalDescription, ModalContent, ModalFooter, ModalClose };
+export {
+  Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalDescription,
+  ModalContent,
+  ModalFooter,
+  ModalClose,
+};

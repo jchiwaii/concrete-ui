@@ -8,7 +8,9 @@ export default function TextareaPage() {
     <div className="space-y-12">
       {/* Header */}
       <div>
-        <Badge variant="primary" className="mb-4">COMPONENT</Badge>
+        <Badge variant="primary" className="mb-4">
+          COMPONENT
+        </Badge>
         <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
           TEXTAREA
         </h1>
@@ -65,10 +67,12 @@ export default function TextareaPage() {
       {/* Full Code */}
       <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">FULL COMPONENT CODE</h3>
+          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+            FULL COMPONENT CODE
+          </h3>
         </div>
         <pre className="p-6 overflow-x-auto text-sm font-mono bg-[#171717] text-[#f5f5f5]">
-{`import { TextareaHTMLAttributes, forwardRef } from "react";
+          {`import { TextareaHTMLAttributes, forwardRef } from "react";
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: boolean;

@@ -8,13 +8,15 @@ export default function ButtonPage() {
     <div className="space-y-12">
       {/* Header */}
       <div>
-        <Badge variant="primary" className="mb-4">COMPONENT</Badge>
+        <Badge variant="primary" className="mb-4">
+          COMPONENT
+        </Badge>
         <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
           BUTTON
         </h1>
         <p className="text-brutal-lg max-w-2xl">
-          Chunky, bold buttons with thick borders and hard shadows. 
-          Interactive states include hover transforms and shadow shifts.
+          Chunky, bold buttons with thick borders and hard shadows. Interactive
+          states include hover transforms and shadow shifts.
         </p>
       </div>
 
@@ -80,17 +82,21 @@ export default function ButtonPage() {
       >
         <div className="flex flex-wrap gap-4">
           <Button disabled>DISABLED</Button>
-          <Button variant="primary" disabled>DISABLED PRIMARY</Button>
+          <Button variant="primary" disabled>
+            DISABLED PRIMARY
+          </Button>
         </div>
       </ComponentPreview>
 
       {/* Full Code */}
       <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">FULL COMPONENT CODE</h3>
+          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+            FULL COMPONENT CODE
+          </h3>
         </div>
         <pre className="p-6 overflow-x-auto text-sm font-mono bg-[#171717] text-[#f5f5f5]">
-{`import { ButtonHTMLAttributes, forwardRef } from "react";
+          {`import { ButtonHTMLAttributes, forwardRef } from "react";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "primary" | "secondary" | "danger" | "ghost" | "outline";

@@ -6,7 +6,9 @@ export default function InstallationPage() {
     <div className="space-y-12">
       {/* Header */}
       <div>
-        <Badge variant="secondary" className="mb-4">GETTING STARTED</Badge>
+        <Badge variant="secondary" className="mb-4">
+          GETTING STARTED
+        </Badge>
         <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
           INSTALLATION
         </h1>
@@ -23,16 +25,30 @@ export default function InstallationPage() {
           </h2>
           <ul className="space-y-3 text-base">
             <li className="flex items-center gap-3">
-              <span className="w-8 h-8 bg-[#FFFF00] border-4 border-black flex items-center justify-center font-bold text-sm">✓</span>
-              <span><strong>React 18+</strong> — Components use modern React features</span>
+              <span className="w-8 h-8 bg-[#FFFF00] border-4 border-black flex items-center justify-center font-bold text-sm">
+                ✓
+              </span>
+              <span>
+                <strong>React 18+</strong> — Components use modern React
+                features
+              </span>
             </li>
             <li className="flex items-center gap-3">
-              <span className="w-8 h-8 bg-[#FFFF00] border-4 border-black flex items-center justify-center font-bold text-sm">✓</span>
-              <span><strong>Tailwind CSS 3+</strong> — All styling uses Tailwind utilities</span>
+              <span className="w-8 h-8 bg-[#FFFF00] border-4 border-black flex items-center justify-center font-bold text-sm">
+                ✓
+              </span>
+              <span>
+                <strong>Tailwind CSS 3+</strong> — All styling uses Tailwind
+                utilities
+              </span>
             </li>
             <li className="flex items-center gap-3">
-              <span className="w-8 h-8 bg-[#FFFF00] border-4 border-black flex items-center justify-center font-bold text-sm">✓</span>
-              <span><strong>TypeScript</strong> — Optional but recommended</span>
+              <span className="w-8 h-8 bg-[#FFFF00] border-4 border-black flex items-center justify-center font-bold text-sm">
+                ✓
+              </span>
+              <span>
+                <strong>TypeScript</strong> — Optional but recommended
+              </span>
             </li>
           </ul>
         </CardContent>
@@ -45,12 +61,15 @@ export default function InstallationPage() {
             STEP 1: ADD FONTS
           </h2>
           <p className="text-base mb-4">
-            Add Space Grotesk (display) and JetBrains Mono (monospace) to your project:
+            Add Space Grotesk (display) and JetBrains Mono (monospace) to your
+            project:
           </p>
-          <CodeBlock code={`<!-- Add to your HTML head or import in CSS -->
+          <CodeBlock
+            code={`<!-- Add to your HTML head or import in CSS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">`} />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">`}
+          />
         </CardContent>
       </Card>
 
@@ -63,7 +82,8 @@ export default function InstallationPage() {
           <p className="text-base mb-4">
             Add these design tokens to your global CSS file:
           </p>
-          <CodeBlock code={`:root {
+          <CodeBlock
+            code={`:root {
   /* Core Colors */
   --concrete-black: #000000;
   --concrete-white: #FFFFFF;
@@ -88,7 +108,8 @@ export default function InstallationPage() {
   
   /* Transitions */
   --concrete-transition: all 0.1s ease-out;
-}`} />
+}`}
+          />
         </CardContent>
       </Card>
 
@@ -99,10 +120,15 @@ export default function InstallationPage() {
             STEP 3: COPY COMPONENTS
           </h2>
           <p className="text-base mb-4">
-            Browse the components documentation and copy the ones you need into your project.
-            We recommend creating a <code className="bg-black text-white px-2 py-0.5">components/ui</code> folder:
+            Browse the components documentation and copy the ones you need into
+            your project. We recommend creating a{" "}
+            <code className="bg-black text-white px-2 py-0.5">
+              components/ui
+            </code>{" "}
+            folder:
           </p>
-          <CodeBlock code={`your-project/
+          <CodeBlock
+            code={`your-project/
 ├── src/
 │   ├── components/
 │   │   └── ui/
@@ -112,7 +138,8 @@ export default function InstallationPage() {
 │   │       ├── input.tsx
 │   │       └── ...
 │   └── ...
-└── ...`} />
+└── ...`}
+          />
         </CardContent>
       </Card>
 
@@ -125,7 +152,8 @@ export default function InstallationPage() {
           <p className="text-base mb-4">
             Import and use components in your React files:
           </p>
-          <CodeBlock code={`import { Button, Card, CardContent, Badge } from "@/components/ui";
+          <CodeBlock
+            code={`import { Button, Card, CardContent, Badge } from "@/components/ui";
 
 export default function MyPage() {
   return (
@@ -141,7 +169,8 @@ export default function MyPage() {
       </CardContent>
     </Card>
   );
-}`} />
+}`}
+          />
         </CardContent>
       </Card>
 
@@ -154,23 +183,35 @@ export default function MyPage() {
           <ul className="space-y-3 text-base text-white">
             <li className="flex items-start gap-3">
               <span className="font-bold">→</span>
-              <span>Use <strong>uppercase text</strong> for buttons, badges, and labels</span>
+              <span>
+                Use <strong>uppercase text</strong> for buttons, badges, and
+                labels
+              </span>
             </li>
             <li className="flex items-start gap-3">
               <span className="font-bold">→</span>
-              <span>Keep border radius <strong>0-4px max</strong> for the brutalist look</span>
+              <span>
+                Keep border radius <strong>0-4px max</strong> for the brutalist
+                look
+              </span>
             </li>
             <li className="flex items-start gap-3">
               <span className="font-bold">→</span>
-              <span>Use <strong>bold, saturated colors</strong> — avoid pastels</span>
+              <span>
+                Use <strong>bold, saturated colors</strong> — avoid pastels
+              </span>
             </li>
             <li className="flex items-start gap-3">
               <span className="font-bold">→</span>
-              <span>Keep transitions <strong>snappy (100ms)</strong> — no slow fades</span>
+              <span>
+                Keep transitions <strong>snappy (100ms)</strong> — no slow fades
+              </span>
             </li>
             <li className="flex items-start gap-3">
               <span className="font-bold">→</span>
-              <span>Add <strong>generous padding</strong> — chunky is good</span>
+              <span>
+                Add <strong>generous padding</strong> — chunky is good
+              </span>
             </li>
           </ul>
         </CardContent>

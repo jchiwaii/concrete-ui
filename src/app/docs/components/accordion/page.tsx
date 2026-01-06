@@ -1,6 +1,12 @@
 "use client";
 
-import { Badge, Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui";
+import {
+  Badge,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui";
 import { ComponentPreview } from "@/components/docs";
 
 export default function AccordionPage() {
@@ -8,7 +14,9 @@ export default function AccordionPage() {
     <div className="space-y-12">
       {/* Header */}
       <div>
-        <Badge variant="primary" className="mb-4">COMPONENT</Badge>
+        <Badge variant="primary" className="mb-4">
+          COMPONENT
+        </Badge>
         <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
           ACCORDION
         </h1>
@@ -36,23 +44,29 @@ export default function AccordionPage() {
         <div className="w-full max-w-lg">
           <Accordion type="single" defaultValue={["item-1"]}>
             <AccordionItem value="item-1">
-              <AccordionTrigger value="item-1">WHAT IS CONCRETE UI?</AccordionTrigger>
+              <AccordionTrigger value="item-1">
+                WHAT IS CONCRETE UI?
+              </AccordionTrigger>
               <AccordionContent value="item-1">
-                Concrete UI is a neo brutalist component library for React. 
-                It features bold borders, hard shadows, and saturated colors.
+                Concrete UI is a neo brutalist component library for React. It
+                features bold borders, hard shadows, and saturated colors.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
-              <AccordionTrigger value="item-2">HOW DO I INSTALL IT?</AccordionTrigger>
+              <AccordionTrigger value="item-2">
+                HOW DO I INSTALL IT?
+              </AccordionTrigger>
               <AccordionContent value="item-2">
-                Simply copy the component code into your project. No npm package needed.
-                Just make sure you have React and Tailwind CSS set up.
+                Simply copy the component code into your project. No npm package
+                needed. Just make sure you have React and Tailwind CSS set up.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
-              <AccordionTrigger value="item-3">IS IT ACCESSIBLE?</AccordionTrigger>
+              <AccordionTrigger value="item-3">
+                IS IT ACCESSIBLE?
+              </AccordionTrigger>
               <AccordionContent value="item-3">
-                Yes! All components follow WAI-ARIA guidelines and support 
+                Yes! All components follow WAI-ARIA guidelines and support
                 keyboard navigation.
               </AccordionContent>
             </AccordionItem>
@@ -95,10 +109,12 @@ export default function AccordionPage() {
       {/* Full Code */}
       <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">FULL COMPONENT CODE</h3>
+          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+            FULL COMPONENT CODE
+          </h3>
         </div>
         <pre className="p-6 overflow-x-auto text-sm font-mono bg-[#171717] text-[#f5f5f5]">
-{`"use client";
+          {`"use client";
 
 import { HTMLAttributes, forwardRef, useState, createContext, useContext } from "react";
 

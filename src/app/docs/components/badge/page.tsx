@@ -8,13 +8,15 @@ export default function BadgePage() {
     <div className="space-y-12">
       {/* Header */}
       <div>
-        <Badge variant="primary" className="mb-4">COMPONENT</Badge>
+        <Badge variant="primary" className="mb-4">
+          COMPONENT
+        </Badge>
         <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
           BADGE
         </h1>
         <p className="text-brutal-lg max-w-2xl">
-          Small status indicators with bold colors and thick borders. 
-          Perfect for labels, tags, and status indicators.
+          Small status indicators with bold colors and thick borders. Perfect
+          for labels, tags, and status indicators.
         </p>
       </div>
 
@@ -90,10 +92,12 @@ export default function BadgePage() {
       {/* Full Code */}
       <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">FULL COMPONENT CODE</h3>
+          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+            FULL COMPONENT CODE
+          </h3>
         </div>
         <pre className="p-6 overflow-x-auto text-sm font-mono bg-[#171717] text-[#f5f5f5]">
-{`import { HTMLAttributes, forwardRef } from "react";
+          {`import { HTMLAttributes, forwardRef } from "react";
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: "default" | "primary" | "secondary" | "danger" | "success" | "warning";

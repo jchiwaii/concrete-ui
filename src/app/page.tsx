@@ -40,15 +40,21 @@ export default function Home() {
       {/* Hero Section */}
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto text-center">
-          <Badge variant="primary" size="lg" className="mb-6 animate-brutal-slide-up">
+          <Badge
+            variant="primary"
+            size="lg"
+            className="mb-6 animate-brutal-slide-up"
+          >
             NEO BRUTALIST
           </Badge>
           <h1 className="text-brutal-5xl font-extrabold uppercase tracking-tight leading-none mb-6 animate-brutal-slide-up stagger-1">
             CONCRETE<span className="text-[#FFFF00] bg-black px-2">UI</span>
           </h1>
           <p className="text-brutal-xl max-w-2xl mx-auto mb-10 animate-brutal-slide-up stagger-2">
-            Bold, unapologetic UI components with thick borders, hard shadows, and raw aesthetics.
-            <span className="font-extrabold"> Copy & paste</span> into your React projects.
+            Bold, unapologetic UI components with thick borders, hard shadows,
+            and raw aesthetics.
+            <span className="font-extrabold"> Copy & paste</span> into your
+            React projects.
           </p>
           <div className="flex items-center justify-center gap-4 animate-brutal-slide-up stagger-3">
             <Link href="/docs">
@@ -75,27 +81,36 @@ export default function Home() {
             <Card variant="elevated" color="yellow">
               <CardContent className="p-8">
                 <div className="text-5xl mb-4">🎨</div>
-                <h3 className="text-xl font-extrabold uppercase mb-2">BOLD DESIGN</h3>
+                <h3 className="text-xl font-extrabold uppercase mb-2">
+                  BOLD DESIGN
+                </h3>
                 <p className="text-base">
-                  Thick borders, hard shadows, and saturated colors. No gradients, no subtlety.
+                  Thick borders, hard shadows, and saturated colors. No
+                  gradients, no subtlety.
                 </p>
               </CardContent>
             </Card>
             <Card variant="elevated" color="cyan">
               <CardContent className="p-8">
                 <div className="text-5xl mb-4">📋</div>
-                <h3 className="text-xl font-extrabold uppercase mb-2">COPY & PASTE</h3>
+                <h3 className="text-xl font-extrabold uppercase mb-2">
+                  COPY & PASTE
+                </h3>
                 <p className="text-base">
-                  Just copy the component code into your project. No package installation needed.
+                  Just copy the component code into your project. No package
+                  installation needed.
                 </p>
               </CardContent>
             </Card>
             <Card variant="elevated" color="magenta">
               <CardContent className="p-8">
                 <div className="text-5xl mb-4">⚡</div>
-                <h3 className="text-xl font-extrabold uppercase mb-2">FAST & LIGHT</h3>
+                <h3 className="text-xl font-extrabold uppercase mb-2">
+                  FAST & LIGHT
+                </h3>
                 <p className="text-base">
-                  Pure React + Tailwind. No heavy dependencies. Maximum performance.
+                  Pure React + Tailwind. No heavy dependencies. Maximum
+                  performance.
                 </p>
               </CardContent>
             </Card>
@@ -160,7 +175,8 @@ export default function Home() {
                   Colored Cards
                 </h3>
                 <p className="text-base">
-                  Cards come in multiple colors: white, yellow, cyan, magenta, and lime.
+                  Cards come in multiple colors: white, yellow, cyan, magenta,
+                  and lime.
                 </p>
               </CardContent>
             </Card>
@@ -184,8 +200,7 @@ export default function Home() {
               # - React 18+
               <br />
               # - Tailwind CSS 3+
-              <br />
-              # - Space Grotesk & JetBrains Mono fonts
+              <br /># - Space Grotesk & JetBrains Mono fonts
             </code>
           </div>
           <div className="mt-8">

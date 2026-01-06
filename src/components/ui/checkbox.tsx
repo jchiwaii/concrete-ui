@@ -2,13 +2,15 @@
 
 import { InputHTMLAttributes, forwardRef } from "react";
 
-export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+export interface CheckboxProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
   label?: string;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className = "", label, id, ...props }, ref) => {
-    const checkboxId = id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
+    const checkboxId =
+      id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
 
     return (
       <label

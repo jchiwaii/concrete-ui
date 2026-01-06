@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Concrete UI
 
-## Getting Started
+**Neo Brutalist Component Library for React**
 
-First, run the development server:
+Bold, unapologetic UI components with thick borders, hard shadows, and raw aesthetics. Copy & paste into your React + Tailwind CSS projects.
+
+![Concrete UI](https://img.shields.io/badge/style-neo%20brutalist-yellow?style=flat-square)
+![React](https://img.shields.io/badge/React-18+-blue?style=flat-square)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3+-cyan?style=flat-square)
+
+## Features
+
+- 🎨 **Bold Design** - Thick borders, hard shadows, saturated colors
+- 📋 **Copy & Paste** - No package to install, just copy component code
+- ⚡ **Fast & Light** - Pure React + Tailwind, no heavy dependencies
+- ♿ **Accessible** - WAI-ARIA compliant components
+- 🎯 **TypeScript** - Full type support
+
+## Components
+
+### Core
+- Button (6 variants, 3 sizes)
+- Card (with Header, Content, Footer)
+- Badge (6 variants, 3 sizes)
+- Input & Textarea
+- Checkbox & Toggle
+- Alert (5 variants)
+
+### Layout
+- Tabs
+- Accordion
+- Modal
+- Separator
+
+### Data Display
+- Avatar
+- Progress
+- Skeleton
+
+## Quick Start
+
+### 1. Install Requirements
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install react tailwindcss
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Add Fonts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```html
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Copy Components
 
-## Learn More
+Copy the components from `src/components/ui/` into your project.
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Use
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```tsx
+import { Button, Card, CardContent, Badge } from "@/components/ui";
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+export default function MyPage() {
+  return (
+    <Card>
+      <CardContent className="p-6">
+        <Badge variant="primary">NEW</Badge>
+        <h2 className="text-2xl font-extrabold uppercase mt-4">
+          Hello Brutal World
+        </h2>
+        <Button variant="primary" className="mt-4">
+          CLICK ME
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+```
 
-## Deploy on Vercel
+## Design Principles
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Borders**: 4-6px solid black on everything
+- **Shadows**: Hard drop shadows (no blur): `6px 6px 0 #000`
+- **Colors**: Saturated & bold (#FFFF00, #00FFFF, #FF00FF)
+- **Corners**: Sharp (0-4px radius max)
+- **Typography**: Space Grotesk, uppercase labels
+- **Motion**: Snappy 100ms transitions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## License
+
+MIT
+
+---
+
+**Concrete UI** - Built with brutal honesty.

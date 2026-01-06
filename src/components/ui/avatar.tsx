@@ -52,23 +52,24 @@ const AvatarImage = forwardRef<HTMLImageElement, AvatarImageProps>(
 
 AvatarImage.displayName = "AvatarImage";
 
-const AvatarFallback = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className = "", children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={`
+const AvatarFallback = forwardRef<
+  HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>
+>(({ className = "", children, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={`
         w-full h-full
         flex items-center justify-center
         bg-[#FFFF00]
         text-black font-extrabold uppercase
         ${className}
       `}
-      {...props}
-    >
-      {children}
-    </div>
-  )
-);
+    {...props}
+  >
+    {children}
+  </div>
+));
 
 AvatarFallback.displayName = "AvatarFallback";
 

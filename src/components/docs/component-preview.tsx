@@ -10,14 +10,21 @@ interface ComponentPreviewProps {
   code: string;
 }
 
-export function ComponentPreview({ title, description, children, code }: ComponentPreviewProps) {
+export function ComponentPreview({
+  title,
+  description,
+  children,
+  code,
+}: ComponentPreviewProps) {
   const [showCode, setShowCode] = useState(false);
 
   return (
     <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
       {/* Header */}
       <div className="p-4 border-b-4 border-black bg-[#FFFF00]">
-        <h3 className="text-xl font-extrabold uppercase tracking-tight">{title}</h3>
+        <h3 className="text-xl font-extrabold uppercase tracking-tight">
+          {title}
+        </h3>
         {description && (
           <p className="mt-1 text-sm font-medium">{description}</p>
         )}
@@ -37,7 +44,11 @@ export function ComponentPreview({ title, description, children, code }: Compone
             text-sm font-bold uppercase tracking-wider
             transition-all duration-100
             flex items-center justify-between
-            ${showCode ? "bg-black text-white" : "bg-white text-black hover:bg-gray-100"}
+            ${
+              showCode
+                ? "bg-black text-white"
+                : "bg-white text-black hover:bg-gray-100"
+            }
           `}
         >
           <span>{showCode ? "HIDE CODE" : "SHOW CODE"}</span>

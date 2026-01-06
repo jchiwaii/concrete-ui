@@ -1,6 +1,7 @@
 import { TextareaHTMLAttributes, forwardRef } from "react";
 
-export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: boolean;
 }
 

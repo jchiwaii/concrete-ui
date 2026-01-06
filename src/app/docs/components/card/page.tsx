@@ -1,6 +1,15 @@
 "use client";
 
-import { Badge, Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button } from "@/components/ui";
+import {
+  Badge,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  Button,
+} from "@/components/ui";
 import { ComponentPreview } from "@/components/docs";
 
 export default function CardPage() {
@@ -8,13 +17,15 @@ export default function CardPage() {
     <div className="space-y-12">
       {/* Header */}
       <div>
-        <Badge variant="primary" className="mb-4">COMPONENT</Badge>
+        <Badge variant="primary" className="mb-4">
+          COMPONENT
+        </Badge>
         <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
           CARD
         </h1>
         <p className="text-brutal-lg max-w-2xl">
-          Versatile container component with thick borders, hard shadows, 
-          and multiple color variants.
+          Versatile container component with thick borders, hard shadows, and
+          multiple color variants.
         </p>
       </div>
 
@@ -60,7 +71,9 @@ export default function CardPage() {
         <Card className="w-full max-w-md">
           <CardHeader>
             <CardTitle>CARD TITLE</CardTitle>
-            <CardDescription>This is a description of the card.</CardDescription>
+            <CardDescription>
+              This is a description of the card.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <p>Main content goes here. Add whatever you need.</p>
@@ -86,19 +99,29 @@ export default function CardPage() {
       >
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
           <Card color="white">
-            <CardContent className="p-4 text-center font-bold uppercase">White</CardContent>
+            <CardContent className="p-4 text-center font-bold uppercase">
+              White
+            </CardContent>
           </Card>
           <Card color="yellow">
-            <CardContent className="p-4 text-center font-bold uppercase">Yellow</CardContent>
+            <CardContent className="p-4 text-center font-bold uppercase">
+              Yellow
+            </CardContent>
           </Card>
           <Card color="cyan">
-            <CardContent className="p-4 text-center font-bold uppercase">Cyan</CardContent>
+            <CardContent className="p-4 text-center font-bold uppercase">
+              Cyan
+            </CardContent>
           </Card>
           <Card color="magenta">
-            <CardContent className="p-4 text-center font-bold uppercase text-white">Magenta</CardContent>
+            <CardContent className="p-4 text-center font-bold uppercase text-white">
+              Magenta
+            </CardContent>
           </Card>
           <Card color="lime">
-            <CardContent className="p-4 text-center font-bold uppercase">Lime</CardContent>
+            <CardContent className="p-4 text-center font-bold uppercase">
+              Lime
+            </CardContent>
           </Card>
         </div>
       </ComponentPreview>
@@ -115,13 +138,19 @@ export default function CardPage() {
       >
         <div className="flex flex-col gap-4 w-full max-w-sm">
           <Card variant="default">
-            <CardContent className="p-4 font-bold uppercase">Default Card</CardContent>
+            <CardContent className="p-4 font-bold uppercase">
+              Default Card
+            </CardContent>
           </Card>
           <Card variant="elevated">
-            <CardContent className="p-4 font-bold uppercase">Elevated Card (Hover Me)</CardContent>
+            <CardContent className="p-4 font-bold uppercase">
+              Elevated Card (Hover Me)
+            </CardContent>
           </Card>
           <Card variant="bordered">
-            <CardContent className="p-4 font-bold uppercase">Bordered Card</CardContent>
+            <CardContent className="p-4 font-bold uppercase">
+              Bordered Card
+            </CardContent>
           </Card>
         </div>
       </ComponentPreview>
@@ -129,10 +158,12 @@ export default function CardPage() {
       {/* Full Code */}
       <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">FULL COMPONENT CODE</h3>
+          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+            FULL COMPONENT CODE
+          </h3>
         </div>
         <pre className="p-6 overflow-x-auto text-sm font-mono bg-[#171717] text-[#f5f5f5]">
-{`import { HTMLAttributes, forwardRef } from "react";
+          {`import { HTMLAttributes, forwardRef } from "react";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   variant?: "default" | "elevated" | "bordered" | "filled";

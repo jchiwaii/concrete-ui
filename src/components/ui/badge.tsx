@@ -1,12 +1,21 @@
 import { HTMLAttributes, forwardRef } from "react";
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-  variant?: "default" | "primary" | "secondary" | "danger" | "success" | "warning";
+  variant?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "danger"
+    | "success"
+    | "warning";
   size?: "sm" | "md" | "lg";
 }
 
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ className = "", variant = "default", size = "md", children, ...props }, ref) => {
+  (
+    { className = "", variant = "default", size = "md", children, ...props },
+    ref
+  ) => {
     const baseStyles = `
       inline-flex items-center justify-center
       font-bold uppercase tracking-wider
