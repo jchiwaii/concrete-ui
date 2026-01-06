@@ -192,15 +192,22 @@ export default function Home() {
           </h2>
           <pre className="bg-[#1a1a1a] p-6 border-4 border-black shadow-[8px_8px_0_0_#000] font-mono text-left overflow-x-auto">
             <code className="text-sm leading-relaxed block bg-transparent border-0 p-0">
-              <span className="text-[#888888]"># Just copy components into your project</span>
-              {'\n\n'}
+              <span className="text-[#888888]">
+                # Just copy components into your project
+              </span>
+              {"\n\n"}
               <span className="text-[#888888]"># Requirements:</span>
-              {'\n'}
-              <span className="text-[#FF6600]"># -</span> <span className="text-white">React 18+</span>
-              {'\n'}
-              <span className="text-[#FF6600]"># -</span> <span className="text-white">Tailwind CSS 3+</span>
-              {'\n'}
-              <span className="text-[#FF6600]"># -</span> <span className="text-white">Space Grotesk & JetBrains Mono fonts</span>
+              {"\n"}
+              <span className="text-[#FF6600]"># -</span>{" "}
+              <span className="text-white">React 18+</span>
+              {"\n"}
+              <span className="text-[#FF6600]"># -</span>{" "}
+              <span className="text-white">Tailwind CSS 3+</span>
+              {"\n"}
+              <span className="text-[#FF6600]"># -</span>{" "}
+              <span className="text-white">
+                Space Grotesk & JetBrains Mono fonts
+              </span>
             </code>
           </pre>
           <div className="mt-8">
