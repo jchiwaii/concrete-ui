@@ -19,6 +19,7 @@ Bold, unapologetic UI components with thick borders, hard shadows, and raw aesth
 ## Components
 
 ### Core
+
 - Button (6 variants, 3 sizes)
 - Card (with Header, Content, Footer)
 - Badge (6 variants, 3 sizes)
@@ -27,12 +28,14 @@ Bold, unapologetic UI components with thick borders, hard shadows, and raw aesth
 - Alert (5 variants)
 
 ### Layout
+
 - Tabs
 - Accordion
 - Modal
 - Separator
 
 ### Data Display
+
 - Avatar
 - Progress
 - Skeleton
@@ -48,7 +51,10 @@ npm install react tailwindcss
 ### 2. Add Fonts
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
 ```
 
 ### 3. Copy Components

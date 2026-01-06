@@ -190,19 +190,19 @@ export default function Home() {
           <h2 className="text-brutal-3xl font-extrabold uppercase tracking-tight mb-8">
             EASY INSTALLATION
           </h2>
-          <div className="bg-black text-white p-6 border-4 border-black shadow-[8px_8px_0_0_#000] font-mono text-left">
-            <code className="text-sm">
-              # Just copy components into your project
-              <br />
-              <br />
-              # Requirements:
-              <br />
-              # - React 18+
-              <br />
-              # - Tailwind CSS 3+
-              <br /># - Space Grotesk & JetBrains Mono fonts
+          <pre className="bg-[#1a1a1a] p-6 border-4 border-black shadow-[8px_8px_0_0_#000] font-mono text-left overflow-x-auto">
+            <code className="text-sm leading-relaxed block bg-transparent border-0 p-0">
+              <span className="text-[#888888]"># Just copy components into your project</span>
+              {'\n\n'}
+              <span className="text-[#888888]"># Requirements:</span>
+              {'\n'}
+              <span className="text-[#FF6600]"># -</span> <span className="text-white">React 18+</span>
+              {'\n'}
+              <span className="text-[#FF6600]"># -</span> <span className="text-white">Tailwind CSS 3+</span>
+              {'\n'}
+              <span className="text-[#FF6600]"># -</span> <span className="text-white">Space Grotesk & JetBrains Mono fonts</span>
             </code>
-          </div>
+          </pre>
           <div className="mt-8">
             <Link href="/docs/installation">
               <Button variant="default" size="lg">
