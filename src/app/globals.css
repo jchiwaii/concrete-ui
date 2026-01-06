@@ -1,26 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+/* ==========================================
+   CONCRETE UI - Neo Brutalist Design System
+   ========================================== */
+
+/* ==========================================
+   Design Tokens / CSS Variables
+   ========================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core Colors - Bold & Saturated */
+  --concrete-black: #000000;
+  --concrete-white: #FFFFFF;
+  --concrete-yellow: #FFFF00;
+  --concrete-blue: #0000FF;
+  --concrete-magenta: #FF00FF;
+  --concrete-cyan: #00FFFF;
+  --concrete-red: #FF0000;
+  --concrete-green: #00FF00;
+  --concrete-orange: #FF6600;
+  --concrete-pink: #FF69B4;
+  --concrete-lime: #CCFF00;
+  
+  /* Neutral Palette */
+  --concrete-gray-100: #F5F5F5;
+  --concrete-gray-200: #E5E5E5;
+  --concrete-gray-300: #D4D4D4;
+  --concrete-gray-400: #A3A3A3;
+  --concrete-gray-500: #737373;
+  --concrete-gray-600: #525252;
+  --concrete-gray-700: #404040;
+  --concrete-gray-800: #262626;
+  --concrete-gray-900: #171717;
+  
+  /* Border & Shadow */
+  --concrete-border-width: 4px;
+  --concrete-border-width-thick: 6px;
+  --concrete-shadow-offset: 6px;
+  --concrete-shadow: 6px 6px 0 var(--concrete-black);
+  --concrete-shadow-sm: 4px 4px 0 var(--concrete-black);
+  --concrete-shadow-lg: 8px 8px 0 var(--concrete-black);
+  
+  /* Spacing */
+  --concrete-space-xs: 8px;
+  --concrete-space-sm: 12px;
+  --concrete-space-md: 16px;
+  --concrete-space-lg: 24px;
+  --concrete-space-xl: 32px;
+  --concrete-space-2xl: 48px;
+  
+  /* Typography */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Transitions - Abrupt */
+  --concrete-transition: all 0.1s ease-out;
+  
+  /* Border Radius - Minimal */
+  --concrete-radius: 0px;
+  --concrete-radius-sm: 2px;
+  --concrete-radius-md: 4px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ==========================================
+   Base Styles
+   ========================================== */
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-display);
+  background: var(--concrete-gray-100);
+  color: var(--concrete-black);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================
+   Typography Utilities
+   ========================================== */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-brutal-xs {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.text-brutal-sm {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.text-brutal-base {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.text-brutal-lg {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.text-brutal-xl {
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.text-brutal-2xl {
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.text-brutal-3xl {
+  font-size: 48px;
+  line-height: 1.1;
+}
+
+.text-brutal-4xl {
+  font-size: 64px;
+  line-height: 1;
+}
+
+.text-brutal-5xl {
+  font-size: 96px;
+  line-height: 0.9;
+}
+
+/* ==========================================
+   Brutal Shadow Utilities
+   ========================================== */
+.shadow-brutal {
+  box-shadow: var(--concrete-shadow);
+}
+
+.shadow-brutal-sm {
+  box-shadow: var(--concrete-shadow-sm);
+}
+
+.shadow-brutal-lg {
+  box-shadow: var(--concrete-shadow-lg);
+}
+
+.shadow-brutal-none {
+  box-shadow: none;
+}
+
+/* Colored shadows */
+.shadow-brutal-yellow {
+  box-shadow: 6px 6px 0 var(--concrete-yellow);
+}
+
+.shadow-brutal-blue {
+  box-shadow: 6px 6px 0 var(--concrete-blue);
+}
+
+.shadow-brutal-magenta {
+  box-shadow: 6px 6px 0 var(--concrete-magenta);
+}
+
+/* ==========================================
+   Brutal Border Utilities
+   ========================================== */
+.border-brutal {
+  border: var(--concrete-border-width) solid var(--concrete-black);
+}
+
+.border-brutal-thick {
+  border: var(--concrete-border-width-thick) solid var(--concrete-black);
+}
+
+/* ==========================================
+   Animation Classes
+   ========================================== */
+@keyframes brutal-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@keyframes brutal-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes brutal-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes brutal-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brutal-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-brutal-shake {
+  animation: brutal-shake 0.3s ease-in-out;
+}
+
+.animate-brutal-bounce {
+  animation: brutal-bounce 0.4s ease-in-out;
+}
+
+.animate-brutal-pulse {
+  animation: brutal-pulse 0.3s ease-in-out;
+}
+
+.animate-brutal-slide-up {
+  animation: brutal-slide-up 0.3s ease-out forwards;
+}
+
+.animate-brutal-slide-in {
+  animation: brutal-slide-in 0.3s ease-out forwards;
+}
+
+/* Staggered animations */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+/* ==========================================
+   Code Block Styling
+   ========================================== */
+pre {
+  font-family: var(--font-mono);
+  background: var(--concrete-gray-900);
+  color: var(--concrete-gray-100);
+  padding: var(--concrete-space-md);
+  border: var(--concrete-border-width) solid var(--concrete-black);
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+code {
+  font-family: var(--font-mono);
+}
+
+/* Inline code */
+:not(pre) > code {
+  background: var(--concrete-gray-200);
+  padding: 2px 6px;
+  border: 2px solid var(--concrete-black);
+  font-size: 0.9em;
+}
+
+/* ==========================================
+   Selection Styling
+   ========================================== */
+::selection {
+  background: var(--concrete-yellow);
+  color: var(--concrete-black);
+}
+
+/* ==========================================
+   Scrollbar Styling
+   ========================================== */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--concrete-gray-200);
+  border: 2px solid var(--concrete-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--concrete-black);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--concrete-gray-700);
 }
