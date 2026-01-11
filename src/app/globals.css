@@ -235,6 +235,53 @@ body {
   }
 }
 
+@keyframes brutal-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brutal-slide-right {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes brutal-slide-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes brutal-slide-top {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes brutal-slide-bottom {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 .animate-brutal-shake {
   animation: brutal-shake 0.3s ease-in-out;
 }
@@ -253,6 +300,26 @@ body {
 
 .animate-brutal-slide-in {
   animation: brutal-slide-in 0.3s ease-out forwards;
+}
+
+.animate-brutal-slide-down {
+  animation: brutal-slide-down 0.2s ease-out forwards;
+}
+
+.animate-brutal-slide-right {
+  animation: brutal-slide-right 0.3s ease-out forwards;
+}
+
+.animate-brutal-slide-left {
+  animation: brutal-slide-left 0.3s ease-out forwards;
+}
+
+.animate-brutal-slide-top {
+  animation: brutal-slide-top 0.3s ease-out forwards;
+}
+
+.animate-brutal-slide-bottom {
+  animation: brutal-slide-bottom 0.3s ease-out forwards;
 }
 
 /* Staggered animations */
