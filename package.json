@@ -2,6 +2,14 @@
   "name": "brutal",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jchiwaii/concrete-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jchiwaii/concrete-ui/issues"
+  },
+  "homepage": "https://github.com/jchiwaii/concrete-ui#readme",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
