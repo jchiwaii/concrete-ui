@@ -66,7 +66,11 @@ function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
           font-bold text-xl
           transition-all duration-100 ease-out
           hover:scale-110
-          ${variant === "error" ? "text-white hover:text-gray-200" : "text-black hover:text-gray-700"}
+          ${
+            variant === "error"
+              ? "text-white hover:text-gray-200"
+              : "text-black hover:text-gray-700"
+          }
         `}
         aria-label="Close"
       >
