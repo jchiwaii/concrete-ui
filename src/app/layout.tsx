@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ToastProvider } from "@/context/ToastContext";
+import { Toaster } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Concrete UI - Neo Brutalist Component Library",
@@ -21,7 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-display antialiased">{children}</body>
+      <body className="font-display antialiased">
+        <ToastProvider>
+          {children}
+          <Toaster />
+        </ToastProvider>
+      </body>
     </html>
   );
 }

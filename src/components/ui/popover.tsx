@@ -17,7 +17,7 @@ import { calculatePosition, Placement } from "@/lib/positioning";
 interface PopoverContextValue {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
-  triggerRef: React.RefObject<HTMLElement>;
+  triggerRef: React.RefObject<HTMLElement | null>;
 }
 
 const PopoverContext = createContext<PopoverContextValue | undefined>(

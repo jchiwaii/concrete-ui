@@ -106,5 +106,4 @@ function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
   );
 }
 
-export { Toaster };
 export type { ToastType };
