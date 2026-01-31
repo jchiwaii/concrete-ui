@@ -1,8 +1,10 @@
 import { HTMLAttributes, forwardRef } from "react";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "elevated" | "bordered" | "filled";
-  color?: "white" | "yellow" | "cyan" | "magenta" | "lime";
+  variant?: "default" | "elevated" | "outline" | "flat" | "bordered";
+  color?: "white" | "yellow" | "cyan" | "pink" | "lime" | "purple" | "orange" | "magenta";
+  hover?: boolean;
+  rounded?: "none" | "md" | "lg" | "xl";
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
@@ -11,36 +13,52 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       className = "",
       variant = "default",
       color = "white",
+      hover = false,
+      rounded = "lg",
       children,
       ...props
     },
     ref
   ) => {
     const baseStyles = `
-      border-4 border-black
-      transition-all duration-100 ease-out
+      border-2 border-black
+      transition-all duration-150 ease-out
     `;
 
     const variants = {
-      default: "shadow-[6px_6px_0_0_#000]",
-      elevated:
-        "shadow-[8px_8px_0_0_#000] hover:shadow-[12px_12px_0_0_#000] hover:translate-x-[-4px] hover:translate-y-[-4px]",
+      default: "shadow-[4px_4px_0_0_#000]",
+      elevated: "shadow-[6px_6px_0_0_#000]",
+      outline: "shadow-none",
+      flat: "shadow-none border-transparent",
       bordered: "shadow-none",
-      filled: "shadow-[6px_6px_0_0_#000]",
     };
 
     const colors = {
       white: "bg-white",
-      yellow: "bg-[#FFFF00]",
-      cyan: "bg-[#00FFFF]",
-      magenta: "bg-[#FF00FF]",
-      lime: "bg-[#CCFF00]",
+      yellow: "bg-[#ffde00]",
+      cyan: "bg-[#06b6d4]",
+      pink: "bg-[#f472b6]",
+      lime: "bg-[#a3e635]",
+      purple: "bg-[#8b5cf6]",
+      orange: "bg-[#f97316]",
+      magenta: "bg-[#ec4899]",
     };
+
+    const radiusStyles = {
+      none: "rounded-none",
+      md: "rounded-md",
+      lg: "rounded-lg",
+      xl: "rounded-xl",
+    };
+
+    const hoverStyles = hover
+      ? "hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[8px_8px_0_0_#000] cursor-pointer"
+      : "";
 
     return (
       <div
         ref={ref}
-        className={`${baseStyles} ${variants[variant]} ${colors[color]} ${className}`}
+        className={`${baseStyles} ${variants[variant]} ${colors[color]} ${radiusStyles[rounded]} ${hoverStyles} ${className}`}
         {...props}
       >
         {children}
@@ -55,7 +73,7 @@ const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`p-6 border-b-4 border-black ${className}`}
+      className={`px-6 py-5 border-b-2 border-black ${className}`}
       {...props}
     >
       {children}
@@ -71,7 +89,7 @@ const CardTitle = forwardRef<
 >(({ className = "", children, ...props }, ref) => (
   <h3
     ref={ref}
-    className={`text-2xl font-extrabold uppercase tracking-tight ${className}`}
+    className={`text-xl font-bold tracking-tight ${className}`}
     {...props}
   >
     {children}
@@ -84,7 +102,11 @@ const CardDescription = forwardRef<
   HTMLParagraphElement,
   HTMLAttributes<HTMLParagraphElement>
 >(({ className = "", children, ...props }, ref) => (
-  <p ref={ref} className={`text-base mt-2 ${className}`} {...props}>
+  <p
+    ref={ref}
+    className={`text-sm text-gray-600 mt-1.5 ${className}`}
+    {...props}
+  >
     {children}
   </p>
 ));
@@ -93,7 +115,7 @@ CardDescription.displayName = "CardDescription";
 
 const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
-    <div ref={ref} className={`p-6 ${className}`} {...props}>
+    <div ref={ref} className={`px-6 py-5 ${className}`} {...props}>
       {children}
     </div>
   )
@@ -105,7 +127,7 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`p-6 border-t-4 border-black flex items-center gap-4 ${className}`}
+      className={`px-6 py-4 border-t-2 border-black flex items-center gap-3 bg-gray-50 ${className}`}
       {...props}
     >
       {children}

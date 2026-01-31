@@ -7,41 +7,56 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
     | "secondary"
     | "danger"
     | "success"
-    | "warning";
+    | "warning"
+    | "info"
+    | "neutral";
   size?: "sm" | "md" | "lg";
+  rounded?: boolean;
 }
 
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   (
-    { className = "", variant = "default", size = "md", children, ...props },
+    {
+      className = "",
+      variant = "default",
+      size = "md",
+      rounded = false,
+      children,
+      ...props
+    },
     ref
   ) => {
     const baseStyles = `
       inline-flex items-center justify-center
-      font-bold uppercase tracking-wider
-      border-4 border-black
-      shadow-[3px_3px_0_0_#000]
+      font-semibold tracking-wide
+      border-2 border-black
+      shadow-[2px_2px_0_0_#000]
+      whitespace-nowrap
     `;
 
     const variants = {
       default: "bg-white text-black",
-      primary: "bg-[#FFFF00] text-black",
-      secondary: "bg-[#00FFFF] text-black",
-      danger: "bg-[#FF0000] text-white",
-      success: "bg-[#00FF00] text-black",
-      warning: "bg-[#FF6600] text-white",
+      primary: "bg-[#ffde00] text-black",
+      secondary: "bg-[#06b6d4] text-black",
+      danger: "bg-[#ef4444] text-white",
+      success: "bg-[#22c55e] text-black",
+      warning: "bg-[#f97316] text-black",
+      info: "bg-[#3b82f6] text-white",
+      neutral: "bg-gray-900 text-white",
     };
 
     const sizes = {
-      sm: "px-2 py-0.5 text-xs",
-      md: "px-3 py-1 text-sm",
-      lg: "px-4 py-1.5 text-base",
+      sm: "px-2 py-0.5 text-[10px]",
+      md: "px-2.5 py-1 text-xs",
+      lg: "px-3 py-1.5 text-sm",
     };
+
+    const radiusStyles = rounded ? "rounded-full" : "rounded-md";
 
     return (
       <span
         ref={ref}
-        className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+        className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${radiusStyles} ${className}`}
         {...props}
       >
         {children}

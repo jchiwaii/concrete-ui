@@ -39,7 +39,13 @@ const TabsList = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`flex border-4 border-black bg-white shadow-[4px_4px_0_0_#000] ${className}`}
+      className={`
+        inline-flex p-1 gap-1
+        bg-gray-100
+        border-2 border-black
+        rounded-lg
+        ${className}
+      `}
       role="tablist"
       {...props}
     >
@@ -68,11 +74,15 @@ const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
         aria-selected={isActive}
         onClick={() => context.setActiveTab(value)}
         className={`
-          flex-1 px-6 py-3
-          text-base font-bold uppercase tracking-wider
-          border-r-4 border-black last:border-r-0
-          transition-all duration-100 ease-out
-          ${isActive ? "bg-[#FFFF00]" : "bg-white hover:bg-gray-100"}
+          px-4 py-2
+          text-sm font-semibold
+          rounded-md
+          transition-all duration-150 ease-out
+          ${
+            isActive
+              ? "bg-white text-black shadow-[2px_2px_0_0_#000] border-2 border-black"
+              : "bg-transparent text-gray-600 border-2 border-transparent hover:text-black hover:bg-gray-200"
+          }
           ${className}
         `}
         {...props}
@@ -100,7 +110,15 @@ const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
       <div
         ref={ref}
         role="tabpanel"
-        className={`mt-4 p-6 border-4 border-black bg-white shadow-[4px_4px_0_0_#000] ${className}`}
+        className={`
+          mt-4 p-5
+          bg-white
+          border-2 border-black
+          shadow-[4px_4px_0_0_#000]
+          rounded-lg
+          animate-brutal-fade-in
+          ${className}
+        `}
         {...props}
       >
         {children}

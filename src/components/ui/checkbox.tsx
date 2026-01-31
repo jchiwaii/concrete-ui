@@ -27,25 +27,28 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           />
           <div
             className={`
-              w-7 h-7
+              w-5 h-5
               bg-white
-              border-4 border-black
-              shadow-[3px_3px_0_0_#000]
-              transition-all duration-100 ease-out
-              group-hover:translate-x-[-2px] group-hover:translate-y-[-2px]
-              group-hover:shadow-[5px_5px_0_0_#000]
-              peer-checked:bg-[#FFFF00]
+              border-2 border-black
+              rounded-md
+              shadow-[2px_2px_0_0_#000]
+              transition-all duration-150 ease-out
+              group-hover:translate-x-[-1px] group-hover:translate-y-[-1px]
+              group-hover:shadow-[3px_3px_0_0_#000]
+              peer-checked:bg-[#ffde00]
+              peer-focus-visible:ring-2 peer-focus-visible:ring-black/20
               peer-disabled:opacity-50 peer-disabled:cursor-not-allowed
             `}
           />
           <svg
             className={`
-              absolute top-1 left-1
-              w-5 h-5
-              stroke-black stroke-[3]
+              absolute top-0.5 left-0.5
+              w-4 h-4
+              stroke-black stroke-[2.5]
               opacity-0
               peer-checked:opacity-100
-              transition-opacity duration-100
+              transition-opacity duration-150
+              pointer-events-none
             `}
             viewBox="0 0 24 24"
             fill="none"
@@ -54,7 +57,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           </svg>
         </div>
         {label && (
-          <span className="text-base font-bold uppercase tracking-wide">
+          <span className="text-sm font-medium select-none">
             {label}
           </span>
         )}

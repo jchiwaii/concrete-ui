@@ -1,28 +1,38 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Bebas+Neue&display=swap");
 @import "tailwindcss";
 
 /* ==========================================
    CONCRETE UI - Neo Brutalist Design System
+   Inspired by reactbits.dev + neobrutalism.dev
    ========================================== */
 
 /* ==========================================
    Design Tokens / CSS Variables
    ========================================== */
 :root {
-  /* Core Colors - Bold & Saturated */
+  /* Core Colors - Refined & Bold */
   --concrete-black: #000000;
   --concrete-white: #ffffff;
-  --concrete-yellow: #ffff00;
-  --concrete-blue: #0000ff;
-  --concrete-magenta: #ff00ff;
-  --concrete-cyan: #00ffff;
-  --concrete-red: #ff0000;
-  --concrete-green: #00ff00;
-  --concrete-orange: #ff6600;
-  --concrete-pink: #ff69b4;
-  --concrete-lime: #ccff00;
+  --concrete-yellow: #ffde00;
+  --concrete-blue: #3b82f6;
+  --concrete-magenta: #ec4899;
+  --concrete-cyan: #06b6d4;
+  --concrete-red: #ef4444;
+  --concrete-green: #22c55e;
+  --concrete-orange: #f97316;
+  --concrete-pink: #f472b6;
+  --concrete-lime: #a3e635;
+  --concrete-purple: #8b5cf6;
+  --concrete-indigo: #6366f1;
+
+  /* Background Colors */
+  --concrete-bg-primary: #fef3c7;
+  --concrete-bg-secondary: #e0f2fe;
+  --concrete-bg-tertiary: #fce7f3;
+  --concrete-bg-dark: #1a1a1a;
 
   /* Neutral Palette */
+  --concrete-gray-50: #fafafa;
   --concrete-gray-100: #f5f5f5;
   --concrete-gray-200: #e5e5e5;
   --concrete-gray-300: #d4d4d4;
@@ -32,34 +42,48 @@
   --concrete-gray-700: #404040;
   --concrete-gray-800: #262626;
   --concrete-gray-900: #171717;
+  --concrete-gray-950: #0a0a0a;
 
-  /* Border & Shadow */
-  --concrete-border-width: 4px;
-  --concrete-border-width-thick: 6px;
-  --concrete-shadow-offset: 6px;
-  --concrete-shadow: 6px 6px 0 var(--concrete-black);
-  --concrete-shadow-sm: 4px 4px 0 var(--concrete-black);
-  --concrete-shadow-lg: 8px 8px 0 var(--concrete-black);
+  /* Border Widths */
+  --concrete-border-width: 2px;
+  --concrete-border-width-md: 3px;
+  --concrete-border-width-lg: 4px;
+
+  /* Border Radius - Modern Brutalism */
+  --concrete-radius-none: 0px;
+  --concrete-radius-sm: 4px;
+  --concrete-radius-md: 8px;
+  --concrete-radius-lg: 12px;
+  --concrete-radius-xl: 16px;
+  --concrete-radius-2xl: 24px;
+  --concrete-radius-full: 9999px;
+
+  /* Shadow System */
+  --concrete-shadow-xs: 2px 2px 0 var(--concrete-black);
+  --concrete-shadow-sm: 3px 3px 0 var(--concrete-black);
+  --concrete-shadow: 4px 4px 0 var(--concrete-black);
+  --concrete-shadow-md: 5px 5px 0 var(--concrete-black);
+  --concrete-shadow-lg: 6px 6px 0 var(--concrete-black);
+  --concrete-shadow-xl: 8px 8px 0 var(--concrete-black);
 
   /* Spacing */
-  --concrete-space-xs: 8px;
-  --concrete-space-sm: 12px;
+  --concrete-space-xs: 4px;
+  --concrete-space-sm: 8px;
   --concrete-space-md: 16px;
   --concrete-space-lg: 24px;
   --concrete-space-xl: 32px;
   --concrete-space-2xl: 48px;
+  --concrete-space-3xl: 64px;
 
   /* Typography */
-  --font-display: "Space Grotesk", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-heading: "Bebas Neue", "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  /* Transitions - Abrupt */
-  --concrete-transition: all 0.1s ease-out;
-
-  /* Border Radius - Minimal */
-  --concrete-radius: 0px;
-  --concrete-radius-sm: 2px;
-  --concrete-radius-md: 4px;
+  /* Transitions */
+  --concrete-transition-fast: all 0.1s ease-out;
+  --concrete-transition: all 0.15s ease-out;
+  --concrete-transition-slow: all 0.3s ease-out;
 }
 
 /* ==========================================
@@ -69,11 +93,15 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-display);
-  background: var(--concrete-gray-100);
+  background: var(--concrete-gray-50);
   color: var(--concrete-black);
-  line-height: 1.5;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -85,51 +113,71 @@ body {
   font-family: var(--font-display);
 }
 
+.font-heading {
+  font-family: var(--font-heading);
+}
+
 .font-mono {
   font-family: var(--font-mono);
 }
 
+/* Refined Typography Scale */
 .text-brutal-xs {
   font-size: 12px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .text-brutal-sm {
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .text-brutal-base {
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .text-brutal-lg {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.text-brutal-xl {
   font-size: 20px;
   line-height: 1.4;
 }
 
-.text-brutal-xl {
+.text-brutal-2xl {
   font-size: 24px;
   line-height: 1.3;
 }
 
-.text-brutal-2xl {
-  font-size: 32px;
+.text-brutal-3xl {
+  font-size: 30px;
   line-height: 1.2;
 }
 
-.text-brutal-3xl {
-  font-size: 48px;
+.text-brutal-4xl {
+  font-size: 36px;
   line-height: 1.1;
 }
 
-.text-brutal-4xl {
-  font-size: 64px;
+.text-brutal-5xl {
+  font-size: 48px;
   line-height: 1;
 }
 
-.text-brutal-5xl {
+.text-brutal-6xl {
+  font-size: 60px;
+  line-height: 1;
+}
+
+.text-brutal-7xl {
+  font-size: 72px;
+  line-height: 0.95;
+}
+
+.text-brutal-8xl {
   font-size: 96px;
   line-height: 0.9;
 }
@@ -137,33 +185,61 @@ body {
 /* ==========================================
    Brutal Shadow Utilities
    ========================================== */
-.shadow-brutal {
-  box-shadow: var(--concrete-shadow);
+.shadow-brutal-xs {
+  box-shadow: var(--concrete-shadow-xs);
 }
 
 .shadow-brutal-sm {
   box-shadow: var(--concrete-shadow-sm);
 }
 
+.shadow-brutal {
+  box-shadow: var(--concrete-shadow);
+}
+
+.shadow-brutal-md {
+  box-shadow: var(--concrete-shadow-md);
+}
+
 .shadow-brutal-lg {
   box-shadow: var(--concrete-shadow-lg);
+}
+
+.shadow-brutal-xl {
+  box-shadow: var(--concrete-shadow-xl);
 }
 
 .shadow-brutal-none {
   box-shadow: none;
 }
 
-/* Colored shadows */
+/* Colored Shadows */
 .shadow-brutal-yellow {
-  box-shadow: 6px 6px 0 var(--concrete-yellow);
+  box-shadow: 4px 4px 0 var(--concrete-yellow);
 }
 
 .shadow-brutal-blue {
-  box-shadow: 6px 6px 0 var(--concrete-blue);
+  box-shadow: 4px 4px 0 var(--concrete-blue);
 }
 
 .shadow-brutal-magenta {
-  box-shadow: 6px 6px 0 var(--concrete-magenta);
+  box-shadow: 4px 4px 0 var(--concrete-magenta);
+}
+
+.shadow-brutal-cyan {
+  box-shadow: 4px 4px 0 var(--concrete-cyan);
+}
+
+.shadow-brutal-green {
+  box-shadow: 4px 4px 0 var(--concrete-green);
+}
+
+.shadow-brutal-red {
+  box-shadow: 4px 4px 0 var(--concrete-red);
+}
+
+.shadow-brutal-purple {
+  box-shadow: 4px 4px 0 var(--concrete-purple);
 }
 
 /* ==========================================
@@ -173,115 +249,115 @@ body {
   border: var(--concrete-border-width) solid var(--concrete-black);
 }
 
-.border-brutal-thick {
-  border: var(--concrete-border-width-thick) solid var(--concrete-black);
+.border-brutal-md {
+  border: var(--concrete-border-width-md) solid var(--concrete-black);
+}
+
+.border-brutal-lg {
+  border: var(--concrete-border-width-lg) solid var(--concrete-black);
 }
 
 /* ==========================================
-   Animation Classes
+   Background Patterns
+   ========================================== */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, var(--concrete-gray-200) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--concrete-gray-200) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(var(--concrete-gray-300) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.bg-diagonal-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    var(--concrete-gray-200) 10px,
+    var(--concrete-gray-200) 11px
+  );
+}
+
+/* ==========================================
+   Animation Keyframes
    ========================================== */
 @keyframes brutal-shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-4px);
-  }
-  75% {
-    transform: translateX(4px);
-  }
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
 }
 
 @keyframes brutal-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 @keyframes brutal-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes brutal-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
 }
 
 @keyframes brutal-slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes brutal-slide-in {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes brutal-slide-down {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes brutal-slide-in {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes brutal-slide-right {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
 }
 
 @keyframes brutal-slide-left {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
 }
 
 @keyframes brutal-slide-top {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }
 
 @keyframes brutal-slide-bottom {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
 }
 
+@keyframes brutal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes brutal-scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes brutal-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Animation Classes */
 .animate-brutal-shake {
   animation: brutal-shake 0.3s ease-in-out;
 }
@@ -294,49 +370,82 @@ body {
   animation: brutal-pulse 0.3s ease-in-out;
 }
 
-.animate-brutal-slide-up {
-  animation: brutal-slide-up 0.3s ease-out forwards;
+.animate-brutal-wiggle {
+  animation: brutal-wiggle 0.3s ease-in-out;
 }
 
-.animate-brutal-slide-in {
-  animation: brutal-slide-in 0.3s ease-out forwards;
+.animate-brutal-slide-up {
+  animation: brutal-slide-up 0.2s ease-out forwards;
 }
 
 .animate-brutal-slide-down {
   animation: brutal-slide-down 0.2s ease-out forwards;
 }
 
+.animate-brutal-slide-in {
+  animation: brutal-slide-in 0.2s ease-out forwards;
+}
+
 .animate-brutal-slide-right {
-  animation: brutal-slide-right 0.3s ease-out forwards;
+  animation: brutal-slide-right 0.25s ease-out forwards;
 }
 
 .animate-brutal-slide-left {
-  animation: brutal-slide-left 0.3s ease-out forwards;
+  animation: brutal-slide-left 0.25s ease-out forwards;
 }
 
 .animate-brutal-slide-top {
-  animation: brutal-slide-top 0.3s ease-out forwards;
+  animation: brutal-slide-top 0.25s ease-out forwards;
 }
 
 .animate-brutal-slide-bottom {
-  animation: brutal-slide-bottom 0.3s ease-out forwards;
+  animation: brutal-slide-bottom 0.25s ease-out forwards;
 }
 
-/* Staggered animations */
-.stagger-1 {
-  animation-delay: 0.05s;
+.animate-brutal-fade-in {
+  animation: brutal-fade-in 0.2s ease-out forwards;
 }
-.stagger-2 {
-  animation-delay: 0.1s;
+
+.animate-brutal-scale-in {
+  animation: brutal-scale-in 0.2s ease-out forwards;
 }
-.stagger-3 {
-  animation-delay: 0.15s;
+
+.animate-brutal-marquee {
+  animation: brutal-marquee 20s linear infinite;
 }
-.stagger-4 {
-  animation-delay: 0.2s;
+
+/* Staggered Animations */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+
+/* ==========================================
+   Interactive Utilities
+   ========================================== */
+.hover-lift {
+  transition: var(--concrete-transition-fast);
 }
-.stagger-5 {
-  animation-delay: 0.25s;
+
+.hover-lift:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--concrete-shadow-md);
+}
+
+.hover-lift:active {
+  transform: translate(0, 0);
+  box-shadow: var(--concrete-shadow-xs);
+}
+
+.hover-push {
+  transition: var(--concrete-transition-fast);
+}
+
+.hover-push:hover {
+  transform: translate(2px, 2px);
+  box-shadow: none;
 }
 
 /* ==========================================
@@ -346,11 +455,12 @@ pre {
   font-family: var(--font-mono);
   background: var(--concrete-gray-900);
   color: var(--concrete-gray-100);
-  padding: var(--concrete-space-md);
+  padding: var(--concrete-space-md) var(--concrete-space-lg);
   border: var(--concrete-border-width) solid var(--concrete-black);
+  border-radius: var(--concrete-radius-md);
   overflow-x: auto;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 code {
@@ -359,37 +469,102 @@ code {
 
 /* Inline code */
 :not(pre) > code {
-  background: var(--concrete-gray-200);
-  padding: 2px 6px;
+  background: var(--concrete-gray-100);
+  padding: 2px 8px;
   border: 2px solid var(--concrete-black);
-  font-size: 0.9em;
+  border-radius: var(--concrete-radius-sm);
+  font-size: 0.875em;
+  font-weight: 500;
 }
 
 /* ==========================================
-   Selection Styling
+   Selection & Focus Styling
    ========================================== */
 ::selection {
   background: var(--concrete-yellow);
   color: var(--concrete-black);
 }
 
+:focus-visible {
+  outline: 3px solid var(--concrete-black);
+  outline-offset: 2px;
+}
+
 /* ==========================================
    Scrollbar Styling
    ========================================== */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--concrete-gray-200);
-  border: 2px solid var(--concrete-black);
+  background: var(--concrete-gray-100);
+  border-left: 2px solid var(--concrete-black);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--concrete-black);
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--concrete-gray-700);
+}
+
+/* ==========================================
+   Link Styles
+   ========================================== */
+.link-brutal {
+  position: relative;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+  transition: var(--concrete-transition-fast);
+}
+
+.link-brutal:hover {
+  background: var(--concrete-yellow);
+}
+
+/* ==========================================
+   Card Hover Effects
+   ========================================== */
+.card-hover {
+  transition: var(--concrete-transition-fast);
+}
+
+.card-hover:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: var(--concrete-shadow-lg);
+}
+
+/* ==========================================
+   Utility Classes
+   ========================================== */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-gradient-brutal {
+  background: linear-gradient(90deg, var(--concrete-yellow), var(--concrete-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Container utility */
+.container-brutal {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--concrete-space-lg);
+  padding-right: var(--concrete-space-lg);
+}
+
+/* Section spacing */
+.section-brutal {
+  padding-top: var(--concrete-space-3xl);
+  padding-bottom: var(--concrete-space-3xl);
 }

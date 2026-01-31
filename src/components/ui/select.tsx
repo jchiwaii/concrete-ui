@@ -26,6 +26,7 @@ export interface SelectProps
   options: SelectOption[];
   disabled?: boolean;
   searchable?: boolean;
+  rounded?: boolean;
 }
 
 const Select = forwardRef<HTMLDivElement, SelectProps>(
@@ -33,10 +34,11 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     {
       value,
       onChange,
-      placeholder = "SELECT OPTION",
+      placeholder = "Select option...",
       options,
       disabled = false,
       searchable = false,
+      rounded = false,
       className = "",
       ...props
     },
@@ -54,12 +56,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     const dropdownRef = useRef<HTMLDivElement>(null);
     const searchInputRef = useRef<HTMLInputElement>(null);
 
-    // Close dropdown when clicking outside
     useClickOutside(dropdownRef, () => {
       if (isOpen) setIsOpen(false);
     });
 
-    // Filter options based on search
     const filteredOptions = useMemo(() => {
       if (!searchable || !searchTerm) return options;
       return options.filter((option) =>
@@ -67,11 +67,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       );
     }, [options, searchTerm, searchable]);
 
-    // Get selected option label
     const selectedOption = options.find((opt) => opt.value === value);
     const displayValue = selectedOption?.label || placeholder;
 
-    // Calculate dropdown position
     useEffect(() => {
       if (isOpen && triggerRef.current && dropdownRef.current) {
         const triggerRect = triggerRef.current.getBoundingClientRect();
@@ -81,14 +79,12 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       }
     }, [isOpen]);
 
-    // Focus search input when opened
     useEffect(() => {
       if (isOpen && searchable && searchInputRef.current) {
         searchInputRef.current.focus();
       }
     }, [isOpen, searchable]);
 
-    // Keyboard navigation
     const handleKeyDown = (e: React.KeyboardEvent) => {
       if (disabled) return;
 
@@ -148,86 +144,49 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       setSearchTerm("");
     };
 
-    const baseStyles = `
-      relative
-      inline-block
-      w-full
-      font-bold
-      uppercase
-      tracking-wider
-    `;
-
-    const triggerStyles = `
-      w-full
-      px-6 py-3
-      bg-white
-      border-4 border-black
-      shadow-[4px_4px_0_0_#000]
-      transition-all duration-100 ease-out
-      font-bold uppercase tracking-wider
-      text-left
-      flex items-center justify-between
-      ${
-        !disabled
-          ? "hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0_0_#000] cursor-pointer"
-          : "opacity-50 cursor-not-allowed"
-      }
-      ${isOpen ? "translate-x-[-2px] translate-y-[-2px] shadow-[6px_6px_0_0_#000]" : ""}
-    `;
-
-    const dropdownStyles = `
-      absolute
-      z-50
-      w-full
-      min-w-[200px]
-      max-h-[300px]
-      overflow-y-auto
-      bg-white
-      border-4 border-black
-      shadow-[6px_6px_0_0_#000]
-      animate-brutal-slide-down
-    `;
-
-    const optionStyles = (index: number, option: SelectOption) => `
-      px-6 py-3
-      border-b-4 border-black last:border-b-0
-      cursor-pointer
-      font-bold uppercase tracking-wider
-      transition-all duration-100 ease-out
-      ${option.disabled ? "opacity-50 cursor-not-allowed bg-gray-200" : ""}
-      ${
-        index === selectedIndex && !option.disabled
-          ? "bg-[#FFFF00] text-black"
-          : "bg-white text-black hover:bg-gray-100"
-      }
-      ${option.value === value ? "bg-[#00FFFF]" : ""}
-    `;
-
-    const searchStyles = `
-      w-full
-      px-6 py-3
-      border-b-4 border-black
-      outline-none
-      font-bold uppercase tracking-wider
-      placeholder:text-gray-400 placeholder:uppercase
-    `;
+    const radiusStyles = rounded ? "rounded-full" : "rounded-lg";
 
     return (
-      <div ref={ref} className={`${baseStyles} ${className}`} {...props}>
+      <div ref={ref} className={`relative inline-block w-full ${className}`} {...props}>
         <button
           ref={triggerRef}
           type="button"
           onClick={() => !disabled && setIsOpen(!isOpen)}
           onKeyDown={handleKeyDown}
           disabled={disabled}
-          className={triggerStyles}
+          className={`
+            w-full
+            px-4 py-2.5
+            bg-white
+            border-2 border-black
+            shadow-[3px_3px_0_0_#000]
+            transition-all duration-150 ease-out
+            font-medium
+            text-left
+            flex items-center justify-between gap-2
+            ${radiusStyles}
+            ${
+              !disabled
+                ? "hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0_0_#000] cursor-pointer"
+                : "opacity-50 cursor-not-allowed"
+            }
+            ${isOpen ? "translate-x-[-2px] translate-y-[-2px] shadow-[5px_5px_0_0_#000]" : ""}
+          `}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
         >
-          <span className="truncate">{displayValue}</span>
-          <span className="ml-2 transform transition-transform duration-100">
-            {isOpen ? "▲" : "▼"}
+          <span className={`truncate ${!selectedOption ? "text-gray-400" : "text-black"}`}>
+            {displayValue}
           </span>
+          <svg
+            className={`w-4 h-4 text-gray-500 transition-transform duration-150 ${isOpen ? "rotate-180" : ""}`}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
         </button>
 
         {isOpen &&
@@ -235,7 +194,17 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           createPortal(
             <div
               ref={dropdownRef}
-              className={dropdownStyles}
+              className={`
+                z-50
+                min-w-[200px]
+                max-h-[280px]
+                overflow-y-auto
+                bg-white
+                border-2 border-black
+                shadow-[4px_4px_0_0_#000]
+                rounded-lg
+                animate-brutal-slide-down
+              `}
               style={{
                 position: "fixed",
                 top: `${dropdownPosition.top}px`,
@@ -243,39 +212,55 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 width: triggerRef.current?.offsetWidth,
               }}
               role="listbox"
-              aria-label="Select options"
             >
               {searchable && (
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => {
-                    setSearchTerm(e.target.value);
-                    setSelectedIndex(0);
-                  }}
-                  placeholder="SEARCH..."
-                  className={searchStyles}
-                />
+                <div className="p-2 border-b-2 border-black">
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      setSelectedIndex(0);
+                    }}
+                    placeholder="Search..."
+                    className="w-full px-3 py-2 text-sm border-2 border-black rounded-md outline-none focus:ring-2 focus:ring-black/20"
+                  />
+                </div>
               )}
 
               {filteredOptions.length === 0 ? (
-                <div className="px-6 py-3 text-gray-400 uppercase">
-                  NO OPTIONS FOUND
+                <div className="px-4 py-3 text-sm text-gray-400">
+                  No options found
                 </div>
               ) : (
-                filteredOptions.map((option, index) => (
-                  <div
-                    key={option.value}
-                    className={optionStyles(index, option)}
-                    onClick={() => handleSelect(option)}
-                    onMouseEnter={() => setSelectedIndex(index)}
-                    role="option"
-                    aria-selected={option.value === value}
-                  >
-                    {option.label}
-                  </div>
-                ))
+                <div className="py-1">
+                  {filteredOptions.map((option, index) => (
+                    <div
+                      key={option.value}
+                      className={`
+                        px-4 py-2.5
+                        cursor-pointer
+                        text-sm font-medium
+                        transition-all duration-100
+                        ${option.disabled ? "opacity-50 cursor-not-allowed" : ""}
+                        ${
+                          index === selectedIndex && !option.disabled
+                            ? "bg-[#ffde00]"
+                            : option.value === value
+                            ? "bg-gray-100"
+                            : "hover:bg-gray-50"
+                        }
+                      `}
+                      onClick={() => handleSelect(option)}
+                      onMouseEnter={() => setSelectedIndex(index)}
+                      role="option"
+                      aria-selected={option.value === value}
+                    >
+                      {option.label}
+                    </div>
+                  ))}
+                </div>
               )}
             </div>,
             document.body

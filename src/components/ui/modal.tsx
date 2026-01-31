@@ -6,10 +6,11 @@ import { createPortal } from "react-dom";
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   open: boolean;
   onClose: () => void;
+  size?: "sm" | "md" | "lg" | "xl" | "full";
 }
 
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
-  ({ className = "", open, onClose, children, ...props }, ref) => {
+  ({ className = "", open, onClose, size = "md", children, ...props }, ref) => {
     const handleEscape = useCallback(
       (e: KeyboardEvent) => {
         if (e.key === "Escape") onClose();
@@ -28,13 +29,21 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       };
     }, [open, handleEscape]);
 
-    if (!open) return null;
+    if (!open || typeof window === "undefined") return null;
+
+    const sizes = {
+      sm: "max-w-sm",
+      md: "max-w-lg",
+      lg: "max-w-2xl",
+      xl: "max-w-4xl",
+      full: "max-w-[calc(100vw-2rem)]",
+    };
 
     return createPortal(
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         {/* Backdrop */}
         <div
-          className="absolute inset-0 bg-black/50"
+          className="absolute inset-0 bg-black/60 animate-brutal-fade-in"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -46,11 +55,12 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           aria-modal="true"
           className={`
             relative z-10
-            w-full max-w-lg
+            w-full ${sizes[size]}
             bg-white
-            border-4 border-black
-            shadow-[8px_8px_0_0_#000]
-            animate-brutal-slide-up
+            border-2 border-black
+            shadow-[6px_6px_0_0_#000]
+            rounded-xl
+            animate-brutal-scale-in
             ${className}
           `}
           {...props}
@@ -69,7 +79,7 @@ const ModalHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`p-6 border-b-4 border-black ${className}`}
+      className={`px-6 py-5 border-b-2 border-black ${className}`}
       {...props}
     >
       {children}
@@ -85,7 +95,7 @@ const ModalTitle = forwardRef<
 >(({ className = "", children, ...props }, ref) => (
   <h2
     ref={ref}
-    className={`text-2xl font-extrabold uppercase tracking-tight ${className}`}
+    className={`text-xl font-bold tracking-tight ${className}`}
     {...props}
   >
     {children}
@@ -98,7 +108,7 @@ const ModalDescription = forwardRef<
   HTMLParagraphElement,
   HTMLAttributes<HTMLParagraphElement>
 >(({ className = "", children, ...props }, ref) => (
-  <p ref={ref} className={`mt-2 text-base ${className}`} {...props}>
+  <p ref={ref} className={`mt-1.5 text-sm text-gray-600 ${className}`} {...props}>
     {children}
   </p>
 ));
@@ -107,7 +117,7 @@ ModalDescription.displayName = "ModalDescription";
 
 const ModalContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
-    <div ref={ref} className={`p-6 ${className}`} {...props}>
+    <div ref={ref} className={`px-6 py-5 ${className}`} {...props}>
       {children}
     </div>
   )
@@ -119,7 +129,7 @@ const ModalFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`p-6 border-t-4 border-black flex items-center justify-end gap-4 ${className}`}
+      className={`px-6 py-4 border-t-2 border-black flex items-center justify-end gap-3 bg-gray-50 rounded-b-xl ${className}`}
       {...props}
     >
       {children}
@@ -137,22 +147,22 @@ const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>(
       ref={ref}
       className={`
         absolute top-4 right-4
-        w-10 h-10
+        w-8 h-8
         flex items-center justify-center
-        text-2xl font-black
-        bg-white
-        border-4 border-black
-        shadow-[2px_2px_0_0_#000]
-        transition-all duration-100 ease-out
-        hover:bg-[#FF0000] hover:text-white
-        hover:translate-x-[-2px] hover:translate-y-[-2px]
-        hover:shadow-[4px_4px_0_0_#000]
+        text-xl font-bold
+        text-gray-500
+        rounded-lg
+        transition-all duration-150 ease-out
+        hover:bg-gray-100 hover:text-black
         ${className}
       `}
       onClick={onClick}
+      aria-label="Close"
       {...props}
     >
-      ×
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
     </button>
   )
 );

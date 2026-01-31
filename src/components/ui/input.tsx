@@ -2,32 +2,36 @@ import { InputHTMLAttributes, forwardRef } from "react";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: boolean;
+  rounded?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className = "", error = false, ...props }, ref) => {
+  ({ className = "", error = false, rounded = false, ...props }, ref) => {
     const baseStyles = `
-      w-full px-4 py-3
+      w-full px-4 py-2.5
       text-base font-medium
       bg-white
-      border-4 border-black
-      shadow-[4px_4px_0_0_#000]
+      border-2 border-black
+      shadow-[3px_3px_0_0_#000]
       outline-none
-      transition-all duration-100 ease-out
-      placeholder:text-gray-400 placeholder:uppercase
+      transition-all duration-150 ease-out
+      placeholder:text-gray-400
       focus:translate-x-[-2px] focus:translate-y-[-2px]
-      focus:shadow-[6px_6px_0_0_#000]
+      focus:shadow-[5px_5px_0_0_#000]
       disabled:opacity-50 disabled:cursor-not-allowed
+      disabled:bg-gray-100
     `;
 
     const errorStyles = error
-      ? "border-[#FF0000] shadow-[4px_4px_0_0_#FF0000] focus:shadow-[6px_6px_0_0_#FF0000]"
+      ? "border-[#ef4444] shadow-[3px_3px_0_0_#ef4444] focus:shadow-[5px_5px_0_0_#ef4444]"
       : "";
+
+    const radiusStyles = rounded ? "rounded-full" : "rounded-lg";
 
     return (
       <input
         ref={ref}
-        className={`${baseStyles} ${errorStyles} ${className}`}
+        className={`${baseStyles} ${errorStyles} ${radiusStyles} ${className}`}
         {...props}
       />
     );

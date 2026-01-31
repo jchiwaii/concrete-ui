@@ -49,21 +49,26 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 flex-shrink-0 border-r-4 border-black bg-white">
-      <div className="sticky top-0 h-screen overflow-y-auto p-6">
-        <Link href="/" className="block mb-8">
-          <span className="text-2xl font-extrabold uppercase tracking-tight">
-            CONCRETE<span className="text-[#FFFF00] bg-black px-1">UI</span>
-          </span>
-        </Link>
+    <aside className="w-64 flex-shrink-0 border-r-2 border-black bg-white">
+      <div className="sticky top-0 h-screen overflow-y-auto">
+        {/* Logo */}
+        <div className="p-6 border-b-2 border-black">
+          <Link href="/" className="block">
+            <span className="text-xl font-bold tracking-tight">
+              Concrete<span className="text-white bg-black px-1.5 py-0.5 ml-0.5 rounded">UI</span>
+            </span>
+          </Link>
+          <p className="text-xs text-gray-500 mt-1">Neobrutalist Components</p>
+        </div>
 
-        <nav className="space-y-8">
+        {/* Navigation */}
+        <nav className="p-4">
           {navigation.map((section) => (
-            <div key={section.title}>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3">
+            <div key={section.title} className="mb-6">
+              <h3 className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-3">
                 {section.title}
               </h3>
-              <ul className="space-y-1">
+              <ul className="space-y-0.5">
                 {section.links.map((link) => {
                   const isActive = pathname === link.href;
                   return (
@@ -72,13 +77,13 @@ export function Sidebar() {
                         href={link.href}
                         className={`
                           block px-3 py-2
-                          text-sm font-bold uppercase tracking-wide
-                          border-2 border-transparent
-                          transition-all duration-100
+                          text-sm font-medium
+                          rounded-lg
+                          transition-all duration-150
                           ${
                             isActive
-                              ? "bg-[#FFFF00] border-black"
-                              : "hover:bg-gray-100 hover:border-black"
+                              ? "bg-[#ffde00] text-black border-2 border-black shadow-[2px_2px_0_0_#000]"
+                              : "text-gray-600 hover:text-black hover:bg-gray-100"
                           }
                         `}
                       >
@@ -91,6 +96,21 @@ export function Sidebar() {
             </div>
           ))}
         </nav>
+
+        {/* Footer */}
+        <div className="p-4 border-t-2 border-black mt-auto">
+          <div className="text-xs text-gray-500">
+            <p>Built with React + Tailwind</p>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black font-medium hover:underline mt-1 inline-block"
+            >
+              View on GitHub →
+            </a>
+          </div>
+        </div>
       </div>
     </aside>
   );

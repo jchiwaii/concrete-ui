@@ -42,7 +42,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
     return (
       <AccordionContext.Provider value={{ openItems, toggleItem, type }}>
-        <div ref={ref} className={`space-y-4 ${className}`} {...props}>
+        <div ref={ref} className={`space-y-3 ${className}`} {...props}>
           {children}
         </div>
       </AccordionContext.Provider>
@@ -68,7 +68,14 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       <div
         ref={ref}
         data-state={isOpen ? "open" : "closed"}
-        className={`border-4 border-black bg-white shadow-[4px_4px_0_0_#000] ${className}`}
+        className={`
+          border-2 border-black
+          bg-white
+          shadow-[3px_3px_0_0_#000]
+          rounded-lg
+          overflow-hidden
+          ${className}
+        `}
         {...props}
       >
         {children}
@@ -97,25 +104,29 @@ const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
         ref={ref}
         onClick={() => context.toggleItem(value)}
         className={`
-          w-full px-6 py-4
-          flex items-center justify-between
-          text-lg font-bold uppercase tracking-wide
-          transition-all duration-100 ease-out
+          w-full px-5 py-4
+          flex items-center justify-between gap-4
+          text-left
+          font-semibold
+          transition-all duration-150 ease-out
           hover:bg-gray-50
           ${className}
         `}
+        aria-expanded={isOpen}
         {...props}
       >
-        {children}
-        <span
-          className={`
-            text-2xl font-black
-            transition-transform duration-100
-            ${isOpen ? "rotate-45" : "rotate-0"}
-          `}
+        <span>{children}</span>
+        <svg
+          className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform duration-150 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
         >
-          +
-        </span>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
       </button>
     );
   }
@@ -140,10 +151,10 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
     return (
       <div
         ref={ref}
-        className={`px-6 pb-4 border-t-4 border-black ${className}`}
+        className={`px-5 pb-4 border-t-2 border-black animate-brutal-fade-in ${className}`}
         {...props}
       >
-        <div className="pt-4">{children}</div>
+        <div className="pt-4 text-sm text-gray-600">{children}</div>
       </div>
     );
   }

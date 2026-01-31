@@ -6,51 +6,73 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | "primary"
     | "secondary"
     | "danger"
+    | "success"
     | "ghost"
-    | "outline";
-  size?: "sm" | "md" | "lg";
+    | "outline"
+    | "neutral";
+  size?: "sm" | "md" | "lg" | "xl";
+  rounded?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className = "", variant = "default", size = "md", children, ...props },
+    {
+      className = "",
+      variant = "default",
+      size = "md",
+      rounded = false,
+      children,
+      ...props
+    },
     ref
   ) => {
     const baseStyles = `
-      inline-flex items-center justify-center
-      font-bold uppercase tracking-wider
-      border-4 border-black
-      transition-all duration-100 ease-out
-      hover:translate-x-[-4px] hover:translate-y-[-4px]
-      hover:shadow-[8px_8px_0_0_#000]
-      active:translate-x-0 active:translate-y-0
+      relative
+      inline-flex items-center justify-center gap-2
+      font-bold uppercase tracking-wide
+      border-2 border-black
+      transition-all duration-150 ease-out
+      cursor-pointer
+      select-none
+      active:translate-y-[2px] active:translate-x-[2px]
       active:shadow-none
       disabled:opacity-50 disabled:cursor-not-allowed
       disabled:hover:translate-x-0 disabled:hover:translate-y-0
-      disabled:hover:shadow-[4px_4px_0_0_#000]
+      disabled:active:translate-x-0 disabled:active:translate-y-0
     `;
 
     const variants = {
-      default: "bg-white text-black shadow-[4px_4px_0_0_#000]",
-      primary: "bg-[#FFFF00] text-black shadow-[4px_4px_0_0_#000]",
-      secondary: "bg-[#00FFFF] text-black shadow-[4px_4px_0_0_#000]",
-      danger: "bg-[#FF0000] text-white shadow-[4px_4px_0_0_#000]",
+      default:
+        "bg-white text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+      primary:
+        "bg-[#ffde00] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+      secondary:
+        "bg-[#06b6d4] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+      danger:
+        "bg-[#ef4444] text-white shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+      success:
+        "bg-[#22c55e] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+      neutral:
+        "bg-gray-900 text-white shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#ffde00] hover:translate-x-[-2px] hover:translate-y-[-2px]",
       ghost:
-        "bg-transparent text-black border-transparent shadow-none hover:bg-gray-100 hover:shadow-none",
+        "bg-transparent text-black border-transparent shadow-none hover:bg-gray-100 hover:border-gray-200",
       outline:
-        "bg-transparent text-black shadow-[4px_4px_0_0_#000] hover:bg-black hover:text-white",
+        "bg-transparent text-black shadow-[4px_4px_0_0_#000] hover:bg-black hover:text-white hover:translate-x-[-2px] hover:translate-y-[-2px]",
     };
 
     const sizes = {
-      sm: "px-4 py-2 text-sm",
-      md: "px-6 py-3 text-base",
-      lg: "px-8 py-4 text-lg",
+      sm: "px-3 py-1.5 text-xs",
+      md: "px-5 py-2.5 text-sm",
+      lg: "px-6 py-3 text-base",
+      xl: "px-8 py-4 text-lg",
     };
+
+    const radiusStyles = rounded ? "rounded-full" : "rounded-lg";
 
     return (
       <button
         ref={ref}
-        className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+        className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${radiusStyles} ${className}`}
         {...props}
       >
         {children}
