@@ -241,7 +241,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                   >
                     <Button variant="default" size="lg">
-                      View On GitHub
+                      Star on GitHub
                     </Button>
                   </a>
                 </div>
