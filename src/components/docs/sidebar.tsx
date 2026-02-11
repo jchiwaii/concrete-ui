@@ -55,7 +55,10 @@ export function Sidebar() {
         <div className="p-6 border-b-2 border-black">
           <Link href="/" className="block">
             <span className="text-xl font-bold tracking-tight">
-              Concrete<span className="text-white bg-black px-1.5 py-0.5 ml-0.5 rounded">UI</span>
+              Concrete
+              <span className="text-white bg-black px-1.5 py-0.5 ml-0.5 rounded">
+                UI
+              </span>
             </span>
           </Link>
           <p className="text-xs text-gray-500 mt-1">Neobrutalist Components</p>

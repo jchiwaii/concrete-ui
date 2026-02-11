@@ -9,7 +9,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-xl font-bold tracking-tight">
-              Concrete<span className="text-white bg-black px-1.5 py-0.5 ml-0.5 rounded">UI</span>
+              Concrete
+              <span className="text-white bg-black px-1.5 py-0.5 ml-0.5 rounded">
+                UI
+              </span>
             </span>
           </Link>
           <nav className="hidden md:flex items-center gap-1">
@@ -42,7 +45,9 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#ffde00] border-2 border-black rounded-full shadow-[3px_3px_0_0_#000] mb-8 animate-brutal-slide-up">
             <span className="w-2 h-2 bg-black rounded-full animate-pulse"></span>
-            <span className="text-sm font-semibold">Neobrutalist Design System</span>
+            <span className="text-sm font-semibold">
+              Neobrutalist Design System
+            </span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6 animate-brutal-slide-up stagger-1">
@@ -52,8 +57,8 @@ export default function Home() {
           </h1>
 
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10 animate-brutal-slide-up stagger-2">
-            A collection of high-quality React components with thick borders, hard shadows,
-            and unapologetic design. Copy, paste, and customize.
+            A collection of high-quality React components with thick borders,
+            hard shadows, and unapologetic design. Copy, paste, and customize.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-brutal-slide-up stagger-3">
@@ -97,12 +102,15 @@ export default function Home() {
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <Badge variant="neutral" className="mb-4">Features</Badge>
+            <Badge variant="neutral" className="mb-4">
+              Features
+            </Badge>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
               Why Concrete UI?
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Designed for developers who want bold, distinctive interfaces without the hassle.
+              Designed for developers who want bold, distinctive interfaces
+              without the hassle.
             </p>
           </div>
 
@@ -114,7 +122,8 @@ export default function Home() {
                 </div>
                 <h3 className="text-lg font-bold mb-2">Bold Design</h3>
                 <p className="text-sm text-gray-600">
-                  Thick borders, hard shadows, and saturated colors. No gradients, no subtlety—just pure impact.
+                  Thick borders, hard shadows, and saturated colors. No
+                  gradients, no subtlety—just pure impact.
                 </p>
               </CardContent>
             </Card>
@@ -126,7 +135,8 @@ export default function Home() {
                 </div>
                 <h3 className="text-lg font-bold mb-2">Copy & Paste</h3>
                 <p className="text-sm text-gray-600">
-                  Just copy the component code into your project. No package installation or complex setup needed.
+                  Just copy the component code into your project. No package
+                  installation or complex setup needed.
                 </p>
               </CardContent>
             </Card>
@@ -138,7 +148,8 @@ export default function Home() {
                 </div>
                 <h3 className="text-lg font-bold mb-2">Fast & Light</h3>
                 <p className="text-sm text-gray-600">
-                  Pure React + Tailwind CSS. No heavy dependencies, no runtime overhead. Maximum performance.
+                  Pure React + Tailwind CSS. No heavy dependencies, no runtime
+                  overhead. Maximum performance.
                 </p>
               </CardContent>
             </Card>
@@ -150,7 +161,9 @@ export default function Home() {
       <section className="py-20 px-6 bg-white border-y-2 border-black">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <Badge variant="primary" className="mb-4">Preview</Badge>
+            <Badge variant="primary" className="mb-4">
+              Preview
+            </Badge>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
               Component Showcase
             </h2>
@@ -167,12 +180,24 @@ export default function Home() {
                   Buttons
                 </h3>
                 <div className="flex flex-wrap gap-3">
-                  <Button variant="default" size="sm">Default</Button>
-                  <Button variant="primary" size="sm">Primary</Button>
-                  <Button variant="secondary" size="sm">Secondary</Button>
-                  <Button variant="danger" size="sm">Danger</Button>
-                  <Button variant="success" size="sm">Success</Button>
-                  <Button variant="neutral" size="sm">Neutral</Button>
+                  <Button variant="default" size="sm">
+                    Default
+                  </Button>
+                  <Button variant="primary" size="sm">
+                    Primary
+                  </Button>
+                  <Button variant="secondary" size="sm">
+                    Secondary
+                  </Button>
+                  <Button variant="danger" size="sm">
+                    Danger
+                  </Button>
+                  <Button variant="success" size="sm">
+                    Success
+                  </Button>
+                  <Button variant="neutral" size="sm">
+                    Neutral
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -214,7 +239,8 @@ export default function Home() {
                   Colored Cards
                 </h3>
                 <p className="text-sm text-gray-700">
-                  Cards come in multiple colors including white, yellow, cyan, pink, lime, purple, and orange.
+                  Cards come in multiple colors including white, yellow, cyan,
+                  pink, lime, purple, and orange.
                 </p>
               </CardContent>
             </Card>
@@ -252,7 +278,10 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <span className="text-xl font-bold tracking-tight">
-                Concrete<span className="text-black bg-[#ffde00] px-1.5 py-0.5 ml-0.5 rounded">UI</span>
+                Concrete
+                <span className="text-black bg-[#ffde00] px-1.5 py-0.5 ml-0.5 rounded">
+                  UI
+                </span>
               </span>
               <p className="text-sm mt-2 text-gray-400">
                 Neobrutalist components for modern web applications.
@@ -278,7 +307,8 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-            © {new Date().getFullYear()} Concrete UI. Open source under MIT license.
+            © {new Date().getFullYear()} Concrete UI. Open source under MIT
+            license.
           </div>
         </div>
       </footer>
