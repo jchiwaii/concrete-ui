@@ -5,9 +5,14 @@ import { useState } from "react";
 interface CodeBlockProps {
   code: string;
   language?: string;
+  embedded?: boolean;
 }
 
-export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
+export function CodeBlock({
+  code,
+  language = "tsx",
+  embedded = false,
+}: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
@@ -17,9 +22,14 @@ export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
   };
 
   return (
-    <div className="relative">
-      <div className="flex items-center justify-between border-b-2 border-black bg-black px-4 py-2">
-        <span className="rounded-md border-2 border-white bg-black px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-white">
+    <div
+      className={`
+        relative overflow-hidden
+        ${embedded ? "" : "rounded-lg border-2 border-black"}
+      `}
+    >
+      <div className="flex items-center justify-between border-b-2 border-black bg-[#ffde00] px-4 py-2.5">
+        <span className="rounded-md border-2 border-black bg-white px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-black">
           {language}
         </span>
         <button
@@ -31,7 +41,7 @@ export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
             ${
               copied
                 ? "border-black bg-[#22c55e] text-black"
-                : "border-white text-white hover:bg-[#ffde00] hover:text-black"
+                : "border-black bg-white text-black hover:bg-black hover:text-white"
             }
           `}
         >
@@ -52,7 +62,7 @@ export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
           )}
         </button>
       </div>
-      <pre className="overflow-x-auto bg-[#171717] p-4 text-sm font-mono leading-relaxed text-gray-100">
+      <pre className="m-0 overflow-x-auto rounded-none border-0 bg-[#1f2937] p-4 text-sm font-mono leading-relaxed text-gray-100">
         <code>{code}</code>
       </pre>
     </div>

@@ -8,6 +8,7 @@ import {
   useState,
   useEffect,
   useCallback,
+  useRef,
   InputHTMLAttributes,
   ReactNode,
 } from "react";
@@ -290,16 +291,22 @@ const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(
     }
 
     const { search, onClose } = context;
-    const [itemIndex, setItemIndex] = useState(0);
+    const [itemIndex, setItemIndex] = useState(-1);
+    const itemRef = useRef<HTMLDivElement | null>(null);
 
     // Calculate item index
     useEffect(() => {
-      const items = document.querySelectorAll('[role="option"]');
-      const currentIndex = Array.from(items).indexOf(
-        ref as any as Element
+      const current = itemRef.current;
+      if (!current) return;
+
+      const list = current.closest('[role="listbox"]');
+      if (!list) return;
+
+      const items = Array.from(
+        list.querySelectorAll<HTMLElement>('[role="option"]')
       );
-      setItemIndex(currentIndex);
-    }, [ref]);
+      setItemIndex(items.indexOf(current));
+    }, [search, children]);
 
     const handleClick = () => {
       if (disabled) return;
@@ -322,7 +329,14 @@ const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(
 
     return (
       <div
-        ref={ref}
+        ref={(node) => {
+          itemRef.current = node;
+          if (typeof ref === "function") {
+            ref(node);
+          } else if (ref) {
+            (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+          }
+        }}
         className={`
           px-6 py-3
           border-b-4 border-black last:border-b-0
@@ -334,11 +348,15 @@ const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(
               ? "opacity-50 cursor-not-allowed bg-gray-200"
               : "cursor-pointer"
           }
-          ${isSelected && !disabled ? "bg-[#ffde00] text-black" : "bg-white text-black hover:bg-gray-100"}
+          ${isSelected && !disabled ? "bg-[#ffde00] text-black" : "bg-white text-black hover:bg-[#fff4ab]"}
           ${className}
         `}
         onClick={handleClick}
-        onMouseEnter={() => context.setSelectedIndex(itemIndex)}
+        onMouseEnter={() => {
+          if (!disabled && itemIndex >= 0) {
+            context.setSelectedIndex(itemIndex);
+          }
+        }}
         role="option"
         aria-selected={isSelected}
         aria-disabled={disabled}

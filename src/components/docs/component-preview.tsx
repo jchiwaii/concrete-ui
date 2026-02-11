@@ -44,8 +44,8 @@ export function ComponentPreview({
             transition-all duration-150
             ${
               showCode
-                ? "bg-black text-white"
-                : "bg-white text-gray-700 hover:bg-gray-100 hover:text-black"
+                ? "border-b-2 border-black bg-[#ffde00] text-black"
+                : "bg-white text-gray-700 hover:bg-[#fff4ab] hover:text-black"
             }
           `}
         >
@@ -68,9 +68,7 @@ export function ComponentPreview({
       </div>
 
       {showCode && (
-        <div className="border-t-2 border-black">
-          <CodeBlock code={code} />
-        </div>
+        <CodeBlock code={code} embedded />
       )}
     </div>
   );

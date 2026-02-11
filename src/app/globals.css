@@ -617,4 +617,12 @@ code {
 
 .docs-component-page .source-panel > div:first-child {
   border-bottom: 2px solid var(--concrete-black);
+  background: var(--concrete-yellow);
+  color: var(--concrete-black);
+}
+
+.docs-component-page .source-panel pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
 }
