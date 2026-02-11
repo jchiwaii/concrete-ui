@@ -63,7 +63,9 @@ export function Sidebar() {
           <Link href="/" className="inline-flex items-center gap-2">
             <span className="text-lg font-bold tracking-tight">
               Concrete
-              <span className="ml-0.5 rounded bg-black px-1.5 py-0.5 text-white">UI</span>
+              <span className="ml-0.5 rounded bg-black px-1.5 py-0.5 text-white">
+                UI
+              </span>
             </span>
           </Link>
           <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
@@ -98,7 +100,9 @@ export function Sidebar() {
             <Link href="/" className="block">
               <span className="text-2xl font-bold tracking-tight">
                 Concrete
-                <span className="ml-0.5 rounded bg-black px-1.5 py-0.5 text-white">UI</span>
+                <span className="ml-0.5 rounded bg-black px-1.5 py-0.5 text-white">
+                  UI
+                </span>
               </span>
             </Link>
             <p className="mt-2 text-xs uppercase tracking-widest text-gray-500">
@@ -106,7 +110,7 @@ export function Sidebar() {
             </p>
           </div>
 
-          <nav className="h-[calc(100%-146px)] overflow-y-auto p-4">
+          <nav className="h-[calc(100%-160px)] overflow-y-auto p-4">
             {navigation.map((section) => (
               <div key={section.title} className="mb-6">
                 <h3 className="mb-2 px-3 text-[11px] font-bold uppercase tracking-widest text-gray-400">
@@ -135,7 +139,7 @@ export function Sidebar() {
             ))}
           </nav>
 
-          <div className="border-t-2 border-black bg-gray-50 p-4">
+          <div className="border-t-2 border-black bg-gray-50 p-4 pb-5 pr-5">
             <a
               href="https://github.com/jchiwaii/concrete-ui"
               target="_blank"
