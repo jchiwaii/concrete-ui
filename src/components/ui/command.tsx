@@ -334,7 +334,7 @@ const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(
               ? "opacity-50 cursor-not-allowed bg-gray-200"
               : "cursor-pointer"
           }
-          ${isSelected && !disabled ? "bg-[#FFFF00] text-black" : "bg-white text-black hover:bg-gray-100"}
+          ${isSelected && !disabled ? "bg-[#ffde00] text-black" : "bg-white text-black hover:bg-gray-100"}
           ${className}
         `}
         onClick={handleClick}

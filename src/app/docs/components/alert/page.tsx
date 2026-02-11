@@ -5,7 +5,7 @@ import { ComponentPreview } from "@/components/docs";
 
 export default function AlertPage() {
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">
@@ -85,7 +85,7 @@ export default function AlertPage() {
       </ComponentPreview>
 
       {/* Full Code */}
-      <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
+      <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
           <h3 className="text-xl font-extrabold uppercase tracking-tight">
             FULL COMPONENT CODE
@@ -108,10 +108,10 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
 
     const variants = {
       default: "bg-white",
-      info: "bg-[#00FFFF]",
-      success: "bg-[#00FF00]",
-      warning: "bg-[#FFFF00]",
-      danger: "bg-[#FF0000] text-white",
+      info: "bg-[#06b6d4]",
+      success: "bg-[#22c55e]",
+      warning: "bg-[#ffde00]",
+      danger: "bg-[#ef4444] text-white",
     };
 
     const icons = {

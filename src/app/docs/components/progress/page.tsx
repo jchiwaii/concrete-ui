@@ -5,7 +5,7 @@ import { ComponentPreview } from "@/components/docs";
 
 export default function ProgressPage() {
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">
@@ -86,7 +86,7 @@ export default function ProgressPage() {
       </ComponentPreview>
 
       {/* Full Code */}
-      <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
+      <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
           <h3 className="text-xl font-extrabold uppercase tracking-tight">
             FULL COMPONENT CODE
@@ -107,10 +107,10 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
 
     const colors = {
       default: "bg-black",
-      primary: "bg-[#FFFF00]",
-      success: "bg-[#00FF00]",
-      warning: "bg-[#FF6600]",
-      danger: "bg-[#FF0000]",
+      primary: "bg-[#ffde00]",
+      success: "bg-[#22c55e]",
+      warning: "bg-[#f97316]",
+      danger: "bg-[#ef4444]",
     };
 
     return (

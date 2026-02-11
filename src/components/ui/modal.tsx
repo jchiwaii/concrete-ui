@@ -59,7 +59,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             bg-white
             border-2 border-black
             shadow-[6px_6px_0_0_#000]
-            rounded-xl
+            rounded-lg
             animate-brutal-scale-in
             ${className}
           `}
@@ -129,7 +129,7 @@ const ModalFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`px-6 py-4 border-t-2 border-black flex items-center justify-end gap-3 bg-gray-50 rounded-b-xl ${className}`}
+      className={`px-6 py-4 border-t-2 border-black flex items-center justify-end gap-3 bg-gray-50 rounded-b-lg ${className}`}
       {...props}
     >
       {children}
@@ -152,7 +152,7 @@ const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>(
         text-xl font-bold
         text-gray-500
         rounded-lg
-        transition-all duration-150 ease-out
+        transition-all duration-100 ease-out
         hover:bg-gray-100 hover:text-black
         ${className}
       `}

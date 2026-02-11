@@ -12,21 +12,21 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       text-base font-medium
       bg-white
       border-2 border-black
-      shadow-[3px_3px_0_0_#000]
+      shadow-[4px_4px_0_0_#000]
       outline-none
-      transition-all duration-150 ease-out
+      transition-all duration-100 ease-out
       placeholder:text-gray-400
       focus:translate-x-[-2px] focus:translate-y-[-2px]
-      focus:shadow-[5px_5px_0_0_#000]
+      focus:shadow-[6px_6px_0_0_#000]
       disabled:opacity-50 disabled:cursor-not-allowed
       disabled:bg-gray-100
     `;
 
     const errorStyles = error
-      ? "border-[#ef4444] shadow-[3px_3px_0_0_#ef4444] focus:shadow-[5px_5px_0_0_#ef4444]"
+      ? "border-[#ef4444] shadow-[4px_4px_0_0_#ef4444] focus:shadow-[6px_6px_0_0_#ef4444]"
       : "";
 
-    const radiusStyles = rounded ? "rounded-full" : "rounded-lg";
+    const radiusStyles = rounded ? "rounded-full" : "rounded-md";
 
     return (
       <input

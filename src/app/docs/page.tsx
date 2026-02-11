@@ -1,165 +1,104 @@
 import Link from "next/link";
 import { Badge, Button, Card, CardContent } from "@/components/ui";
 
+const principles = [
+  {
+    title: "Clear hierarchy",
+    description:
+      "Strong type scale, visible structure, and predictable spacing across every component.",
+  },
+  {
+    title: "Confident surfaces",
+    description:
+      "Bold outlines and hard shadows give interfaces identity while staying clean and usable.",
+  },
+  {
+    title: "Fast composition",
+    description:
+      "Copy components, adapt tokens, and ship screens quickly without losing consistency.",
+  },
+];
+
 export default function DocsPage() {
   return (
     <div className="space-y-12">
-      {/* Header */}
-      <div>
-        <Badge variant="primary" className="mb-4">
-          DOCUMENTATION
+      <section className="docs-panel p-7 md:p-8">
+        <Badge variant="primary" className="mb-4 uppercase">
+          Documentation
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
-          INTRODUCTION
+        <h1 className="font-heading text-[clamp(3rem,8vw,5.5rem)] uppercase leading-[0.9]">
+          Concrete UI Guide
         </h1>
-        <p className="text-brutal-lg max-w-2xl">
-          Welcome to <strong>Concrete UI</strong> — a neo brutalist component
-          library for React. Bold borders, hard shadows, saturated colors. No
-          subtlety, no compromise.
+        <p className="mt-4 max-w-3xl text-brutal-lg text-gray-700">
+          Concrete UI is a modern neo-brutalist component system for React.
+          Clean layout, bold identity, and practical copy-paste workflows.
         </p>
-      </div>
+        <div className="mt-7 flex flex-wrap gap-3">
+          <Link href="/docs/installation">
+            <Button variant="primary" size="lg">
+              Installation
+            </Button>
+          </Link>
+          <Link href="/docs/components/button">
+            <Button variant="outline" size="lg">
+              Browse Components
+            </Button>
+          </Link>
+        </div>
+      </section>
 
-      {/* What is Concrete UI */}
-      <Card>
-        <CardContent className="p-8">
-          <h2 className="text-brutal-2xl font-extrabold uppercase mb-4">
-            WHAT IS CONCRETE UI?
-          </h2>
-          <div className="space-y-4 text-base">
-            <p>
-              Concrete UI is a collection of copy-paste React components
-              designed in the
-              <strong> neo brutalist</strong> style. Inspired by the raw, honest
-              aesthetic of brutalist architecture, these components feature:
+      <section className="grid gap-6 md:grid-cols-3">
+        {principles.map((item) => (
+          <Card key={item.title} hover>
+            <CardContent className="p-6">
+              <h2 className="text-xl font-extrabold uppercase tracking-tight">
+                {item.title}
+              </h2>
+              <p className="mt-3 text-sm text-gray-700">{item.description}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </section>
+
+      <section className="docs-panel p-7 md:p-8">
+        <h2 className="text-2xl font-extrabold uppercase tracking-tight">
+          Core style language
+        </h2>
+        <div className="mt-5 grid gap-3 md:grid-cols-2">
+          <div className="rounded-lg border-2 border-black bg-gray-50 p-4">
+            <p className="text-xs font-bold uppercase tracking-widest text-gray-500">
+              Borders + depth
             </p>
-            <ul className="list-none space-y-2">
-              <li className="flex items-start gap-3">
-                <span className="bg-[#FFFF00] px-2 py-0.5 border-2 border-black font-bold text-sm">
-                  01
-                </span>
-                <span>
-                  <strong>Thick black borders</strong> (4-6px) on every
-                  component
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="bg-[#00FFFF] px-2 py-0.5 border-2 border-black font-bold text-sm">
-                  02
-                </span>
-                <span>
-                  <strong>Hard drop shadows</strong> for depth and dimension
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="bg-[#FF00FF] px-2 py-0.5 border-2 border-black font-bold text-sm">
-                  03
-                </span>
-                <span>
-                  <strong>Saturated, bold colors</strong> — no pastels, no
-                  subtlety
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="bg-[#00FF00] px-2 py-0.5 border-2 border-black font-bold text-sm">
-                  04
-                </span>
-                <span>
-                  <strong>Sharp corners</strong> — minimal to no border radius
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="bg-[#FF6600] px-2 py-0.5 border-2 border-black font-bold text-sm text-white">
-                  05
-                </span>
-                <span>
-                  <strong>Abrupt transitions</strong> — 100ms max for snappy
-                  feedback
-                </span>
-              </li>
-            </ul>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Design Philosophy */}
-      <Card color="yellow">
-        <CardContent className="p-8">
-          <h2 className="text-brutal-2xl font-extrabold uppercase mb-4">
-            DESIGN PHILOSOPHY
-          </h2>
-          <div className="space-y-4 text-base">
-            <p>
-              Neo brutalism in UI design is about{" "}
-              <strong>honesty and confidence</strong>. It rejects the sanitized,
-              rounded, gradient-heavy aesthetics that dominate modern
-              interfaces. Instead, it embraces:
+            <p className="mt-2 text-sm font-medium text-gray-700">
+              Thick black outlines and hard shadows across controls and layout blocks.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-              <div className="bg-white p-4 border-4 border-black">
-                <h3 className="font-extrabold uppercase mb-2">RAW HONESTY</h3>
-                <p className="text-sm">
-                  Components that look like what they are. No hiding behind soft
-                  curves.
-                </p>
-              </div>
-              <div className="bg-white p-4 border-4 border-black">
-                <h3 className="font-extrabold uppercase mb-2">VISUAL WEIGHT</h3>
-                <p className="text-sm">
-                  Chunky, substantial elements that demand attention.
-                </p>
-              </div>
-              <div className="bg-white p-4 border-4 border-black">
-                <h3 className="font-extrabold uppercase mb-2">
-                  BOLD EXPRESSION
-                </h3>
-                <p className="text-sm">
-                  High contrast, saturated colors, uppercase typography.
-                </p>
-              </div>
-              <div className="bg-white p-4 border-4 border-black">
-                <h3 className="font-extrabold uppercase mb-2">
-                  PLAYFUL REBELLION
-                </h3>
-                <p className="text-sm">
-                  Breaking conventions while remaining functional.
-                </p>
-              </div>
-            </div>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Getting Started */}
-      <Card>
-        <CardContent className="p-8">
-          <h2 className="text-brutal-2xl font-extrabold uppercase mb-4">
-            GETTING STARTED
-          </h2>
-          <p className="text-base mb-6">
-            Ready to add some brutalist energy to your project? Follow these
-            steps:
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/docs/installation">
-              <Button variant="primary" size="lg">
-                INSTALLATION GUIDE
-              </Button>
-            </Link>
-            <Link href="/docs/components/button">
-              <Button variant="outline" size="lg">
-                VIEW COMPONENTS
-              </Button>
-            </Link>
+          <div className="rounded-lg border-2 border-black bg-gray-50 p-4">
+            <p className="text-xs font-bold uppercase tracking-widest text-gray-500">
+              Color strategy
+            </p>
+            <p className="mt-2 text-sm font-medium text-gray-700">
+              Neutral base with focused accent usage: yellow for primary, cyan for secondary.
+            </p>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Credits */}
-      <div className="text-center py-8 border-t-4 border-black">
-        <p className="text-sm text-gray-600 uppercase tracking-wider">
-          Built with React, Tailwind CSS, and brutal honesty.
-        </p>
-      </div>
+          <div className="rounded-lg border-2 border-black bg-gray-50 p-4">
+            <p className="text-xs font-bold uppercase tracking-widest text-gray-500">
+              Motion
+            </p>
+            <p className="mt-2 text-sm font-medium text-gray-700">
+              Short transitions and clear interaction feedback without decorative overload.
+            </p>
+          </div>
+          <div className="rounded-lg border-2 border-black bg-gray-50 p-4">
+            <p className="text-xs font-bold uppercase tracking-widest text-gray-500">
+              Shape language
+            </p>
+            <p className="mt-2 text-sm font-medium text-gray-700">
+              Rounded modern corners with brutalist contrast and structural weight.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

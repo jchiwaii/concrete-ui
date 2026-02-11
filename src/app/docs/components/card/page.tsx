@@ -14,7 +14,7 @@ import { ComponentPreview } from "@/components/docs";
 
 export default function CardPage() {
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">
@@ -156,7 +156,7 @@ export default function CardPage() {
       </ComponentPreview>
 
       {/* Full Code */}
-      <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
+      <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
           <h3 className="text-xl font-extrabold uppercase tracking-tight">
             FULL COMPONENT CODE
@@ -186,10 +186,10 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 
     const colors = {
       white: "bg-white",
-      yellow: "bg-[#FFFF00]",
-      cyan: "bg-[#00FFFF]",
-      magenta: "bg-[#FF00FF]",
-      lime: "bg-[#CCFF00]",
+      yellow: "bg-[#ffde00]",
+      cyan: "bg-[#06b6d4]",
+      magenta: "bg-[#ec4899]",
+      lime: "bg-[#a3e635]",
     };
 
     return (

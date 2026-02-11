@@ -35,7 +35,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>(
           ref={ref}
           className={`
             overflow-x-auto
-            border-4 border-black
+            border-2 border-black
             shadow-[6px_6px_0_0_#000]
             ${className}
           `}
@@ -98,9 +98,9 @@ const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
           transition-all duration-100 ease-out
           ${
             selected
-              ? "bg-[#00FFFF]"
+              ? "bg-[#06b6d4]"
               : isHovered
-              ? "bg-[#FFFF00]"
+              ? "bg-[#ffde00]"
               : "even:bg-gray-100 odd:bg-white"
           }
           ${className}

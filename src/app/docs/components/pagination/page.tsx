@@ -11,7 +11,7 @@ export default function PaginationPage() {
   const [page4, setPage4] = useState(1);
 
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">

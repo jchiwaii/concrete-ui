@@ -14,7 +14,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       variant = "default",
       color = "white",
       hover = false,
-      rounded = "lg",
+      rounded = "md",
       children,
       ...props
     },
@@ -22,7 +22,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
   ) => {
     const baseStyles = `
       border-2 border-black
-      transition-all duration-150 ease-out
+      transition-all duration-100 ease-out
     `;
 
     const variants = {
@@ -52,7 +52,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     };
 
     const hoverStyles = hover
-      ? "hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[8px_8px_0_0_#000] cursor-pointer"
+      ? "hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0_0_#000] cursor-pointer"
       : "";
 
     return (

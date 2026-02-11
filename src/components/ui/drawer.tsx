@@ -239,13 +239,13 @@ const DrawerClose = forwardRef<HTMLButtonElement, DrawerCloseProps>(
           w-10 h-10
           flex items-center justify-center
           bg-white
-          border-4 border-black
+          border-2 border-black
           shadow-[3px_3px_0_0_#000]
           font-bold text-2xl
           transition-all duration-100 ease-out
           hover:translate-x-[-2px] hover:translate-y-[-2px]
           hover:shadow-[5px_5px_0_0_#000]
-          hover:bg-[#FF0000] hover:text-white hover:border-white
+          hover:bg-[#ef4444] hover:text-white hover:border-white
           ${className}
         `}
         aria-label="Close"

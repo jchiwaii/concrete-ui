@@ -11,7 +11,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       w-full px-4 py-3
       text-base font-medium
       bg-white
-      border-4 border-black
+      border-2 border-black
       shadow-[4px_4px_0_0_#000]
       outline-none
       transition-all duration-100 ease-out
@@ -24,7 +24,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     `;
 
     const errorStyles = error
-      ? "border-[#FF0000] shadow-[4px_4px_0_0_#FF0000] focus:shadow-[6px_6px_0_0_#FF0000]"
+      ? "border-[#ef4444] shadow-[4px_4px_0_0_#ef4444] focus:shadow-[6px_6px_0_0_#ef4444]"
       : "";
 
     return (

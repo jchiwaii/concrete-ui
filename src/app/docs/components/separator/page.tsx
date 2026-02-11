@@ -5,7 +5,7 @@ import { ComponentPreview } from "@/components/docs";
 
 export default function SeparatorPage() {
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">
@@ -73,7 +73,7 @@ export default function SeparatorPage() {
       </ComponentPreview>
 
       {/* Full Code */}
-      <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
+      <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
           <h3 className="text-xl font-extrabold uppercase tracking-tight">
             FULL COMPONENT CODE

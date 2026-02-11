@@ -18,7 +18,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         ref={ref}
         className={`
           relative overflow-hidden
-          border-4 border-black
+          border-2 border-black
           shadow-[3px_3px_0_0_#000]
           ${sizes[size]}
           ${className}
@@ -61,7 +61,7 @@ const AvatarFallback = forwardRef<
     className={`
         w-full h-full
         flex items-center justify-center
-        bg-[#FFFF00]
+        bg-[#ffde00]
         text-black font-extrabold uppercase
         ${className}
       `}

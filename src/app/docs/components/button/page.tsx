@@ -5,7 +5,7 @@ import { ComponentPreview } from "@/components/docs";
 
 export default function ButtonPage() {
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">
@@ -89,7 +89,7 @@ export default function ButtonPage() {
       </ComponentPreview>
 
       {/* Full Code */}
-      <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
+      <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
           <h3 className="text-xl font-extrabold uppercase tracking-tight">
             FULL COMPONENT CODE
@@ -121,9 +121,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       default: "bg-white text-black shadow-[4px_4px_0_0_#000]",
-      primary: "bg-[#FFFF00] text-black shadow-[4px_4px_0_0_#000]",
-      secondary: "bg-[#00FFFF] text-black shadow-[4px_4px_0_0_#000]",
-      danger: "bg-[#FF0000] text-white shadow-[4px_4px_0_0_#000]",
+      primary: "bg-[#ffde00] text-black shadow-[4px_4px_0_0_#000]",
+      secondary: "bg-[#06b6d4] text-black shadow-[4px_4px_0_0_#000]",
+      danger: "bg-[#ef4444] text-white shadow-[4px_4px_0_0_#000]",
       ghost: "bg-transparent text-black border-transparent shadow-none hover:bg-gray-100 hover:shadow-none",
       outline: "bg-transparent text-black shadow-[4px_4px_0_0_#000] hover:bg-black hover:text-white",
     };

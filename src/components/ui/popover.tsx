@@ -69,7 +69,7 @@ const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
         className={`
           px-6 py-3
           bg-white
-          border-4 border-black
+          border-2 border-black
           shadow-[4px_4px_0_0_#000]
           font-bold uppercase tracking-wider
           transition-all duration-100 ease-out
@@ -142,7 +142,7 @@ const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
           min-w-[200px]
           max-w-md
           bg-white
-          border-4 border-black
+          border-2 border-black
           shadow-[6px_6px_0_0_#000]
           animate-brutal-slide-down
           ${className}

@@ -5,7 +5,7 @@ import { ComponentPreview } from "@/components/docs";
 
 export default function BadgePage() {
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">
@@ -90,7 +90,7 @@ export default function BadgePage() {
       </ComponentPreview>
 
       {/* Full Code */}
-      <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
+      <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
           <h3 className="text-xl font-extrabold uppercase tracking-tight">
             FULL COMPONENT CODE
@@ -115,11 +115,11 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
 
     const variants = {
       default: "bg-white text-black",
-      primary: "bg-[#FFFF00] text-black",
-      secondary: "bg-[#00FFFF] text-black",
-      danger: "bg-[#FF0000] text-white",
-      success: "bg-[#00FF00] text-black",
-      warning: "bg-[#FF6600] text-white",
+      primary: "bg-[#ffde00] text-black",
+      secondary: "bg-[#06b6d4] text-black",
+      danger: "bg-[#ef4444] text-white",
+      success: "bg-[#22c55e] text-black",
+      warning: "bg-[#f97316] text-white",
     };
 
     const sizes = {

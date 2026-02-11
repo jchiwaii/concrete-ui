@@ -45,76 +45,108 @@ const navigation = [
   },
 ];
 
+const mobileQuickLinks = [
+  { title: "Intro", href: "/docs" },
+  { title: "Install", href: "/docs/installation" },
+  { title: "Button", href: "/docs/components/button" },
+  { title: "Slider", href: "/docs/components/slider" },
+  { title: "Card", href: "/docs/components/card" },
+];
+
 export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 flex-shrink-0 border-r-2 border-black bg-white">
-      <div className="sticky top-0 h-screen overflow-y-auto">
-        {/* Logo */}
-        <div className="p-6 border-b-2 border-black">
-          <Link href="/" className="block">
-            <span className="text-xl font-bold tracking-tight">
+    <>
+      <div className="sticky top-0 z-40 border-b-2 border-black bg-white md:hidden">
+        <div className="flex items-center justify-between px-4 py-3">
+          <Link href="/" className="inline-flex items-center gap-2">
+            <span className="text-lg font-bold tracking-tight">
               Concrete
-              <span className="text-white bg-black px-1.5 py-0.5 ml-0.5 rounded">
-                UI
-              </span>
+              <span className="ml-0.5 rounded bg-black px-1.5 py-0.5 text-white">UI</span>
             </span>
           </Link>
-          <p className="text-xs text-gray-500 mt-1">Neobrutalist Components</p>
+          <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+            Docs
+          </span>
         </div>
+        <div className="overflow-x-auto border-t-2 border-black px-3 py-3">
+          <div className="flex min-w-max gap-2">
+            {mobileQuickLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={
+                    isActive
+                      ? "rounded-md border-2 border-black bg-[#ffde00] px-3 py-1.5 text-xs font-semibold uppercase tracking-wide shadow-[2px_2px_0_0_#000]"
+                      : "rounded-md border-2 border-black bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-wide"
+                  }
+                >
+                  {link.title}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
 
-        {/* Navigation */}
-        <nav className="p-4">
-          {navigation.map((section) => (
-            <div key={section.title} className="mb-6">
-              <h3 className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-2 px-3">
-                {section.title}
-              </h3>
-              <ul className="space-y-0.5">
-                {section.links.map((link) => {
-                  const isActive = pathname === link.href;
-                  return (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className={`
-                          block px-3 py-2
-                          text-sm font-medium
-                          rounded-lg
-                          transition-all duration-150
-                          ${
+      <aside className="hidden w-72 flex-shrink-0 p-6 md:block">
+        <div className="docs-panel sticky top-6 h-[calc(100vh-3rem)] overflow-hidden">
+          <div className="border-b-2 border-black p-5">
+            <Link href="/" className="block">
+              <span className="text-2xl font-bold tracking-tight">
+                Concrete
+                <span className="ml-0.5 rounded bg-black px-1.5 py-0.5 text-white">UI</span>
+              </span>
+            </Link>
+            <p className="mt-2 text-xs uppercase tracking-widest text-gray-500">
+              Neobrutalist Components
+            </p>
+          </div>
+
+          <nav className="h-[calc(100%-146px)] overflow-y-auto p-4">
+            {navigation.map((section) => (
+              <div key={section.title} className="mb-6">
+                <h3 className="mb-2 px-3 text-[11px] font-bold uppercase tracking-widest text-gray-400">
+                  {section.title}
+                </h3>
+                <ul className="space-y-1">
+                  {section.links.map((link) => {
+                    const isActive = pathname === link.href;
+                    return (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className={
                             isActive
-                              ? "bg-[#ffde00] text-black border-2 border-black shadow-[2px_2px_0_0_#000]"
-                              : "text-gray-600 hover:text-black hover:bg-gray-100"
+                              ? "block rounded-md border-2 border-black bg-[#ffde00] px-3 py-2 text-sm font-semibold shadow-[2px_2px_0_0_#000]"
+                              : "block rounded-md px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-black"
                           }
-                        `}
-                      >
-                        {link.title}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))}
-        </nav>
+                        >
+                          {link.title}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </nav>
 
-        {/* Footer */}
-        <div className="p-4 border-t-2 border-black mt-auto">
-          <div className="text-xs text-gray-500">
-            <p>Built with React + Tailwind</p>
+          <div className="border-t-2 border-black bg-gray-50 p-4">
             <a
               href="https://github.com/jchiwaii/concrete-ui"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-black font-medium hover:underline mt-1 inline-block"
+              className="inline-flex rounded-md border-2 border-black bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide shadow-[2px_2px_0_0_#000] transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
             >
-              View on GitHub →
+              View on GitHub
             </a>
           </div>
         </div>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 }

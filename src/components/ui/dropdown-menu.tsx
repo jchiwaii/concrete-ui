@@ -80,7 +80,7 @@ const DropdownMenuTrigger = forwardRef<
       className={`
         px-6 py-3
         bg-white
-        border-4 border-black
+        border-2 border-black
         shadow-[4px_4px_0_0_#000]
         font-bold uppercase tracking-wider
         transition-all duration-100 ease-out
@@ -155,7 +155,7 @@ const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>
           z-50
           min-w-[200px]
           bg-white
-          border-4 border-black
+          border-2 border-black
           shadow-[6px_6px_0_0_#000]
           animate-brutal-slide-down
           ${className}
@@ -205,7 +205,7 @@ const DropdownMenuItem = forwardRef<HTMLDivElement, DropdownMenuItemProps>(
           ${
             disabled
               ? "opacity-50 cursor-not-allowed bg-gray-200"
-              : "cursor-pointer hover:bg-[#FFFF00]"
+              : "cursor-pointer hover:bg-[#ffde00]"
           }
           ${className}
         `}

@@ -17,21 +17,21 @@ export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
   };
 
   return (
-    <div className="relative group">
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
-        <span className="text-xs text-gray-400 font-mono">{language}</span>
+    <div className="relative">
+      <div className="flex items-center justify-between border-b-2 border-black bg-black px-4 py-2">
+        <span className="rounded-md border-2 border-white bg-black px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-white">
+          {language}
+        </span>
         <button
           onClick={copyToClipboard}
           className={`
-            flex items-center gap-1.5
-            px-2.5 py-1
-            text-xs font-medium
-            rounded-md
-            transition-all duration-150
+            flex items-center gap-1.5 rounded-md border-2 px-2.5 py-1
+            text-xs font-semibold uppercase tracking-wide
+            transition-all duration-100
             ${
               copied
-                ? "bg-green-500/20 text-green-400"
-                : "text-gray-400 hover:text-white hover:bg-gray-700"
+                ? "border-black bg-[#22c55e] text-black"
+                : "border-white text-white hover:bg-[#ffde00] hover:text-black"
             }
           `}
         >
@@ -52,7 +52,7 @@ export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
           )}
         </button>
       </div>
-      <pre className="overflow-x-auto p-4 bg-gray-900 text-gray-100 text-sm font-mono leading-relaxed">
+      <pre className="overflow-x-auto bg-[#171717] p-4 text-sm font-mono leading-relaxed text-gray-100">
         <code>{code}</code>
       </pre>
     </div>

@@ -9,7 +9,7 @@ export default function TogglePage() {
   const [checked2, setChecked2] = useState(true);
 
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">
@@ -60,7 +60,7 @@ const [checked, setChecked] = useState(false);
       </ComponentPreview>
 
       {/* Full Code */}
-      <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
+      <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
           <h3 className="text-xl font-extrabold uppercase tracking-tight">
             FULL COMPONENT CODE
@@ -99,7 +99,7 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
             hover:shadow-[5px_5px_0_0_#000]
             disabled:hover:translate-x-0 disabled:hover:translate-y-0
             disabled:hover:shadow-[3px_3px_0_0_#000]
-            \${checked ? "bg-[#00FF00]" : "bg-white"}
+            \${checked ? "bg-[#22c55e]" : "bg-white"}
           \`}
           {...props}
         >

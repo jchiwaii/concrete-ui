@@ -1,219 +1,102 @@
 import { Badge, Card, CardContent } from "@/components/ui";
 import { CodeBlock } from "@/components/docs";
 
+const requirements = [
+  "React 18+",
+  "Tailwind CSS",
+  "TypeScript (recommended)",
+];
+
 export default function InstallationPage() {
   return (
     <div className="space-y-12">
-      {/* Header */}
-      <div>
-        <Badge variant="secondary" className="mb-4">
-          GETTING STARTED
+      <section className="docs-panel p-7 md:p-8">
+        <Badge variant="secondary" className="mb-4 uppercase">
+          Getting Started
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
-          INSTALLATION
+        <h1 className="font-heading text-[clamp(3rem,8vw,5rem)] uppercase leading-[0.9]">
+          Installation
         </h1>
-        <p className="text-brutal-lg max-w-2xl">
-          Get Concrete UI up and running in your project in minutes.
+        <p className="mt-4 max-w-2xl text-brutal-lg text-gray-700">
+          Set up Concrete UI in minutes and keep your product styling consistent from day one.
         </p>
-      </div>
+      </section>
 
-      {/* Requirements */}
       <Card>
-        <CardContent className="p-8">
-          <h2 className="text-brutal-2xl font-extrabold uppercase mb-4">
-            REQUIREMENTS
-          </h2>
-          <ul className="space-y-3 text-base">
-            <li className="flex items-center gap-3">
-              <span className="w-8 h-8 bg-[#FFFF00] border-4 border-black flex items-center justify-center font-bold text-sm">
-                ✓
-              </span>
-              <span>
-                <strong>React 18+</strong> — Components use modern React
-                features
-              </span>
-            </li>
-            <li className="flex items-center gap-3">
-              <span className="w-8 h-8 bg-[#FFFF00] border-4 border-black flex items-center justify-center font-bold text-sm">
-                ✓
-              </span>
-              <span>
-                <strong>Tailwind CSS 3+</strong> — All styling uses Tailwind
-                utilities
-              </span>
-            </li>
-            <li className="flex items-center gap-3">
-              <span className="w-8 h-8 bg-[#FFFF00] border-4 border-black flex items-center justify-center font-bold text-sm">
-                ✓
-              </span>
-              <span>
-                <strong>TypeScript</strong> — Optional but recommended
-              </span>
-            </li>
+        <CardContent className="p-7">
+          <h2 className="text-2xl font-extrabold uppercase tracking-tight">Requirements</h2>
+          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+            {requirements.map((item) => (
+              <li key={item} className="flex items-center gap-3 rounded-lg border-2 border-black bg-gray-50 p-3">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-md border-2 border-black bg-[#ffde00] text-xs font-bold">
+                  ✓
+                </span>
+                <span className="text-sm font-semibold uppercase tracking-wide">{item}</span>
+              </li>
+            ))}
           </ul>
         </CardContent>
       </Card>
 
-      {/* Step 1: Fonts */}
       <Card color="cyan">
-        <CardContent className="p-8">
-          <h2 className="text-brutal-xl font-extrabold uppercase mb-4">
-            STEP 1: ADD FONTS
-          </h2>
-          <p className="text-base mb-4">
-            Add Space Grotesk (display) and JetBrains Mono (monospace) to your
-            project:
+        <CardContent className="p-7">
+          <h2 className="text-brutal-xl font-extrabold uppercase">1. Add Fonts</h2>
+          <p className="mt-3 text-sm text-gray-800">
+            Include Space Grotesk and JetBrains Mono in your app.
           </p>
-          <CodeBlock
-            code={`<!-- Add to your HTML head or import in CSS -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">`}
-          />
+          <div className="mt-4">
+            <CodeBlock
+              language="html"
+              code={`<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />`}
+            />
+          </div>
         </CardContent>
       </Card>
 
-      {/* Step 2: CSS Variables */}
       <Card>
-        <CardContent className="p-8">
-          <h2 className="text-brutal-xl font-extrabold uppercase mb-4">
-            STEP 2: ADD CSS VARIABLES
-          </h2>
-          <p className="text-base mb-4">
-            Add these design tokens to your global CSS file:
+        <CardContent className="p-7">
+          <h2 className="text-brutal-xl font-extrabold uppercase">2. Add Tokens</h2>
+          <p className="mt-3 text-sm text-gray-700">
+            Add the shared colors, shadows, and typography variables to your global stylesheet.
           </p>
-          <CodeBlock
-            code={`:root {
-  /* Core Colors */
+          <div className="mt-4">
+            <CodeBlock
+              code={`:root {
   --concrete-black: #000000;
-  --concrete-white: #FFFFFF;
-  --concrete-yellow: #FFFF00;
-  --concrete-blue: #0000FF;
-  --concrete-magenta: #FF00FF;
-  --concrete-cyan: #00FFFF;
-  --concrete-red: #FF0000;
-  --concrete-green: #00FF00;
-  --concrete-orange: #FF6600;
-  --concrete-lime: #CCFF00;
-  
-  /* Border & Shadow */
-  --concrete-border-width: 4px;
-  --concrete-shadow: 6px 6px 0 var(--concrete-black);
-  --concrete-shadow-sm: 4px 4px 0 var(--concrete-black);
-  --concrete-shadow-lg: 8px 8px 0 var(--concrete-black);
-  
-  /* Typography */
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  
-  /* Transitions */
-  --concrete-transition: all 0.1s ease-out;
+  --concrete-white: #ffffff;
+  --concrete-yellow: #ffde00;
+  --concrete-cyan: #06b6d4;
+  --concrete-magenta: #ec4899;
+  --concrete-shadow: 4px 4px 0 #000;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }`}
-          />
+            />
+          </div>
         </CardContent>
       </Card>
 
-      {/* Step 3: Copy Components */}
       <Card color="yellow">
-        <CardContent className="p-8">
-          <h2 className="text-brutal-xl font-extrabold uppercase mb-4">
-            STEP 3: COPY COMPONENTS
-          </h2>
-          <p className="text-base mb-4">
-            Browse the components documentation and copy the ones you need into
-            your project. We recommend creating a{" "}
-            <code className="bg-black text-[#FFFF00] px-2 py-0.5 border-2 border-black font-bold">
-              components/ui
-            </code>{" "}
-            folder:
+        <CardContent className="p-7">
+          <h2 className="text-brutal-xl font-extrabold uppercase">3. Copy Components</h2>
+          <p className="mt-3 text-sm text-gray-800">
+            Copy components from the docs into your `components/ui` folder.
           </p>
-          <CodeBlock
-            code={`your-project/
-├── src/
-│   ├── components/
-│   │   └── ui/
-│   │       ├── button.tsx
-│   │       ├── card.tsx
-│   │       ├── badge.tsx
-│   │       ├── input.tsx
-│   │       └── ...
-│   └── ...
-└── ...`}
-          />
-        </CardContent>
-      </Card>
-
-      {/* Step 4: Usage */}
-      <Card>
-        <CardContent className="p-8">
-          <h2 className="text-brutal-xl font-extrabold uppercase mb-4">
-            STEP 4: USE COMPONENTS
-          </h2>
-          <p className="text-base mb-4">
-            Import and use components in your React files:
-          </p>
-          <CodeBlock
-            code={`import { Button, Card, CardContent, Badge } from "@/components/ui";
-
-export default function MyPage() {
-  return (
-    <Card>
-      <CardContent className="p-6">
-        <Badge variant="primary">NEW</Badge>
-        <h2 className="text-2xl font-extrabold uppercase mt-4">
-          Hello Brutal World
-        </h2>
-        <Button variant="primary" className="mt-4">
-          CLICK ME
-        </Button>
-      </CardContent>
-    </Card>
-  );
-}`}
-          />
-        </CardContent>
-      </Card>
-
-      {/* Tips */}
-      <Card color="magenta">
-        <CardContent className="p-8">
-          <h2 className="text-brutal-xl font-extrabold uppercase mb-4 text-white">
-            PRO TIPS
-          </h2>
-          <ul className="space-y-3 text-base text-white">
-            <li className="flex items-start gap-3">
-              <span className="font-bold">→</span>
-              <span>
-                Use <strong>uppercase text</strong> for buttons, badges, and
-                labels
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="font-bold">→</span>
-              <span>
-                Keep border radius <strong>0-4px max</strong> for the brutalist
-                look
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="font-bold">→</span>
-              <span>
-                Use <strong>bold, saturated colors</strong> — avoid pastels
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="font-bold">→</span>
-              <span>
-                Keep transitions <strong>snappy (100ms)</strong> — no slow fades
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="font-bold">→</span>
-              <span>
-                Add <strong>generous padding</strong> — chunky is good
-              </span>
-            </li>
-          </ul>
+          <div className="mt-4">
+            <CodeBlock
+              language="bash"
+              code={`src/
+  components/
+    ui/
+      button.tsx
+      card.tsx
+      badge.tsx
+      input.tsx
+      ...`}
+            />
+          </div>
         </CardContent>
       </Card>
     </div>

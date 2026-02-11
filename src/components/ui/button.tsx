@@ -31,7 +31,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       inline-flex items-center justify-center gap-2
       font-bold uppercase tracking-wide
       border-2 border-black
-      transition-all duration-150 ease-out
+      transition-all duration-100 ease-out
       cursor-pointer
       select-none
       active:translate-y-[2px] active:translate-x-[2px]
@@ -55,7 +55,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       neutral:
         "bg-gray-900 text-white shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#ffde00] hover:translate-x-[-2px] hover:translate-y-[-2px]",
       ghost:
-        "bg-transparent text-black border-transparent shadow-none hover:bg-gray-100 hover:border-gray-200",
+        "bg-transparent text-black border-transparent shadow-none hover:bg-gray-100 hover:border-black/20",
       outline:
         "bg-transparent text-black shadow-[4px_4px_0_0_#000] hover:bg-black hover:text-white hover:translate-x-[-2px] hover:translate-y-[-2px]",
     };
@@ -67,7 +67,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       xl: "px-8 py-4 text-lg",
     };
 
-    const radiusStyles = rounded ? "rounded-full" : "rounded-lg";
+    const radiusStyles = rounded ? "rounded-full" : "rounded-md";
 
     return (
       <button

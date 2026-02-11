@@ -25,7 +25,7 @@ export default function SelectPage() {
   const [searchableFruit, setSearchableFruit] = useState("");
 
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">

@@ -72,7 +72,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
     const buttonStyles = (isActive: boolean, isDisabled: boolean) => `
       w-10 h-10
       flex items-center justify-center
-      border-4 border-black
+      border-2 border-black
       shadow-[3px_3px_0_0_#000]
       font-bold uppercase
       transition-all duration-100 ease-out
@@ -80,7 +80,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
         isDisabled
           ? "opacity-50 cursor-not-allowed bg-gray-200"
           : isActive
-          ? "bg-[#FFFF00] text-black"
+          ? "bg-[#ffde00] text-black"
           : "bg-white text-black hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0_0_#000] cursor-pointer"
       }
     `;
@@ -88,7 +88,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
     const arrowButtonStyles = (isDisabled: boolean) => `
       px-4 h-10
       flex items-center justify-center
-      border-4 border-black
+      border-2 border-black
       shadow-[3px_3px_0_0_#000]
       font-bold uppercase text-sm
       transition-all duration-100 ease-out

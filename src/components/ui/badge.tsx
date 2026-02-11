@@ -28,9 +28,9 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   ) => {
     const baseStyles = `
       inline-flex items-center justify-center
-      font-semibold tracking-wide
+      font-bold uppercase tracking-wide
       border-2 border-black
-      shadow-[2px_2px_0_0_#000]
+      shadow-[3px_3px_0_0_#000]
       whitespace-nowrap
     `;
 

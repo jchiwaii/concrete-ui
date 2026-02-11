@@ -43,7 +43,7 @@ const TabsList = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
         inline-flex p-1 gap-1
         bg-gray-100
         border-2 border-black
-        rounded-lg
+        rounded-md
         ${className}
       `}
       role="tablist"
@@ -75,12 +75,12 @@ const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
         onClick={() => context.setActiveTab(value)}
         className={`
           px-4 py-2
-          text-sm font-semibold
+          text-sm font-semibold uppercase tracking-wide
           rounded-md
-          transition-all duration-150 ease-out
+          transition-all duration-100 ease-out
           ${
             isActive
-              ? "bg-white text-black shadow-[2px_2px_0_0_#000] border-2 border-black"
+              ? "bg-white text-black shadow-[3px_3px_0_0_#000] border-2 border-black"
               : "bg-transparent text-gray-600 border-2 border-transparent hover:text-black hover:bg-gray-200"
           }
           ${className}
@@ -114,8 +114,8 @@ const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
           mt-4 p-5
           bg-white
           border-2 border-black
-          shadow-[4px_4px_0_0_#000]
-          rounded-lg
+          shadow-[5px_5px_0_0_#000]
+          rounded-md
           animate-brutal-fade-in
           ${className}
         `}

@@ -8,7 +8,7 @@ export default function CommandPage() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">
@@ -26,7 +26,7 @@ export default function CommandPage() {
       {/* Global Shortcut */}
       <div className="space-y-4">
         <h2 className="text-brutal-2xl font-bold uppercase">GLOBAL SHORTCUT</h2>
-        <div className="bg-[#FFFF00] border-4 border-black shadow-[4px_4px_0_0_#000] p-6">
+        <div className="bg-[#ffde00] border-4 border-black shadow-[4px_4px_0_0_#000] p-6">
           <p className="font-bold uppercase mb-2">TRY IT NOW!</p>
           <p className="text-sm font-medium">
             Press{" "}

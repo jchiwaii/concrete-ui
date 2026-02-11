@@ -82,8 +82,8 @@
 
   /* Transitions */
   --concrete-transition-fast: all 0.1s ease-out;
-  --concrete-transition: all 0.15s ease-out;
-  --concrete-transition-slow: all 0.3s ease-out;
+  --concrete-transition: all 0.12s ease-out;
+  --concrete-transition-slow: all 0.2s ease-out;
 }
 
 /* ==========================================
@@ -547,10 +547,10 @@ code {
 }
 
 .text-gradient-brutal {
-  background: linear-gradient(90deg, var(--concrete-yellow), var(--concrete-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: var(--concrete-yellow);
+  color: var(--concrete-black);
+  padding-inline: 4px;
+  box-decoration-break: clone;
 }
 
 /* Container utility */
@@ -567,4 +567,54 @@ code {
 .section-brutal {
   padding-top: var(--concrete-space-3xl);
   padding-bottom: var(--concrete-space-3xl);
+}
+
+/* ==========================================
+   Docs System Utilities
+   ========================================== */
+.docs-shell {
+  background: var(--concrete-gray-100);
+  background-image:
+    linear-gradient(to right, var(--concrete-gray-200) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--concrete-gray-200) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.docs-panel {
+  border: 2px solid var(--concrete-black);
+  background: var(--concrete-white);
+  box-shadow: var(--concrete-shadow);
+}
+
+.docs-component-page {
+  position: relative;
+}
+
+.docs-component-page > div:first-child {
+  border: 2px solid var(--concrete-black);
+  background: var(--concrete-white);
+  box-shadow: var(--concrete-shadow);
+  padding: 24px;
+}
+
+.docs-component-page > div:first-child h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 9vw, 5.6rem);
+  line-height: 0.92;
+  margin-bottom: 14px;
+}
+
+.docs-component-page > div:first-child p {
+  max-width: 46rem;
+  color: var(--concrete-gray-700);
+}
+
+.docs-component-page .source-panel {
+  border: 2px solid var(--concrete-black);
+  box-shadow: var(--concrete-shadow-lg);
+  overflow: hidden;
+}
+
+.docs-component-page .source-panel > div:first-child {
+  border-bottom: 2px solid var(--concrete-black);
 }

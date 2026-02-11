@@ -106,7 +106,7 @@ const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
     const boxStyles = `
       relative
       w-7 h-7
-      border-4 border-black
+      border-2 border-black
       shadow-[3px_3px_0_0_#000]
       transition-all duration-100 ease-out
       flex items-center justify-center

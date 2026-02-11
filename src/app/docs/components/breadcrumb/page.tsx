@@ -5,7 +5,7 @@ import { ComponentPreview } from "@/components/docs";
 
 export default function BreadcrumbPage() {
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">

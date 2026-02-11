@@ -19,10 +19,9 @@ export function ComponentPreview({
   const [showCode, setShowCode] = useState(false);
 
   return (
-    <div className="border-2 border-black bg-white shadow-[4px_4px_0_0_#000] rounded-xl overflow-hidden">
-      {/* Header */}
-      <div className="px-5 py-4 border-b-2 border-black bg-gray-50">
-        <h3 className="text-base font-bold tracking-tight">
+    <div className="overflow-hidden rounded-xl border-2 border-black bg-white shadow-[4px_4px_0_0_#000]">
+      <div className="border-b-2 border-black bg-gray-50 px-5 py-4">
+        <h3 className="text-base font-bold tracking-tight uppercase">
           {title}
         </h3>
         {description && (
@@ -30,26 +29,23 @@ export function ComponentPreview({
         )}
       </div>
 
-      {/* Preview Area */}
-      <div className="p-8 min-h-[180px] flex items-center justify-center bg-[radial-gradient(circle,#e5e5e5_1px,transparent_1px)] bg-[size:16px_16px]">
-        <div className="w-full flex items-center justify-center">
+      <div className="flex min-h-[200px] items-center justify-center bg-dot-pattern p-8">
+        <div className="flex w-full items-center justify-center">
           {children}
         </div>
       </div>
 
-      {/* Code Toggle */}
       <div className="border-t-2 border-black">
         <button
           onClick={() => setShowCode(!showCode)}
           className={`
-            w-full px-5 py-3
-            text-sm font-semibold
+            flex w-full items-center justify-between px-5 py-3
+            text-sm font-semibold uppercase tracking-wide
             transition-all duration-150
-            flex items-center justify-between
             ${
               showCode
-                ? "bg-gray-900 text-white"
-                : "bg-gray-50 text-gray-700 hover:bg-gray-100 hover:text-black"
+                ? "bg-black text-white"
+                : "bg-white text-gray-700 hover:bg-gray-100 hover:text-black"
             }
           `}
         >
@@ -71,7 +67,6 @@ export function ComponentPreview({
         </button>
       </div>
 
-      {/* Code Block */}
       {showCode && (
         <div className="border-t-2 border-black">
           <CodeBlock code={code} />

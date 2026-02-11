@@ -178,24 +178,24 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
     const containerStyles = `
       relative
       flex
-      ${orientation === "horizontal" ? "flex-col w-full" : "flex-row h-64"}
-      gap-4
+      ${orientation === "horizontal" ? "flex-col w-full" : "flex-row h-72"}
+      gap-5
       ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
     `;
 
     const trackStyles = `
       relative
       bg-white
-      border-4 border-black
-      shadow-[3px_3px_0_0_#000]
-      ${orientation === "horizontal" ? "h-8 w-full" : "w-8 h-full"}
-      ${!disabled ? "hover:shadow-[4px_4px_0_0_#000]" : ""}
+      border-2 border-black
+      shadow-[4px_4px_0_0_#000]
+      ${orientation === "horizontal" ? "h-10 w-full rounded-lg" : "w-10 h-full rounded-lg"}
+      ${!disabled ? "hover:shadow-[5px_5px_0_0_#000]" : ""}
     `;
 
     const fillStyles = `
       absolute
-      bg-[#FFFF00]
-      border-r-4 border-black
+      bg-[#ffde00]
+      border-r-2 border-black
       ${orientation === "horizontal" ? "h-full left-0 top-0" : "w-full bottom-0 left-0"}
       transition-all duration-100 ease-out
       pointer-events-none
@@ -203,32 +203,32 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
 
     const thumbStyles = `
       absolute
-      w-6 h-6
+      w-8 h-8
       bg-black
       border-4 border-white
-      shadow-[4px_4px_0_0_#000]
+      shadow-[5px_5px_0_0_#000]
       transition-all duration-100 ease-out
       ${
         !disabled
-          ? "hover:scale-110 hover:shadow-[5px_5px_0_0_#000]"
+          ? "hover:scale-105 hover:shadow-[6px_6px_0_0_#000]"
           : ""
       }
-      ${isDragging ? "scale-110 shadow-[5px_5px_0_0_#000]" : ""}
+      ${isDragging ? "scale-105 shadow-[6px_6px_0_0_#000]" : ""}
       ${orientation === "horizontal" ? "top-1/2 -translate-y-1/2" : "left-1/2 -translate-x-1/2"}
     `;
 
     const valueStyles = `
-      font-bold
+      font-extrabold
       uppercase
       tracking-wider
-      text-sm
+      text-base
       ${orientation === "horizontal" ? "text-center" : "text-left"}
     `;
 
     const thumbPosition =
       orientation === "horizontal"
-        ? { left: `calc(${percentage}% - 12px)` }
-        : { bottom: `calc(${percentage}% - 12px)` };
+        ? { left: `calc(${percentage}% - 16px)` }
+        : { bottom: `calc(${percentage}% - 16px)` };
 
     const fillSize =
       orientation === "horizontal"

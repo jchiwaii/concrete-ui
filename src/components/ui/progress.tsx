@@ -62,7 +62,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
           {...props}
         >
           <div
-            className={`h-full transition-all duration-300 ease-out rounded-full ${colors[color]}`}
+            className={`h-full transition-all duration-150 ease-out rounded-full ${colors[color]}`}
             style={{ width: `${percentage}%` }}
           />
         </div>

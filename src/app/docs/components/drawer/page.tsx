@@ -11,7 +11,7 @@ export default function DrawerPage() {
   const [bottomOpen, setBottomOpen] = useState(false);
 
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">

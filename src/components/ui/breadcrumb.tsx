@@ -41,7 +41,7 @@ const BreadcrumbItem = forwardRef<HTMLAnchorElement, BreadcrumbItemProps>(
       text-sm
       ${
         current
-          ? "bg-[#FFFF00] px-3 py-1 border-2 border-black"
+          ? "bg-[#ffde00] px-3 py-1 border-2 border-black"
           : "hover:underline text-black"
       }
     `;

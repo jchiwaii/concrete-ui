@@ -5,7 +5,7 @@ import { ComponentPreview } from "@/components/docs";
 
 export default function CheckboxPage() {
   return (
-    <div className="space-y-12">
+    <div className="docs-component-page space-y-12">
       {/* Header */}
       <div>
         <Badge variant="primary" className="mb-4">
@@ -63,7 +63,7 @@ export default function CheckboxPage() {
       </ComponentPreview>
 
       {/* Full Code */}
-      <div className="border-4 border-black bg-white shadow-[6px_6px_0_0_#000]">
+      <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
           <h3 className="text-xl font-extrabold uppercase tracking-tight">
             FULL COMPONENT CODE
@@ -104,7 +104,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               transition-all duration-100 ease-out
               group-hover:translate-x-[-2px] group-hover:translate-y-[-2px]
               group-hover:shadow-[5px_5px_0_0_#000]
-              peer-checked:bg-[#FFFF00]
+              peer-checked:bg-[#ffde00]
               peer-disabled:opacity-50 peer-disabled:cursor-not-allowed
             \`}
           />

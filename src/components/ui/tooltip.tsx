@@ -71,7 +71,7 @@ export function Tooltip({
     z-[9999]
     px-3 py-2
     max-w-xs
-    border-4 border-black
+    border-2 border-black
     shadow-[3px_3px_0_0_#000]
     font-bold uppercase tracking-wider text-xs
     whitespace-nowrap

@@ -29,14 +29,14 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
           onClick={() => !disabled && onChange?.(!checked)}
           className={`
             relative w-16 h-9
-            border-4 border-black
+            border-2 border-black
             shadow-[3px_3px_0_0_#000]
             transition-all duration-100 ease-out
             hover:translate-x-[-2px] hover:translate-y-[-2px]
             hover:shadow-[5px_5px_0_0_#000]
             disabled:hover:translate-x-0 disabled:hover:translate-y-0
             disabled:hover:shadow-[3px_3px_0_0_#000]
-            ${checked ? "bg-[#00FF00]" : "bg-white"}
+            ${checked ? "bg-[#22c55e]" : "bg-white"}
           `}
           {...props}
         >

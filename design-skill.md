@@ -1,215 +1,154 @@
-# Concrete UI - Design System Documentation
+# Concrete UI - Current Design Skill
 
 ## Overview
 
-**Concrete UI** is a neo-brutalist React component library featuring bold borders, hard shadows, and raw aesthetics. Copy & paste components into your React + Tailwind CSS projects.
+**Concrete UI** is a modern, clean neo-brutalist React UI library.
+It combines bold visual identity (borders + hard shadows + saturated accents) with cleaner spacing, softer card corners, and practical developer ergonomics.
+
+This file documents the **current implemented style** and should be used as the source of truth for future edits.
 
 ---
 
-## Design Principles
+## Current Visual Direction
 
-<brutal_aesthetics>
-When building components for the Brutal UI library:
+- Neo-brutal foundation with modern polish.
+- Strong outlines and hard shadow offsets.
+- Saturated accents used intentionally, not everywhere.
+- Mostly flat color blocks and pattern backgrounds.
+- Structured, readable layout system with generous whitespace.
+
+---
+
+## Design Tokens (Current)
+
+### Primary colors
+
+- `--concrete-black: #000000`
+- `--concrete-white: #ffffff`
+- `--concrete-yellow: #ffde00`
+- `--concrete-cyan: #06b6d4`
+- `--concrete-magenta: #ec4899`
+- `--concrete-red: #ef4444`
+- `--concrete-green: #22c55e`
+- `--concrete-orange: #f97316`
+- `--concrete-lime: #a3e635`
+
+### Structural tokens
+
+- Borders: `2px / 3px / 4px`
+- Shadows: mostly `4px 4px 0 #000` to `6px 6px 0 #000`
+- Radius system exists and is used (`md/lg/xl`) for cleaner neo-brutal presentation
+- Fast transitions: `0.1s` to `0.15s` are the common interaction timings
 
 ### Typography
 
-- Use Space Grotesk 800 for primary text
-- JetBrains Mono for monospace needs
-- All-caps for buttons, badges, labels
-- Size hierarchy: 3x+ jumps between levels
-
-### Color
-
-- Thick black borders (4-6px) on ALL components
-- Hard shadows: box-shadow: 6px 6px 0 black
-- Saturated, bold colors: #FFFF00, #0000FF, #FF00FF
-- No gradients, no subtle transparency
-
-### Motion
-
-- Abrupt transitions (0.1s max)
-- Scale transforms on hover (1.05-1.1)
-- Shadow position shifts for depth
-- Staggered page load animations
-
-### Shapes
-
-- Sharp corners (border-radius: 0-4px max)
-- Generous padding (minimum 16px)
-- Chunky components with visual weight
-  </brutal_aesthetics>
+- Display/body: **Space Grotesk**
+- Hero/headline utility: **Bebas Neue**
+- Code: **JetBrains Mono**
+- Uppercase treatment is heavily used for labels, chips, buttons, and section markers
 
 ---
 
-## Color Palette
+## Component Styling Rules (Current)
 
-| Color   | Hex       | Usage                  |
-| ------- | --------- | ---------------------- |
-| Black   | `#000000` | Borders, shadows, text |
-| White   | `#FFFFFF` | Backgrounds            |
-| Yellow  | `#FFFF00` | Primary accent, CTAs   |
-| Cyan    | `#00FFFF` | Secondary accent       |
-| Magenta | `#FF00FF` | Tertiary accent        |
-| Red     | `#FF0000` | Danger, errors         |
-| Green   | `#00FF00` | Success states         |
-| Orange  | `#FF6600` | Warnings               |
-| Lime    | `#CCFF00` | Alternative accent     |
+### Borders and shadows
 
----
+- Most interactive primitives use `border-2 border-black`.
+- Larger structural components may use thicker edges where appropriate.
+- Use hard, non-blurred shadow offsets.
 
-## Components
+### Motion and interaction
 
-### Core Components
+- Hover movement is subtle and directional (`-2px` / `-4px` pattern).
+- Active states collapse depth (shadow removal + pressed translation).
+- Motion should feel immediate, not soft.
 
-1. **Button** - Primary interaction element with 6 variants
-2. **Card** - Content container with color variants
-3. **Badge** - Status indicators and labels
-4. **Input** - Text input with focus effects
-5. **Textarea** - Multi-line text input
-6. **Checkbox** - Selection control with checkmark
-7. **Toggle** - On/off switch
-8. **Alert** - Notification banners (info, success, warning, danger)
+### Corners and surfaces
 
-### Layout Components
+- Rounded corners are part of the current identity (not fully square-only brutalism).
+- Use rounded cards/inputs/buttons consistently across the same context.
 
-9. **Tabs** - Tabbed interface (single selection)
-10. **Accordion** - Collapsible sections (single/multiple)
-11. **Modal** - Dialog overlay with backdrop
-12. **Separator** - Content divider
+### Color usage
 
-### Data Display
-
-13. **Avatar** - User profile images with fallback
-14. **Progress** - Progress bars with color variants
-15. **Skeleton** - Loading placeholders
+- Accent colors are bright, but avoid overusing all accents in one area.
+- Maintain high text contrast and legibility first.
 
 ---
 
-## Installation
+## Landing Page Structure (Current)
 
-### Requirements
+### Hero
 
-- React 18+
-- Tailwind CSS 3+
-- TypeScript (recommended)
+- Large flowing headline:
+  - "Build Loud Interfaces Fast And Furiously"
+- Supporting paragraph and primary CTAs.
+- Quick win badge row below hero content.
 
-### Step 1: Add Fonts
+### Removed noisy setup block
 
-```html
-<link
-  href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-  rel="stylesheet"
-/>
-```
+The previous hero support panel content has been removed:
 
-### Step 2: Add CSS Variables
+- Starter Command / Quick setup block
+- Git clone + install command snippet
+- 27+ Components / A11y mini-stats
+- Build posture / Fast setup card
 
-```css
-:root {
-  --concrete-black: #000000;
-  --concrete-white: #ffffff;
-  --concrete-yellow: #ffff00;
-  --concrete-cyan: #00ffff;
-  --concrete-magenta: #ff00ff;
-  --concrete-red: #ff0000;
-  --concrete-green: #00ff00;
-  --concrete-orange: #ff6600;
-  --concrete-lime: #ccff00;
+This keeps the top fold focused and less distracting.
 
-  --concrete-shadow: 6px 6px 0 var(--concrete-black);
-  --concrete-shadow-sm: 4px 4px 0 var(--concrete-black);
-  --concrete-shadow-lg: 8px 8px 0 var(--concrete-black);
+### Scrolling signal strip
 
-  --font-display: "Space Grotesk", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
-}
-```
+- Black background strip with marquee motion.
+- Large, bold, uppercase moving labels.
+- Alternating high-contrast neo-brutal chips.
 
-### Step 3: Copy Components
+### Remaining sections
 
-Copy components from `/src/components/ui/` into your project.
+- "Why teams pick concrete ui"
+- Component blend showcase
+- CTA + footer
+
+All kept intact with consistent visual language.
 
 ---
 
-## Usage Example
+## Component Library Surface (Current)
 
-```tsx
-import { Button, Card, CardContent, Badge } from "@/components/ui";
+Concrete UI currently documents and ships components across:
 
-export default function MyPage() {
-  return (
-    <Card>
-      <CardContent className="p-6">
-        <Badge variant="primary">NEW</Badge>
-        <h2 className="text-2xl font-extrabold uppercase mt-4">
-          Hello Brutal World
-        </h2>
-        <Button variant="primary" className="mt-4">
-          CLICK ME
-        </Button>
-      </CardContent>
-    </Card>
-  );
-}
-```
+- Form and input primitives
+- Feedback and notification components
+- Navigation components
+- Data display and structure components
+- Overlay/dialog primitives
+
+The docs pages use a shared preview pattern and code toggle style, with strong border/shadow treatment and consistent spacing.
 
 ---
 
-## Project Structure
+## Contribution Rules
 
-```
-src/
-├── app/
-│   ├── globals.css          # Design tokens & base styles
-│   ├── layout.tsx           # Root layout
-│   ├── page.tsx             # Landing page
-│   └── docs/
-│       ├── layout.tsx       # Docs layout with sidebar
-│       ├── page.tsx         # Introduction
-│       ├── installation/
-│       └── components/
-│           ├── button/
-│           ├── card/
-│           ├── badge/
-│           └── ...
-├── components/
-│   ├── ui/                  # UI components (copy these)
-│   │   ├── index.ts
-│   │   ├── button.tsx
-│   │   ├── card.tsx
-│   │   └── ...
-│   └── docs/                # Documentation components
-│       ├── code-block.tsx
-│       ├── component-preview.tsx
-│       └── sidebar.tsx
-```
+When updating existing pages/components:
+
+1. Preserve current spacing rhythm and type scale.
+2. Keep border/shadow language consistent with current tokens.
+3. Keep interactions snappy (`0.1s` to `0.15s`).
+4. Avoid introducing soft/glassy styles that conflict with the neo-brutal system.
+5. Prefer composition and shared primitives over one-off visual rules.
 
 ---
 
-## Design Guidelines
+## Do / Avoid
 
-### DO ✅
+### Do
 
-- Use thick black borders (4-6px)
-- Apply hard drop shadows (no blur)
-- Use saturated, bold colors
-- Keep corners sharp (0-4px radius)
-- Make transitions snappy (100ms)
-- Use uppercase for labels
-- Add generous padding
+- Use strong black outlines and hard shadows
+- Use clear hierarchy and uppercase utility labels
+- Keep layouts expressive but readable
+- Maintain mobile + desktop visual integrity
 
-### DON'T ❌
+### Avoid
 
-- Use gradients
-- Use subtle transparency
-- Use rounded corners (>4px)
-- Use slow transitions (>100ms)
-- Use muted/pastel colors
-- Use thin borders (<4px)
-
----
-
-## Credits
-
-**Concrete UI** - Neo Brutalist Component Library  
-Built with React, Tailwind CSS, and brutal honesty.
+- Reintroducing noisy hero clutter in top fold
+- Over-layering too many competing accents in one section
+- Slow, floaty transitions
+- Inconsistent border/shadow depths across similar components

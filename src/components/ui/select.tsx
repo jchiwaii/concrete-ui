@@ -144,7 +144,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       setSearchTerm("");
     };
 
-    const radiusStyles = rounded ? "rounded-full" : "rounded-lg";
+    const radiusStyles = rounded ? "rounded-full" : "rounded-md";
 
     return (
       <div ref={ref} className={`relative inline-block w-full ${className}`} {...props}>
@@ -159,18 +159,18 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             px-4 py-2.5
             bg-white
             border-2 border-black
-            shadow-[3px_3px_0_0_#000]
-            transition-all duration-150 ease-out
-            font-medium
+            shadow-[4px_4px_0_0_#000]
+            transition-all duration-100 ease-out
+            font-semibold
             text-left
             flex items-center justify-between gap-2
             ${radiusStyles}
             ${
               !disabled
-                ? "hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0_0_#000] cursor-pointer"
+                ? "hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0_0_#000] cursor-pointer"
                 : "opacity-50 cursor-not-allowed"
             }
-            ${isOpen ? "translate-x-[-2px] translate-y-[-2px] shadow-[5px_5px_0_0_#000]" : ""}
+            ${isOpen ? "translate-x-[-2px] translate-y-[-2px] shadow-[6px_6px_0_0_#000]" : ""}
           `}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
@@ -179,7 +179,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             {displayValue}
           </span>
           <svg
-            className={`w-4 h-4 text-gray-500 transition-transform duration-150 ${isOpen ? "rotate-180" : ""}`}
+            className={`w-4 h-4 text-gray-500 transition-transform duration-100 ${isOpen ? "rotate-180" : ""}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -201,8 +201,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 overflow-y-auto
                 bg-white
                 border-2 border-black
-                shadow-[4px_4px_0_0_#000]
-                rounded-lg
+                shadow-[6px_6px_0_0_#000]
+                rounded-md
                 animate-brutal-slide-down
               `}
               style={{

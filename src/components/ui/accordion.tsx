@@ -71,8 +71,8 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
         className={`
           border-2 border-black
           bg-white
-          shadow-[3px_3px_0_0_#000]
-          rounded-lg
+          shadow-[4px_4px_0_0_#000]
+          rounded-md
           overflow-hidden
           ${className}
         `}
@@ -108,7 +108,7 @@ const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
           flex items-center justify-between gap-4
           text-left
           font-semibold
-          transition-all duration-150 ease-out
+          transition-all duration-100 ease-out
           hover:bg-gray-50
           ${className}
         `}
@@ -117,7 +117,7 @@ const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
       >
         <span>{children}</span>
         <svg
-          className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform duration-150 ${
+          className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform duration-100 ${
             isOpen ? "rotate-180" : ""
           }`}
           fill="none"
