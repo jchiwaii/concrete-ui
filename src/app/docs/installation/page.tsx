@@ -122,7 +122,7 @@ export default function InstallationPage() {
           <p className="text-base mb-4">
             Browse the components documentation and copy the ones you need into
             your project. We recommend creating a{" "}
-            <code className="bg-black text-white px-2 py-0.5">
+            <code className="bg-black text-[#FFFF00] px-2 py-0.5 border-2 border-black font-bold">
               components/ui
             </code>{" "}
             folder:
