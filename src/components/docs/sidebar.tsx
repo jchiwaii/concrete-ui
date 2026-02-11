@@ -106,7 +106,7 @@ export function Sidebar() {
             </p>
           </div>
 
-          <nav className="h-[calc(100%-146px)] overflow-y-auto p-4">
+          <nav className="h-[calc(100%-160px)] overflow-y-auto p-4">
             {navigation.map((section) => (
               <div key={section.title} className="mb-6">
                 <h3 className="mb-2 px-3 text-[11px] font-bold uppercase tracking-widest text-gray-400">
@@ -135,7 +135,7 @@ export function Sidebar() {
             ))}
           </nav>
 
-          <div className="border-t-2 border-black bg-gray-50 p-4">
+          <div className="border-t-2 border-black bg-gray-50 p-4 pb-5 pr-5">
             <a
               href="https://github.com/jchiwaii/concrete-ui"
               target="_blank"
