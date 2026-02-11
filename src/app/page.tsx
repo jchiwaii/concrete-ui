@@ -26,7 +26,7 @@ export default function Home() {
               Components
             </Link>
             <a
-              href="https://github.com"
+              href="https://github.com/jchiwaii/concrete-ui"
               target="_blank"
               rel="noopener noreferrer"
               className="ml-2 px-4 py-2 text-sm font-semibold bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
@@ -260,7 +260,7 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-6">
               <a
-                href="https://github.com"
+                href="https://github.com/jchiwaii/concrete-ui"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-medium text-gray-400 hover:text-white transition-colors"

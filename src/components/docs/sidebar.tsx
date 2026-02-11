@@ -102,7 +102,7 @@ export function Sidebar() {
           <div className="text-xs text-gray-500">
             <p>Built with React + Tailwind</p>
             <a
-              href="https://github.com"
+              href="https://github.com/jchiwaii/concrete-ui"
               target="_blank"
               rel="noopener noreferrer"
               className="text-black font-medium hover:underline mt-1 inline-block"
