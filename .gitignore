@@ -39,3 +39,31 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude
+.claude/
+.claude_history
+.claudeignore
+
+# cursor
+.cursorignore
+.cursorindexingignore
+.cursorrules
+
+# github copilot
+.copilot/
+
+# ai / llm
+.aider*
+.codeium/
+.continue/
+.prompt
+
+# ide
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
