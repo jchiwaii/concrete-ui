@@ -43,7 +43,11 @@ export default function Home() {
                 UI
               </span>
             </span>
-            <Badge variant="primary" size="sm" className="hidden md:inline-flex">
+            <Badge
+              variant="primary"
+              size="sm"
+              className="hidden md:inline-flex"
+            >
               v0.1
             </Badge>
           </Link>
@@ -131,7 +135,9 @@ export default function Home() {
                 <span
                   key={`${item}-${index}`}
                   className={`inline-flex items-center rounded-md border-2 border-black px-6 py-3 text-lg font-extrabold uppercase tracking-[0.08em] shadow-[4px_4px_0_0_#000] md:text-2xl ${
-                    index % 2 === 0 ? "bg-[#ffde00] text-black" : "bg-[#06b6d4] text-black"
+                    index % 2 === 0
+                      ? "bg-[#ffde00] text-black"
+                      : "bg-[#06b6d4] text-black"
                   }`}
                 >
                   {item}
@@ -159,7 +165,9 @@ export default function Home() {
                     <h3 className="text-2xl font-extrabold uppercase tracking-tight">
                       {item.title}
                     </h3>
-                    <p className="mt-4 text-sm text-gray-800">{item.description}</p>
+                    <p className="mt-4 text-sm text-gray-800">
+                      {item.description}
+                    </p>
                   </CardContent>
                 </Card>
               ))}
@@ -227,7 +235,8 @@ export default function Home() {
                   Keep your UI bold and clean
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-800">
-                  Use the docs, copy components, and build consistent interfaces fast.
+                  Use the docs, copy components, and build consistent interfaces
+                  fast.
                 </p>
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
                   <Link href="/docs">
@@ -283,7 +292,8 @@ export default function Home() {
           </div>
         </div>
         <div className="mx-auto mt-8 w-full max-w-7xl border-t border-gray-800 pt-8 text-sm text-gray-500">
-          © {new Date().getFullYear()} Concrete UI. Open source under MIT license.
+          © {new Date().getFullYear()} Concrete UI. Open source under MIT
+          license.
         </div>
       </footer>
     </div>
