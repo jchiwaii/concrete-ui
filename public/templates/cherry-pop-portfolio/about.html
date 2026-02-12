@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About | Cherry Pop Portfolio</title>
+    <meta name="description" content="About page for a software engineer portfolio template." />
+    <link rel="icon" href="images/logo-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="top-banner">
+      <div class="container">About · Experience · Skills · Mentorship</div>
+    </div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">
+          <span class="brand-badge"><img src="images/logo-mark.svg" alt="Cherry Pop logo" /></span>
+          <span class="brand-text">Cherry Pop<span class="brand-note">Engineer Portfolio</span></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html" data-nav-link>Home</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="projects.html" data-nav-link>Projects</a>
+          <a href="contact.html" data-nav-link>Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="btn tiny soft" href="contact.html">Let's talk</a>
+        </div>
+
+        <button class="menu-button" data-menu-button aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <div class="mobile-nav" data-mobile-nav>
+        <div class="container">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="container">
+          <header class="page-heading">
+            <span class="kicker">About Me</span>
+            <h1 class="title">Product-minded engineer with a <span>clean execution style.</span></h1>
+            <p class="lead">
+              This page layout is built for a personal story, work values, and an experience timeline that hiring managers can scan quickly.
+            </p>
+          </header>
+
+          <div class="about-layout" style="margin-top: 1.25rem;">
+            <article class="card about-text">
+              <p>
+                I am a software engineer focused on frontend platforms and full-stack delivery. I enjoy translating ambiguous product goals
+                into robust systems that teams can maintain over time.
+              </p>
+              <p>
+                I value clear architecture, practical abstraction, and interfaces that feel expressive without sacrificing accessibility.
+              </p>
+              <p>
+                Outside of product work, I mentor engineers on code quality, collaboration habits, and technical communication.
+              </p>
+            </article>
+
+            <article class="card peach about-values">
+              <h3>Core values</h3>
+              <ul class="values-list">
+                <li>Ship fast without skipping quality gates</li>
+                <li>Make systems understandable before making them clever</li>
+                <li>Design for accessibility from day one</li>
+                <li>Document tradeoffs, not just outcomes</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section tight">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">Experience Timeline</span>
+            <h2>Roles that shaped engineering depth and leadership.</h2>
+          </div>
+
+          <div class="timeline">
+            <article class="card timeline-item">
+              <div class="timeline-time">
+                <p>2023 - Present</p>
+                <p>Remote</p>
+              </div>
+              <div class="timeline-content">
+                <h3>Lead Frontend Engineer · Northstar Labs</h3>
+                <p>Built a component platform and frontend quality system for 6 product squads.</p>
+                <ul>
+                  <li>Bundle size down 37%</li>
+                  <li>Regression bugs down 41%</li>
+                  <li>Mentored 5 engineers into ownership roles</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card mint timeline-item">
+              <div class="timeline-time">
+                <p>2020 - 2023</p>
+                <p>New York</p>
+              </div>
+              <div class="timeline-content">
+                <h3>Senior Software Engineer · Orbital Studio</h3>
+                <p>Shipped high-traffic product surfaces across fintech and healthcare domains.</p>
+                <ul>
+                  <li>14 platforms delivered</li>
+                  <li>Lighthouse 95+ across launches</li>
+                  <li>Typed API contracts introduced org-wide</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card sky timeline-item">
+              <div class="timeline-time">
+                <p>2017 - 2020</p>
+                <p>San Francisco</p>
+              </div>
+              <div class="timeline-content">
+                <h3>Software Engineer · Brightforge</h3>
+                <p>Worked across UI, API, and delivery workflows for internal and customer-facing tools.</p>
+                <ul>
+                  <li>Unified 120+ legacy patterns into one system</li>
+                  <li>Improved internal tooling adoption by 2x</li>
+                  <li>Led migration planning for service modules</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">Technical Skills</span>
+            <h2>Organized by outcomes, not buzzwords.</h2>
+          </div>
+
+          <div class="skills-layout">
+            <article class="card skill-card soft">
+              <h3>Frontend</h3>
+              <ul>
+                <li>React, Next.js, TypeScript</li>
+                <li>Design systems and tokens</li>
+                <li>Performance optimization</li>
+                <li>Accessibility and testing</li>
+              </ul>
+            </article>
+
+            <article class="card skill-card peach">
+              <h3>Backend</h3>
+              <ul>
+                <li>Node.js, PostgreSQL, Redis</li>
+                <li>REST and GraphQL APIs</li>
+                <li>Queue-based workflows</li>
+                <li>Observability and metrics</li>
+              </ul>
+            </article>
+
+            <article class="card skill-card mint">
+              <h3>Delivery</h3>
+              <ul>
+                <li>CI/CD with GitHub Actions</li>
+                <li>Docker and deployment pipelines</li>
+                <li>Code review standards</li>
+                <li>Mentorship and docs</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <article class="card cta-banner">
+            <div>
+              <h3>Want to personalize this about page?</h3>
+              <p>Replace roles and metrics with your own and keep the layout structure.</p>
+            </div>
+            <div>
+              <a class="btn primary" href="projects.html">Go to projects</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>© <span data-year></span> Cherry Pop Portfolio Template</p>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

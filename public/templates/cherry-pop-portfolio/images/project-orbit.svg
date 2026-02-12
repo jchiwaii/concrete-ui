@@ -1,0 +1,13 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="36" fill="#F6FDFF"/>
+  <rect x="72" y="86" width="1056" height="588" rx="30" fill="#FFFFFF" stroke="#151515" stroke-width="10"/>
+  <rect x="120" y="136" width="300" height="488" rx="24" fill="#CBF9DD" stroke="#151515" stroke-width="8"/>
+  <rect x="450" y="136" width="632" height="160" rx="24" fill="#FFD5B8" stroke="#151515" stroke-width="8"/>
+  <rect x="450" y="324" width="300" height="300" rx="24" fill="#FFE2F1" stroke="#151515" stroke-width="8"/>
+  <rect x="782" y="324" width="300" height="300" rx="24" fill="#C6EBFF" stroke="#151515" stroke-width="8"/>
+  <circle cx="270" cy="280" r="82" fill="#FF5EA8" stroke="#151515" stroke-width="8"/>
+  <circle cx="270" cy="508" r="82" fill="#FFFFFF" stroke="#151515" stroke-width="8"/>
+  <path d="M510 210H1036" stroke="#151515" stroke-width="8" stroke-linecap="round"/>
+  <path d="M510 252H920" stroke="#151515" stroke-width="8" stroke-linecap="round"/>
+  <text x="600" y="702" text-anchor="middle" font-family="Baloo 2, Arial" font-size="54" font-weight="700" fill="#151515">Orbit Care Portal</text>
+</svg>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projects | Cherry Pop Portfolio</title>
+    <meta name="description" content="Projects page for the Cherry Pop software engineer portfolio template." />
+    <link rel="icon" href="images/logo-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="top-banner">
+      <div class="container">Projects · Filterable gallery · Case study links</div>
+    </div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">
+          <span class="brand-badge"><img src="images/logo-mark.svg" alt="Cherry Pop logo" /></span>
+          <span class="brand-text">Cherry Pop<span class="brand-note">Engineer Portfolio</span></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html" data-nav-link>Home</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="projects.html" data-nav-link>Projects</a>
+          <a href="contact.html" data-nav-link>Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="btn tiny soft" href="contact.html">Let's collaborate</a>
+        </div>
+
+        <button class="menu-button" data-menu-button aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <div class="mobile-nav" data-mobile-nav>
+        <div class="container">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="container">
+          <header class="page-heading">
+            <span class="kicker">Project Library</span>
+            <h1 class="title">Filterable project grid with <span>real portfolio flow.</span></h1>
+            <p class="lead">Use category filters and route every project to a single reusable case study page.</p>
+          </header>
+
+          <div class="filters" style="margin-top: 1.2rem;">
+            <button class="filter-btn active" type="button" data-filter="all">All</button>
+            <button class="filter-btn" type="button" data-filter="web">Web app</button>
+            <button class="filter-btn" type="button" data-filter="platform">Platform</button>
+            <button class="filter-btn" type="button" data-filter="tooling">Tooling</button>
+            <button class="filter-btn" type="button" data-filter="mobile">Mobile</button>
+          </div>
+
+          <div class="grid-3">
+            <article class="card project-card" data-project-card data-category="web">
+              <img src="images/project-lumen.svg" alt="Lumen dashboard preview" />
+              <div class="project-body">
+                <div class="project-top">
+                  <h3 class="project-title">Lumen Dashboard</h3>
+                  <span class="tag">Web app</span>
+                </div>
+                <p>Real-time analytics command center for growth teams.</p>
+                <div class="project-meta"><span>React</span><span>Node</span><span>TS</span></div>
+                <div class="project-actions"><a class="btn tiny secondary" href="project.html?id=lumen">Open case study</a></div>
+              </div>
+            </article>
+
+            <article class="card project-card pink" data-project-card data-category="mobile">
+              <img src="images/project-bloom.svg" alt="Bloom commerce preview" />
+              <div class="project-body">
+                <div class="project-top">
+                  <h3 class="project-title">Bloom Commerce</h3>
+                  <span class="tag">Mobile</span>
+                </div>
+                <p>Conversion-focused storefront with checkout improvements.</p>
+                <div class="project-meta"><span>Next.js</span><span>GraphQL</span><span>Redis</span></div>
+                <div class="project-actions"><a class="btn tiny secondary" href="project.html?id=bloom">Open case study</a></div>
+              </div>
+            </article>
+
+            <article class="card project-card mint" data-project-card data-category="platform">
+              <img src="images/project-nova.svg" alt="Nova design system preview" />
+              <div class="project-body">
+                <div class="project-top">
+                  <h3 class="project-title">Nova Design System</h3>
+                  <span class="tag">Platform</span>
+                </div>
+                <p>Cross-team component and token platform.</p>
+                <div class="project-meta"><span>Storybook</span><span>React</span><span>Tokens</span></div>
+                <div class="project-actions"><a class="btn tiny secondary" href="project.html?id=nova">Open case study</a></div>
+              </div>
+            </article>
+
+            <article class="card project-card peach" data-project-card data-category="web">
+              <img src="images/project-orbit.svg" alt="Orbit portal preview" />
+              <div class="project-body">
+                <div class="project-top">
+                  <h3 class="project-title">Orbit Care Portal</h3>
+                  <span class="tag">Web app</span>
+                </div>
+                <p>Scheduling and coordination software for care teams.</p>
+                <div class="project-meta"><span>Vue</span><span>Node</span><span>AWS</span></div>
+                <div class="project-actions"><a class="btn tiny secondary" href="project.html?id=orbit">Open case study</a></div>
+              </div>
+            </article>
+
+            <article class="card project-card sky" data-project-card data-category="tooling">
+              <img src="images/project-zen.svg" alt="Zen dev platform preview" />
+              <div class="project-body">
+                <div class="project-top">
+                  <h3 class="project-title">Zen Dev Platform</h3>
+                  <span class="tag">Tooling</span>
+                </div>
+                <p>Release orchestration and deployment control panel.</p>
+                <div class="project-meta"><span>Node</span><span>Docker</span><span>CI/CD</span></div>
+                <div class="project-actions"><a class="btn tiny secondary" href="project.html?id=zen">Open case study</a></div>
+              </div>
+            </article>
+
+            <article class="card project-card soft" data-project-card data-category="platform">
+              <img src="images/project-lumen.svg" alt="Reporting workspace preview" />
+              <div class="project-body">
+                <div class="project-top">
+                  <h3 class="project-title">Signal Reporting Workspace</h3>
+                  <span class="tag">Platform</span>
+                </div>
+                <p>Self-serve reporting UI used across product and operations teams.</p>
+                <div class="project-meta"><span>React</span><span>Postgres</span><span>Charts</span></div>
+                <div class="project-actions"><a class="btn tiny secondary" href="project.html?id=lumen">Open case study</a></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section tight">
+        <div class="container">
+          <article class="card cta-banner peach">
+            <div>
+              <h3>Need an open-source section too?</h3>
+              <p>Duplicate a project card block and relabel it for libraries, packages, or experiments.</p>
+            </div>
+            <div>
+              <a class="btn secondary" href="contact.html">Contact</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>© <span data-year></span> Cherry Pop Portfolio Template</p>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

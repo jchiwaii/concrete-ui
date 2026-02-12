@@ -1,0 +1,12 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="36" fill="#FFF5FB"/>
+  <rect x="74" y="84" width="1052" height="592" rx="28" fill="#FFFFFF" stroke="#151515" stroke-width="10"/>
+  <rect x="120" y="140" width="240" height="476" rx="18" fill="#FFE2F1" stroke="#151515" stroke-width="8"/>
+  <rect x="400" y="140" width="680" height="130" rx="18" fill="#C6EBFF" stroke="#151515" stroke-width="8"/>
+  <rect x="400" y="292" width="320" height="324" rx="18" fill="#FFD5B8" stroke="#151515" stroke-width="8"/>
+  <rect x="760" y="292" width="320" height="324" rx="18" fill="#CBF9DD" stroke="#151515" stroke-width="8"/>
+  <path d="M154 566V360L216 392L276 328L338 420" stroke="#FF5EA8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M434 230H746" stroke="#151515" stroke-width="8" stroke-linecap="round"/>
+  <path d="M434 188H950" stroke="#151515" stroke-width="8" stroke-linecap="round"/>
+  <text x="598" y="560" text-anchor="middle" font-family="Baloo 2, Arial" font-size="56" font-weight="700" fill="#151515">Lumen Analytics</text>
+</svg>

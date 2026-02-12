@@ -43,14 +43,21 @@ const navigation = [
       { title: "Tooltip", href: "/docs/components/tooltip" },
     ],
   },
+  {
+    title: "Templates",
+    links: [
+      { title: "Overview", href: "/docs/templates" },
+      { title: "Cherry Pop Portfolio", href: "/docs/templates/cherry-pop-portfolio" },
+    ],
+  },
 ];
 
 const mobileQuickLinks = [
   { title: "Intro", href: "/docs" },
   { title: "Install", href: "/docs/installation" },
   { title: "Button", href: "/docs/components/button" },
-  { title: "Slider", href: "/docs/components/slider" },
   { title: "Card", href: "/docs/components/card" },
+  { title: "Template", href: "/docs/templates/cherry-pop-portfolio" },
 ];
 
 export function Sidebar() {

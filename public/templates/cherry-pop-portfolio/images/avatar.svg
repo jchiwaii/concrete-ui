@@ -1,0 +1,14 @@
+<svg width="900" height="760" viewBox="0 0 900 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="760" rx="44" fill="#FFEFF8"/>
+  <circle cx="665" cy="130" r="70" fill="#FFD2EA"/>
+  <circle cx="155" cy="610" r="90" fill="#C6EBFF"/>
+  <rect x="140" y="120" width="620" height="520" rx="26" fill="#FFFDF9" stroke="#151515" stroke-width="10"/>
+  <circle cx="450" cy="286" r="120" fill="#FFD5B8" stroke="#151515" stroke-width="10"/>
+  <path d="M327 273C327 197 378 150 450 150C522 150 573 197 573 273V308H327V273Z" fill="#151515"/>
+  <path d="M368 470C391 432 423 412 450 412C477 412 509 432 532 470" stroke="#151515" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="404" cy="299" r="10" fill="#151515"/>
+  <circle cx="496" cy="299" r="10" fill="#151515"/>
+  <path d="M421 344C433 355 467 355 479 344" stroke="#151515" stroke-width="8" stroke-linecap="round"/>
+  <rect x="260" y="500" width="380" height="88" rx="16" fill="#FF5EA8" stroke="#151515" stroke-width="8"/>
+  <text x="450" y="555" text-anchor="middle" font-size="38" font-family="Baloo 2, Arial" font-weight="700" fill="white">Avery Stone</text>
+</svg>

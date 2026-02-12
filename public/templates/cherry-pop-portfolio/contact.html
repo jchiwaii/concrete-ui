@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact | Cherry Pop Portfolio</title>
+    <meta name="description" content="Contact page template for a software engineer portfolio." />
+    <link rel="icon" href="images/logo-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="top-banner">
+      <div class="container">Contact page · working demo form · FAQ</div>
+    </div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">
+          <span class="brand-badge"><img src="images/logo-mark.svg" alt="Cherry Pop logo" /></span>
+          <span class="brand-text">Cherry Pop<span class="brand-note">Engineer Portfolio</span></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html" data-nav-link>Home</a>
+          <a href="about.html" data-nav-link>About</a>
+          <a href="projects.html" data-nav-link>Projects</a>
+          <a href="contact.html" data-nav-link>Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="btn tiny soft" href="projects.html">See projects</a>
+        </div>
+
+        <button class="menu-button" data-menu-button aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <div class="mobile-nav" data-mobile-nav>
+        <div class="container">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="container">
+          <header class="page-heading">
+            <span class="kicker">Contact</span>
+            <h1 class="title">Let's build something <span>fast, clean, and memorable.</span></h1>
+            <p class="lead">This page includes a demo form handler in vanilla JS and structured contact info blocks.</p>
+          </header>
+
+          <div class="contact-layout" style="margin-top: 1.2rem;">
+            <article class="card soft contact-copy">
+              <h2>How we can work together</h2>
+              <p>
+                Share your goals, technical constraints, and timeline. I typically reply within one business day.
+              </p>
+              <ul>
+                <li>Email: hello@cherrypop.dev</li>
+                <li>GitHub: github.com/cherrypop-dev</li>
+                <li>LinkedIn: linkedin.com/in/cherrypop-dev</li>
+                <li>Location: Austin, Texas (remote-friendly)</li>
+              </ul>
+            </article>
+
+            <form class="card contact-form" data-demo-form>
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your full name" required />
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@company.com" required />
+              </div>
+
+              <div class="field">
+                <label for="project-type">Project Type</label>
+                <select id="project-type" name="project-type" required>
+                  <option value="" disabled selected>Select one</option>
+                  <option>Web app build</option>
+                  <option>Frontend modernization</option>
+                  <option>Design system implementation</option>
+                  <option>Team augmentation</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="message">Project Brief</label>
+                <textarea id="message" name="message" rows="6" placeholder="Tell me what you're building." required></textarea>
+              </div>
+
+              <button class="btn primary" type="submit">Send message</button>
+              <p class="form-note" data-form-note aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="section tight">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">FAQ</span>
+            <h2>Helpful answers before your message.</h2>
+          </div>
+
+          <div class="grid-3">
+            <article class="card feature-card peach">
+              <h3>Do you work async?</h3>
+              <p>Yes. I usually overlap at least 3-4 hours with the core team timezone.</p>
+            </article>
+            <article class="card feature-card mint">
+              <h3>Can you join an existing codebase?</h3>
+              <p>Absolutely. Most engagements involve improving an active product stack.</p>
+            </article>
+            <article class="card feature-card sky">
+              <h3>Do you help with hiring and mentoring?</h3>
+              <p>Yes, for long-term projects I support interview loops and onboarding.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>© <span data-year></span> Cherry Pop Portfolio Template</p>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
