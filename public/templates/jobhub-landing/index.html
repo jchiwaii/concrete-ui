@@ -33,41 +33,154 @@
       <section class="hero" id="find-jobs">
         <div class="container hero-grid">
           <div class="hero-copy-wrap">
-            <h1 class="hero-wordmark">
-              <span class="line dark">JOBHUB</span>
-              <span class="line accent">GLOBAL JOBS</span>
-            </h1>
+            <div class="hero-text-group">
+              <h1 class="hero-wordmark">
+                <span class="line dark">Discover Your</span>
+                <span class="line accent">Dream Career</span>
+                <span class="line dark">Today</span>
+              </h1>
 
-            <p class="hero-copy">
-              Let's try our way to get your dream job, with offers from different countries and
-              job positions, created for a better life.
-            </p>
+              <p class="hero-copy">
+                Let's try our way to get your dream job, with offers from different countries and
+                job positions, create for a better life.
+              </p>
+            </div>
 
             <div class="search-shell">
-              <button class="search-input" type="button" aria-label="Select job title">
-                <span class="input-icon">*</span>
-                <span>Job title</span>
-                <span class="caret">v</span>
-              </button>
-              <button class="search-input" type="button" aria-label="Select location">
-                <span class="input-icon">*</span>
-                <span>Location</span>
-                <span class="caret">v</span>
-              </button>
-              <a class="btn btn-primary" href="#register">Register Now</a>
+              <div class="search-combo" role="search">
+                <button class="search-part" type="button" aria-label="Select job title">
+                  <span class="search-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M2.25 8.25H21.75V20.25H2.25V8.25Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      />
+                      <path
+                        d="M8.25 8.25V5.25H15.75V8.25"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      />
+                      <path
+                        d="M2.25 12.75H21.75"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      />
+                      <path
+                        d="M10.5 14.25H13.5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      />
+                    </svg>
+                  </span>
+                  <span class="search-label">Job title</span>
+                  <span class="caret" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M6 9L12 15L18 9"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+
+                <div class="search-divider" aria-hidden="true"></div>
+
+                <button class="search-part" type="button" aria-label="Select location">
+                  <span class="search-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M12 20.25C12 20.25 18 14.25 18 10.5C18 7.18629 15.3137 4.5 12 4.5C8.68629 4.5 6 7.18629 6 10.5C6 14.25 12 20.25 12 20.25Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      />
+                      <circle
+                        cx="12"
+                        cy="10.5"
+                        r="2.25"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      />
+                    </svg>
+                  </span>
+                  <span class="search-label">Location</span>
+                  <span class="caret" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M6 9L12 15L18 9"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+              <a class="btn btn-primary hero-register" href="#register">Register Now</a>
             </div>
           </div>
 
           <div class="hero-visual" aria-hidden="true">
             <div class="hero-visual-card"></div>
-            <div class="hero-visual-photo">
-              <div class="silhouette"></div>
-            </div>
+            <div class="hero-visual-photo"></div>
 
-            <div class="badge badge-spotify">Spotify</div>
-            <div class="badge badge-meta">Meta</div>
-            <div class="badge badge-google">Google</div>
-            <div class="badge badge-microsoft">Microsoft</div>
+            <div class="badge badge-spotify">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="18" cy="18" r="13.5" fill="#1ED760" />
+                <path
+                  d="M25.214 16.5483C21.1386 14.1129 14.4163 13.889 10.5259 15.0773C9.90114 15.2679 9.24048 14.9131 9.05116 14.2844C8.86184 13.6555 9.21421 12.9912 9.83939 12.8001C14.3053 11.4359 21.7294 11.6994 26.421 14.5018C26.9829 14.8374 27.1673 15.5677 26.8342 16.1322C26.5009 16.6976 25.7745 16.884 25.214 16.5483ZM25.0805 20.1554C24.7946 20.6222 24.188 20.7687 23.7246 20.482C20.327 18.3805 15.1461 17.7718 11.1264 18.9995C10.6051 19.1581 10.0545 18.8623 9.89631 18.3388C9.73914 17.8142 10.0332 17.2612 10.5535 17.1017C15.1455 15.6997 20.8539 16.3787 24.7562 18.7918C25.2196 19.0789 25.3654 19.6898 25.0805 20.1554ZM23.5335 23.6195C23.3063 23.9945 22.8212 24.1119 22.45 23.8834C19.4809 22.0575 15.7441 21.6452 11.3432 22.6567C10.9191 22.7545 10.4966 22.4871 10.3998 22.0604C10.3027 21.6338 10.5674 21.2085 10.9925 21.1111C15.8084 20.0033 19.9396 20.48 23.272 22.5291C23.6436 22.7574 23.7606 23.2458 23.5335 23.6195Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+            <div class="badge badge-meta">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.4276 12.6988C15.9152 9.4998 13.8142 8.28076 11.2997 8.28076C6.17335 8.28076 2.24561 14.9522 2.24561 22.0135C2.24561 26.4323 4.38332 29.2192 7.96401 29.2192C10.5411 29.2192 12.3946 28.0044 15.6895 22.2446C15.6895 22.2446 17.063 19.8191 18.008 18.1482C18.339 18.6828 18.687 19.258 19.0541 19.8763L20.5993 22.4756C23.609 27.5123 25.2862 29.2192 28.3248 29.2192C31.8131 29.2192 33.7543 26.3942 33.7543 21.8836C33.7543 14.4901 29.7381 8.28076 24.859 8.28076C22.2754 8.28076 20.2559 10.2268 18.4276 12.6988Z"
+                  fill="#1080F8"
+                />
+              </svg>
+            </div>
+            <div class="badge badge-google">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M30.24 18.2898C30.24 17.3858 30.1589 16.5164 30.0082 15.6819H18V20.6138H24.8618C24.5662 22.2076 23.6679 23.5579 22.3176 24.462V27.6611H26.4382C28.8491 25.4414 30.24 22.1728 30.24 18.2898Z"
+                  fill="#4285F4"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M18 30.7501C21.4425 30.7501 24.3286 29.6084 26.4382 27.6611L22.3176 24.462C21.1759 25.227 19.7154 25.679 18 25.679C14.6792 25.679 11.8684 23.4362 10.8658 20.4225H6.60609V23.726C8.70405 27.8929 13.0159 30.7501 18 30.7501Z"
+                  fill="#34A853"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M10.8658 20.4226C10.6108 19.6576 10.4659 18.8404 10.4659 18.0001C10.4659 17.1597 10.6108 16.3426 10.8658 15.5776V12.2742H6.60611C5.74258 13.9954 5.24997 15.9427 5.24997 18.0001C5.24997 20.0575 5.74258 22.0048 6.60611 23.726L10.8658 20.4226Z"
+                  fill="#FBBC05"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M18 10.321C19.8719 10.321 21.5526 10.9643 22.874 12.2277L26.5309 8.5708C24.3228 6.51341 21.4367 5.25 18 5.25C13.0159 5.25 8.70405 8.10716 6.60609 12.2741L10.8658 15.5775C11.8684 12.5639 14.6792 10.321 18 10.321Z"
+                  fill="#EA4335"
+                />
+              </svg>
+            </div>
+            <div class="badge badge-microsoft">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.99994 6H17.4285V17.4286H5.99994V6Z" fill="#F35325" />
+                <path d="M18.5714 6H29.9999V17.4286H18.5714V6Z" fill="#81BC06" />
+                <path d="M5.99994 18.5714H17.4285V30H5.99994V18.5714Z" fill="#05A6F0" />
+                <path d="M18.5714 18.5714H29.9999V30H18.5714V18.5714Z" fill="#FFBA08" />
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -97,33 +210,59 @@
 
       <section class="stats" id="find-candidates">
         <div class="container stats-head">
-          <h2 class="section-wordmark">JOBHUB</h2>
+          <h2 class="section-headline section-headline-best">
+            <span class="headline-line dark">WHY WE'RE</span>
+            <span class="headline-line accent-yellow">THE BEST</span>
+          </h2>
           <p>
-            We have been helping workers find their dream job for more than 10 years, and it
-            continues to grow.
+            We have been helping workers to find their dream job for more than 10 years, and it
+            continues to grow
           </p>
         </div>
 
-        <div class="container stats-grid">
-          <article class="stat-card stat-card-peach">
-            <div class="stat-icon">SC</div>
-            <div>
-              <p class="stat-value">1,500+</p>
-              <p class="stat-label">Job title</p>
+        <div class="container stats-grid stats-grid-kpi">
+          <article class="kpi-item">
+            <div class="kpi-icon tone-amber">
+              <svg viewBox="0 0 56 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M22 18C22 17.4696 22.2107 16.9609 22.5858 16.5858C22.9609 16.2107 23.4696 16 24 16H40C40.5304 16 41.0391 16.2107 41.4142 16.5858C41.7893 16.9609 42 17.4696 42 18C42 18.5304 41.7893 19.0391 41.4142 19.4142C41.0391 19.7893 40.5304 20 40 20H24C23.4696 20 22.9609 19.7893 22.5858 19.4142C22.2107 19.0391 22 18.5304 22 18ZM24 28H40C40.5304 28 41.0391 27.7893 41.4142 27.4142C41.7893 27.0391 42 26.5304 42 26C42 25.4696 41.7893 24.9609 41.4142 24.5858C41.0391 24.2107 40.5304 24 40 24H24C23.4696 24 22.9609 24.2107 22.5858 24.5858C22.2107 24.9609 22 25.4696 22 26C22 26.5304 22.2107 27.0391 22.5858 27.4142C22.9609 27.7893 23.4696 28 24 28ZM56 40C56 42.1217 55.1571 44.1566 53.6569 45.6569C52.1566 47.1571 50.1217 48 48 48H20C17.8783 48 15.8434 47.1571 14.3431 45.6569C12.8429 44.1566 12 42.1217 12 40V8C12 6.93913 11.5786 5.92172 10.8284 5.17157C10.0783 4.42143 9.06087 4 8 4C6.93913 4 5.92172 4.42143 5.17157 5.17157C4.42143 5.92172 4 6.93913 4 8C4 9.435 5.2075 10.405 5.22 10.415C5.551 10.6697 5.79395 11.0217 5.91476 11.4215C6.03557 11.8213 6.02818 12.2489 5.89362 12.6443C5.75907 13.0397 5.5041 13.3831 5.16449 13.6262C4.82488 13.8693 4.41767 14.0001 4 14C3.5675 14.0007 3.14674 13.8593 2.8025 13.5975C2.5125 13.385 0 11.4025 0 8C0 5.87827 0.842855 3.84344 2.34315 2.34315C3.84344 0.842854 5.87827 0 8 0H42C44.1217 0 46.1566 0.842854 47.6569 2.34315C49.1571 3.84344 50 5.87827 50 8V34H52C52.4327 34 52.8538 34.1404 53.2 34.4C53.5 34.615 56 36.5975 56 40ZM22.065 35.37C22.2017 34.9666 22.4624 34.6169 22.81 34.3708C23.1576 34.1247 23.5742 33.9949 24 34H46V8C46 6.93913 45.5786 5.92172 44.8284 5.17157C44.0783 4.42143 43.0609 4 42 4H14.9225C15.6298 5.21426 16.0017 6.59473 16 8V40C16 41.0609 16.4214 42.0783 17.1716 42.8284C17.9217 43.5786 18.9391 44 20 44C21.0609 44 22.0783 43.5786 22.8284 42.8284C23.5786 42.0783 24 41.0609 24 40C24 38.565 22.7925 37.595 22.78 37.585C22.4392 37.3412 22.1857 36.9943 22.057 36.5955C21.9282 36.1967 21.931 35.7671 22.065 35.37ZM52 40C51.975 39.259 51.689 38.5506 51.1925 38H27.6925C27.8935 38.6476 27.9955 39.3219 27.995 40C27.9969 41.4046 27.6269 42.7847 26.9225 44H48C49.0609 44 50.0783 43.5786 50.8284 42.8284C51.5786 42.0783 52 41.0609 52 40Z"
+                  fill="black"
+                />
+              </svg>
+            </div>
+            <div class="kpi-copy">
+              <p class="kpi-value">1,500+</p>
+              <p class="kpi-label">Job title</p>
             </div>
           </article>
-          <article class="stat-card stat-card-green">
-            <div class="stat-icon">MP</div>
-            <div>
-              <p class="stat-value">100+</p>
-              <p class="stat-label">Country</p>
+
+          <article class="kpi-item">
+            <div class="kpi-icon tone-green">
+              <svg viewBox="0 0 44 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M22 12C20.0222 12 18.0888 12.5865 16.4443 13.6853C14.7998 14.7841 13.5181 16.3459 12.7612 18.1732C12.0043 20.0004 11.8063 22.0111 12.1921 23.9509C12.578 25.8907 13.5304 27.6725 14.9289 29.0711C16.3275 30.4696 18.1093 31.422 20.0491 31.8079C21.9889 32.1937 23.9996 31.9957 25.8268 31.2388C27.6541 30.4819 29.2159 29.2002 30.3147 27.5557C31.4135 25.9112 32 23.9778 32 22C32 19.3478 30.9464 16.8043 29.0711 14.9289C27.1957 13.0536 24.6522 12 22 12ZM22 28C20.8133 28 19.6533 27.6481 18.6666 26.9888C17.6799 26.3295 16.9108 25.3925 16.4567 24.2961C16.0026 23.1997 15.8838 21.9933 16.1153 20.8295C16.3468 19.6656 16.9182 18.5965 17.7574 17.7574C18.5965 16.9182 19.6656 16.3468 20.8295 16.1153C21.9933 15.8838 23.1997 16.0026 24.2961 16.4567C25.3925 16.9108 26.3295 17.6799 26.9888 18.6666C27.6481 19.6533 28 20.8133 28 22C28 23.5913 27.3679 25.1174 26.2426 26.2426C25.1174 27.3679 23.5913 28 22 28ZM22 0C16.1673 0.00661683 10.5753 2.32659 6.45096 6.45096C2.32659 10.5753 0.00661683 16.1673 0 22C0 29.85 3.6275 38.17 10.5 46.0625C13.5881 49.6289 17.0636 52.8404 20.8625 55.6375C21.1988 55.8731 21.5994 55.9994 22.01 55.9994C22.4206 55.9994 22.8212 55.8731 23.1575 55.6375C26.9494 52.8392 30.4182 49.6278 33.5 46.0625C40.3625 38.17 44 29.85 44 22C43.9934 16.1673 41.6734 10.5753 37.549 6.45096C33.4247 2.32659 27.8327 0.00661683 22 0ZM22 51.5C17.8675 48.25 4 36.3125 4 22C4 17.2261 5.89642 12.6477 9.27208 9.27208C12.6477 5.89642 17.2261 4 22 4C26.7739 4 31.3523 5.89642 34.7279 9.27208C38.1036 12.6477 40 17.2261 40 22C40 36.3075 26.1325 48.25 22 51.5Z"
+                  fill="black"
+                />
+              </svg>
+            </div>
+            <div class="kpi-copy">
+              <p class="kpi-value">100+</p>
+              <p class="kpi-label">Country</p>
             </div>
           </article>
-          <article class="stat-card stat-card-blue">
-            <div class="stat-icon">US</div>
-            <div>
-              <p class="stat-value">50,000+</p>
-              <p class="stat-label">Community member</p>
+
+          <article class="kpi-item">
+            <div class="kpi-icon tone-blue">
+              <svg viewBox="0 0 63 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M28.7706 27.4861C31.4511 25.7016 33.4862 23.1018 34.5749 20.0712C35.6636 17.0406 35.7481 13.7402 34.8159 10.6578C33.8837 7.57552 31.9844 4.87501 29.3987 2.95566C26.813 1.0363 23.6783 0 20.4581 0C17.2379 0 14.1032 1.0363 11.5176 2.95566C8.93189 4.87501 7.03253 7.57552 6.10036 10.6578C5.16819 13.7402 5.25269 17.0406 6.34138 20.0712C7.43006 23.1018 9.46513 25.7016 12.1456 27.4861C7.29686 29.2732 3.1559 32.5802 0.340632 36.9136C0.192671 37.1335 0.0898976 37.3806 0.038285 37.6406C-0.0133277 37.9006 -0.0127498 38.1682 0.0399849 38.428C0.0927197 38.6877 0.196559 38.9344 0.345468 39.1537C0.494377 39.3729 0.685385 39.5604 0.907388 39.7052C1.12939 39.85 1.37796 39.9492 1.63865 39.9971C1.89934 40.045 2.16695 40.0406 2.42592 39.9842C2.68489 39.9277 2.93006 39.8204 3.14718 39.6683C3.36429 39.5163 3.54902 39.3226 3.69063 39.0986C5.50661 36.3055 7.99152 34.0104 10.9197 32.4215C13.8479 30.8327 17.1266 30.0005 20.4581 30.0005C23.7896 30.0005 27.0683 30.8327 29.9965 32.4215C32.9247 34.0104 35.4097 36.3055 37.2256 39.0986C37.519 39.5346 37.9721 39.8376 38.4871 39.9421C39.0021 40.0467 39.5375 39.9444 39.9776 39.6573C40.4177 39.3702 40.7272 38.9215 40.8391 38.408C40.951 37.8946 40.8564 37.3578 40.5756 36.9136C37.7604 32.5802 33.6194 29.2732 28.7706 27.4861ZM9.45813 15.0061C9.45813 12.8305 10.1033 10.7038 11.312 8.89481C12.5207 7.08587 14.2386 5.67598 16.2486 4.84341C18.2586 4.01085 20.4703 3.79301 22.6041 4.21745C24.7379 4.64189 26.6979 5.68953 28.2363 7.22791C29.7747 8.76629 30.8223 10.7263 31.2468 12.8601C31.6712 14.9939 31.4534 17.2056 30.6208 19.2156C29.7882 21.2256 28.3783 22.9436 26.5694 24.1523C24.7605 25.3609 22.6337 26.0061 20.4581 26.0061C17.5418 26.0028 14.7458 24.8428 12.6836 22.7806C10.6214 20.7184 9.46144 17.9225 9.45813 15.0061ZM61.9931 39.6811C61.5489 39.9708 61.0078 40.0722 60.4888 39.9629C59.9698 39.8537 59.5154 39.5428 59.2256 39.0986C57.4118 36.3039 54.9272 34.0077 51.9984 32.4195C49.0696 30.8313 45.7898 30.0016 42.4581 30.0061C41.9277 30.0061 41.419 29.7954 41.0439 29.4203C40.6688 29.0452 40.4581 28.5365 40.4581 28.0061C40.4581 27.4757 40.6688 26.9669 41.0439 26.5919C41.419 26.2168 41.9277 26.0061 42.4581 26.0061C44.0781 26.0046 45.6776 25.6453 47.1426 24.9539C48.6076 24.2625 49.9018 23.2561 50.9327 22.0065C51.9636 20.757 52.7058 19.2952 53.1063 17.7255C53.5068 16.1559 53.5556 14.5172 53.2494 12.9265C52.9431 11.3357 52.2893 9.83231 51.3347 8.52358C50.38 7.21484 49.1481 6.13311 47.7269 5.35567C46.3057 4.57823 44.7304 4.12428 43.1134 4.02625C41.4965 3.92822 39.8778 4.18853 38.3731 4.78859C38.1278 4.89464 37.8637 4.95045 37.5964 4.95271C37.3292 4.95497 37.0642 4.90363 36.8171 4.80174C36.57 4.69984 36.3458 4.54946 36.1578 4.35946C35.9698 4.16947 35.8218 3.94372 35.7226 3.69556C35.6233 3.4474 35.5748 3.18186 35.5799 2.91463C35.585 2.6474 35.6436 2.38391 35.7523 2.13972C35.8609 1.89552 36.0174 1.67558 36.2125 1.4929C36.4076 1.31021 36.6373 1.16848 36.8881 1.07609C40.3318 -0.297286 44.162 -0.346708 47.64 0.937353C51.1179 2.22141 53.9971 4.74798 55.7221 8.02963C57.4471 11.3113 57.8957 15.1155 56.9814 18.7084C56.067 22.3013 53.8545 25.4282 50.7706 27.4861C55.6194 29.2732 59.7604 32.5802 62.5756 36.9136C62.8653 37.3578 62.9667 37.899 62.8575 38.418C62.7482 38.937 62.4373 39.3913 61.9931 39.6811Z"
+                  fill="black"
+                />
+              </svg>
+            </div>
+            <div class="kpi-copy">
+              <p class="kpi-value">50,000+</p>
+              <p class="kpi-label">Community member</p>
             </div>
           </article>
         </div>
@@ -131,71 +270,184 @@
 
       <section class="categories" id="career-advice">
         <div class="container categories-head">
-          <h2 class="section-wordmark">JOB CATEGORY</h2>
-          <p>Discover high-growth roles across industries with active, verified openings.</p>
+          <h2 class="section-headline section-headline-categories">
+            <span class="headline-line dark">
+              THERE ARE <span class="accent-blue">20+ JOB</span>
+            </span>
+            <span class="headline-line dark">
+              <span class="accent-yellow-soft">CATEGORIES</span> AVAILABLE
+            </span>
+          </h2>
         </div>
 
         <div class="container category-grid">
           <article class="category-card tone-peach">
             <div class="category-title-row">
-              <div class="category-icon">PL</div>
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="7.5" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="9" cy="11" r="1.25" fill="currentColor" />
+                  <circle cx="13.5" cy="9" r="1.25" fill="currentColor" />
+                  <path
+                    d="M10.2 14.2H13.8"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
               <h3>Design</h3>
             </div>
-            <a href="#" class="category-link">New 128 job posted <span>-></span></a>
+            <a href="#" class="category-link">
+              <span>New 128 job posted</span>
+              <span class="link-arrow">&gt;</span>
+            </a>
           </article>
           <article class="category-card">
             <div class="category-title-row">
-              <div class="category-icon">SF</div>
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 10L6.5 6H17.5L19 10"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <rect x="5" y="10" width="14" height="8" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M9 14H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </div>
               <h3>Marketing</h3>
             </div>
-            <a href="#" class="category-link">New 90 job posted <span>-></span></a>
+            <a href="#" class="category-link">
+              <span>New 90 job posted</span>
+              <span class="link-arrow">&gt;</span>
+            </a>
           </article>
           <article class="category-card">
             <div class="category-title-row">
-              <div class="category-icon">BK</div>
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6 6H11V18H6V6Z" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M13 6H18V18H13V6Z" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M11 8H13" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+              </div>
               <h3>Education</h3>
             </div>
-            <a href="#" class="category-link">New 232 job posted <span>-></span></a>
+            <a href="#" class="category-link">
+              <span>New 232 job posted</span>
+              <span class="link-arrow">&gt;</span>
+            </a>
           </article>
           <article class="category-card">
             <div class="category-title-row">
-              <div class="category-icon">$</div>
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="7.5" stroke="currentColor" stroke-width="1.8" />
+                  <path
+                    d="M12 8V16M14.3 9.7C13.9 9.2 13.1 8.9 12 8.9C10.8 8.9 10 9.4 10 10.2C10 11 10.7 11.4 12 11.7C13.7 12.1 14.6 12.7 14.6 13.9C14.6 15.1 13.5 15.9 12 15.9C10.8 15.9 9.8 15.5 9.2 14.8"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
               <h3>Finance</h3>
             </div>
-            <a href="#" class="category-link">New 458 job posted <span>-></span></a>
+            <a href="#" class="category-link">
+              <span>New 458 job posted</span>
+              <span class="link-arrow">&gt;</span>
+            </a>
           </article>
           <article class="category-card">
-            <div class="category-title-row">
-              <div class="category-icon">MB</div>
+            <div class="category-title-row category-title-row-tech">
               <h3>Technology</h3>
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect x="8" y="4" width="8" height="16" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M11 17H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </div>
             </div>
-            <a href="#" class="category-link">New 320 job posted <span>-></span></a>
+            <a href="#" class="category-link">
+              <span>New 320 job posted</span>
+              <span class="link-arrow">&gt;</span>
+            </a>
           </article>
           <article class="category-card">
             <div class="category-title-row">
-              <div class="category-icon">ST</div>
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9 5V10C9 11.7 10.3 13 12 13C13.7 13 15 11.7 15 10V5"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M8 13V15.2C8 17.6 9.9 19.5 12.3 19.5C14.7 19.5 16.6 17.6 16.6 15.2V13"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                  <circle cx="17.5" cy="8.5" r="2.5" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+              </div>
               <h3>Health</h3>
             </div>
-            <a href="#" class="category-link">New 112 job posted <span>-></span></a>
+            <a href="#" class="category-link">
+              <span>New 112 job posted</span>
+              <span class="link-arrow">&gt;</span>
+            </a>
           </article>
           <article class="category-card">
             <div class="category-title-row">
-              <div class="category-icon">PN</div>
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M7 17L13.5 10.5L16.5 13.5L10 20H7V17Z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M11 12L14 15"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                  <path d="M13.5 10.5L15.5 8.5" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+              </div>
               <h3>Writer</h3>
             </div>
-            <a href="#" class="category-link">New 86 job posted <span>-></span></a>
+            <a href="#" class="category-link">
+              <span>New 86 job posted</span>
+              <span class="link-arrow">&gt;</span>
+            </a>
           </article>
           <article class="category-card">
             <div class="category-title-row">
-              <div class="category-icon">BN</div>
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="8.5" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="15.5" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M12.5 10L11.5 10" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+              </div>
               <h3>Researcher</h3>
             </div>
-            <a href="#" class="category-link">New 213 job posted <span>-></span></a>
+            <a href="#" class="category-link">
+              <span>New 213 job posted</span>
+              <span class="link-arrow">&gt;</span>
+            </a>
           </article>
         </div>
 
         <div class="container categories-cta">
-          <a class="btn btn-light" href="#">See All Category</a>
+          <a class="btn btn-light categories-button" href="#">View All Categories</a>
         </div>
       </section>
 
@@ -459,12 +711,14 @@
             JobHub helps job seekers discover better opportunities and helps teams hire faster
             across markets.
           </p>
-          <div class="footer-social" aria-label="Social links">
-            <a href="#" aria-label="Facebook">Fb</a>
-            <a href="#" aria-label="Instagram">Ig</a>
-            <a href="#" aria-label="X">X</a>
-            <a href="#" aria-label="LinkedIn">In</a>
-            <a href="#" aria-label="YouTube">Yt</a>
+          <div class="footer-social" aria-label="Social media">
+            <svg viewBox="0 0 168 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Social media icons">
+              <path d="M22 12.3038C22 6.74719 17.5229 2.24268 12 2.24268C6.47715 2.24268 2 6.74719 2 12.3038C2 17.3255 5.65684 21.4879 10.4375 22.2427V15.2121H7.89844V12.3038H10.4375V10.0872C10.4375 7.56564 11.9305 6.1728 14.2146 6.1728C15.3088 6.1728 16.4531 6.36931 16.4531 6.36931V8.84529H15.1922C13.95 8.84529 13.5625 9.6209 13.5625 10.4166V12.3038H16.3359L15.8926 15.2121H13.5625V22.2427C18.3432 21.4879 22 17.3257 22 12.3038Z" fill="white" />
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M52 3.24268H44C41.2386 3.24268 39 5.48126 39 8.24268V16.2427C39 19.0041 41.2386 21.2427 44 21.2427H52C54.7614 21.2427 57 19.0041 57 16.2427V8.24268C57 5.48126 54.7614 3.24268 52 3.24268ZM55.25 16.2427C55.2445 18.0353 53.7926 19.4872 52 19.4927H44C42.2074 19.4872 40.7555 18.0353 40.75 16.2427V8.24268C40.7555 6.45003 42.2074 4.99817 44 4.99268H52C53.7926 4.99817 55.2445 6.45003 55.25 8.24268V16.2427ZM52.75 8.49268C53.3023 8.49268 53.75 8.04496 53.75 7.49268C53.75 6.9404 53.3023 6.49268 52.75 6.49268C52.1977 6.49268 51.75 6.9404 51.75 7.49268C51.75 8.04496 52.1977 8.49268 52.75 8.49268ZM48 7.74268C45.5147 7.74268 43.5 9.7574 43.5 12.2427C43.5 14.728 45.5147 16.7427 48 16.7427C50.4853 16.7427 52.5 14.728 52.5 12.2427C52.5027 11.0484 52.0294 9.90225 51.1849 9.05776C50.3404 8.21327 49.1943 7.74002 48 7.74268ZM45.25 12.2427C45.25 13.7615 46.4812 14.9927 48 14.9927C49.5188 14.9927 50.75 13.7615 50.75 12.2427C50.75 10.7239 49.5188 9.49268 48 9.49268C46.4812 9.49268 45.25 10.7239 45.25 12.2427Z" fill="white" />
+              <path d="M89.1761 4.24268H91.9362L85.9061 11.0201L93 20.2427H87.4456L83.0951 14.6493L78.1172 20.2427H75.3554L81.8052 12.9935L75 4.24268H80.6954L84.6279 9.3553L89.1761 4.24268ZM88.2073 18.6181H89.7368L79.8644 5.78196H78.2232L88.2073 18.6181Z" fill="white" />
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M112.5 3.24268C111.672 3.24268 111 3.91425 111 4.74268V19.7427C111 20.5711 111.672 21.2427 112.5 21.2427H127.5C128.328 21.2427 129 20.5711 129 19.7427V4.74268C129 3.91425 128.328 3.24268 127.5 3.24268H112.5ZM116.521 7.2454C116.526 8.20165 115.811 8.79087 114.961 8.78665C114.161 8.78243 113.464 8.1454 113.468 7.24681C113.472 6.40165 114.14 5.72243 115.008 5.74212C115.888 5.76181 116.526 6.40728 116.521 7.2454ZM120.28 10.0044H117.76H117.758V18.5643H120.422V18.3646C120.422 17.9847 120.421 17.6047 120.421 17.2246C120.42 16.2108 120.419 15.1959 120.425 14.1824C120.426 13.9363 120.437 13.6804 120.5 13.4455C120.738 12.568 121.527 12.0013 122.407 12.1406C122.973 12.2291 123.347 12.5568 123.504 13.0898C123.601 13.423 123.645 13.7816 123.649 14.129C123.661 15.1766 123.659 16.2242 123.657 17.2719C123.657 17.6417 123.656 18.0117 123.656 18.3815V18.5629H126.328V18.3576C126.328 17.9056 126.328 17.4537 126.327 17.0018C126.327 15.8723 126.326 14.7428 126.329 13.6129C126.331 13.1024 126.276 12.599 126.151 12.1054C125.964 11.3713 125.577 10.7638 124.948 10.3251C124.503 10.0129 124.013 9.81178 123.466 9.78928C123.404 9.78669 123.341 9.7833 123.278 9.77989C122.998 9.76477 122.714 9.74941 122.447 9.80334C121.682 9.95662 121.01 10.3068 120.502 10.9241C120.443 10.9949 120.385 11.0668 120.299 11.1741L120.28 11.1984V10.0044ZM113.682 18.5671H116.332V10.01H113.682V18.5671Z" fill="white" />
+              <path d="M165.593 7.20301C165.479 6.78041 165.256 6.39501 164.947 6.08518C164.638 5.77534 164.253 5.55187 163.831 5.43701C162.265 5.00701 156 5.00001 156 5.00001C156 5.00001 149.736 4.99301 148.169 5.40401C147.747 5.52415 147.363 5.75078 147.054 6.06214C146.744 6.3735 146.52 6.75913 146.403 7.18201C145.99 8.74801 145.986 11.996 145.986 11.996C145.986 11.996 145.982 15.26 146.392 16.81C146.622 17.667 147.297 18.344 148.155 18.575C149.737 19.005 155.985 19.012 155.985 19.012C155.985 19.012 162.25 19.019 163.816 18.609C164.238 18.4943 164.624 18.2714 164.934 17.9622C165.244 17.653 165.467 17.2682 165.583 16.846C165.997 15.281 166 12.034 166 12.034C166 12.034 166.02 8.76901 165.593 7.20301ZM153.996 15.005L154.001 9.00501L159.208 12.01L153.996 15.005Z" fill="white" />
+            </svg>
           </div>
         </div>
 
