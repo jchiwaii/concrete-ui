@@ -3,6 +3,13 @@ import { Badge, Button, Card, CardContent } from "@/components/ui";
 
 const templates = [
   {
+    title: "JobHub Landing",
+    description:
+      "A hiring marketplace landing page with bold Concrete UI styling, job search hero, partner marquee, and category grid.",
+    docsHref: "/docs/templates/jobhub-landing",
+    previewHref: "/templates/jobhub-landing/index.html",
+  },
+  {
     title: "Cherry Pop Portfolio (Multi-Page)",
     description:
       "A fresh girly neo-brutalist software engineer portfolio built from scratch with five pages, custom assets, and vanilla JS behaviors.",

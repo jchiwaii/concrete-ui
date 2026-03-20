@@ -47,6 +47,7 @@ const navigation = [
     title: "Templates",
     links: [
       { title: "Overview", href: "/docs/templates" },
+      { title: "JobHub Landing", href: "/docs/templates/jobhub-landing" },
       { title: "Cherry Pop Portfolio", href: "/docs/templates/cherry-pop-portfolio" },
     ],
   },
@@ -57,7 +58,7 @@ const mobileQuickLinks = [
   { title: "Install", href: "/docs/installation" },
   { title: "Button", href: "/docs/components/button" },
   { title: "Card", href: "/docs/components/card" },
-  { title: "Template", href: "/docs/templates/cherry-pop-portfolio" },
+  { title: "JobHub", href: "/docs/templates/jobhub-landing" },
 ];
 
 export function Sidebar() {
