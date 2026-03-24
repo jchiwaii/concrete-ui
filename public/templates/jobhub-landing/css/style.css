@@ -33,6 +33,7 @@ body {
   margin: 0;
   color: var(--ink);
   font-family: "Space Grotesk", sans-serif;
+  overflow-x: clip;
   background:
     radial-gradient(circle at 12% -8%, #ffeec7 0%, transparent 36%),
     radial-gradient(circle at 90% -12%, #dff3ff 0%, transparent 34%),
@@ -107,7 +108,29 @@ a {
 .nav-actions {
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.65rem;
+}
+
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 40px;
+  border: var(--line) solid var(--ink);
+  background: #fff;
+  box-shadow: var(--shadow);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 18px;
+  height: 2px;
+  background: var(--ink);
+  display: block;
 }
 
 .text-link {
@@ -294,7 +317,7 @@ a {
 
 .hero-visual {
   position: relative;
-  width: 525px;
+  width: min(525px, 100%);
   height: 532px;
   max-width: 100%;
 }
@@ -317,13 +340,14 @@ a {
   width: 384px;
   height: 520px;
   background: #bab6b6;
+  overflow: hidden;
 }
 
-.hero-visual-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgb(0 0 0 / 20%);
+.hero-photo-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .silhouette {
@@ -597,9 +621,6 @@ a {
 .category-icon {
   width: 48px;
   height: 48px;
-  border: var(--line) solid var(--ink);
-  border-radius: var(--radius-pill);
-  background: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -607,8 +628,8 @@ a {
 }
 
 .category-icon svg {
-  width: 24px;
-  height: 24px;
+  width: 48px;
+  height: 48px;
   display: block;
 }
 
@@ -717,30 +738,24 @@ a {
 
 .workflow-icon-svg {
   display: block;
-}
-
-.workflow-icon-account {
-  width: 56px;
-  height: auto;
-}
-
-.workflow-icon-account path {
-  fill: #000 !important;
-}
-
-.workflow-icon-find {
-  width: 28px;
-  height: auto;
-}
-
-.workflow-icon-apply {
   width: 40px;
   height: auto;
 }
 
+.workflow-icon-account {
+  width: 42px;
+}
+
+.workflow-icon-find {
+  width: 40px;
+}
+
+.workflow-icon-apply {
+  width: 42px;
+}
+
 .workflow-icon-start {
   width: 34px;
-  height: auto;
 }
 
 .tone-amber .workflow-icon {
@@ -760,10 +775,15 @@ a {
 }
 
 .workflow-arrow {
-  font-family: "Bebas Neue", "Space Grotesk", sans-serif;
-  font-size: 2.6rem;
-  line-height: 1;
-  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.workflow-arrow svg {
+  width: 36px;
+  height: 36px;
+  display: block;
 }
 
 .open-jobs {
@@ -1004,6 +1024,13 @@ a {
   overflow: hidden;
 }
 
+.register-photo-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
 .register-photo .silhouette {
   inset: auto 8% 0;
   height: 92%;
@@ -1165,7 +1192,7 @@ a {
   }
 
   .stats-grid-kpi {
-    grid-template-columns: repeat(2, minmax(0, 276px));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-content: center;
   }
 
@@ -1210,13 +1237,75 @@ a {
 }
 
 @media (max-width: 780px) {
+  .nav-shell {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0 0.75rem;
+  }
+
+  .brand {
+    width: auto;
+    text-align: left;
+    font-size: 1.8rem;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
   .nav-links {
-    display: none;
+    display: none !important;
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 100%;
+    order: 2;
+    justify-content: stretch;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow: visible;
+    gap: 0.4rem;
+    padding: 0.15rem 0 0.2rem;
+  }
+
+  .nav-links a {
+    width: 100%;
+    flex: 1 1 auto;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.88rem;
+    background: #fff;
+    border-color: var(--ink);
   }
 
   .nav-actions {
+    display: none;
+    width: 100%;
+    grid-column: 1 / -1;
+    order: 3;
+    flex-direction: column;
+    justify-content: stretch;
+    gap: 0.45rem;
+  }
+
+  .nav-actions .text-link,
+  .nav-actions .btn {
     width: 100%;
     justify-content: center;
+    border-color: var(--ink);
+    background: #fff;
+  }
+
+  .nav-actions .btn-primary {
+    background: var(--yellow-deep);
+  }
+
+  .site-header.nav-open .nav-links {
+    display: flex !important;
+  }
+
+  .site-header.nav-open .nav-actions {
+    display: flex;
   }
 
   .search-shell {
@@ -1358,5 +1447,227 @@ a {
     display: flex;
     flex-wrap: wrap;
     gap: 0.9rem 1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --content: min(1240px, calc(100% - 1rem));
+  }
+
+  .site-header {
+    position: static;
+  }
+
+  .hero {
+    padding-top: 56px;
+  }
+
+  .menu-toggle {
+    width: 42px;
+    height: 38px;
+  }
+
+  .hero-wordmark .line {
+    line-height: 0.92;
+  }
+
+  .hero-copy {
+    font-size: var(--text-sm);
+  }
+
+  .hero-visual {
+    height: 368px;
+  }
+
+  .hero-visual-card {
+    top: 128px;
+    height: 232px;
+  }
+
+  .hero-visual-photo {
+    left: 28px;
+    right: 28px;
+    height: 338px;
+  }
+
+  .badge {
+    width: 40px;
+    height: 40px;
+  }
+
+  .badge svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .badge-spotify {
+    left: 44px;
+  }
+
+  .badge-meta {
+    right: -2px;
+    top: 96px;
+  }
+
+  .badge-google {
+    top: 242px;
+    left: -2px;
+  }
+
+  .badge-microsoft {
+    top: 292px;
+    right: -2px;
+  }
+
+  .partner-strip {
+    height: 88px;
+  }
+
+  .partner-track span {
+    min-width: 132px;
+    min-height: 58px;
+    font-size: 1.2rem;
+  }
+
+  .stats,
+  .categories,
+  .workflow,
+  .open-jobs,
+  .register-cta,
+  .site-footer {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .stats-grid {
+    margin-top: 48px;
+  }
+
+  .kpi-item {
+    align-items: center;
+  }
+
+  .kpi-copy {
+    padding-top: 0;
+  }
+
+  .category-grid {
+    margin-top: 56px;
+  }
+
+  .category-card {
+    min-height: 160px;
+    gap: 18px;
+  }
+
+  .category-title-row h3 {
+    font-size: 1.35rem;
+  }
+
+  .workflow-row,
+  .jobs-grid {
+    margin-top: 56px;
+  }
+
+  .workflow-step h3 {
+    font-size: 1.45rem;
+  }
+
+  .job-card {
+    min-height: 0;
+  }
+
+  .job-title {
+    font-size: 1.35rem;
+  }
+
+  .register-visual {
+    min-height: 390px;
+  }
+
+  .register-bg {
+    height: 255px;
+  }
+
+  .register-copy {
+    gap: 1.2rem;
+  }
+
+  .footer-main {
+    gap: 1.5rem;
+  }
+
+  .footer-bottom {
+    margin-top: 2.5rem;
+    padding-top: 1.3rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-visual {
+    height: 332px;
+  }
+
+  .hero-visual-card {
+    top: 118px;
+    height: 208px;
+  }
+
+  .hero-visual-photo {
+    left: 20px;
+    right: 20px;
+    height: 304px;
+  }
+
+  .badge-spotify {
+    left: 28px;
+  }
+
+  .badge-meta {
+    top: 86px;
+    right: 0;
+  }
+
+  .badge-google {
+    top: 214px;
+    left: 0;
+  }
+
+  .badge-microsoft {
+    top: 266px;
+    right: 0;
+  }
+
+  .section-wordmark {
+    font-size: clamp(2.2rem, 12vw, 3.2rem);
+  }
+
+  .section-headline-best,
+  .section-headline-categories {
+    font-size: clamp(2rem, 11vw, 2.9rem);
+  }
+
+  .search-part {
+    font-size: 0.93rem;
+  }
+
+  .kpi-icon {
+    width: 78px;
+    height: 78px;
+  }
+
+  .company-meta {
+    gap: 0.5rem;
+  }
+
+  .company-logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .company-logo svg {
+    width: 24px;
+    height: 24px;
   }
 }
