@@ -25,6 +25,8 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--paper);
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -32,10 +34,7 @@ body {
   color: var(--ink);
   font-family: "Space Grotesk", sans-serif;
   overflow-x: clip;
-  background:
-    radial-gradient(circle at 12% -8%, #ffeec7 0%, transparent 36%),
-    radial-gradient(circle at 90% -12%, #dff3ff 0%, transparent 34%),
-    var(--paper);
+  background: var(--paper);
 }
 
 h1,
@@ -655,9 +654,19 @@ a {
 }
 
 .link-arrow {
-  font-size: var(--text-base);
-  line-height: 1;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   color: #000;
+}
+
+.link-arrow svg {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .categories-cta {
@@ -894,11 +903,17 @@ a {
   border-radius: var(--radius-pill);
   background: #fff;
   box-shadow: var(--shadow);
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--ink);
   cursor: pointer;
+}
+
+.bookmark-btn svg {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 .job-title {
