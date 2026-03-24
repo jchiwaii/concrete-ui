@@ -1,6 +1,10 @@
 import { Badge, Button, Card, CardContent } from "@/components/ui";
 
 const PAGE = "/templates/jobhub-landing/index.html";
+const PREVIEW_IMAGES = [
+  { src: "/jobhub/hero.jpg", alt: "JobHub hero section", label: "Hero" },
+  { src: "/jobhub/cta.jpg", alt: "JobHub call to action section", label: "CTA" },
+];
 
 export default function JobHubLandingTemplatePage() {
   return (
@@ -30,14 +34,38 @@ export default function JobHubLandingTemplatePage() {
         </CardContent>
       </Card>
 
-      <div className="overflow-hidden rounded-lg border-2 border-black bg-white shadow-[6px_6px_0_0_#000]">
-        <iframe
-          src={PAGE}
-          title="JobHub landing template preview"
-          loading="lazy"
-          className="h-[980px] w-full border-0 bg-white"
-        />
-      </div>
+      <Card>
+        <CardContent className="space-y-4 p-6">
+          <h2 className="text-2xl font-extrabold uppercase tracking-tight">
+            Static Preview
+          </h2>
+          <p className="text-sm text-gray-700">
+            Preview is image-only. Click any image to open the full live page in
+            a new tab.
+          </p>
+          <div className="grid gap-4 md:grid-cols-2">
+            {PREVIEW_IMAGES.map((image) => (
+              <a
+                key={image.src}
+                href={PAGE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group overflow-hidden rounded-lg border-2 border-black bg-white shadow-[4px_4px_0_0_#000] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#000]"
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                  className="h-56 w-full object-cover object-top"
+                />
+                <div className="border-t-2 border-black bg-gray-100 px-3 py-2 text-xs font-bold uppercase tracking-wide">
+                  {image.label}
+                </div>
+              </a>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

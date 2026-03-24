@@ -48,7 +48,6 @@ const navigation = [
     links: [
       { title: "Overview", href: "/docs/templates" },
       { title: "JobHub Landing", href: "/docs/templates/jobhub-landing" },
-      { title: "Cherry Pop Portfolio", href: "/docs/templates/cherry-pop-portfolio" },
     ],
   },
 ];

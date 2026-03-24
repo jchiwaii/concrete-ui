@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Bebas+Neue&display=swap");
-
 :root {
   --ink: #001429;
   --paper: #fff9ef;
@@ -1670,4 +1668,36 @@ a {
     width: 24px;
     height: 24px;
   }
+}
+
+/* ── Focus styles ───────────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--yellow-deep);
+  outline-offset: 2px;
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .partner-track {
+    animation: none;
+  }
+}
+
+/* ── Skip link ──────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--yellow-deep);
+  border: var(--line) solid var(--ink);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  transform: translateY(-100%);
+  transition: transform 120ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }

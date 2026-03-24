@@ -9,13 +9,6 @@ const templates = [
     docsHref: "/docs/templates/jobhub-landing",
     previewHref: "/templates/jobhub-landing/index.html",
   },
-  {
-    title: "Cherry Pop Portfolio (Multi-Page)",
-    description:
-      "A fresh girly neo-brutalist software engineer portfolio built from scratch with five pages, custom assets, and vanilla JS behaviors.",
-    docsHref: "/docs/templates/cherry-pop-portfolio",
-    previewHref: "/templates/cherry-pop-portfolio/index.html",
-  },
 ];
 
 export default function TemplatesPage() {
