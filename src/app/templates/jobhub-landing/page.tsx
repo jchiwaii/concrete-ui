@@ -267,7 +267,7 @@ export default function JobHubLandingReact() {
 
       <main id="main-content">
         {/* ── HERO ──────────────────────────────────────────────────────── */}
-        <section className="pt-14 md:pt-20" id="find-jobs">
+        <section className="pt-14 md:pt-20 overflow-x-clip" id="find-jobs">
           <div
             className="w-full max-w-[min(1240px,calc(100%-2rem))] mx-auto grid gap-4 lg:gap-4 items-end"
             style={{ gridTemplateColumns: "minmax(0,1fr)", minHeight: "auto" }}
@@ -297,7 +297,7 @@ export default function JobHubLandingReact() {
                 .hero-visual { height: 420px; }
                 .hero-visual-card { left: 8px; right: 8px; width: auto; top: 150px; height: 260px; }
                 .hero-visual-photo { left: 42px; right: 42px; width: auto; top: 6px; height: 400px; }
-                .badge-spotify-pos { top: -8px; left: 64px; }
+                .badge-spotify-pos { top: 0; left: 64px; }
                 .badge-meta-pos { top: 118px; right: -6px; left: auto; }
                 .badge-google-pos { top: 280px; left: -8px; }
                 .badge-ms-pos { top: 330px; right: -8px; left: auto; }
@@ -316,6 +316,22 @@ export default function JobHubLandingReact() {
               }
               @media (min-width: 1024px) {
                 .workflow-grid { grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr); }
+              }
+              .footer-main {
+                display: grid;
+                grid-template-columns: 2.3fr repeat(3, minmax(0,1fr));
+                gap: 3rem;
+              }
+              @media (max-width: 1020px) {
+                .footer-main { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 2.4rem; }
+                .footer-brand-col { grid-column: 1 / -1; }
+              }
+              @media (max-width: 640px) {
+                .footer-main { grid-template-columns: 1fr; gap: 2rem; }
+                .footer-bottom-bar { flex-direction: column !important; align-items: flex-start !important; }
+              }
+              @media (max-width: 560px) {
+                .footer-bottom-bar { margin-top: 2.5rem; padding-top: 1.3rem; }
               }
             `}</style>
 
@@ -765,20 +781,18 @@ export default function JobHubLandingReact() {
       </main>
 
       {/* ── FOOTER ────────────────────────────────────────────────────────── */}
-      <footer className="mt-10 py-20 pb-8" style={{ background: "#000", color: "#fff" }} id="footer-login">
-        <div
-          className="w-full max-w-[min(1240px,calc(100%-2rem))] mx-auto grid gap-12"
-          style={{ gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))" }}
-        >
-          {/* brand col */}
-          <div style={{ gridColumn: "1 / -1" }} className="md:col-auto">
-            <a href="#" className="font-heading text-[2rem] tracking-[0.04em] text-white">JOBHUB</a>
+      <footer className="mt-10 pb-8" style={{ paddingTop: "80px", background: "#000", color: "#fff" }} id="footer-login">
+        {/* main grid: 2.3fr + 3×1fr on desktop, 2-col at tablet, 1-col at mobile */}
+        <div className="footer-main w-full max-w-[min(1240px,calc(100%-2rem))] mx-auto">
+
+          {/* brand column */}
+          <div className="footer-brand-col">
+            <a href="#" className="font-heading text-[2rem] tracking-[0.04em] text-white block">JOBHUB</a>
             <p className="mt-6 text-base leading-[1.5]" style={{ maxWidth: "320px", color: "#d4d4d8" }}>
               JobHub helps job seekers discover better opportunities and helps teams hire faster across markets.
             </p>
-            {/* social icons */}
             <div className="mt-6">
-              <svg viewBox="0 0 168 24" className="w-[168px] max-w-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Social media icons">
+              <svg viewBox="0 0 168 24" className="block" style={{ width: "168px", height: "24px", maxWidth: "100%" }} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Social media icons">
                 <path d="M22 12.3038C22 6.74719 17.5229 2.24268 12 2.24268C6.47715 2.24268 2 6.74719 2 12.3038C2 17.3255 5.65684 21.4879 10.4375 22.2427V15.2121H7.89844V12.3038H10.4375V10.0872C10.4375 7.56564 11.9305 6.1728 14.2146 6.1728C15.3088 6.1728 16.4531 6.36931 16.4531 6.36931V8.84529H15.1922C13.95 8.84529 13.5625 9.6209 13.5625 10.4166V12.3038H16.3359L15.8926 15.2121H13.5625V22.2427C18.3432 21.4879 22 17.3257 22 12.3038Z" fill="white" />
                 <path fillRule="evenodd" clipRule="evenodd" d="M52 3.24268H44C41.2386 3.24268 39 5.48126 39 8.24268V16.2427C39 19.0041 41.2386 21.2427 44 21.2427H52C54.7614 21.2427 57 19.0041 57 16.2427V8.24268C57 5.48126 54.7614 3.24268 52 3.24268ZM55.25 16.2427C55.2445 18.0353 53.7926 19.4872 52 19.4927H44C42.2074 19.4872 40.7555 18.0353 40.75 16.2427V8.24268C40.7555 6.45003 42.2074 4.99817 44 4.99268H52C53.7926 4.99817 55.2445 6.45003 55.25 8.24268V16.2427ZM52.75 8.49268C53.3023 8.49268 53.75 8.04496 53.75 7.49268C53.75 6.9404 53.3023 6.49268 52.75 6.49268C52.1977 6.49268 51.75 6.9404 51.75 7.49268C51.75 8.04496 52.1977 8.49268 52.75 8.49268ZM48 7.74268C45.5147 7.74268 43.5 9.7574 43.5 12.2427C43.5 14.728 45.5147 16.7427 48 16.7427C50.4853 16.7427 52.5 14.728 52.5 12.2427C52.5027 11.0484 52.0294 9.90225 51.1849 9.05776C50.3404 8.21327 49.1943 7.74002 48 7.74268ZM45.25 12.2427C45.25 13.7615 46.4812 14.9927 48 14.9927C49.5188 14.9927 50.75 13.7615 50.75 12.2427C50.75 10.7239 49.5188 9.49268 48 9.49268C46.4812 9.49268 45.25 10.7239 45.25 12.2427Z" fill="white" />
                 <path d="M89.1761 4.24268H91.9362L85.9061 11.0201L93 20.2427H87.4456L83.0951 14.6493L78.1172 20.2427H75.3554L81.8052 12.9935L75 4.24268H80.6954L84.6279 9.3553L89.1761 4.24268ZM88.2073 18.6181H89.7368L79.8644 5.78196H78.2232L88.2073 18.6181Z" fill="white" />
@@ -788,34 +802,28 @@ export default function JobHubLandingReact() {
             </div>
           </div>
 
-          <div>
-            <h3 className="text-[1.05rem] font-bold mb-4">Product</h3>
-            {["Find Jobs","Job Alerts","Career Advice"].map((l) => (
-              <a key={l} href="#" className="block text-[0.95rem] mb-3 hover:text-white" style={{ color: "#d4d4d8" }}>{l}</a>
-            ))}
-          </div>
-
-          <div>
-            <h3 className="text-[1.05rem] font-bold mb-4">Company</h3>
-            {["About","Press","Partners"].map((l) => (
-              <a key={l} href="#" className="block text-[0.95rem] mb-3 hover:text-white" style={{ color: "#d4d4d8" }}>{l}</a>
-            ))}
-          </div>
-
-          <div>
-            <h3 className="text-[1.05rem] font-bold mb-4">Resources</h3>
-            {["Support","Contact","Terms","Privacy"].map((l) => (
-              <a key={l} href="#" className="block text-[0.95rem] mb-3 hover:text-white" style={{ color: "#d4d4d8" }}>{l}</a>
-            ))}
-          </div>
+          {/* link columns */}
+          {[
+            { heading: "Product",   links: ["Find Jobs", "Job Alerts", "Career Advice"] },
+            { heading: "Company",   links: ["About", "Press", "Partners"] },
+            { heading: "Resources", links: ["Support", "Contact", "Terms", "Privacy"] },
+          ].map(({ heading, links }) => (
+            <div key={heading}>
+              <h3 className="text-[1.05rem] font-bold mb-4">{heading}</h3>
+              {links.map((l) => (
+                <a key={l} href="#" className="block text-[0.95rem] mb-3 hover:text-white" style={{ color: "#d4d4d8" }}>{l}</a>
+              ))}
+            </div>
+          ))}
         </div>
 
+        {/* bottom bar */}
         <div
-          className="w-full max-w-[min(1240px,calc(100%-2rem))] mx-auto mt-16 pt-8 flex flex-wrap items-center justify-between gap-4"
+          className="footer-bottom-bar w-full max-w-[min(1240px,calc(100%-2rem))] mx-auto mt-16 pt-8 flex flex-wrap items-center justify-between gap-4"
           style={{ borderTop: "1px solid rgba(255,255,255,0.4)" }}
         >
           <p className="text-[0.88rem]" style={{ color: "#e4e4e7" }}>2026 JobHub. All rights reserved.</p>
-          <div className="flex flex-wrap items-center gap-6">
+          <div className="inline-flex flex-wrap items-center gap-6">
             <a href="#" className="text-[0.88rem] hover:text-white" style={{ color: "#e4e4e7" }}>Privacy Policy</a>
             <a href="#" className="text-[0.88rem] hover:text-white" style={{ color: "#e4e4e7" }}>Terms &amp; Conditions</a>
           </div>
