@@ -1,6 +1,7 @@
 import { Badge, Button, Card, CardContent } from "@/components/ui";
 
 const PAGE = "/templates/jobhub-landing/index.html";
+const REACT_PAGE = "/templates/jobhub-landing";
 const PREVIEW_IMAGES = [
   { src: "/jobhub/hero.jpg", alt: "JobHub hero section", label: "Hero" },
   { src: "/jobhub/cta.jpg", alt: "JobHub call to action section", label: "CTA" },
@@ -28,9 +29,14 @@ export default function JobHubLandingTemplatePage() {
           <h2 className="text-2xl font-extrabold uppercase tracking-tight">
             Page
           </h2>
-          <a href={PAGE} target="_blank" rel="noopener noreferrer">
-            <Button variant="outline">Open Full Page</Button>
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <a href={REACT_PAGE} target="_blank" rel="noopener noreferrer">
+              <Button variant="primary">Open React Version</Button>
+            </a>
+            <a href={PAGE} target="_blank" rel="noopener noreferrer">
+              <Button variant="outline">Open HTML Version</Button>
+            </a>
+          </div>
         </CardContent>
       </Card>
 
