@@ -44,6 +44,11 @@ export default function DocsPage() {
               Browse Components
             </Button>
           </Link>
+          <Link href="/docs/templates">
+            <Button variant="outline" size="lg">
+              Browse Templates
+            </Button>
+          </Link>
         </div>
       </section>
 

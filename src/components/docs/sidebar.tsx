@@ -43,14 +43,21 @@ const navigation = [
       { title: "Tooltip", href: "/docs/components/tooltip" },
     ],
   },
+  {
+    title: "Templates",
+    links: [
+      { title: "Overview", href: "/docs/templates" },
+      { title: "JobHub Landing", href: "/docs/templates/jobhub-landing" },
+    ],
+  },
 ];
 
 const mobileQuickLinks = [
   { title: "Intro", href: "/docs" },
   { title: "Install", href: "/docs/installation" },
   { title: "Button", href: "/docs/components/button" },
-  { title: "Slider", href: "/docs/components/slider" },
   { title: "Card", href: "/docs/components/card" },
+  { title: "JobHub", href: "/docs/templates/jobhub-landing" },
 ];
 
 export function Sidebar() {
@@ -146,7 +153,7 @@ export function Sidebar() {
               rel="noopener noreferrer"
               className="inline-flex rounded-md border-2 border-black bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide shadow-[2px_2px_0_0_#000] transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
             >
-              View on GitHub
+              Star on GitHub
             </a>
           </div>
         </div>
