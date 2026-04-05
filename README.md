@@ -8,4 +8,4 @@ Bold, unapologetic UI components with thick borders, hard shadows, and raw aesth
 
 [GitHub Repository](https://github.com/jchiwaii/concrete-ui)
 
-Still building...
+Still building...in progress
