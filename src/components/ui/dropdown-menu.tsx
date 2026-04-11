@@ -9,6 +9,10 @@ import {
   useRef,
   useEffect,
   ReactNode,
+  ReactElement,
+  cloneElement,
+  isValidElement,
+  MouseEvent,
   ButtonHTMLAttributes,
 } from "react";
 import { createPortal } from "react-dom";
@@ -60,16 +64,24 @@ const DropdownMenuTrigger = forwardRef<
     setIsOpen(!isOpen);
   };
 
-  if (asChild && typeof children === "object") {
+  if (asChild && isValidElement(children)) {
+    const child = children as ReactElement<{
+      onClick?: (event: MouseEvent<HTMLElement>) => void;
+      className?: string;
+    }>;
+
     return (
-      <button
-        ref={ref}
-        onClick={handleClick}
-        className={className}
-        {...props}
-      >
-        {children}
-      </button>
+      cloneElement(child, {
+        ref,
+        onClick: (event: MouseEvent<HTMLElement>) => {
+          child.props.onClick?.(event);
+          handleClick();
+        },
+        className: `${child.props.className ?? ""} ${className}`,
+        "aria-haspopup": "menu",
+        "aria-expanded": isOpen,
+        ...props,
+      } as unknown as Partial<typeof child.props>)
     );
   }
 

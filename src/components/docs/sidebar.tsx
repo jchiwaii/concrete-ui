@@ -16,30 +16,58 @@ const navigation = [
     links: [
       { title: "Accordion", href: "/docs/components/accordion" },
       { title: "Alert", href: "/docs/components/alert" },
+      { title: "Alert Dialog", href: "/docs/components/alert-dialog" },
+      { title: "Aspect Ratio", href: "/docs/components/aspect-ratio" },
       { title: "Avatar", href: "/docs/components/avatar" },
       { title: "Badge", href: "/docs/components/badge" },
       { title: "Breadcrumb", href: "/docs/components/breadcrumb" },
       { title: "Button", href: "/docs/components/button" },
+      { title: "Button Group", href: "/docs/components/button-group" },
+      { title: "Calendar", href: "/docs/components/calendar" },
       { title: "Card", href: "/docs/components/card" },
+      { title: "Carousel", href: "/docs/components/carousel" },
       { title: "Checkbox", href: "/docs/components/checkbox" },
+      { title: "Collapsible", href: "/docs/components/collapsible" },
+      { title: "Combobox", href: "/docs/components/combobox" },
       { title: "Command", href: "/docs/components/command" },
+      { title: "Context Menu", href: "/docs/components/context-menu" },
+      { title: "Date Picker", href: "/docs/components/date-picker" },
       { title: "Drawer", href: "/docs/components/drawer" },
       { title: "Dropdown Menu", href: "/docs/components/dropdown-menu" },
+      { title: "Empty", href: "/docs/components/empty" },
+      { title: "Field", href: "/docs/components/field" },
+      { title: "File Upload", href: "/docs/components/file-upload" },
+      { title: "Hover Card", href: "/docs/components/hover-card" },
       { title: "Input", href: "/docs/components/input" },
+      { title: "Input Group", href: "/docs/components/input-group" },
+      { title: "Item", href: "/docs/components/item" },
+      { title: "Kbd", href: "/docs/components/kbd" },
+      { title: "Label", href: "/docs/components/label" },
+      { title: "Marquee", href: "/docs/components/marquee" },
+      { title: "Menubar", href: "/docs/components/menubar" },
       { title: "Modal", href: "/docs/components/modal" },
+      { title: "Multi Select", href: "/docs/components/multi-select" },
+      { title: "Navigation Menu", href: "/docs/components/navigation-menu" },
       { title: "Pagination", href: "/docs/components/pagination" },
       { title: "Popover", href: "/docs/components/popover" },
       { title: "Progress", href: "/docs/components/progress" },
       { title: "Radio Group", href: "/docs/components/radio-group" },
+      { title: "Resizable", href: "/docs/components/resizable" },
+      { title: "Scroll Area", href: "/docs/components/scroll-area" },
       { title: "Select", href: "/docs/components/select" },
       { title: "Separator", href: "/docs/components/separator" },
       { title: "Skeleton", href: "/docs/components/skeleton" },
       { title: "Slider", href: "/docs/components/slider" },
+      { title: "Spinner", href: "/docs/components/spinner" },
+      { title: "Stepper", href: "/docs/components/stepper" },
+      { title: "Switch", href: "/docs/components/switch" },
       { title: "Table", href: "/docs/components/table" },
       { title: "Tabs", href: "/docs/components/tabs" },
       { title: "Textarea", href: "/docs/components/textarea" },
+      { title: "Timeline", href: "/docs/components/timeline" },
       { title: "Toast", href: "/docs/components/toast" },
       { title: "Toggle", href: "/docs/components/toggle" },
+      { title: "Toggle Group", href: "/docs/components/toggle-group" },
       { title: "Tooltip", href: "/docs/components/tooltip" },
     ],
   },
@@ -56,7 +84,8 @@ const mobileQuickLinks = [
   { title: "Intro", href: "/docs" },
   { title: "Install", href: "/docs/installation" },
   { title: "Button", href: "/docs/components/button" },
-  { title: "Card", href: "/docs/components/card" },
+  { title: "Field", href: "/docs/components/field" },
+  { title: "Combobox", href: "/docs/components/combobox" },
   { title: "JobHub", href: "/docs/templates/jobhub-landing" },
 ];
 
@@ -79,7 +108,7 @@ export function Sidebar() {
             Docs
           </span>
         </div>
-        <div className="overflow-x-auto border-t-2 border-black px-3 py-3">
+        <div className="overflow-x-auto border-t-2 border-black px-3 py-3 brutal-scroll-area">
           <div className="flex min-w-max gap-2">
             {mobileQuickLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -117,7 +146,7 @@ export function Sidebar() {
             </p>
           </div>
 
-          <nav className="h-[calc(100%-160px)] overflow-y-auto p-4">
+          <nav className="h-[calc(100%-160px)] overflow-y-auto p-4 brutal-scroll-area">
             {navigation.map((section) => (
               <div key={section.title} className="mb-6">
                 <h3 className="mb-2 px-3 text-[11px] font-bold uppercase tracking-widest text-gray-400">

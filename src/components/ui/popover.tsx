@@ -9,6 +9,10 @@ import {
   useRef,
   useEffect,
   ReactNode,
+  ReactElement,
+  cloneElement,
+  isValidElement,
+  MouseEvent,
 } from "react";
 import { createPortal } from "react-dom";
 import { useClickOutside } from "@/hooks/useClickOutside";
@@ -57,6 +61,29 @@ const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
     const handleClick = () => {
       setIsOpen(!isOpen);
     };
+
+    if (asChild && isValidElement(children)) {
+      const child = children as ReactElement<{
+        onClick?: (event: MouseEvent<HTMLElement>) => void;
+        className?: string;
+      }>;
+
+      return cloneElement(child, {
+        ref: (node: HTMLElement | null) => {
+          if (typeof ref === "function") ref(node as HTMLButtonElement | null);
+          else if (ref) ref.current = node as HTMLButtonElement | null;
+          triggerRef.current = node;
+        },
+        onClick: (event: MouseEvent<HTMLElement>) => {
+          child.props.onClick?.(event);
+          handleClick();
+        },
+        className: `${child.props.className ?? ""} ${className}`,
+        "aria-haspopup": "dialog",
+        "aria-expanded": isOpen,
+        ...props,
+      } as unknown as Partial<typeof child.props>);
+    }
 
     return (
       <button

@@ -1,0 +1,160 @@
+"use client";
+
+import {
+  HTMLAttributes,
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { createPortal } from "react-dom";
+import { cn } from "@/lib/utils";
+import { calculatePosition } from "@/lib/positioning";
+import { useClickOutside } from "@/hooks/useClickOutside";
+
+export interface MultiSelectOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
+
+export interface MultiSelectProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
+  value?: string[];
+  onValueChange?: (value: string[]) => void;
+  options: MultiSelectOption[];
+  placeholder?: string;
+  searchPlaceholder?: string;
+  disabled?: boolean;
+}
+
+const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
+  (
+    {
+      className = "",
+      value = [],
+      onValueChange,
+      options,
+      placeholder = "Select options...",
+      searchPlaceholder = "Search options...",
+      disabled = false,
+      ...props
+    },
+    ref
+  ) => {
+    const [open, setOpen] = useState(false);
+    const [search, setSearch] = useState("");
+    const [position, setPosition] = useState({ top: 0, left: 0 });
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+
+    const selectedOptions = options.filter((option) => value.includes(option.value));
+    const filtered = useMemo(
+      () => options.filter((option) => option.label.toLowerCase().includes(search.toLowerCase())),
+      [options, search]
+    );
+
+    useClickOutside(contentRef, () => open && setOpen(false));
+
+    useEffect(() => {
+      if (!open || !triggerRef.current || !contentRef.current) return;
+      setPosition(
+        calculatePosition(
+          triggerRef.current.getBoundingClientRect(),
+          contentRef.current.getBoundingClientRect(),
+          "bottom"
+        )
+      );
+    }, [open]);
+
+    const toggle = (option: MultiSelectOption) => {
+      if (option.disabled) return;
+      const next = value.includes(option.value)
+        ? value.filter((item) => item !== option.value)
+        : [...value, option.value];
+      onValueChange?.(next);
+    };
+
+    return (
+      <div ref={ref} className={cn("relative w-full", className)} {...props}>
+        <button
+          ref={triggerRef}
+          type="button"
+          disabled={disabled}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          onClick={() => !disabled && setOpen((next) => !next)}
+          className={cn(
+            "flex min-h-11 w-full items-center justify-between gap-3 rounded-md border-2 border-black bg-white px-3 py-2 text-left shadow-[4px_4px_0_0_#000] transition-all duration-100",
+            !disabled && "hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#000]",
+            disabled && "cursor-not-allowed opacity-50"
+          )}
+        >
+          <span className="flex flex-1 flex-wrap gap-2">
+            {selectedOptions.length === 0 ? (
+              <span className="px-1 text-sm font-semibold text-gray-400">{placeholder}</span>
+            ) : (
+              selectedOptions.map((option) => (
+                <span
+                  key={option.value}
+                  className="inline-flex items-center gap-1 rounded-md border-2 border-black bg-[#ffde00] px-2 py-1 text-xs font-bold uppercase tracking-wide"
+                >
+                  {option.label}
+                </span>
+              ))
+            )}
+          </span>
+          <span className={cn("text-lg leading-none transition-transform", open && "rotate-180")}>⌄</span>
+        </button>
+
+        {open && typeof window !== "undefined" &&
+          createPortal(
+            <div
+              ref={contentRef}
+              role="listbox"
+              aria-multiselectable="true"
+              className="fixed z-50 max-h-80 min-w-64 overflow-hidden rounded-md border-2 border-black bg-white shadow-[6px_6px_0_0_#000] animate-brutal-slide-down"
+              style={{ top: position.top, left: position.left, width: triggerRef.current?.offsetWidth }}
+            >
+              <div className="border-b-2 border-black p-2">
+                <input
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                  placeholder={searchPlaceholder}
+                  className="w-full rounded-md border-2 border-black px-3 py-2 text-sm font-semibold outline-none placeholder:text-gray-400"
+                />
+              </div>
+              <div className="max-h-64 overflow-y-auto brutal-scroll-area">
+                {filtered.map((option) => {
+                  const selected = value.includes(option.value);
+                  return (
+                    <div
+                      key={option.value}
+                      role="option"
+                      aria-selected={selected}
+                      onClick={() => toggle(option)}
+                      className={cn(
+                        "flex cursor-pointer items-center gap-3 border-b-2 border-black px-4 py-3 last:border-b-0 hover:bg-[#fff4ab]",
+                        selected && "bg-[#ffde00]",
+                        option.disabled && "cursor-not-allowed bg-gray-100 opacity-50"
+                      )}
+                    >
+                      <span className="flex h-5 w-5 items-center justify-center rounded-md border-2 border-black bg-white text-xs font-bold shadow-[2px_2px_0_0_#000]">
+                        {selected ? "✓" : ""}
+                      </span>
+                      <span className="text-sm font-bold uppercase tracking-wide">{option.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>,
+            document.body
+          )}
+      </div>
+    );
+  }
+);
+
+MultiSelect.displayName = "MultiSelect";
+
+export { MultiSelect };

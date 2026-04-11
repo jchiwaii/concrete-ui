@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Badge, Button, Card, CardContent, Input } from "@/components/ui";
 
 const signalStrip = [
-  "27+ Components",
+  "55 Components",
   "TypeScript First",
   "React 19 + Next 16",
   "Copy + Paste Workflow",

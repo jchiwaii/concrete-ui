@@ -6,8 +6,10 @@ import {
   ReactNode,
   useEffect,
   useCallback,
+  useRef,
 } from "react";
 import { createPortal } from "react-dom";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 export type DrawerDirection = "left" | "right" | "top" | "bottom";
 
@@ -24,6 +26,8 @@ const Drawer = ({
   direction = "right",
   children,
 }: DrawerProps) => {
+  const drawerRef = useRef<HTMLDivElement>(null);
+
   // Handle escape key
   const handleEscape = useCallback(
     (e: KeyboardEvent) => {
@@ -52,6 +56,8 @@ const Drawer = ({
     };
   }, [open]);
 
+  useFocusTrap(drawerRef, open, onClose);
+
   if (!open || typeof window === "undefined") return null;
 
   const directionStyles = {
@@ -74,6 +80,7 @@ const Drawer = ({
 
       {/* Drawer */}
       <div
+        ref={drawerRef}
         className={`
           fixed
           z-50
