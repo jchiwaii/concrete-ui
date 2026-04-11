@@ -7,6 +7,8 @@ import {
   createContext,
   forwardRef,
   useContext,
+  useEffect,
+  useRef,
   useState,
 } from "react";
 import { cn } from "@/lib/utils";
@@ -21,10 +23,27 @@ const MenubarContext = createContext<MenubarContextValue | undefined>(undefined)
 const Menubar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", ...props }, ref) => {
     const [active, setActive] = useState<string | null>(null);
+    const localRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      const handlePointerDown = (event: PointerEvent) => {
+        if (!localRef.current?.contains(event.target as Node)) {
+          setActive(null);
+        }
+      };
+
+      document.addEventListener("pointerdown", handlePointerDown);
+      return () => document.removeEventListener("pointerdown", handlePointerDown);
+    }, []);
+
     return (
       <MenubarContext.Provider value={{ active, setActive }}>
         <div
-          ref={ref}
+          ref={(node) => {
+            localRef.current = node;
+            if (typeof ref === "function") ref(node);
+            else if (ref) ref.current = node;
+          }}
           role="menubar"
           className={cn("inline-flex rounded-lg border-2 border-black bg-white shadow-[4px_4px_0_0_#000]", className)}
           {...props}

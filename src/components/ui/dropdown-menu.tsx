@@ -22,6 +22,7 @@ import { calculatePosition } from "@/lib/positioning";
 interface DropdownMenuContextValue {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
 }
 
 const DropdownMenuContext = createContext<
@@ -34,9 +35,10 @@ export interface DropdownMenuProps {
 
 const DropdownMenu = ({ children }: DropdownMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <DropdownMenuContext.Provider value={{ isOpen, setIsOpen }}>
+    <DropdownMenuContext.Provider value={{ isOpen, setIsOpen, triggerRef }}>
       <div className="relative inline-block">{children}</div>
     </DropdownMenuContext.Provider>
   );
@@ -58,7 +60,7 @@ const DropdownMenuTrigger = forwardRef<
     throw new Error("DropdownMenuTrigger must be used within DropdownMenu");
   }
 
-  const { isOpen, setIsOpen } = context;
+  const { isOpen, setIsOpen, triggerRef } = context;
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -72,7 +74,11 @@ const DropdownMenuTrigger = forwardRef<
 
     return (
       cloneElement(child, {
-        ref,
+        ref: (node: HTMLButtonElement | null) => {
+          if (typeof ref === "function") ref(node);
+          else if (ref) ref.current = node;
+          triggerRef.current = node;
+        },
         onClick: (event: MouseEvent<HTMLElement>) => {
           child.props.onClick?.(event);
           handleClick();
@@ -87,7 +93,11 @@ const DropdownMenuTrigger = forwardRef<
 
   return (
     <button
-      ref={ref}
+      ref={(node) => {
+        if (typeof ref === "function") ref(node);
+        else if (ref) ref.current = node;
+        triggerRef.current = node;
+      }}
       onClick={handleClick}
       className={`
         px-6 py-3
@@ -122,7 +132,7 @@ const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>
       throw new Error("DropdownMenuContent must be used within DropdownMenu");
     }
 
-    const { isOpen, setIsOpen } = context;
+    const { isOpen, setIsOpen, triggerRef } = context;
     const contentRef = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ top: 0, left: 0 });
 
@@ -132,18 +142,13 @@ const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>
 
     // Calculate position
     useEffect(() => {
-      if (isOpen && contentRef.current) {
-        const trigger = contentRef.current.parentElement?.querySelector(
-          "button"
-        );
-        if (trigger) {
-          const triggerRect = trigger.getBoundingClientRect();
-          const contentRect = contentRef.current.getBoundingClientRect();
-          const pos = calculatePosition(triggerRect, contentRect, "bottom");
-          setPosition(pos);
-        }
+      if (isOpen && triggerRef.current && contentRef.current) {
+        const triggerRect = triggerRef.current.getBoundingClientRect();
+        const contentRect = contentRef.current.getBoundingClientRect();
+        const pos = calculatePosition(triggerRect, contentRect, "bottom");
+        setPosition(pos);
       }
-    }, [isOpen]);
+    }, [isOpen, triggerRef]);
 
     // Handle escape key
     useEffect(() => {

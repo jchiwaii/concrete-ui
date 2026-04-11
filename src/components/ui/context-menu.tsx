@@ -12,6 +12,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
+import { clamp } from "@/lib/utils";
 import { useClickOutside } from "@/hooks/useClickOutside";
 
 interface ContextMenuContextValue {
@@ -73,7 +74,17 @@ const ContextMenuContent = forwardRef<HTMLDivElement, ContextMenuContentProps>(
     if (!context) throw new Error("ContextMenuContent must be used within ContextMenu");
 
     const contentRef = useRef<HTMLDivElement>(null);
+    const [safePosition, setSafePosition] = useState(context.position);
     useClickOutside(contentRef, () => context.open && context.setOpen(false));
+
+    useEffect(() => {
+      if (!context.open || !contentRef.current) return;
+      const rect = contentRef.current.getBoundingClientRect();
+      setSafePosition({
+        top: clamp(context.position.top, 16, window.innerHeight - rect.height - 16),
+        left: clamp(context.position.left, 16, window.innerWidth - rect.width - 16),
+      });
+    }, [context.open, context.position]);
 
     useEffect(() => {
       const onKeyDown = (event: KeyboardEvent) => {
@@ -97,7 +108,7 @@ const ContextMenuContent = forwardRef<HTMLDivElement, ContextMenuContentProps>(
           "fixed z-50 min-w-56 overflow-hidden rounded-lg border-2 border-black bg-white shadow-[6px_6px_0_0_#000] animate-brutal-scale-in",
           className
         )}
-        style={{ top: context.position.top, left: context.position.left }}
+        style={{ top: safePosition.top, left: safePosition.left }}
         {...props}
       />,
       document.body

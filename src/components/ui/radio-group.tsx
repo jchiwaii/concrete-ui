@@ -6,6 +6,7 @@ import {
   createContext,
   useContext,
   InputHTMLAttributes,
+  useId,
 } from "react";
 
 interface RadioGroupContextValue {
@@ -32,7 +33,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
     {
       value,
       onValueChange,
-      name = `radio-group-${Math.random().toString(36).substring(7)}`,
+      name,
       disabled = false,
       orientation = "vertical",
       className = "",
@@ -41,13 +42,16 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
     },
     ref
   ) => {
+    const generatedName = useId();
+    const groupName = name || generatedName;
+
     const baseStyles = `
       ${orientation === "vertical" ? "flex flex-col gap-4" : "flex flex-row flex-wrap gap-6"}
     `;
 
     return (
       <RadioGroupContext.Provider
-        value={{ value, onChange: onValueChange, name, disabled }}
+        value={{ value, onChange: onValueChange, name: groupName, disabled }}
       >
         <div
           ref={ref}

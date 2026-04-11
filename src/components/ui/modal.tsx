@@ -29,12 +29,16 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
     useEffect(() => {
       if (open) {
+        const previousOverflow = document.body.style.overflow;
         document.addEventListener("keydown", handleEscape);
         document.body.style.overflow = "hidden";
+        return () => {
+          document.removeEventListener("keydown", handleEscape);
+          document.body.style.overflow = previousOverflow;
+        };
       }
       return () => {
         document.removeEventListener("keydown", handleEscape);
-        document.body.style.overflow = "unset";
       };
     }, [open, handleEscape]);
 
