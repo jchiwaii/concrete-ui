@@ -9,15 +9,20 @@ import {
   useRef,
   useEffect,
   ReactNode,
+  ReactElement,
+  cloneElement,
+  isValidElement,
+  MouseEvent,
   ButtonHTMLAttributes,
 } from "react";
 import { createPortal } from "react-dom";
 import { useClickOutside } from "@/hooks/useClickOutside";
-import { calculatePosition } from "@/lib/positioning";
+import { useOverlayPosition } from "@/hooks/useOverlayPosition";
 
 interface DropdownMenuContextValue {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  triggerRef: React.RefObject<HTMLElement | null>;
 }
 
 const DropdownMenuContext = createContext<
@@ -30,9 +35,10 @@ export interface DropdownMenuProps {
 
 const DropdownMenu = ({ children }: DropdownMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const triggerRef = useRef<HTMLElement>(null);
 
   return (
-    <DropdownMenuContext.Provider value={{ isOpen, setIsOpen }}>
+    <DropdownMenuContext.Provider value={{ isOpen, setIsOpen, triggerRef }}>
       <div className="relative inline-block">{children}</div>
     </DropdownMenuContext.Provider>
   );
@@ -54,28 +60,44 @@ const DropdownMenuTrigger = forwardRef<
     throw new Error("DropdownMenuTrigger must be used within DropdownMenu");
   }
 
-  const { isOpen, setIsOpen } = context;
+  const { isOpen, setIsOpen, triggerRef } = context;
 
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
 
-  if (asChild && typeof children === "object") {
+  if (asChild && isValidElement(children)) {
+    const child = children as ReactElement<{
+      onClick?: (event: MouseEvent<HTMLElement>) => void;
+      className?: string;
+    }>;
+
     return (
-      <button
-        ref={ref}
-        onClick={handleClick}
-        className={className}
-        {...props}
-      >
-        {children}
-      </button>
+      cloneElement(child, {
+        ref: (node: HTMLElement | null) => {
+          if (typeof ref === "function") ref(node as HTMLButtonElement | null);
+          else if (ref) ref.current = node as HTMLButtonElement | null;
+          triggerRef.current = node;
+        },
+        onClick: (event: MouseEvent<HTMLElement>) => {
+          child.props.onClick?.(event);
+          handleClick();
+        },
+        className: `${child.props.className ?? ""} ${className}`,
+        "aria-haspopup": "menu",
+        "aria-expanded": isOpen,
+        ...props,
+      } as unknown as Partial<typeof child.props>)
     );
   }
 
   return (
     <button
-      ref={ref}
+      ref={(node) => {
+        if (typeof ref === "function") ref(node);
+        else if (ref) ref.current = node;
+        triggerRef.current = node;
+      }}
       onClick={handleClick}
       className={`
         px-6 py-3
@@ -110,28 +132,13 @@ const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>
       throw new Error("DropdownMenuContent must be used within DropdownMenu");
     }
 
-    const { isOpen, setIsOpen } = context;
+    const { isOpen, setIsOpen, triggerRef } = context;
     const contentRef = useRef<HTMLDivElement>(null);
-    const [position, setPosition] = useState({ top: 0, left: 0 });
+    const position = useOverlayPosition(triggerRef, contentRef, isOpen, "bottom");
 
-    useClickOutside(contentRef, () => {
+    useClickOutside([contentRef, triggerRef], () => {
       if (isOpen) setIsOpen(false);
-    });
-
-    // Calculate position
-    useEffect(() => {
-      if (isOpen && contentRef.current) {
-        const trigger = contentRef.current.parentElement?.querySelector(
-          "button"
-        );
-        if (trigger) {
-          const triggerRect = trigger.getBoundingClientRect();
-          const contentRect = contentRef.current.getBoundingClientRect();
-          const pos = calculatePosition(triggerRect, contentRect, "bottom");
-          setPosition(pos);
-        }
-      }
-    }, [isOpen]);
+    }, isOpen);
 
     // Handle escape key
     useEffect(() => {
@@ -194,6 +201,13 @@ const DropdownMenuItem = forwardRef<HTMLDivElement, DropdownMenuItemProps>(
       context?.setIsOpen(false);
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        handleClick();
+      }
+    };
+
     return (
       <div
         ref={ref}
@@ -210,6 +224,8 @@ const DropdownMenuItem = forwardRef<HTMLDivElement, DropdownMenuItemProps>(
           ${className}
         `}
         onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        tabIndex={disabled ? -1 : 0}
         role="menuitem"
         aria-disabled={disabled}
         {...props}

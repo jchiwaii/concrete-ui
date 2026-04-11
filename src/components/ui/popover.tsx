@@ -9,10 +9,15 @@ import {
   useRef,
   useEffect,
   ReactNode,
+  ReactElement,
+  cloneElement,
+  isValidElement,
+  MouseEvent,
 } from "react";
 import { createPortal } from "react-dom";
 import { useClickOutside } from "@/hooks/useClickOutside";
-import { calculatePosition, Placement } from "@/lib/positioning";
+import { Placement } from "@/lib/positioning";
+import { useOverlayPosition } from "@/hooks/useOverlayPosition";
 
 interface PopoverContextValue {
   isOpen: boolean;
@@ -58,6 +63,29 @@ const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
       setIsOpen(!isOpen);
     };
 
+    if (asChild && isValidElement(children)) {
+      const child = children as ReactElement<{
+        onClick?: (event: MouseEvent<HTMLElement>) => void;
+        className?: string;
+      }>;
+
+      return cloneElement(child, {
+        ref: (node: HTMLElement | null) => {
+          if (typeof ref === "function") ref(node as HTMLButtonElement | null);
+          else if (ref) ref.current = node as HTMLButtonElement | null;
+          triggerRef.current = node;
+        },
+        onClick: (event: MouseEvent<HTMLElement>) => {
+          child.props.onClick?.(event);
+          handleClick();
+        },
+        className: `${child.props.className ?? ""} ${className}`,
+        "aria-haspopup": "dialog",
+        "aria-expanded": isOpen,
+        ...props,
+      } as unknown as Partial<typeof child.props>);
+    }
+
     return (
       <button
         ref={(node) => {
@@ -102,21 +130,11 @@ const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
 
     const { isOpen, setIsOpen, triggerRef } = context;
     const contentRef = useRef<HTMLDivElement>(null);
-    const [position, setPosition] = useState({ top: 0, left: 0 });
+    const position = useOverlayPosition(triggerRef, contentRef, isOpen, placement);
 
-    useClickOutside(contentRef, () => {
+    useClickOutside([contentRef, triggerRef], () => {
       if (isOpen) setIsOpen(false);
-    });
-
-    // Calculate position
-    useEffect(() => {
-      if (isOpen && triggerRef.current && contentRef.current) {
-        const triggerRect = triggerRef.current.getBoundingClientRect();
-        const contentRect = contentRef.current.getBoundingClientRect();
-        const pos = calculatePosition(triggerRect, contentRect, placement);
-        setPosition(pos);
-      }
-    }, [isOpen, placement, triggerRef]);
+    }, isOpen);
 
     // Handle escape key
     useEffect(() => {

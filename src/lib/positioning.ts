@@ -5,6 +5,10 @@ export interface Position {
   left: number;
 }
 
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), Math.max(min, max));
+}
+
 export function calculatePosition(
   trigger: DOMRect,
   content: DOMRect,
@@ -39,19 +43,8 @@ export function calculatePosition(
   const viewportHeight = window.innerHeight;
   const padding = 16; // Padding from viewport edges
 
-  // Adjust if off-screen horizontally
-  if (left < padding) {
-    left = padding;
-  } else if (left + content.width > viewportWidth - padding) {
-    left = viewportWidth - content.width - padding;
-  }
-
-  // Adjust if off-screen vertically
-  if (top < padding) {
-    top = padding;
-  } else if (top + content.height > viewportHeight - padding) {
-    top = viewportHeight - content.height - padding;
-  }
+  left = clamp(left, padding, viewportWidth - content.width - padding);
+  top = clamp(top, padding, viewportHeight - content.height - padding);
 
   return { top, left };
 }

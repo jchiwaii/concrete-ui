@@ -1,7 +1,16 @@
 "use client";
 
-import { HTMLAttributes, forwardRef, useEffect, useCallback } from "react";
+import {
+  HTMLAttributes,
+  MutableRefObject,
+  forwardRef,
+  useEffect,
+  useCallback,
+  useRef,
+} from "react";
 import { createPortal } from "react-dom";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   open: boolean;
@@ -11,6 +20,7 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
 
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
   ({ className = "", open, onClose, size = "md", children, ...props }, ref) => {
+    const contentRef = useRef<HTMLDivElement>(null);
     const handleEscape = useCallback(
       (e: KeyboardEvent) => {
         if (e.key === "Escape") onClose();
@@ -19,15 +29,16 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     );
 
     useEffect(() => {
-      if (open) {
-        document.addEventListener("keydown", handleEscape);
-        document.body.style.overflow = "hidden";
-      }
+      if (!open) return;
+
+      document.addEventListener("keydown", handleEscape);
       return () => {
         document.removeEventListener("keydown", handleEscape);
-        document.body.style.overflow = "unset";
       };
     }, [open, handleEscape]);
+
+    useBodyScrollLock(open);
+    useFocusTrap(contentRef, open, onClose);
 
     if (!open || typeof window === "undefined") return null;
 
@@ -50,7 +61,11 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
         {/* Modal Content */}
         <div
-          ref={ref}
+          ref={(node) => {
+            contentRef.current = node;
+            if (typeof ref === "function") ref(node);
+            else if (ref) (ref as MutableRefObject<HTMLDivElement | null>).current = node;
+          }}
           role="dialog"
           aria-modal="true"
           className={`

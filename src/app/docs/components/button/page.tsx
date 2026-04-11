@@ -41,6 +41,8 @@ export default function ButtonPage() {
 <Button variant="primary">PRIMARY</Button>
 <Button variant="secondary">SECONDARY</Button>
 <Button variant="danger">DANGER</Button>
+<Button variant="success">SUCCESS</Button>
+<Button variant="neutral">NEUTRAL</Button>
 <Button variant="outline">OUTLINE</Button>
 <Button variant="ghost">GHOST</Button>`}
       >
@@ -49,6 +51,8 @@ export default function ButtonPage() {
           <Button variant="primary">PRIMARY</Button>
           <Button variant="secondary">SECONDARY</Button>
           <Button variant="danger">DANGER</Button>
+          <Button variant="success">SUCCESS</Button>
+          <Button variant="neutral">NEUTRAL</Button>
           <Button variant="outline">OUTLINE</Button>
           <Button variant="ghost">GHOST</Button>
         </div>
@@ -57,18 +61,30 @@ export default function ButtonPage() {
       {/* Sizes */}
       <ComponentPreview
         title="Button Sizes"
-        description="Three sizes: small, medium, and large."
+        description="Four sizes: small, medium, large, and extra large."
         code={`import { Button } from "@/components/ui";
 
 <Button size="sm">SMALL</Button>
 <Button size="md">MEDIUM</Button>
-<Button size="lg">LARGE</Button>`}
+<Button size="lg">LARGE</Button>
+<Button size="xl">EXTRA LARGE</Button>`}
       >
         <div className="flex flex-wrap items-center gap-4">
           <Button size="sm">SMALL</Button>
           <Button size="md">MEDIUM</Button>
           <Button size="lg">LARGE</Button>
+          <Button size="xl">EXTRA LARGE</Button>
         </div>
+      </ComponentPreview>
+
+      <ComponentPreview
+        title="Rounded Button"
+        description="Use rounded buttons when the surrounding UI needs softer controls."
+        code={`import { Button } from "@/components/ui";
+
+<Button rounded>ROUNDED BUTTON</Button>`}
+      >
+        <Button rounded>ROUNDED BUTTON</Button>
       </ComponentPreview>
 
       {/* Disabled */}
@@ -99,45 +115,73 @@ export default function ButtonPage() {
           {`import { ButtonHTMLAttributes, forwardRef } from "react";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "primary" | "secondary" | "danger" | "ghost" | "outline";
-  size?: "sm" | "md" | "lg";
+  variant?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "danger"
+    | "success"
+    | "ghost"
+    | "outline"
+    | "neutral";
+  size?: "sm" | "md" | "lg" | "xl";
+  rounded?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className = "", variant = "default", size = "md", children, ...props }, ref) => {
+  (
+    {
+      className = "",
+      variant = "default",
+      size = "md",
+      rounded = false,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const baseStyles = \`
-      inline-flex items-center justify-center
-      font-bold uppercase tracking-wider
-      border-4 border-black
+      relative inline-flex items-center justify-center gap-2
+      font-bold uppercase tracking-wide
+      border-2 border-black
       transition-all duration-100 ease-out
-      hover:translate-x-[-4px] hover:translate-y-[-4px]
-      hover:shadow-[8px_8px_0_0_#000]
-      active:translate-x-0 active:translate-y-0
-      active:shadow-none
+      cursor-pointer select-none
+      active:translate-y-[2px] active:translate-x-[2px] active:shadow-none
       disabled:opacity-50 disabled:cursor-not-allowed
       disabled:hover:translate-x-0 disabled:hover:translate-y-0
-      disabled:hover:shadow-[4px_4px_0_0_#000]
+      disabled:active:translate-x-0 disabled:active:translate-y-0
     \`;
 
     const variants = {
-      default: "bg-white text-black shadow-[4px_4px_0_0_#000]",
-      primary: "bg-[#ffde00] text-black shadow-[4px_4px_0_0_#000]",
-      secondary: "bg-[#06b6d4] text-black shadow-[4px_4px_0_0_#000]",
-      danger: "bg-[#ef4444] text-white shadow-[4px_4px_0_0_#000]",
+      default:
+        "bg-white text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+      primary:
+        "bg-[#ffde00] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+      secondary:
+        "bg-[#06b6d4] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+      danger:
+        "bg-[#ef4444] text-white shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+      success:
+        "bg-[#22c55e] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+      neutral:
+        "bg-gray-900 text-white shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#ffde00] hover:translate-x-[-2px] hover:translate-y-[-2px]",
       ghost: "bg-transparent text-black border-transparent shadow-none hover:bg-gray-100 hover:shadow-none",
       outline: "bg-transparent text-black shadow-[4px_4px_0_0_#000] hover:bg-black hover:text-white",
     };
 
     const sizes = {
-      sm: "px-4 py-2 text-sm",
-      md: "px-6 py-3 text-base",
-      lg: "px-8 py-4 text-lg",
+      sm: "px-3 py-1.5 text-xs",
+      md: "px-5 py-2.5 text-sm",
+      lg: "px-6 py-3 text-base",
+      xl: "px-8 py-4 text-lg",
     };
+
+    const radiusStyles = rounded ? "rounded-full" : "rounded-md";
 
     return (
       <button
         ref={ref}
-        className={\`\${baseStyles} \${variants[variant]} \${sizes[size]} \${className}\`}
+        className={\`\${baseStyles} \${variants[variant]} \${sizes[size]} \${radiusStyles} \${className}\`}
         {...props}
       >
         {children}

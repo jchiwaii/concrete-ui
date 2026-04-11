@@ -2,7 +2,7 @@ import { Badge, Card, CardContent } from "@/components/ui";
 import { CodeBlock } from "@/components/docs";
 
 const requirements = [
-  "React 18+",
+  "React 19+",
   "Tailwind CSS",
   "TypeScript (recommended)",
 ];
