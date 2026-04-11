@@ -12,7 +12,8 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
-import { calculatePosition, Placement } from "@/lib/positioning";
+import { Placement } from "@/lib/positioning";
+import { useOverlayPosition } from "@/hooks/useOverlayPosition";
 
 interface HoverCardContextValue {
   open: boolean;
@@ -89,18 +90,12 @@ const HoverCardContent = forwardRef<HTMLDivElement, HoverCardContentProps>(
     if (!context) throw new Error("HoverCardContent must be used within HoverCard");
 
     const contentRef = useRef<HTMLDivElement>(null);
-    const [position, setPosition] = useState({ top: 0, left: 0 });
-
-    useEffect(() => {
-      if (!context.open || !context.triggerRef.current || !contentRef.current) return;
-      setPosition(
-        calculatePosition(
-          context.triggerRef.current.getBoundingClientRect(),
-          contentRef.current.getBoundingClientRect(),
-          placement
-        )
-      );
-    }, [context.open, context.triggerRef, placement]);
+    const position = useOverlayPosition(
+      context.triggerRef,
+      contentRef,
+      context.open,
+      placement
+    );
 
     if (!context.open || typeof window === "undefined") return null;
 

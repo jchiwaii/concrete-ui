@@ -10,6 +10,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 export type DrawerDirection = "left" | "right" | "top" | "bottom";
 
@@ -43,19 +44,7 @@ const Drawer = ({
     return () => document.removeEventListener("keydown", handleEscape);
   }, [handleEscape]);
 
-  // Lock body scroll when open
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
+  useBodyScrollLock(open);
   useFocusTrap(drawerRef, open, onClose);
 
   if (!open || typeof window === "undefined") return null;

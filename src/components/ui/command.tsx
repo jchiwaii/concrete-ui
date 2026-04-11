@@ -11,8 +11,11 @@ import {
   useRef,
   InputHTMLAttributes,
   ReactNode,
+  MutableRefObject,
 } from "react";
 import { createPortal } from "react-dom";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 interface CommandContextValue {
   search: string;
@@ -47,6 +50,7 @@ const Command = forwardRef<HTMLDivElement, CommandProps>(
     const [internalOpen, setInternalOpen] = useState(false);
     const [search, setSearch] = useState("");
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const panelRef = useRef<HTMLDivElement>(null);
 
     const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
     const setIsOpen = onOpenChange || setInternalOpen;
@@ -72,18 +76,8 @@ const Command = forwardRef<HTMLDivElement, CommandProps>(
       return () => document.removeEventListener("keydown", handleKeyDown);
     }, [shortcut, isOpen, setIsOpen]);
 
-    // Lock body scroll when open
-    useEffect(() => {
-      if (isOpen) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "";
-      }
-
-      return () => {
-        document.body.style.overflow = "";
-      };
-    }, [isOpen]);
+    useBodyScrollLock(isOpen);
+    useFocusTrap(panelRef, isOpen, onClose);
 
     if (!isOpen || typeof window === "undefined") return null;
 
@@ -111,7 +105,11 @@ const Command = forwardRef<HTMLDivElement, CommandProps>(
             value={{ search, setSearch, selectedIndex, setSelectedIndex, onClose }}
           >
             <div
-              ref={ref}
+              ref={(node) => {
+                panelRef.current = node;
+                if (typeof ref === "function") ref(node);
+                else if (ref) (ref as MutableRefObject<HTMLDivElement | null>).current = node;
+              }}
               className={`
                 bg-white
                 border-6 border-black
@@ -119,8 +117,9 @@ const Command = forwardRef<HTMLDivElement, CommandProps>(
                 animate-brutal-slide-up
                 ${className}
               `}
-              role="combobox"
-              aria-expanded={isOpen}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Command menu"
               {...props}
             >
               {children}
@@ -145,7 +144,7 @@ const CommandInput = forwardRef<HTMLInputElement, CommandInputProps>(
       throw new Error("CommandInput must be used within Command");
     }
 
-    const { search, setSearch, onClose } = context;
+    const { search, setSearch, setSelectedIndex, onClose } = context;
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Escape") {
@@ -159,7 +158,10 @@ const CommandInput = forwardRef<HTMLInputElement, CommandInputProps>(
         ref={ref}
         type="text"
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setSelectedIndex(0);
+        }}
         onKeyDown={handleKeyDown}
         autoFocus
         className={`
@@ -186,6 +188,7 @@ export interface CommandListProps extends HTMLAttributes<HTMLDivElement> {}
 const CommandList = forwardRef<HTMLDivElement, CommandListProps>(
   ({ children, className = "", ...props }, ref) => {
     const context = useContext(CommandContext);
+    const listRef = useRef<HTMLDivElement>(null);
 
     // Handle keyboard navigation
     const handleKeyDown = useCallback(
@@ -193,7 +196,11 @@ const CommandList = forwardRef<HTMLDivElement, CommandListProps>(
         if (!context) return;
 
         const { selectedIndex, setSelectedIndex } = context;
-        const items = document.querySelectorAll('[role="option"]');
+        const items = Array.from(
+          listRef.current?.querySelectorAll<HTMLElement>('[role="option"]') ?? []
+        ).filter((item) => item.getAttribute("aria-disabled") !== "true");
+
+        if (items.length === 0) return;
 
         switch (e.key) {
           case "ArrowDown":
@@ -212,7 +219,7 @@ const CommandList = forwardRef<HTMLDivElement, CommandListProps>(
 
           case "Enter":
             e.preventDefault();
-            const selected = items[selectedIndex] as HTMLElement;
+            const selected = items[Math.min(selectedIndex, items.length - 1)] as HTMLElement;
             selected?.click();
             break;
         }
@@ -227,7 +234,11 @@ const CommandList = forwardRef<HTMLDivElement, CommandListProps>(
 
     return (
       <div
-        ref={ref}
+        ref={(node) => {
+          listRef.current = node;
+          if (typeof ref === "function") ref(node);
+          else if (ref) (ref as MutableRefObject<HTMLDivElement | null>).current = node;
+        }}
         className={`
           max-h-[400px]
           overflow-y-auto
@@ -304,7 +315,7 @@ const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(
 
       const items = Array.from(
         list.querySelectorAll<HTMLElement>('[role="option"]')
-      );
+      ).filter((item) => item.getAttribute("aria-disabled") !== "true");
       setItemIndex(items.indexOf(current));
     }, [search, children]);
 

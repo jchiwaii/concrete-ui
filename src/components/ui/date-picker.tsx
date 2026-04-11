@@ -3,8 +3,8 @@
 import { HTMLAttributes, forwardRef, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
-import { calculatePosition } from "@/lib/positioning";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { useOverlayPosition } from "@/hooks/useOverlayPosition";
 import { Calendar } from "./calendar";
 
 export interface DatePickerProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
@@ -21,21 +21,24 @@ const defaultFormat = (date: Date) =>
 const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   ({ className = "", value, onValueChange, placeholder = "Pick a date", disabled = false, formatDate = defaultFormat, ...props }, ref) => {
     const [open, setOpen] = useState(false);
-    const [position, setPosition] = useState({ top: 0, left: 0 });
     const triggerRef = useRef<HTMLButtonElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const position = useOverlayPosition(triggerRef, contentRef, open, "bottom");
 
-    useClickOutside(contentRef, () => open && setOpen(false));
+    useClickOutside([contentRef, triggerRef], () => open && setOpen(false), open);
 
     useEffect(() => {
-      if (!open || !triggerRef.current || !contentRef.current) return;
-      setPosition(
-        calculatePosition(
-          triggerRef.current.getBoundingClientRect(),
-          contentRef.current.getBoundingClientRect(),
-          "bottom"
-        )
-      );
+      if (!open) return;
+
+      const onKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          setOpen(false);
+        }
+      };
+
+      document.addEventListener("keydown", onKeyDown);
+      return () => document.removeEventListener("keydown", onKeyDown);
     }, [open]);
 
     return (

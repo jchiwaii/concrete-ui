@@ -10,8 +10,8 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
-import { calculatePosition } from "@/lib/positioning";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { useOverlayPosition } from "@/hooks/useOverlayPosition";
 
 export interface ComboboxOption {
   value: string;
@@ -48,10 +48,10 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     const [open, setOpen] = useState(false);
     const [search, setSearch] = useState("");
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const [position, setPosition] = useState({ top: 0, left: 0 });
     const triggerRef = useRef<HTMLButtonElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const position = useOverlayPosition(triggerRef, contentRef, open, "bottom");
 
     const selected = options.find((option) => option.value === value);
     const filtered = useMemo(
@@ -64,19 +64,17 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       [options, search]
     );
 
-    useClickOutside(contentRef, () => open && setOpen(false));
+    useClickOutside([contentRef, triggerRef], () => open && setOpen(false), open);
 
     useEffect(() => {
-      if (!open || !triggerRef.current || !contentRef.current) return;
-      setPosition(
-        calculatePosition(
-          triggerRef.current.getBoundingClientRect(),
-          contentRef.current.getBoundingClientRect(),
-          "bottom"
-        )
-      );
       inputRef.current?.focus();
     }, [open]);
+
+    useEffect(() => {
+      if (selectedIndex > filtered.length - 1) {
+        setSelectedIndex(Math.max(filtered.length - 1, 0));
+      }
+    }, [filtered.length, selectedIndex]);
 
     const select = (option: ComboboxOption) => {
       if (option.disabled) return;

@@ -10,8 +10,8 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
-import { calculatePosition } from "@/lib/positioning";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { useOverlayPosition } from "@/hooks/useOverlayPosition";
 
 export interface MultiSelectOption {
   value: string;
@@ -44,9 +44,11 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
   ) => {
     const [open, setOpen] = useState(false);
     const [search, setSearch] = useState("");
-    const [position, setPosition] = useState({ top: 0, left: 0 });
+    const [selectedIndex, setSelectedIndex] = useState(0);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const position = useOverlayPosition(triggerRef, contentRef, open, "bottom");
 
     const selectedOptions = options.filter((option) => value.includes(option.value));
     const filtered = useMemo(
@@ -54,18 +56,17 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       [options, search]
     );
 
-    useClickOutside(contentRef, () => open && setOpen(false));
+    useClickOutside([contentRef, triggerRef], () => open && setOpen(false), open);
 
     useEffect(() => {
-      if (!open || !triggerRef.current || !contentRef.current) return;
-      setPosition(
-        calculatePosition(
-          triggerRef.current.getBoundingClientRect(),
-          contentRef.current.getBoundingClientRect(),
-          "bottom"
-        )
-      );
+      if (open) inputRef.current?.focus();
     }, [open]);
+
+    useEffect(() => {
+      if (selectedIndex > filtered.length - 1) {
+        setSelectedIndex(Math.max(filtered.length - 1, 0));
+      }
+    }, [filtered.length, selectedIndex]);
 
     const toggle = (option: MultiSelectOption) => {
       if (option.disabled) return;
@@ -75,8 +76,49 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
       onValueChange?.(next);
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+      if (disabled) return;
+
+      if (!open && ["Enter", " ", "ArrowDown"].includes(event.key)) {
+        event.preventDefault();
+        setOpen(true);
+        return;
+      }
+
+      if (!open) return;
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+      }
+
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        setSelectedIndex((index) =>
+          index < filtered.length - 1 ? index + 1 : 0
+        );
+      }
+
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        setSelectedIndex((index) =>
+          filtered.length === 0 ? 0 : index <= 0 ? filtered.length - 1 : index - 1
+        );
+      }
+
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const option = filtered[selectedIndex];
+        if (option) toggle(option);
+      }
+
+      if (event.key === "Backspace" && search.length === 0 && value.length > 0) {
+        onValueChange?.(value.slice(0, -1));
+      }
+    };
+
     return (
-      <div ref={ref} className={cn("relative w-full", className)} {...props}>
+      <div ref={ref} className={cn("relative w-full", className)} onKeyDown={handleKeyDown} {...props}>
         <button
           ref={triggerRef}
           type="button"
@@ -118,14 +160,18 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
             >
               <div className="border-b-2 border-black p-2">
                 <input
+                  ref={inputRef}
                   value={search}
-                  onChange={(event) => setSearch(event.target.value)}
+                  onChange={(event) => {
+                    setSearch(event.target.value);
+                    setSelectedIndex(0);
+                  }}
                   placeholder={searchPlaceholder}
                   className="w-full rounded-md border-2 border-black px-3 py-2 text-sm font-semibold outline-none placeholder:text-gray-400"
                 />
               </div>
               <div className="max-h-64 overflow-y-auto brutal-scroll-area">
-                {filtered.map((option) => {
+                {filtered.map((option, index) => {
                   const selected = value.includes(option.value);
                   return (
                     <div
@@ -135,6 +181,7 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                       onClick={() => toggle(option)}
                       className={cn(
                         "flex cursor-pointer items-center gap-3 border-b-2 border-black px-4 py-3 last:border-b-0 hover:bg-[#fff4ab]",
+                        selectedIndex === index && "bg-[#fff4ab]",
                         selected && "bg-[#ffde00]",
                         option.disabled && "cursor-not-allowed bg-gray-100 opacity-50"
                       )}

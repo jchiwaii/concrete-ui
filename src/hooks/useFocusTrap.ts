@@ -20,21 +20,40 @@ export function useFocusTrap(
     if (!active || typeof document === "undefined") return;
 
     const root = ref.current;
+    if (!root) return;
+
     const previous = document.activeElement as HTMLElement | null;
 
-    const focusables = Array.from(
-      root?.querySelectorAll<HTMLElement>(focusableSelector) ?? []
-    );
-    const first = focusables[0];
-    const last = focusables[focusables.length - 1];
+    const getFocusables = () =>
+      Array.from(root.querySelectorAll<HTMLElement>(focusableSelector)).filter(
+        (element) =>
+          !element.hasAttribute("disabled") &&
+          element.getAttribute("aria-hidden") !== "true" &&
+          element.getClientRects().length > 0
+      );
 
-    first?.focus();
+    const initialFocusables = getFocusables();
+    const first = initialFocusables[0];
+
+    if (!root.contains(document.activeElement)) {
+      if (first) {
+        first.focus();
+      } else {
+        root.tabIndex = -1;
+        root.focus();
+      }
+    }
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        event.preventDefault();
         onEscape?.();
         return;
       }
+
+      const focusables = getFocusables();
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
 
       if (event.key !== "Tab" || focusables.length === 0) return;
 
@@ -51,7 +70,9 @@ export function useFocusTrap(
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      previous?.focus?.();
+      if (previous?.isConnected) {
+        previous.focus();
+      }
     };
   }, [active, onEscape, ref]);
 }

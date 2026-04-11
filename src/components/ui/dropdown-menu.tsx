@@ -17,12 +17,12 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { useClickOutside } from "@/hooks/useClickOutside";
-import { calculatePosition } from "@/lib/positioning";
+import { useOverlayPosition } from "@/hooks/useOverlayPosition";
 
 interface DropdownMenuContextValue {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
-  triggerRef: React.RefObject<HTMLButtonElement | null>;
+  triggerRef: React.RefObject<HTMLElement | null>;
 }
 
 const DropdownMenuContext = createContext<
@@ -35,7 +35,7 @@ export interface DropdownMenuProps {
 
 const DropdownMenu = ({ children }: DropdownMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement>(null);
 
   return (
     <DropdownMenuContext.Provider value={{ isOpen, setIsOpen, triggerRef }}>
@@ -74,9 +74,9 @@ const DropdownMenuTrigger = forwardRef<
 
     return (
       cloneElement(child, {
-        ref: (node: HTMLButtonElement | null) => {
-          if (typeof ref === "function") ref(node);
-          else if (ref) ref.current = node;
+        ref: (node: HTMLElement | null) => {
+          if (typeof ref === "function") ref(node as HTMLButtonElement | null);
+          else if (ref) ref.current = node as HTMLButtonElement | null;
           triggerRef.current = node;
         },
         onClick: (event: MouseEvent<HTMLElement>) => {
@@ -134,21 +134,11 @@ const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>
 
     const { isOpen, setIsOpen, triggerRef } = context;
     const contentRef = useRef<HTMLDivElement>(null);
-    const [position, setPosition] = useState({ top: 0, left: 0 });
+    const position = useOverlayPosition(triggerRef, contentRef, isOpen, "bottom");
 
-    useClickOutside(contentRef, () => {
+    useClickOutside([contentRef, triggerRef], () => {
       if (isOpen) setIsOpen(false);
-    });
-
-    // Calculate position
-    useEffect(() => {
-      if (isOpen && triggerRef.current && contentRef.current) {
-        const triggerRect = triggerRef.current.getBoundingClientRect();
-        const contentRect = contentRef.current.getBoundingClientRect();
-        const pos = calculatePosition(triggerRect, contentRect, "bottom");
-        setPosition(pos);
-      }
-    }, [isOpen, triggerRef]);
+    }, isOpen);
 
     // Handle escape key
     useEffect(() => {
@@ -211,6 +201,13 @@ const DropdownMenuItem = forwardRef<HTMLDivElement, DropdownMenuItemProps>(
       context?.setIsOpen(false);
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        handleClick();
+      }
+    };
+
     return (
       <div
         ref={ref}
@@ -227,6 +224,8 @@ const DropdownMenuItem = forwardRef<HTMLDivElement, DropdownMenuItemProps>(
           ${className}
         `}
         onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        tabIndex={disabled ? -1 : 0}
         role="menuitem"
         aria-disabled={disabled}
         {...props}

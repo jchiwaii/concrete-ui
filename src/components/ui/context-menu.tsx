@@ -11,8 +11,7 @@ import {
   useState,
 } from "react";
 import { createPortal } from "react-dom";
-import { cn } from "@/lib/utils";
-import { clamp } from "@/lib/utils";
+import { clamp, cn } from "@/lib/utils";
 import { useClickOutside } from "@/hooks/useClickOutside";
 
 interface ContextMenuContextValue {
@@ -75,7 +74,7 @@ const ContextMenuContent = forwardRef<HTMLDivElement, ContextMenuContentProps>(
 
     const contentRef = useRef<HTMLDivElement>(null);
     const [safePosition, setSafePosition] = useState(context.position);
-    useClickOutside(contentRef, () => context.open && context.setOpen(false));
+    useClickOutside(contentRef, () => context.open && context.setOpen(false), context.open);
 
     useEffect(() => {
       if (!context.open || !contentRef.current) return;
@@ -127,15 +126,24 @@ const ContextMenuItem = forwardRef<HTMLDivElement, ContextMenuItemProps>(
   ({ className = "", disabled = false, inset = false, onClick, ...props }, ref) => {
     const context = useContext(ContextMenuContext);
 
+    const activate = (event: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>) => {
+      if (disabled) return;
+      onClick?.(event as React.MouseEvent<HTMLDivElement>);
+      context?.setOpen(false);
+    };
+
     return (
       <div
         ref={ref}
         role="menuitem"
         aria-disabled={disabled}
-        onClick={(event) => {
-          if (disabled) return;
-          onClick?.(event);
-          context?.setOpen(false);
+        tabIndex={disabled ? -1 : 0}
+        onClick={activate}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            activate(event);
+          }
         }}
         className={cn(
           "flex cursor-pointer items-center justify-between gap-4 border-b-2 border-black px-4 py-3 text-sm font-bold uppercase tracking-wide last:border-b-0 hover:bg-[#ffde00]",

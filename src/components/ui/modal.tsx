@@ -10,6 +10,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   open: boolean;
@@ -28,20 +29,15 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     );
 
     useEffect(() => {
-      if (open) {
-        const previousOverflow = document.body.style.overflow;
-        document.addEventListener("keydown", handleEscape);
-        document.body.style.overflow = "hidden";
-        return () => {
-          document.removeEventListener("keydown", handleEscape);
-          document.body.style.overflow = previousOverflow;
-        };
-      }
+      if (!open) return;
+
+      document.addEventListener("keydown", handleEscape);
       return () => {
         document.removeEventListener("keydown", handleEscape);
       };
     }, [open, handleEscape]);
 
+    useBodyScrollLock(open);
     useFocusTrap(contentRef, open, onClose);
 
     if (!open || typeof window === "undefined") return null;

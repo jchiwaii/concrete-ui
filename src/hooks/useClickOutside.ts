@@ -1,24 +1,32 @@
 import { RefObject, useEffect } from "react";
 
+type OutsideRef = RefObject<HTMLElement | null>;
+
 export function useClickOutside(
-  ref: RefObject<HTMLElement | null>,
-  handler: () => void
+  refs: OutsideRef | OutsideRef[],
+  handler: (event: PointerEvent) => void,
+  enabled = true
 ): void {
   useEffect(() => {
-    const listener = (event: MouseEvent | TouchEvent) => {
-      // Do nothing if clicking ref's element or descendent elements
-      if (!ref.current || ref.current.contains(event.target as Node)) {
+    if (!enabled) return;
+
+    const refList = Array.isArray(refs) ? refs : [refs];
+
+    const listener = (event: PointerEvent) => {
+      const target = event.target as Node;
+      const isInside = refList.some((ref) => ref.current?.contains(target));
+
+      if (isInside) {
         return;
       }
-      handler();
+
+      handler(event);
     };
 
-    document.addEventListener("mousedown", listener);
-    document.addEventListener("touchstart", listener);
+    document.addEventListener("pointerdown", listener, true);
 
     return () => {
-      document.removeEventListener("mousedown", listener);
-      document.removeEventListener("touchstart", listener);
+      document.removeEventListener("pointerdown", listener, true);
     };
-  }, [ref, handler]);
+  }, [enabled, handler, refs]);
 }

@@ -6,12 +6,12 @@ import {
   ReactNode,
   forwardRef,
   useCallback,
-  useEffect,
   useRef,
 } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { Button } from "./button";
 
 export interface AlertDialogProps {
@@ -26,14 +26,7 @@ const AlertDialog = ({ open, onOpenChange, children }: AlertDialogProps) => {
 
   useFocusTrap(dialogRef, open, close);
 
-  useEffect(() => {
-    if (!open) return;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previous;
-    };
-  }, [open]);
+  useBodyScrollLock(open);
 
   if (!open || typeof window === "undefined") return null;
 

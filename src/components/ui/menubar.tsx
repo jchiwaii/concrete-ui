@@ -31,9 +31,16 @@ const Menubar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
           setActive(null);
         }
       };
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") setActive(null);
+      };
 
       document.addEventListener("pointerdown", handlePointerDown);
-      return () => document.removeEventListener("pointerdown", handlePointerDown);
+      document.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.removeEventListener("pointerdown", handlePointerDown);
+        document.removeEventListener("keydown", handleKeyDown);
+      };
     }, []);
 
     return (
@@ -122,7 +129,13 @@ MenubarContent.displayName = "MenubarContent";
 
 const MenubarItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", ...props }, ref) => (
-    <div ref={ref} role="menuitem" className={cn("cursor-pointer border-b-2 border-black px-4 py-3 text-sm font-bold uppercase tracking-wide last:border-b-0 hover:bg-[#ffde00]", className)} {...props} />
+    <div
+      ref={ref}
+      role="menuitem"
+      tabIndex={0}
+      className={cn("cursor-pointer border-b-2 border-black px-4 py-3 text-sm font-bold uppercase tracking-wide last:border-b-0 hover:bg-[#ffde00] focus:bg-[#ffde00] focus:outline-none", className)}
+      {...props}
+    />
   )
 );
 
