@@ -1,17 +1,72 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
+import { cn } from "@/lib/utils";
+
+export type ButtonVariant =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "danger"
+  | "success"
+  | "ghost"
+  | "outline"
+  | "neutral";
+
+export type ButtonSize = "sm" | "md" | "lg" | "xl";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?:
-    | "default"
-    | "primary"
-    | "secondary"
-    | "danger"
-    | "success"
-    | "ghost"
-    | "outline"
-    | "neutral";
-  size?: "sm" | "md" | "lg" | "xl";
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   rounded?: boolean;
+  loading?: boolean;
+}
+
+const baseStyles =
+  "relative inline-flex shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap border-2 border-black font-semibold tracking-[-0.01em] transition-[transform,box-shadow,background-color,color] duration-150 ease-out focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-black disabled:pointer-events-none disabled:opacity-45";
+
+const variantStyles: Record<ButtonVariant, string> = {
+  default:
+    "bg-[var(--ui-surface)] text-black shadow-[var(--ui-shadow)] hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)] active:translate-x-px active:translate-y-px active:shadow-[var(--ui-shadow-xs)]",
+  primary:
+    "bg-[var(--ui-accent)] text-black shadow-[var(--ui-shadow)] hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)] active:translate-x-px active:translate-y-px active:shadow-[var(--ui-shadow-xs)]",
+  secondary:
+    "bg-[var(--ui-info)] text-black shadow-[var(--ui-shadow)] hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)] active:translate-x-px active:translate-y-px active:shadow-[var(--ui-shadow-xs)]",
+  danger:
+    "bg-[var(--ui-danger)] text-black shadow-[var(--ui-shadow)] hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)] active:translate-x-px active:translate-y-px active:shadow-[var(--ui-shadow-xs)]",
+  success:
+    "bg-[var(--ui-success)] text-black shadow-[var(--ui-shadow)] hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)] active:translate-x-px active:translate-y-px active:shadow-[var(--ui-shadow-xs)]",
+  neutral:
+    "bg-[var(--ui-ink)] text-white shadow-[3px_3px_0_var(--ui-accent)] hover:-translate-x-px hover:-translate-y-px hover:shadow-[4px_4px_0_var(--ui-accent)] active:translate-x-px active:translate-y-px active:shadow-none",
+  ghost:
+    "border-transparent bg-transparent text-black shadow-none hover:border-black/20 hover:bg-black/5 active:bg-black/10",
+  outline:
+    "bg-[var(--ui-surface)] text-black shadow-[var(--ui-shadow)] hover:-translate-x-px hover:-translate-y-px hover:bg-black hover:text-white hover:shadow-[var(--ui-shadow-md)] active:translate-x-px active:translate-y-px active:shadow-none",
+};
+
+const sizeStyles: Record<ButtonSize, string> = {
+  sm: "h-9 px-3 text-[13px]",
+  md: "h-10 px-4 text-sm",
+  lg: "h-12 px-5 text-[15px]",
+  xl: "h-14 px-6 text-base",
+};
+
+export function buttonStyles({
+  variant = "default",
+  size = "md",
+  rounded = false,
+  className,
+}: {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  rounded?: boolean;
+  className?: string;
+} = {}) {
+  return cn(
+    baseStyles,
+    variantStyles[variant],
+    sizeStyles[size],
+    rounded ? "rounded-full" : "rounded-[var(--ui-radius)]",
+    className
+  );
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -21,60 +76,34 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "default",
       size = "md",
       rounded = false,
+      loading = false,
+      disabled,
+      type = "button",
       children,
       ...props
     },
     ref
   ) => {
-    const baseStyles = `
-      relative
-      inline-flex items-center justify-center gap-2
-      font-bold uppercase tracking-wide
-      border-2 border-black
-      transition-all duration-100 ease-out
-      cursor-pointer
-      select-none
-      active:translate-y-[2px] active:translate-x-[2px]
-      active:shadow-none
-      disabled:opacity-50 disabled:cursor-not-allowed
-      disabled:hover:translate-x-0 disabled:hover:translate-y-0
-      disabled:active:translate-x-0 disabled:active:translate-y-0
-    `;
-
-    const variants = {
-      default:
-        "bg-white text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
-      primary:
-        "bg-[#ffde00] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
-      secondary:
-        "bg-[#06b6d4] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
-      danger:
-        "bg-[#ef4444] text-white shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
-      success:
-        "bg-[#22c55e] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
-      neutral:
-        "bg-gray-900 text-white shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#ffde00] hover:translate-x-[-2px] hover:translate-y-[-2px]",
-      ghost:
-        "bg-transparent text-black border-transparent shadow-none hover:bg-gray-100 hover:border-black/20",
-      outline:
-        "bg-transparent text-black shadow-[4px_4px_0_0_#000] hover:bg-black hover:text-white hover:translate-x-[-2px] hover:translate-y-[-2px]",
-    };
-
-    const sizes = {
-      sm: "px-3 py-1.5 text-xs",
-      md: "px-5 py-2.5 text-sm",
-      lg: "px-6 py-3 text-base",
-      xl: "px-8 py-4 text-lg",
-    };
-
-    const radiusStyles = rounded ? "rounded-full" : "rounded-md";
-
     return (
       <button
         ref={ref}
-        className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${radiusStyles} ${className}`}
+        type={type}
+        disabled={disabled || loading}
+        aria-busy={loading || undefined}
+        className={buttonStyles({ variant, size, rounded, className })}
         {...props}
       >
+        {loading && (
+          <svg
+            className="h-4 w-4 animate-spin"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="3" opacity="0.25" />
+            <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+          </svg>
+        )}
         {children}
       </button>
     );

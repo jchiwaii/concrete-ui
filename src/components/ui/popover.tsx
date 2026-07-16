@@ -13,6 +13,7 @@ import {
   cloneElement,
   isValidElement,
   MouseEvent,
+  ButtonHTMLAttributes,
 } from "react";
 import { createPortal } from "react-dom";
 import { useClickOutside } from "@/hooks/useClickOutside";
@@ -46,12 +47,12 @@ const Popover = ({ children }: PopoverProps) => {
 
 Popover.displayName = "Popover";
 
-export interface PopoverTriggerProps extends HTMLAttributes<HTMLButtonElement> {
+export interface PopoverTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
 }
 
 const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
-  ({ children, asChild = false, className = "", ...props }, ref) => {
+  ({ children, asChild = false, className = "", onClick, type = "button", ...props }, ref) => {
     const context = useContext(PopoverContext);
     if (!context) {
       throw new Error("PopoverTrigger must be used within Popover");
@@ -59,8 +60,8 @@ const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
 
     const { isOpen, setIsOpen, triggerRef } = context;
 
-    const handleClick = () => {
-      setIsOpen(!isOpen);
+    const handleClick = (event: MouseEvent<HTMLElement>) => {
+      if (!event.defaultPrevented) setIsOpen(!isOpen);
     };
 
     if (asChild && isValidElement(children)) {
@@ -77,7 +78,8 @@ const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
         },
         onClick: (event: MouseEvent<HTMLElement>) => {
           child.props.onClick?.(event);
-          handleClick();
+          onClick?.(event as unknown as React.MouseEvent<HTMLButtonElement>);
+          handleClick(event);
         },
         className: `${child.props.className ?? ""} ${className}`,
         "aria-haspopup": "dialog",
@@ -93,16 +95,20 @@ const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
           else if (ref) ref.current = node;
           triggerRef.current = node;
         }}
-        onClick={handleClick}
+        type={type}
+        onClick={(event) => {
+          onClick?.(event);
+          handleClick(event);
+        }}
         className={`
           px-6 py-3
-          bg-white
+          bg-[var(--ui-surface)]
           border-2 border-black
-          shadow-[4px_4px_0_0_#000]
-          font-bold uppercase tracking-wider
+          shadow-[var(--ui-shadow)]
+          font-semibold
           transition-all duration-100 ease-out
-          hover:translate-x-[-2px] hover:translate-y-[-2px]
-          hover:shadow-[6px_6px_0_0_#000]
+          hover:-translate-x-px hover:-translate-y-px
+          hover:shadow-[var(--ui-shadow-md)]
           ${className}
         `}
         aria-haspopup="dialog"
@@ -159,9 +165,9 @@ const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
           p-6
           min-w-[200px]
           max-w-md
-          bg-white
+          bg-[var(--ui-surface)]
           border-2 border-black
-          shadow-[6px_6px_0_0_#000]
+          shadow-[var(--ui-shadow-lg)]
           animate-brutal-slide-down
           ${className}
         `}
@@ -173,6 +179,7 @@ const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
         {...props}
       >
         <button
+          type="button"
           onClick={() => setIsOpen(false)}
           className="
             absolute

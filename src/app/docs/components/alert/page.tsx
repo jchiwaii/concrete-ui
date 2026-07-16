@@ -11,7 +11,7 @@ export default function AlertPage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           ALERT
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -87,7 +87,7 @@ export default function AlertPage() {
       {/* Full Code */}
       <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+          <h3 className="text-xl font-semibold tracking-[-0.03em]">
             FULL COMPONENT CODE
           </h3>
         </div>
@@ -103,15 +103,15 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     const baseStyles = \`
       p-4
       border-4 border-black
-      shadow-[4px_4px_0_0_#000]
+      shadow-[var(--ui-shadow)]
     \`;
 
     const variants = {
       default: "bg-white",
-      info: "bg-[#06b6d4]",
-      success: "bg-[#22c55e]",
-      warning: "bg-[#ffde00]",
-      danger: "bg-[#ef4444] text-white",
+      info: "bg-[var(--ui-info)]",
+      success: "bg-[var(--ui-success)]",
+      warning: "bg-[var(--ui-accent)]",
+      danger: "bg-[var(--ui-danger)] text-white",
     };
 
     const icons = {

@@ -11,7 +11,7 @@ export default function BreadcrumbPage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           BREADCRUMB
         </h1>
         <p className="text-brutal-lg max-w-2xl">

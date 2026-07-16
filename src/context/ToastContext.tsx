@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useCallback, ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, ReactNode, useEffect, useRef } from "react";
 
 export type ToastVariant = "default" | "success" | "error" | "warning" | "info";
 
@@ -26,9 +26,18 @@ const ToastContext = createContext<ToastContextValue | undefined>(undefined);
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const nextId = useRef(0);
+  const timers = useRef(new Map<string, ReturnType<typeof setTimeout>>());
+
+  const dismiss = useCallback((id: string) => {
+    const timer = timers.current.get(id);
+    if (timer) clearTimeout(timer);
+    timers.current.delete(id);
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  }, []);
 
   const toast = useCallback((options: Omit<Toast, "id">) => {
-    const id = Math.random().toString(36).substring(2, 11);
+    const id = `toast-${++nextId.current}`;
     const newToast: Toast = { id, ...options };
 
     setToasts((prev) => [...prev, newToast]);
@@ -36,14 +45,16 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     // Auto-dismiss after duration
     const duration = options.duration ?? 5000;
     if (duration > 0) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         dismiss(id);
       }, duration);
+      timers.current.set(id, timer);
     }
-  }, []);
+  }, [dismiss]);
 
-  const dismiss = useCallback((id: string) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
+  useEffect(() => {
+    const activeTimers = timers.current;
+    return () => activeTimers.forEach(clearTimeout);
   }, []);
 
   return (

@@ -36,12 +36,12 @@ const BreadcrumbItem = forwardRef<HTMLAnchorElement, BreadcrumbItemProps>(
   ) => {
     const itemStyles = `
       font-bold
-      uppercase
+     
       tracking-wider
       text-sm
       ${
         current
-          ? "bg-[#ffde00] px-3 py-1 border-2 border-black"
+          ? "bg-[var(--ui-accent)] px-3 py-1 border-2 border-black"
           : "hover:underline text-black"
       }
     `;

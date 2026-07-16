@@ -14,7 +14,7 @@ export default function ToastPage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           TOAST
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -26,7 +26,7 @@ export default function ToastPage() {
       {/* Setup Instructions */}
       <div className="space-y-4">
         <h2 className="text-brutal-2xl font-bold uppercase">SETUP</h2>
-        <div className="bg-gray-100 border-4 border-black shadow-[4px_4px_0_0_#000] p-6">
+        <div className="bg-gray-100 border-4 border-black shadow-[var(--ui-shadow)] p-6">
           <p className="font-bold uppercase mb-4">
             Wrap your app with ToastProvider:
           </p>

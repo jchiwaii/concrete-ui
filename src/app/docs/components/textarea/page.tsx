@@ -11,7 +11,7 @@ export default function TextareaPage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           TEXTAREA
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -67,7 +67,7 @@ export default function TextareaPage() {
       {/* Full Code */}
       <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+          <h3 className="text-xl font-semibold tracking-[-0.03em]">
             FULL COMPONENT CODE
           </h3>
         </div>
@@ -85,19 +85,19 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       text-base font-medium
       bg-white
       border-4 border-black
-      shadow-[4px_4px_0_0_#000]
+      shadow-[var(--ui-shadow)]
       outline-none
       transition-all duration-100 ease-out
       placeholder:text-gray-400 placeholder:uppercase
       focus:translate-x-[-2px] focus:translate-y-[-2px]
-      focus:shadow-[6px_6px_0_0_#000]
+      focus:shadow-[var(--ui-shadow-lg)]
       disabled:opacity-50 disabled:cursor-not-allowed
       resize-none
       min-h-[120px]
     \`;
 
     const errorStyles = error
-      ? "border-[#ef4444] shadow-[4px_4px_0_0_#ef4444] focus:shadow-[6px_6px_0_0_#ef4444]"
+      ? "border-[var(--ui-danger)] shadow-[4px_4px_0_0_#ef4444] focus:shadow-[6px_6px_0_0_#ef4444]"
       : "";
 
     return (

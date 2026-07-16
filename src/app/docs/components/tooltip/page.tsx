@@ -11,7 +11,7 @@ export default function TooltipPage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           TOOLTIP
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -138,7 +138,7 @@ export default function TooltipPage() {
       {/* Usage Notes */}
       <div className="space-y-4">
         <h2 className="text-brutal-2xl font-bold uppercase">USAGE NOTES</h2>
-        <div className="bg-gray-100 border-4 border-black shadow-[4px_4px_0_0_#000] p-6">
+        <div className="bg-gray-100 border-4 border-black shadow-[var(--ui-shadow)] p-6">
           <ul className="space-y-3 font-medium">
             <li>
               <strong className="uppercase">Portal Rendering:</strong> Tooltips

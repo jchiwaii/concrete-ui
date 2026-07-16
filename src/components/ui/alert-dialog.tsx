@@ -52,7 +52,7 @@ const AlertDialogContent = forwardRef<HTMLDivElement, AlertDialogContentProps>(
       role="alertdialog"
       aria-modal="true"
       className={cn(
-        "rounded-lg border-2 border-black bg-white shadow-[8px_8px_0_0_#000] animate-brutal-scale-in",
+        "rounded-[var(--ui-radius-lg)] border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)] animate-brutal-scale-in",
         className
       )}
       {...props}
@@ -72,7 +72,7 @@ AlertDialogHeader.displayName = "AlertDialogHeader";
 
 const AlertDialogTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
   ({ className = "", ...props }, ref) => (
-    <h2 ref={ref} className={cn("text-2xl font-extrabold uppercase tracking-tight", className)} {...props} />
+    <h2 ref={ref} className={cn("text-2xl font-semibold tracking-[-0.035em]", className)} {...props} />
   )
 );
 
@@ -90,7 +90,7 @@ const AlertDialogFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
   ({ className = "", ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("flex flex-col-reverse gap-3 border-t-2 border-black bg-gray-50 p-5 sm:flex-row sm:justify-end", className)}
+      className={cn("flex flex-col-reverse gap-3 border-t-2 border-black bg-[var(--ui-surface-muted)] p-5 sm:flex-row sm:justify-end", className)}
       {...props}
     />
   )

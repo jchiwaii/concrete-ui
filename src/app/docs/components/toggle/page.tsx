@@ -15,7 +15,7 @@ export default function TogglePage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           TOGGLE
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -62,7 +62,7 @@ const [checked, setChecked] = useState(false);
       {/* Full Code */}
       <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+          <h3 className="text-xl font-semibold tracking-[-0.03em]">
             FULL COMPONENT CODE
           </h3>
         </div>
@@ -93,13 +93,13 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
           className={\`
             relative w-16 h-9
             border-4 border-black
-            shadow-[3px_3px_0_0_#000]
+            shadow-[var(--ui-shadow)]
             transition-all duration-100 ease-out
             hover:translate-x-[-2px] hover:translate-y-[-2px]
-            hover:shadow-[5px_5px_0_0_#000]
+            hover:shadow-[var(--ui-shadow-md)]
             disabled:hover:translate-x-0 disabled:hover:translate-y-0
-            disabled:hover:shadow-[3px_3px_0_0_#000]
-            \${checked ? "bg-[#22c55e]" : "bg-white"}
+            disabled:hover:shadow-[var(--ui-shadow)]
+            \${checked ? "bg-[var(--ui-success)]" : "bg-white"}
           \`}
           {...props}
         >

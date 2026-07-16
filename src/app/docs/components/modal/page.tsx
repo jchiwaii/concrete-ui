@@ -25,7 +25,7 @@ export default function ModalPage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           MODAL
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -125,7 +125,7 @@ const [open, setOpen] = useState(false);
       {/* Full Code */}
       <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+          <h3 className="text-xl font-semibold tracking-[-0.03em]">
             FULL COMPONENT CODE
           </h3>
         </div>
@@ -167,7 +167,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           ref={ref}
           role="dialog"
           aria-modal="true"
-          className="relative z-10 w-full max-w-lg bg-white border-4 border-black shadow-[8px_8px_0_0_#000] animate-brutal-slide-up"
+          className="relative z-10 w-full max-w-lg bg-white border-4 border-black shadow-[var(--ui-shadow-xl)] animate-brutal-slide-up"
           {...props}
         >
           {children}

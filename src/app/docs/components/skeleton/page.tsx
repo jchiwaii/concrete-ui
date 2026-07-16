@@ -11,7 +11,7 @@ export default function SkeletonPage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           SKELETON
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -83,7 +83,7 @@ export default function SkeletonPage() {
       {/* Full Code */}
       <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+          <h3 className="text-xl font-semibold tracking-[-0.03em]">
             FULL COMPONENT CODE
           </h3>
         </div>

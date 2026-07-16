@@ -2,6 +2,7 @@
 
 import {
   HTMLAttributes,
+  ButtonHTMLAttributes,
   ReactNode,
   createContext,
   forwardRef,
@@ -52,10 +53,10 @@ const HoverCard = ({ children, openDelay = 120, closeDelay = 120 }: HoverCardPro
 
 HoverCard.displayName = "HoverCard";
 
-export interface HoverCardTriggerProps extends HTMLAttributes<HTMLButtonElement> {}
+export interface HoverCardTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const HoverCardTrigger = forwardRef<HTMLButtonElement, HoverCardTriggerProps>(
-  ({ className = "", ...props }, ref) => {
+  ({ className = "", onMouseEnter, onMouseLeave, onFocus, onBlur, type = "button", ...props }, ref) => {
     const context = useContext(HoverCardContext);
     if (!context) throw new Error("HoverCardTrigger must be used within HoverCard");
 
@@ -66,11 +67,23 @@ const HoverCardTrigger = forwardRef<HTMLButtonElement, HoverCardTriggerProps>(
           else if (ref) ref.current = node;
           context.triggerRef.current = node;
         }}
-        type="button"
-        onMouseEnter={() => context.setOpen(true)}
-        onMouseLeave={() => context.setOpen(false)}
-        onFocus={() => context.setOpen(true)}
-        onBlur={() => context.setOpen(false)}
+        type={type}
+        onMouseEnter={(event) => {
+          onMouseEnter?.(event);
+          if (!event.defaultPrevented) context.setOpen(true);
+        }}
+        onMouseLeave={(event) => {
+          onMouseLeave?.(event);
+          if (!event.defaultPrevented) context.setOpen(false);
+        }}
+        onFocus={(event) => {
+          onFocus?.(event);
+          if (!event.defaultPrevented) context.setOpen(true);
+        }}
+        onBlur={(event) => {
+          onBlur?.(event);
+          if (!event.defaultPrevented) context.setOpen(false);
+        }}
         className={cn("inline-flex", className)}
         {...props}
       />
@@ -110,7 +123,7 @@ const HoverCardContent = forwardRef<HTMLDivElement, HoverCardContentProps>(
         onMouseEnter={() => context.setOpen(true)}
         onMouseLeave={() => context.setOpen(false)}
         className={cn(
-          "fixed z-50 max-w-sm rounded-lg border-2 border-black bg-white p-5 shadow-[6px_6px_0_0_#000] animate-brutal-scale-in",
+          "fixed z-50 max-w-sm rounded-lg border-2 border-black bg-[var(--ui-surface)] p-5 shadow-[var(--ui-shadow-lg)] animate-brutal-scale-in",
           className
         )}
         style={{ top: position.top, left: position.left }}

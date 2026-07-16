@@ -20,7 +20,7 @@ export default function CardPage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           CARD
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -158,7 +158,7 @@ export default function CardPage() {
       {/* Full Code */}
       <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+          <h3 className="text-xl font-semibold tracking-[-0.03em]">
             FULL COMPONENT CODE
           </h3>
         </div>
@@ -178,18 +178,18 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     \`;
 
     const variants = {
-      default: "shadow-[6px_6px_0_0_#000]",
-      elevated: "shadow-[8px_8px_0_0_#000] hover:shadow-[12px_12px_0_0_#000] hover:translate-x-[-4px] hover:translate-y-[-4px]",
+      default: "shadow-[var(--ui-shadow-lg)]",
+      elevated: "shadow-[var(--ui-shadow-xl)] hover:shadow-[12px_12px_0_0_#000] hover:translate-x-[-4px] hover:translate-y-[-4px]",
       bordered: "shadow-none",
-      filled: "shadow-[6px_6px_0_0_#000]",
+      filled: "shadow-[var(--ui-shadow-lg)]",
     };
 
     const colors = {
       white: "bg-white",
-      yellow: "bg-[#ffde00]",
-      cyan: "bg-[#06b6d4]",
-      magenta: "bg-[#ec4899]",
-      lime: "bg-[#a3e635]",
+      yellow: "bg-[var(--ui-accent)]",
+      cyan: "bg-[var(--ui-info)]",
+      magenta: "bg-[var(--ui-pink)]",
+      lime: "bg-[var(--ui-lime)]",
     };
 
     return (

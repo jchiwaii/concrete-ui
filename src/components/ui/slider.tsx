@@ -185,16 +185,16 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
 
     const trackStyles = `
       relative
-      bg-white
+      bg-[var(--ui-surface)]
       border-2 border-black
-      shadow-[4px_4px_0_0_#000]
+      shadow-[var(--ui-shadow)]
       ${orientation === "horizontal" ? "h-10 w-full rounded-lg" : "w-10 h-full rounded-lg"}
-      ${!disabled ? "hover:shadow-[5px_5px_0_0_#000]" : ""}
+      ${!disabled ? "hover:shadow-[var(--ui-shadow-md)]" : ""}
     `;
 
     const fillStyles = `
       absolute
-      bg-[#ffde00]
+      bg-[var(--ui-accent)]
       border-r-2 border-black
       ${orientation === "horizontal" ? "h-full left-0 top-0" : "w-full bottom-0 left-0"}
       transition-all duration-100 ease-out
@@ -206,20 +206,20 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
       w-8 h-8
       bg-black
       border-4 border-white
-      shadow-[5px_5px_0_0_#000]
+      shadow-[var(--ui-shadow-md)]
       transition-all duration-100 ease-out
       ${
         !disabled
-          ? "hover:scale-105 hover:shadow-[6px_6px_0_0_#000]"
+          ? "hover:scale-105 hover:shadow-[var(--ui-shadow-md)]"
           : ""
       }
-      ${isDragging ? "scale-105 shadow-[6px_6px_0_0_#000]" : ""}
+      ${isDragging ? "scale-105 shadow-[var(--ui-shadow-lg)]" : ""}
       ${orientation === "horizontal" ? "top-1/2 -translate-y-1/2" : "left-1/2 -translate-x-1/2"}
     `;
 
     const valueStyles = `
-      font-extrabold
-      uppercase
+      font-semibold
+     
       tracking-wider
       text-base
       ${orientation === "horizontal" ? "text-center" : "text-left"}

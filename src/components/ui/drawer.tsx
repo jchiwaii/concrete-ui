@@ -4,9 +4,8 @@ import {
   HTMLAttributes,
   forwardRef,
   ReactNode,
-  useEffect,
-  useCallback,
   useRef,
+  ButtonHTMLAttributes,
 } from "react";
 import { createPortal } from "react-dom";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
@@ -19,6 +18,8 @@ export interface DrawerProps {
   onClose: () => void;
   direction?: DrawerDirection;
   children: ReactNode;
+  className?: string;
+  ariaLabel?: string;
 }
 
 const Drawer = ({
@@ -26,23 +27,10 @@ const Drawer = ({
   onClose,
   direction = "right",
   children,
+  className = "",
+  ariaLabel = "Panel",
 }: DrawerProps) => {
   const drawerRef = useRef<HTMLDivElement>(null);
-
-  // Handle escape key
-  const handleEscape = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape" && open) {
-        onClose();
-      }
-    },
-    [open, onClose]
-  );
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [handleEscape]);
 
   useBodyScrollLock(open);
   useFocusTrap(drawerRef, open, onClose);
@@ -50,19 +38,19 @@ const Drawer = ({
   if (!open || typeof window === "undefined") return null;
 
   const directionStyles = {
-    left: "left-0 top-0 h-full w-96 border-r-6 shadow-[8px_0_0_0_#000] animate-brutal-slide-right",
+    left: "left-0 top-0 h-full w-[min(90vw,24rem)] border-r-2 shadow-[5px_0_0_var(--ui-ink)] animate-brutal-slide-right",
     right:
-      "right-0 top-0 h-full w-96 border-l-6 shadow-[-8px_0_0_0_#000] animate-brutal-slide-left",
-    top: "top-0 left-0 w-full h-96 border-b-6 shadow-[0_8px_0_0_#000] animate-brutal-slide-bottom",
+      "right-0 top-0 h-full w-[min(90vw,24rem)] border-l-2 shadow-[-5px_0_0_var(--ui-ink)] animate-brutal-slide-left",
+    top: "left-0 top-0 max-h-[85dvh] w-full border-b-2 shadow-[0_5px_0_var(--ui-ink)] animate-brutal-slide-bottom",
     bottom:
-      "bottom-0 left-0 w-full h-96 border-t-6 shadow-[0_-8px_0_0_#000] animate-brutal-slide-top",
+      "bottom-0 left-0 max-h-[85dvh] w-full border-t-2 shadow-[0_-5px_0_var(--ui-ink)] animate-brutal-slide-top",
   };
 
   return createPortal(
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/50 z-40 animate-brutal-slide-down"
+        className="fixed inset-0 z-40 bg-black/45 backdrop-blur-[1px] animate-brutal-fade-in"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -73,13 +61,15 @@ const Drawer = ({
         className={`
           fixed
           z-50
-          bg-white
+          bg-[var(--ui-surface)]
           border-black
           overflow-y-auto
           ${directionStyles[direction]}
+          ${className}
         `}
         role="dialog"
         aria-modal="true"
+        aria-label={ariaLabel}
       >
         {children}
       </div>
@@ -97,7 +87,7 @@ const DrawerContent = forwardRef<HTMLDivElement, DrawerContentProps>(
     return (
       <div
         ref={ref}
-        className={`flex flex-col h-full ${className}`}
+        className={`flex h-full min-h-0 flex-col ${className}`}
         {...props}
       >
         {children}
@@ -116,8 +106,7 @@ const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
       <div
         ref={ref}
         className={`
-          px-6 py-4
-          border-b-4 border-black
+          border-b-2 border-black px-5 py-4 pr-16
           ${className}
         `}
         {...props}
@@ -138,10 +127,9 @@ const DrawerTitle = forwardRef<HTMLHeadingElement, DrawerTitleProps>(
       <h2
         ref={ref}
         className={`
-          text-2xl
-          font-bold
-          uppercase
-          tracking-wider
+          text-xl
+          font-semibold
+          tracking-[-0.03em]
           ${className}
         `}
         {...props}
@@ -185,7 +173,7 @@ const DrawerBody = forwardRef<HTMLDivElement, DrawerBodyProps>(
     return (
       <div
         ref={ref}
-        className={`flex-1 px-6 py-4 overflow-y-auto ${className}`}
+        className={`min-h-0 flex-1 overflow-y-auto px-5 py-4 ${className}`}
         {...props}
       >
         {children}
@@ -204,9 +192,7 @@ const DrawerFooter = forwardRef<HTMLDivElement, DrawerFooterProps>(
       <div
         ref={ref}
         className={`
-          px-6 py-4
-          border-t-4 border-black
-          flex gap-4
+          flex flex-col-reverse gap-3 border-t-2 border-black bg-[var(--ui-surface-muted)] px-5 py-4 sm:flex-row
           ${className}
         `}
         {...props}
@@ -219,7 +205,7 @@ const DrawerFooter = forwardRef<HTMLDivElement, DrawerFooterProps>(
 
 DrawerFooter.displayName = "DrawerFooter";
 
-export interface DrawerCloseProps extends HTMLAttributes<HTMLButtonElement> {
+export interface DrawerCloseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClose: () => void;
 }
 
@@ -228,20 +214,22 @@ const DrawerClose = forwardRef<HTMLButtonElement, DrawerCloseProps>(
     return (
       <button
         ref={ref}
+        type="button"
         onClick={onClose}
         className={`
           absolute
           top-4 right-4
-          w-10 h-10
+          w-9 h-9
           flex items-center justify-center
-          bg-white
+          bg-[var(--ui-surface)]
           border-2 border-black
-          shadow-[3px_3px_0_0_#000]
-          font-bold text-2xl
-          transition-all duration-100 ease-out
-          hover:translate-x-[-2px] hover:translate-y-[-2px]
-          hover:shadow-[5px_5px_0_0_#000]
-          hover:bg-[#ef4444] hover:text-white hover:border-white
+          rounded-[var(--ui-radius-sm)]
+          shadow-[var(--ui-shadow-sm)]
+          font-semibold text-xl
+          transition-all duration-150 ease-out
+          hover:-translate-x-px hover:-translate-y-px
+          hover:shadow-[var(--ui-shadow)]
+          hover:bg-[var(--ui-danger)]
           ${className}
         `}
         aria-label="Close"

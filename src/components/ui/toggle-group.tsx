@@ -35,7 +35,7 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       <div
         ref={ref}
         role="group"
-        className={cn("inline-flex flex-wrap overflow-hidden rounded-lg border-2 border-black shadow-[4px_4px_0_0_#000]", className)}
+        className={cn("inline-flex flex-wrap overflow-hidden rounded-lg border-2 border-black shadow-[var(--ui-shadow)]", className)}
         {...props}
       >
         {children}
@@ -84,9 +84,9 @@ const ToggleGroupItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
         disabled={isDisabled}
         onClick={handleClick}
         className={cn(
-          "border-r-2 border-black px-4 py-2 text-sm font-bold uppercase tracking-wide last:border-r-0",
-          "transition-colors duration-100 focus:outline-none focus-visible:bg-[#fff4ab]",
-          isPressed ? "bg-[#ffde00] text-black" : "bg-white text-black hover:bg-gray-100",
+          "border-r-2 border-black px-4 py-2 text-sm font-semibold last:border-r-0",
+          "transition-colors duration-100 focus:outline-none focus-visible:bg-[var(--ui-accent-soft)]",
+          isPressed ? "bg-[var(--ui-accent)] text-black" : "bg-[var(--ui-surface)] text-black hover:bg-gray-100",
           isDisabled && "cursor-not-allowed opacity-50",
           className
         )}

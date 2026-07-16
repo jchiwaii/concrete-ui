@@ -11,7 +11,7 @@ export default function BadgePage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           BADGE
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -92,7 +92,7 @@ export default function BadgePage() {
       {/* Full Code */}
       <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+          <h3 className="text-xl font-semibold tracking-[-0.03em]">
             FULL COMPONENT CODE
           </h3>
         </div>
@@ -110,16 +110,16 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       inline-flex items-center justify-center
       font-bold uppercase tracking-wider
       border-4 border-black
-      shadow-[3px_3px_0_0_#000]
+      shadow-[var(--ui-shadow)]
     \`;
 
     const variants = {
       default: "bg-white text-black",
-      primary: "bg-[#ffde00] text-black",
-      secondary: "bg-[#06b6d4] text-black",
-      danger: "bg-[#ef4444] text-white",
-      success: "bg-[#22c55e] text-black",
-      warning: "bg-[#f97316] text-white",
+      primary: "bg-[var(--ui-accent)] text-black",
+      secondary: "bg-[var(--ui-info)] text-black",
+      danger: "bg-[var(--ui-danger)] text-white",
+      success: "bg-[var(--ui-success)] text-black",
+      warning: "bg-[var(--ui-warning)] text-white",
     };
 
     const sizes = {

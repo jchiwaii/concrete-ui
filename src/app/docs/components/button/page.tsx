@@ -11,7 +11,7 @@ export default function ButtonPage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           BUTTON
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -107,7 +107,7 @@ export default function ButtonPage() {
       {/* Full Code */}
       <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+          <h3 className="text-xl font-semibold tracking-[-0.03em]">
             FULL COMPONENT CODE
           </h3>
         </div>
@@ -154,19 +154,19 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       default:
-        "bg-white text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+        "bg-white text-black shadow-[var(--ui-shadow)] hover:shadow-[var(--ui-shadow-lg)] hover:translate-x-[-2px] hover:translate-y-[-2px]",
       primary:
-        "bg-[#ffde00] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+        "bg-[var(--ui-accent)] text-black shadow-[var(--ui-shadow)] hover:shadow-[var(--ui-shadow-lg)] hover:translate-x-[-2px] hover:translate-y-[-2px]",
       secondary:
-        "bg-[#06b6d4] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+        "bg-[var(--ui-info)] text-black shadow-[var(--ui-shadow)] hover:shadow-[var(--ui-shadow-lg)] hover:translate-x-[-2px] hover:translate-y-[-2px]",
       danger:
-        "bg-[#ef4444] text-white shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+        "bg-[var(--ui-danger)] text-white shadow-[var(--ui-shadow)] hover:shadow-[var(--ui-shadow-lg)] hover:translate-x-[-2px] hover:translate-y-[-2px]",
       success:
-        "bg-[#22c55e] text-black shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+        "bg-[var(--ui-success)] text-black shadow-[var(--ui-shadow)] hover:shadow-[var(--ui-shadow-lg)] hover:translate-x-[-2px] hover:translate-y-[-2px]",
       neutral:
-        "bg-gray-900 text-white shadow-[4px_4px_0_0_#000] hover:shadow-[6px_6px_0_0_#ffde00] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+        "bg-gray-900 text-white shadow-[var(--ui-shadow)] hover:shadow-[6px_6px_0_0_#ffde00] hover:translate-x-[-2px] hover:translate-y-[-2px]",
       ghost: "bg-transparent text-black border-transparent shadow-none hover:bg-gray-100 hover:shadow-none",
-      outline: "bg-transparent text-black shadow-[4px_4px_0_0_#000] hover:bg-black hover:text-white",
+      outline: "bg-transparent text-black shadow-[var(--ui-shadow)] hover:bg-black hover:text-white",
     };
 
     const sizes = {

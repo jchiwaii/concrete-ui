@@ -9,12 +9,19 @@ export interface ResizableProps extends HTMLAttributes<HTMLDivElement> {
   defaultSize?: number;
   minSize?: number;
   maxSize?: number;
+  onSizeChange?: (size: number) => void;
 }
 
 const Resizable = forwardRef<HTMLDivElement, ResizableProps>(
-  ({ className = "", left, right, defaultSize = 50, minSize = 20, maxSize = 80, ...props }, ref) => {
+  ({ className = "", left, right, defaultSize = 50, minSize = 20, maxSize = 80, onSizeChange, ...props }, ref) => {
     const [size, setSize] = useState(defaultSize);
     const rootRef = useRef<HTMLDivElement | null>(null);
+
+    const updateSize = (nextSize: number) => {
+      const clampedSize = clamp(nextSize, minSize, maxSize);
+      setSize(clampedSize);
+      onSizeChange?.(clampedSize);
+    };
 
     const onPointerDown = (event: React.PointerEvent<HTMLButtonElement>) => {
       event.currentTarget.setPointerCapture(event.pointerId);
@@ -24,7 +31,19 @@ const Resizable = forwardRef<HTMLDivElement, ResizableProps>(
       if (!event.currentTarget.hasPointerCapture(event.pointerId) || !rootRef.current) return;
       const rect = rootRef.current.getBoundingClientRect();
       const next = ((event.clientX - rect.left) / rect.width) * 100;
-      setSize(clamp(next, minSize, maxSize));
+      updateSize(next);
+    };
+
+    const onKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      let nextSize = size;
+      if (event.key === "ArrowLeft") nextSize -= 2;
+      else if (event.key === "ArrowRight") nextSize += 2;
+      else if (event.key === "Home") nextSize = minSize;
+      else if (event.key === "End") nextSize = maxSize;
+      else return;
+
+      event.preventDefault();
+      updateSize(nextSize);
     };
 
     return (
@@ -34,17 +53,23 @@ const Resizable = forwardRef<HTMLDivElement, ResizableProps>(
           if (typeof ref === "function") ref(node);
           else if (ref) ref.current = node;
         }}
-        className={cn("grid overflow-hidden rounded-lg border-2 border-black bg-white shadow-[4px_4px_0_0_#000]", className)}
-        style={{ gridTemplateColumns: `${size}% 10px 1fr` }}
+        className={cn("grid overflow-hidden rounded-[var(--ui-radius-lg)] border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow)]", className)}
+        style={{ gridTemplateColumns: `${size}% 12px 1fr` }}
         {...props}
       >
         <div className="min-w-0 overflow-auto p-4">{left}</div>
         <button
           type="button"
+          role="separator"
           aria-label="Resize panels"
+          aria-orientation="vertical"
+          aria-valuemin={minSize}
+          aria-valuemax={maxSize}
+          aria-valuenow={Math.round(size)}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
-          className="cursor-col-resize border-x-2 border-black bg-[#ffde00] hover:bg-[#06b6d4]"
+          onKeyDown={onKeyDown}
+          className="touch-none cursor-col-resize border-x-2 border-black bg-[var(--ui-accent)] transition-colors hover:bg-[var(--ui-info)]"
         />
         <div className="min-w-0 overflow-auto p-4">{right}</div>
       </div>

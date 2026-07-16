@@ -1,48 +1,65 @@
 "use client";
 
 import {
+  ButtonHTMLAttributes,
   HTMLAttributes,
-  forwardRef,
-  useState,
   createContext,
+  forwardRef,
   useContext,
+  useId,
+  useState,
 } from "react";
+import { cn } from "@/lib/utils";
 
 interface AccordionContextValue {
   openItems: string[];
   toggleItem: (value: string) => void;
-  type: "single" | "multiple";
+  baseId: string;
 }
 
 const AccordionContext = createContext<AccordionContextValue | null>(null);
 
 export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   type?: "single" | "multiple";
+  value?: string[];
   defaultValue?: string[];
+  onValueChange?: (value: string[]) => void;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
-    { className = "", type = "single", defaultValue = [], children, ...props },
+    {
+      className = "",
+      type = "single",
+      value,
+      defaultValue = [],
+      onValueChange,
+      children,
+      ...props
+    },
     ref
   ) => {
-    const [openItems, setOpenItems] = useState<string[]>(defaultValue);
+    const baseId = useId();
+    const [internalValue, setInternalValue] = useState(defaultValue);
+    const openItems = value ?? internalValue;
 
-    const toggleItem = (value: string) => {
-      if (type === "single") {
-        setOpenItems(openItems.includes(value) ? [] : [value]);
-      } else {
-        setOpenItems(
-          openItems.includes(value)
-            ? openItems.filter((item) => item !== value)
-            : [...openItems, value]
-        );
-      }
+    const toggleItem = (itemValue: string) => {
+      const nextValue =
+        type === "single"
+          ? openItems.includes(itemValue)
+            ? []
+            : [itemValue]
+          : openItems.includes(itemValue)
+            ? openItems.filter((item) => item !== itemValue)
+            : [...openItems, itemValue];
+
+      if (value === undefined) setInternalValue(nextValue);
+      onValueChange?.(nextValue);
     };
 
     return (
-      <AccordionContext.Provider value={{ openItems, toggleItem, type }}>
-        <div ref={ref} className={`space-y-3 ${className}`} {...props}>
+      <AccordionContext.Provider value={{ openItems, toggleItem, baseId }}>
+        <div ref={ref} className={cn("space-y-3", className)} {...props}>
           {children}
         </div>
       </AccordionContext.Provider>
@@ -59,8 +76,7 @@ export interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
 const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   ({ className = "", value, children, ...props }, ref) => {
     const context = useContext(AccordionContext);
-    if (!context)
-      throw new Error("AccordionItem must be used within Accordion");
+    if (!context) throw new Error("AccordionItem must be used within Accordion");
 
     const isOpen = context.openItems.includes(value);
 
@@ -68,14 +84,10 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       <div
         ref={ref}
         data-state={isOpen ? "open" : "closed"}
-        className={`
-          border-2 border-black
-          bg-white
-          shadow-[4px_4px_0_0_#000]
-          rounded-md
-          overflow-hidden
-          ${className}
-        `}
+        className={cn(
+          "overflow-hidden rounded-[var(--ui-radius-lg)] border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow)]",
+          className
+        )}
         {...props}
       >
         {children}
@@ -87,45 +99,49 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
 AccordionItem.displayName = "AccordionItem";
 
 export interface AccordionTriggerProps
-  extends HTMLAttributes<HTMLButtonElement> {
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;
 }
 
 const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
-  ({ className = "", value, children, ...props }, ref) => {
+  ({ className = "", value, children, onClick, ...props }, ref) => {
     const context = useContext(AccordionContext);
-    if (!context)
-      throw new Error("AccordionTrigger must be used within Accordion");
+    if (!context) throw new Error("AccordionTrigger must be used within Accordion");
 
     const isOpen = context.openItems.includes(value);
+    const triggerId = `${context.baseId}-trigger-${value}`;
+    const contentId = `${context.baseId}-content-${value}`;
 
     return (
       <button
         ref={ref}
-        onClick={() => context.toggleItem(value)}
-        className={`
-          w-full px-5 py-4
-          flex items-center justify-between gap-4
-          text-left
-          font-semibold
-          transition-all duration-100 ease-out
-          hover:bg-gray-50
-          ${className}
-        `}
+        id={triggerId}
+        type="button"
         aria-expanded={isOpen}
+        aria-controls={contentId}
+        onClick={(event) => {
+          onClick?.(event);
+          if (!event.defaultPrevented) context.toggleItem(value);
+        }}
+        className={cn(
+          "flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-[15px] font-semibold transition-colors duration-150 hover:bg-black/5",
+          className
+        )}
         {...props}
       >
         <span>{children}</span>
         <svg
-          className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform duration-100 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={cn(
+            "h-4 w-4 shrink-0 text-gray-500 transition-transform duration-150",
+            isOpen && "rotate-180"
+          )}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
           strokeWidth={2}
+          aria-hidden="true"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
         </svg>
       </button>
     );
@@ -141,20 +157,23 @@ export interface AccordionContentProps extends HTMLAttributes<HTMLDivElement> {
 const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   ({ className = "", value, children, ...props }, ref) => {
     const context = useContext(AccordionContext);
-    if (!context)
-      throw new Error("AccordionContent must be used within Accordion");
+    if (!context) throw new Error("AccordionContent must be used within Accordion");
 
-    const isOpen = context.openItems.includes(value);
-
-    if (!isOpen) return null;
+    if (!context.openItems.includes(value)) return null;
 
     return (
       <div
         ref={ref}
-        className={`px-5 pb-4 border-t-2 border-black animate-brutal-fade-in ${className}`}
+        id={`${context.baseId}-content-${value}`}
+        role="region"
+        aria-labelledby={`${context.baseId}-trigger-${value}`}
+        className={cn(
+          "border-t-2 border-black px-5 py-4 text-sm leading-6 text-gray-600 animate-brutal-fade-in",
+          className
+        )}
         {...props}
       >
-        <div className="pt-4 text-sm text-gray-600">{children}</div>
+        {children}
       </div>
     );
   }

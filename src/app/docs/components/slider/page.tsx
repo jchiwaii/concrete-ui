@@ -17,7 +17,7 @@ export default function SliderPage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           SLIDER
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -119,7 +119,7 @@ const [value, setValue] = useState(50);
         <h2 className="text-brutal-2xl font-bold uppercase">
           KEYBOARD NAVIGATION
         </h2>
-        <div className="bg-gray-100 border-4 border-black shadow-[4px_4px_0_0_#000] p-6">
+        <div className="bg-gray-100 border-4 border-black shadow-[var(--ui-shadow)] p-6">
           <ul className="space-y-2 font-mono text-sm">
             <li>
               <kbd className="px-2 py-1 bg-black text-white border-2 border-white">

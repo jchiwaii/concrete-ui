@@ -17,7 +17,7 @@ const Kbd = forwardRef<HTMLElement, KbdProps>(
       <kbd
         ref={ref}
         className={cn(
-          "inline-flex items-center justify-center rounded-md border-2 border-black bg-white font-mono font-bold uppercase leading-none shadow-[2px_2px_0_0_#000]",
+          "inline-flex items-center justify-center rounded-md border-2 border-black bg-[var(--ui-surface)] font-mono font-semibold leading-none shadow-[var(--ui-shadow-sm)]",
           sizes[size],
           className
         )}

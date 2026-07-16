@@ -104,7 +104,7 @@ const ContextMenuContent = forwardRef<HTMLDivElement, ContextMenuContentProps>(
         }}
         role="menu"
         className={cn(
-          "fixed z-50 min-w-56 overflow-hidden rounded-lg border-2 border-black bg-white shadow-[6px_6px_0_0_#000] animate-brutal-scale-in",
+          "fixed z-50 min-w-56 overflow-hidden rounded-lg border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)] animate-brutal-scale-in",
           className
         )}
         style={{ top: safePosition.top, left: safePosition.left }}
@@ -146,7 +146,7 @@ const ContextMenuItem = forwardRef<HTMLDivElement, ContextMenuItemProps>(
           }
         }}
         className={cn(
-          "flex cursor-pointer items-center justify-between gap-4 border-b-2 border-black px-4 py-3 text-sm font-bold uppercase tracking-wide last:border-b-0 hover:bg-[#ffde00]",
+          "flex cursor-pointer items-center justify-between gap-4 border-b-2 border-black px-4 py-3 text-sm font-semibold last:border-b-0 hover:bg-[var(--ui-accent)]",
           inset && "pl-9",
           disabled && "cursor-not-allowed bg-gray-100 opacity-50 hover:bg-gray-100",
           className
@@ -161,7 +161,7 @@ ContextMenuItem.displayName = "ContextMenuItem";
 
 const ContextMenuLabel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", ...props }, ref) => (
-    <div ref={ref} className={cn("border-b-2 border-black bg-gray-100 px-4 py-2 text-xs font-bold uppercase tracking-widest text-gray-500", className)} {...props} />
+    <div ref={ref} className={cn("border-b-2 border-black bg-gray-100 px-4 py-2 text-xs font-semibold tracking-[0.12em] text-gray-500", className)} {...props} />
   )
 );
 

@@ -2,189 +2,207 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  Input,
+} from "@/components/ui";
+import {
+  componentGroups,
+  getComponentHref,
+} from "@/lib/component-registry";
+import { cn } from "@/lib/utils";
 
-const navigation = [
-  {
-    title: "Getting Started",
-    links: [
-      { title: "Introduction", href: "/docs" },
-      { title: "Installation", href: "/docs/installation" },
-    ],
-  },
-  {
-    title: "Components",
-    links: [
-      { title: "Accordion", href: "/docs/components/accordion" },
-      { title: "Alert", href: "/docs/components/alert" },
-      { title: "Alert Dialog", href: "/docs/components/alert-dialog" },
-      { title: "Aspect Ratio", href: "/docs/components/aspect-ratio" },
-      { title: "Avatar", href: "/docs/components/avatar" },
-      { title: "Badge", href: "/docs/components/badge" },
-      { title: "Breadcrumb", href: "/docs/components/breadcrumb" },
-      { title: "Button", href: "/docs/components/button" },
-      { title: "Button Group", href: "/docs/components/button-group" },
-      { title: "Calendar", href: "/docs/components/calendar" },
-      { title: "Card", href: "/docs/components/card" },
-      { title: "Carousel", href: "/docs/components/carousel" },
-      { title: "Checkbox", href: "/docs/components/checkbox" },
-      { title: "Collapsible", href: "/docs/components/collapsible" },
-      { title: "Combobox", href: "/docs/components/combobox" },
-      { title: "Command", href: "/docs/components/command" },
-      { title: "Context Menu", href: "/docs/components/context-menu" },
-      { title: "Date Picker", href: "/docs/components/date-picker" },
-      { title: "Drawer", href: "/docs/components/drawer" },
-      { title: "Dropdown Menu", href: "/docs/components/dropdown-menu" },
-      { title: "Empty", href: "/docs/components/empty" },
-      { title: "Field", href: "/docs/components/field" },
-      { title: "File Upload", href: "/docs/components/file-upload" },
-      { title: "Hover Card", href: "/docs/components/hover-card" },
-      { title: "Input", href: "/docs/components/input" },
-      { title: "Input Group", href: "/docs/components/input-group" },
-      { title: "Item", href: "/docs/components/item" },
-      { title: "Kbd", href: "/docs/components/kbd" },
-      { title: "Label", href: "/docs/components/label" },
-      { title: "Marquee", href: "/docs/components/marquee" },
-      { title: "Menubar", href: "/docs/components/menubar" },
-      { title: "Modal", href: "/docs/components/modal" },
-      { title: "Multi Select", href: "/docs/components/multi-select" },
-      { title: "Navigation Menu", href: "/docs/components/navigation-menu" },
-      { title: "Pagination", href: "/docs/components/pagination" },
-      { title: "Popover", href: "/docs/components/popover" },
-      { title: "Progress", href: "/docs/components/progress" },
-      { title: "Radio Group", href: "/docs/components/radio-group" },
-      { title: "Resizable", href: "/docs/components/resizable" },
-      { title: "Scroll Area", href: "/docs/components/scroll-area" },
-      { title: "Select", href: "/docs/components/select" },
-      { title: "Separator", href: "/docs/components/separator" },
-      { title: "Skeleton", href: "/docs/components/skeleton" },
-      { title: "Slider", href: "/docs/components/slider" },
-      { title: "Spinner", href: "/docs/components/spinner" },
-      { title: "Stepper", href: "/docs/components/stepper" },
-      { title: "Switch", href: "/docs/components/switch" },
-      { title: "Table", href: "/docs/components/table" },
-      { title: "Tabs", href: "/docs/components/tabs" },
-      { title: "Textarea", href: "/docs/components/textarea" },
-      { title: "Timeline", href: "/docs/components/timeline" },
-      { title: "Toast", href: "/docs/components/toast" },
-      { title: "Toggle", href: "/docs/components/toggle" },
-      { title: "Toggle Group", href: "/docs/components/toggle-group" },
-      { title: "Tooltip", href: "/docs/components/tooltip" },
-    ],
-  },
-  {
-    title: "Templates",
-    links: [
-      { title: "Overview", href: "/docs/templates" },
-      { title: "JobHub Landing", href: "/docs/templates/jobhub-landing" },
-    ],
-  },
+const primaryLinks = [
+  { title: "Introduction", href: "/docs" },
+  { title: "Installation", href: "/docs/installation" },
+  { title: "All components", href: "/docs/components" },
+  { title: "Templates", href: "/docs/templates" },
 ];
 
-const mobileQuickLinks = [
-  { title: "Intro", href: "/docs" },
-  { title: "Install", href: "/docs/installation" },
-  { title: "Button", href: "/docs/components/button" },
-  { title: "Field", href: "/docs/components/field" },
-  { title: "Combobox", href: "/docs/components/combobox" },
-  { title: "JobHub", href: "/docs/templates/jobhub-landing" },
-];
+function Brand() {
+  return (
+    <Link href="/" className="inline-flex items-center gap-2" aria-label="Concrete UI home">
+      <span className="text-lg font-bold tracking-[-0.04em]">Concrete</span>
+      <span className="rounded-[4px] bg-black px-1.5 py-0.5 text-xs font-bold tracking-tight text-white">
+        UI
+      </span>
+    </Link>
+  );
+}
 
-export function Sidebar() {
-  const pathname = usePathname();
+function NavigationContent({
+  pathname,
+  searchId,
+  onNavigate,
+}: {
+  pathname: string;
+  searchId: string;
+  onNavigate?: () => void;
+}) {
+  const [query, setQuery] = useState("");
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredGroups = useMemo(
+    () =>
+      componentGroups
+        .map((group) => ({
+          ...group,
+          components: group.components.filter((component) =>
+            `${component.name} ${component.description}`
+              .toLowerCase()
+              .includes(normalizedQuery)
+          ),
+        }))
+        .filter((group) => group.components.length > 0),
+    [normalizedQuery]
+  );
+
+  const linkClassName = (active: boolean) =>
+    cn(
+      "block rounded-[var(--ui-radius-sm)] border-2 px-3 py-2 text-sm transition-colors",
+      active
+        ? "border-black bg-[var(--ui-accent)] font-semibold shadow-[var(--ui-shadow-sm)]"
+        : "border-transparent font-medium text-gray-600 hover:border-black/15 hover:bg-black/5 hover:text-black"
+    );
 
   return (
     <>
-      <div className="sticky top-0 z-40 border-b-2 border-black bg-white md:hidden">
-        <div className="flex items-center justify-between px-4 py-3">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <span className="text-lg font-bold tracking-tight">
-              Concrete
-              <span className="ml-0.5 rounded bg-black px-1.5 py-0.5 text-white">
-                UI
-              </span>
-            </span>
-          </Link>
-          <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-            Docs
-          </span>
-        </div>
-        <div className="overflow-x-auto border-t-2 border-black px-3 py-3 brutal-scroll-area">
-          <div className="flex min-w-max gap-2">
-            {mobileQuickLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
+      <div className="mb-5">
+        <label htmlFor={searchId} className="mb-2 block text-xs font-semibold text-gray-600">
+          Find a component
+        </label>
+        <Input
+          id={searchId}
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Search components"
+          sizeVariant="sm"
+        />
+      </div>
+
+      {!normalizedQuery && (
+        <div className="mb-7">
+          <p className="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-500">
+            Overview
+          </p>
+          <ul className="space-y-1">
+            {primaryLinks.map((link) => (
+              <li key={link.href}>
                 <Link
-                  key={link.href}
                   href={link.href}
-                  className={
-                    isActive
-                      ? "rounded-md border-2 border-black bg-[#ffde00] px-3 py-1.5 text-xs font-semibold uppercase tracking-wide shadow-[2px_2px_0_0_#000]"
-                      : "rounded-md border-2 border-black bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-wide"
-                  }
+                  onClick={onNavigate}
+                  className={linkClassName(pathname === link.href)}
                 >
                   {link.title}
                 </Link>
-              );
-            })}
-          </div>
+              </li>
+            ))}
+          </ul>
         </div>
+      )}
+
+      <div className="space-y-7">
+        {filteredGroups.map((group) => (
+          <section key={group.category}>
+            <p className="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-500">
+              {group.category}
+            </p>
+            <ul className="space-y-1">
+              {group.components.map((component) => {
+                const href = getComponentHref(component.slug);
+                return (
+                  <li key={component.slug}>
+                    <Link
+                      href={href}
+                      onClick={onNavigate}
+                      className={linkClassName(pathname === href)}
+                    >
+                      {component.name}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
       </div>
 
-      <aside className="hidden w-72 flex-shrink-0 p-6 md:block">
-        <div className="docs-panel sticky top-6 h-[calc(100vh-3rem)] overflow-hidden">
-          <div className="border-b-2 border-black p-5">
-            <Link href="/" className="block">
-              <span className="text-2xl font-bold tracking-tight">
-                Concrete
-                <span className="ml-0.5 rounded bg-black px-1.5 py-0.5 text-white">
-                  UI
-                </span>
-              </span>
-            </Link>
-            <p className="mt-2 text-xs uppercase tracking-widest text-gray-500">
-              Neobrutalist Components
-            </p>
-          </div>
+      {filteredGroups.length === 0 && (
+        <p className="rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface-muted)] p-4 text-sm text-gray-600">
+          No component matches “{query}”.
+        </p>
+      )}
+    </>
+  );
+}
 
-          <nav className="h-[calc(100%-160px)] overflow-y-auto p-4 brutal-scroll-area">
-            {navigation.map((section) => (
-              <div key={section.title} className="mb-6">
-                <h3 className="mb-2 px-3 text-[11px] font-bold uppercase tracking-widest text-gray-400">
-                  {section.title}
-                </h3>
-                <ul className="space-y-1">
-                  {section.links.map((link) => {
-                    const isActive = pathname === link.href;
-                    return (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          className={
-                            isActive
-                              ? "block rounded-md border-2 border-black bg-[#ffde00] px-3 py-2 text-sm font-semibold shadow-[2px_2px_0_0_#000]"
-                              : "block rounded-md px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-black"
-                          }
-                        >
-                          {link.title}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
-          </nav>
+export function Sidebar() {
+  const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-          <div className="border-t-2 border-black bg-gray-50 p-4 pb-5 pr-5">
-            <a
-              href="https://github.com/jchiwaii/concrete-ui"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex rounded-md border-2 border-black bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide shadow-[2px_2px_0_0_#000] transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
-            >
-              Star on GitHub
-            </a>
-          </div>
+  useEffect(() => setMobileOpen(false), [pathname]);
+
+  return (
+    <>
+      <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b-2 border-black bg-[var(--ui-surface)] px-4 md:hidden">
+        <Brand />
+        <button
+          type="button"
+          aria-label="Open documentation navigation"
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen(true)}
+          className="grid h-10 w-10 place-items-center rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-accent)] shadow-[var(--ui-shadow-sm)] transition-transform active:translate-x-px active:translate-y-px active:shadow-none"
+        >
+          <span className="sr-only">Open menu</span>
+          <span className="grid gap-1" aria-hidden="true">
+            <span className="h-0.5 w-5 bg-black" />
+            <span className="h-0.5 w-5 bg-black" />
+            <span className="h-0.5 w-5 bg-black" />
+          </span>
+        </button>
+      </header>
+
+      <Drawer
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        direction="left"
+        ariaLabel="Documentation navigation"
+        className="md:hidden"
+      >
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Documentation</DrawerTitle>
+            <DrawerClose onClose={() => setMobileOpen(false)} />
+          </DrawerHeader>
+          <DrawerBody className="brutal-scroll-area">
+            <NavigationContent pathname={pathname} searchId="mobile-component-search" onNavigate={() => setMobileOpen(false)} />
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+
+      <aside className="sticky top-0 hidden h-screen w-72 shrink-0 border-r-2 border-black bg-[var(--ui-surface)] md:flex md:flex-col">
+        <div className="border-b-2 border-black px-5 py-5">
+          <Brand />
+          <p className="mt-2 text-xs font-medium text-gray-500">React components with a harder edge.</p>
+        </div>
+        <nav className="brutal-scroll-area min-h-0 flex-1 overflow-y-auto p-4" aria-label="Documentation">
+          <NavigationContent pathname={pathname} searchId="desktop-component-search" />
+        </nav>
+        <div className="border-t-2 border-black bg-[var(--ui-surface-muted)] p-4">
+          <a
+            href="https://github.com/jchiwaii/concrete-ui"
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm font-semibold underline decoration-2 underline-offset-4 hover:no-underline"
+          >
+            View on GitHub
+          </a>
         </div>
       </aside>
     </>

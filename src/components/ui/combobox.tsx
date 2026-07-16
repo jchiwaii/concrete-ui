@@ -121,8 +121,8 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           aria-expanded={open}
           onClick={() => !disabled && setOpen((next) => !next)}
           className={cn(
-            "flex w-full items-center justify-between gap-3 rounded-md border-2 border-black bg-white px-4 py-2.5 text-left font-semibold shadow-[4px_4px_0_0_#000] transition-all duration-100",
-            !disabled && "hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#000]",
+            "flex w-full items-center justify-between gap-3 rounded-md border-2 border-black bg-[var(--ui-surface)] px-4 py-2.5 text-left font-semibold shadow-[var(--ui-shadow)] transition-all duration-100",
+            !disabled && "hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--ui-shadow-md)]",
             disabled && "cursor-not-allowed opacity-50"
           )}
         >
@@ -135,7 +135,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
             <div
               ref={contentRef}
               role="listbox"
-              className="fixed z-50 max-h-80 min-w-64 overflow-hidden rounded-md border-2 border-black bg-white shadow-[6px_6px_0_0_#000] animate-brutal-slide-down"
+              className="fixed z-50 max-h-80 min-w-64 overflow-hidden rounded-md border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)] animate-brutal-slide-down"
               style={{ top: position.top, left: position.left, width: triggerRef.current?.offsetWidth }}
             >
               <div className="border-b-2 border-black p-2">
@@ -163,13 +163,13 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                       onClick={() => select(option)}
                       className={cn(
                         "cursor-pointer border-b-2 border-black px-4 py-3 last:border-b-0",
-                        index === selectedIndex && "bg-[#ffde00]",
+                        index === selectedIndex && "bg-[var(--ui-accent)]",
                         option.value === value && "font-bold",
                         option.disabled && "cursor-not-allowed bg-gray-100 opacity-50"
                       )}
                     >
                       <div className="flex items-center justify-between gap-3">
-                        <span className="text-sm font-bold uppercase tracking-wide">{option.label}</span>
+                        <span className="text-sm font-semibold">{option.label}</span>
                         {option.value === value && <span aria-hidden="true">✓</span>}
                       </div>
                       {option.description && <p className="mt-1 text-xs font-medium text-gray-600">{option.description}</p>}

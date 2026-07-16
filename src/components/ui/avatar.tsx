@@ -1,11 +1,13 @@
-import { HTMLAttributes, forwardRef } from "react";
+import { HTMLAttributes, ImgHTMLAttributes, forwardRef } from "react";
+import { cn } from "@/lib/utils";
 
 export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
   size?: "sm" | "md" | "lg" | "xl";
+  shape?: "square" | "rounded" | "circle";
 }
 
 const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
-  ({ className = "", size = "md", children, ...props }, ref) => {
+  ({ className = "", size = "md", shape = "rounded", children, ...props }, ref) => {
     const sizes = {
       sm: "w-10 h-10",
       md: "w-14 h-14",
@@ -16,13 +18,13 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     return (
       <div
         ref={ref}
-        className={`
-          relative overflow-hidden
-          border-2 border-black
-          shadow-[3px_3px_0_0_#000]
-          ${sizes[size]}
-          ${className}
-        `}
+        className={cn(
+          "relative overflow-hidden border-2 border-black shadow-[var(--ui-shadow)]",
+          sizes[size],
+          shape === "circle" && "rounded-full",
+          shape === "rounded" && "rounded-[var(--ui-radius)]",
+          className
+        )}
         {...props}
       >
         {children}
@@ -33,10 +35,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
 
 Avatar.displayName = "Avatar";
 
-export interface AvatarImageProps extends HTMLAttributes<HTMLImageElement> {
-  src: string;
-  alt: string;
-}
+export interface AvatarImageProps extends ImgHTMLAttributes<HTMLImageElement> {}
 
 const AvatarImage = forwardRef<HTMLImageElement, AvatarImageProps>(
   ({ className = "", src, alt, ...props }, ref) => (
@@ -61,8 +60,8 @@ const AvatarFallback = forwardRef<
     className={`
         w-full h-full
         flex items-center justify-center
-        bg-[#ffde00]
-        text-black font-extrabold uppercase
+        bg-[var(--ui-accent)]
+        text-black font-semibold
         ${className}
       `}
     {...props}

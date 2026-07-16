@@ -11,6 +11,7 @@ import {
   useRef,
   InputHTMLAttributes,
   ReactNode,
+  isValidElement,
   MutableRefObject,
 } from "react";
 import { createPortal } from "react-dom";
@@ -28,6 +29,13 @@ interface CommandContextValue {
 const CommandContext = createContext<CommandContextValue | undefined>(
   undefined
 );
+
+function getNodeText(node: ReactNode): string {
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(getNodeText).join(" ");
+  if (isValidElement<{ children?: ReactNode }>(node)) return getNodeText(node.props.children);
+  return "";
+}
 
 export interface CommandProps extends HTMLAttributes<HTMLDivElement> {
   open?: boolean;
@@ -111,9 +119,9 @@ const Command = forwardRef<HTMLDivElement, CommandProps>(
                 else if (ref) (ref as MutableRefObject<HTMLDivElement | null>).current = node;
               }}
               className={`
-                bg-white
+                bg-[var(--ui-surface)]
                 border-6 border-black
-                shadow-[8px_8px_0_0_#000]
+                shadow-[var(--ui-shadow-xl)]
                 animate-brutal-slide-up
                 ${className}
               `}
@@ -169,8 +177,8 @@ const CommandInput = forwardRef<HTMLInputElement, CommandInputProps>(
           px-6 py-4
           border-b-4 border-black
           outline-none
-          font-bold uppercase tracking-wider text-lg
-          placeholder:text-gray-400 placeholder:uppercase
+          font-semibold text-lg
+          placeholder:text-gray-400 
           ${className}
         `}
         role="searchbox"
@@ -268,7 +276,7 @@ const CommandGroup = forwardRef<HTMLDivElement, CommandGroupProps>(
             className="
               px-6 py-2
               text-xs
-              font-bold uppercase tracking-wider
+              font-semibold
               text-gray-600
               bg-gray-100
               border-b-4 border-t-4 border-black
@@ -326,10 +334,7 @@ const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(
     };
 
     // Simple fuzzy search
-    const childText =
-      typeof children === "string"
-        ? children
-        : (children as any)?.props?.children || "";
+    const childText = getNodeText(children);
     const isVisible =
       !search ||
       childText.toLowerCase().includes(search.toLowerCase());
@@ -351,7 +356,7 @@ const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(
         className={`
           px-6 py-3
           border-b-4 border-black last:border-b-0
-          font-bold uppercase tracking-wider
+          font-semibold
           flex items-center gap-3
           transition-all duration-100 ease-out
           ${
@@ -359,7 +364,7 @@ const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(
               ? "opacity-50 cursor-not-allowed bg-gray-200"
               : "cursor-pointer"
           }
-          ${isSelected && !disabled ? "bg-[#ffde00] text-black" : "bg-white text-black hover:bg-[#fff4ab]"}
+          ${isSelected && !disabled ? "bg-[var(--ui-accent)] text-black" : "bg-[var(--ui-surface)] text-black hover:bg-[var(--ui-accent-soft)]"}
           ${className}
         `}
         onClick={handleClick}

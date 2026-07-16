@@ -52,7 +52,7 @@ const Menubar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
             else if (ref) ref.current = node;
           }}
           role="menubar"
-          className={cn("inline-flex rounded-lg border-2 border-black bg-white shadow-[4px_4px_0_0_#000]", className)}
+          className={cn("inline-flex rounded-lg border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow)]", className)}
           {...props}
         />
       </MenubarContext.Provider>
@@ -92,8 +92,8 @@ const MenubarTrigger = forwardRef<HTMLButtonElement, MenubarTriggerProps>(
         aria-expanded={open}
         onClick={() => context.setActive(open ? null : value)}
         className={cn(
-          "border-r-2 border-black px-4 py-2 text-sm font-bold uppercase tracking-wide last:border-r-0 hover:bg-[#fff4ab]",
-          open && "bg-[#ffde00]",
+          "border-r-2 border-black px-4 py-2 text-sm font-semibold last:border-r-0 hover:bg-[var(--ui-accent-soft)]",
+          open && "bg-[var(--ui-accent)]",
           className
         )}
         {...props}
@@ -118,7 +118,7 @@ const MenubarContent = forwardRef<HTMLDivElement, MenubarContentProps>(
       <div
         ref={ref}
         role="menu"
-        className={cn("absolute left-0 top-full z-50 mt-2 min-w-52 overflow-hidden rounded-lg border-2 border-black bg-white shadow-[6px_6px_0_0_#000] animate-brutal-slide-down", className)}
+        className={cn("absolute left-0 top-full z-50 mt-2 min-w-52 overflow-hidden rounded-lg border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)] animate-brutal-slide-down", className)}
         {...props}
       />
     );
@@ -133,7 +133,7 @@ const MenubarItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
       ref={ref}
       role="menuitem"
       tabIndex={0}
-      className={cn("cursor-pointer border-b-2 border-black px-4 py-3 text-sm font-bold uppercase tracking-wide last:border-b-0 hover:bg-[#ffde00] focus:bg-[#ffde00] focus:outline-none", className)}
+      className={cn("cursor-pointer border-b-2 border-black px-4 py-3 text-sm font-semibold last:border-b-0 hover:bg-[var(--ui-accent)] focus:bg-[var(--ui-accent)] focus:outline-none", className)}
       {...props}
     />
   )

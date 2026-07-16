@@ -192,9 +192,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           className={`
             w-full
             px-4 py-2.5
-            bg-white
+            bg-[var(--ui-surface)]
             border-2 border-black
-            shadow-[4px_4px_0_0_#000]
+            shadow-[var(--ui-shadow)]
             transition-all duration-100 ease-out
             font-semibold
             text-left
@@ -202,10 +202,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             ${radiusStyles}
             ${
               !disabled
-                ? "hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0_0_#000] cursor-pointer"
+                ? "hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)] cursor-pointer"
                 : "opacity-50 cursor-not-allowed"
             }
-            ${isOpen ? "translate-x-[-2px] translate-y-[-2px] shadow-[6px_6px_0_0_#000]" : ""}
+            ${isOpen ? "-translate-x-px -translate-y-px shadow-[var(--ui-shadow-lg)]" : ""}
           `}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
@@ -234,9 +234,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 min-w-[200px]
                 max-h-[280px]
                 overflow-y-auto
-                bg-white
+                bg-[var(--ui-surface)]
                 border-2 border-black
-                shadow-[6px_6px_0_0_#000]
+                shadow-[var(--ui-shadow-lg)]
                 rounded-md
                 animate-brutal-slide-down
               `}
@@ -282,10 +282,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                         ${option.disabled ? "opacity-50 cursor-not-allowed" : ""}
                         ${
                           index === selectedIndex && !option.disabled
-                            ? "bg-[#ffde00]"
+                            ? "bg-[var(--ui-accent)]"
                             : option.value === value
                             ? "bg-gray-100"
-                            : "hover:bg-gray-50"
+                            : "hover:bg-[var(--ui-surface-muted)]"
                         }
                       `}
                       onClick={() => handleSelect(option)}

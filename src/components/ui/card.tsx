@@ -1,4 +1,5 @@
 import { HTMLAttributes, forwardRef } from "react";
+import { cn } from "@/lib/utils";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   variant?: "default" | "elevated" | "outline" | "flat" | "bordered";
@@ -14,51 +15,56 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       variant = "default",
       color = "white",
       hover = false,
-      rounded = "md",
+      rounded = "lg",
       children,
       ...props
     },
     ref
   ) => {
-    const baseStyles = `
-      border-2 border-black
-      transition-all duration-100 ease-out
-    `;
+    const baseStyles =
+      "border-2 border-black transition-[transform,box-shadow,background-color] duration-150 ease-out";
 
     const variants = {
-      default: "shadow-[4px_4px_0_0_#000]",
-      elevated: "shadow-[6px_6px_0_0_#000]",
+      default: "shadow-[var(--ui-shadow)]",
+      elevated: "shadow-[var(--ui-shadow-lg)]",
       outline: "shadow-none",
       flat: "shadow-none border-transparent",
       bordered: "shadow-none",
     };
 
     const colors = {
-      white: "bg-white",
-      yellow: "bg-[#ffde00]",
-      cyan: "bg-[#06b6d4]",
-      pink: "bg-[#f472b6]",
-      lime: "bg-[#a3e635]",
-      purple: "bg-[#8b5cf6]",
-      orange: "bg-[#f97316]",
-      magenta: "bg-[#ec4899]",
+      white: "bg-[var(--ui-surface)]",
+      yellow: "bg-[var(--ui-accent)]",
+      cyan: "bg-[var(--ui-info)]",
+      pink: "bg-[var(--ui-pink)]",
+      lime: "bg-[var(--ui-lime)]",
+      purple: "bg-[var(--ui-purple)]",
+      orange: "bg-[var(--ui-warning)]",
+      magenta: "bg-[var(--ui-pink)]",
     };
 
     const radiusStyles = {
       none: "rounded-none",
-      md: "rounded-md",
-      lg: "rounded-lg",
-      xl: "rounded-xl",
+      md: "rounded-[var(--ui-radius-sm)]",
+      lg: "rounded-[var(--ui-radius-lg)]",
+      xl: "rounded-[var(--ui-radius-xl)]",
     };
 
     const hoverStyles = hover
-      ? "hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0_0_#000] cursor-pointer"
+      ? "hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)]"
       : "";
 
     return (
       <div
         ref={ref}
-        className={`${baseStyles} ${variants[variant]} ${colors[color]} ${radiusStyles[rounded]} ${hoverStyles} ${className}`}
+        className={cn(
+          baseStyles,
+          variants[variant],
+          colors[color],
+          radiusStyles[rounded],
+          hoverStyles,
+          className
+        )}
         {...props}
       >
         {children}
@@ -73,7 +79,7 @@ const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`px-6 py-5 border-b-2 border-black ${className}`}
+      className={cn("border-b-2 border-black px-5 py-4 sm:px-6 sm:py-5", className)}
       {...props}
     >
       {children}
@@ -89,7 +95,7 @@ const CardTitle = forwardRef<
 >(({ className = "", children, ...props }, ref) => (
   <h3
     ref={ref}
-    className={`text-xl font-bold tracking-tight ${className}`}
+    className={cn("text-lg font-semibold tracking-[-0.025em]", className)}
     {...props}
   >
     {children}
@@ -104,7 +110,7 @@ const CardDescription = forwardRef<
 >(({ className = "", children, ...props }, ref) => (
   <p
     ref={ref}
-    className={`text-sm text-gray-600 mt-1.5 ${className}`}
+    className={cn("mt-1.5 text-sm leading-6 text-gray-600", className)}
     {...props}
   >
     {children}
@@ -115,7 +121,7 @@ CardDescription.displayName = "CardDescription";
 
 const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
-    <div ref={ref} className={`px-6 py-5 ${className}`} {...props}>
+    <div ref={ref} className={cn("px-5 py-5 sm:px-6", className)} {...props}>
       {children}
     </div>
   )
@@ -127,7 +133,10 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`px-6 py-4 border-t-2 border-black flex items-center gap-3 bg-gray-50 ${className}`}
+      className={cn(
+        "flex items-center gap-3 border-t-2 border-black bg-[var(--ui-surface-muted)] px-5 py-4 sm:px-6",
+        className
+      )}
       {...props}
     >
       {children}

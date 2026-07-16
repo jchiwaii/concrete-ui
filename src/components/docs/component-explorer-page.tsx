@@ -137,7 +137,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     "aspect-ratio": {
       title: "Aspect Ratio",
       description: "A simple media wrapper that preserves proportional layouts.",
-      demo: <AspectRatio ratio={16 / 9} className="max-w-md rounded-lg border-2 border-black bg-[#06b6d4] shadow-[4px_4px_0_0_#000]" />,
+      demo: <AspectRatio ratio={16 / 9} className="max-w-md rounded-lg border-2 border-black bg-[var(--ui-info)] shadow-[var(--ui-shadow)]" />,
       code: `<AspectRatio ratio={16 / 9} />`,
     },
     "button-group": {
@@ -158,7 +158,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
       demo: (
         <Carousel className="w-full max-w-xl">
           {["Design", "Build", "Ship"].map((item) => (
-            <CarouselItem key={item}><div className="rounded-lg border-2 border-black bg-[#ffde00] p-8 text-2xl font-black uppercase shadow-[4px_4px_0_0_#000]">{item}</div></CarouselItem>
+            <CarouselItem key={item}><div className="rounded-lg border-2 border-black bg-[var(--ui-accent)] p-8 text-2xl font-black uppercase shadow-[var(--ui-shadow)]">{item}</div></CarouselItem>
           ))}
         </Carousel>
       ),
@@ -167,7 +167,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     collapsible: {
       title: "Collapsible",
       description: "A controlled disclosure primitive for compact sections.",
-      demo: <Collapsible defaultOpen><CollapsibleTrigger className="rounded-md border-2 border-black bg-[#ffde00] px-4 py-2 font-bold shadow-[3px_3px_0_0_#000]">Toggle Details</CollapsibleTrigger><CollapsibleContent className="mt-4 rounded-lg border-2 border-black bg-white p-4 shadow-[4px_4px_0_0_#000]">Concrete UI keeps the mechanics sharp and visible.</CollapsibleContent></Collapsible>,
+      demo: <Collapsible defaultOpen><CollapsibleTrigger className="rounded-md border-2 border-black bg-[var(--ui-accent)] px-4 py-2 font-bold shadow-[var(--ui-shadow)]">Toggle Details</CollapsibleTrigger><CollapsibleContent className="mt-4 rounded-lg border-2 border-black bg-white p-4 shadow-[var(--ui-shadow)]">Concrete UI keeps the mechanics sharp and visible.</CollapsibleContent></Collapsible>,
       code: `<Collapsible><CollapsibleTrigger /> <CollapsibleContent /></Collapsible>`,
     },
     combobox: {
@@ -179,7 +179,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     "context-menu": {
       title: "Context Menu",
       description: "Right-click actions with a brutal command surface.",
-      demo: <ContextMenu><ContextMenuTrigger className="rounded-lg border-2 border-dashed border-black bg-white p-10 text-center font-bold shadow-[4px_4px_0_0_#000]">Right click this panel</ContextMenuTrigger><ContextMenuContent><ContextMenuLabel>Actions</ContextMenuLabel><ContextMenuItem>Duplicate</ContextMenuItem><ContextMenuItem>Rename</ContextMenuItem><ContextMenuSeparator /><ContextMenuItem>Archive</ContextMenuItem></ContextMenuContent></ContextMenu>,
+      demo: <ContextMenu><ContextMenuTrigger className="rounded-lg border-2 border-dashed border-black bg-white p-10 text-center font-bold shadow-[var(--ui-shadow)]">Right click this panel</ContextMenuTrigger><ContextMenuContent><ContextMenuLabel>Actions</ContextMenuLabel><ContextMenuItem>Duplicate</ContextMenuItem><ContextMenuItem>Rename</ContextMenuItem><ContextMenuSeparator /><ContextMenuItem>Archive</ContextMenuItem></ContextMenuContent></ContextMenu>,
       code: `<ContextMenu><ContextMenuTrigger>Right click</ContextMenuTrigger><ContextMenuContent>...</ContextMenuContent></ContextMenu>`,
     },
     "date-picker": {
@@ -209,7 +209,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     "hover-card": {
       title: "Hover Card",
       description: "A richer tooltip for previews, profiles, and metadata.",
-      demo: <HoverCard><HoverCardTrigger className="rounded-md border-2 border-black bg-[#ffde00] px-4 py-2 font-bold shadow-[3px_3px_0_0_#000]">Hover profile</HoverCardTrigger><HoverCardContent><h3 className="font-extrabold uppercase">Concrete Designer</h3><p className="mt-2 text-sm text-gray-600">Builds bold, accessible surfaces with hard shadows.</p></HoverCardContent></HoverCard>,
+      demo: <HoverCard><HoverCardTrigger className="rounded-md border-2 border-black bg-[var(--ui-accent)] px-4 py-2 font-bold shadow-[var(--ui-shadow)]">Hover profile</HoverCardTrigger><HoverCardContent><h3 className="font-extrabold uppercase">Concrete Designer</h3><p className="mt-2 text-sm text-gray-600">Builds bold, accessible surfaces with hard shadows.</p></HoverCardContent></HoverCard>,
       code: `<HoverCard><HoverCardTrigger /><HoverCardContent /></HoverCard>`,
     },
     "input-group": {
@@ -269,7 +269,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     "scroll-area": {
       title: "Scroll Area",
       description: "Custom brutal scroll containers for panels and menus.",
-      demo: <ScrollArea className="h-48 w-72 rounded-lg border-2 border-black bg-white p-4 shadow-[4px_4px_0_0_#000]"><div className="grid gap-3">{Array.from({ length: 12 }, (_, index) => <div key={index} className="rounded-md border-2 border-black bg-[#fff4ab] p-3 text-sm font-bold">Item {index + 1}</div>)}</div></ScrollArea>,
+      demo: <ScrollArea className="h-48 w-72 rounded-lg border-2 border-black bg-white p-4 shadow-[var(--ui-shadow)]"><div className="grid gap-3">{Array.from({ length: 12 }, (_, index) => <div key={index} className="rounded-md border-2 border-black bg-[var(--ui-accent-soft)] p-3 text-sm font-bold">Item {index + 1}</div>)}</div></ScrollArea>,
       code: `<ScrollArea className="h-48">...</ScrollArea>`,
     },
     spinner: {
@@ -311,11 +311,11 @@ export function ComponentExplorerPage({ component }: { component: string }) {
   }
 
   return (
-    <div className="docs-component-page space-y-12">
+    <div className="docs-component-page space-y-10">
       <div>
-        <Badge variant="primary" className="mb-4">COMPONENT</Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">{config.title}</h1>
-        <p className="text-brutal-lg max-w-2xl">{config.description}</p>
+        <Badge variant="primary" className="mb-4">Component</Badge>
+        <h1>{config.title}</h1>
+        <p className="text-brutal-lg">{config.description}</p>
       </div>
 
       <ComponentPreview title={`${config.title} Preview`} description={config.description} code={config.code}>

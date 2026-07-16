@@ -30,13 +30,13 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
           className={`
             relative w-16 h-9
             border-2 border-black
-            shadow-[3px_3px_0_0_#000]
+            shadow-[var(--ui-shadow)]
             transition-all duration-100 ease-out
-            hover:translate-x-[-2px] hover:translate-y-[-2px]
-            hover:shadow-[5px_5px_0_0_#000]
+            hover:-translate-x-px hover:-translate-y-px
+            hover:shadow-[var(--ui-shadow-md)]
             disabled:hover:translate-x-0 disabled:hover:translate-y-0
-            disabled:hover:shadow-[3px_3px_0_0_#000]
-            ${checked ? "bg-[#22c55e]" : "bg-white"}
+            disabled:hover:shadow-[var(--ui-shadow)]
+            ${checked ? "bg-[var(--ui-success)]" : "bg-[var(--ui-surface)]"}
           `}
           {...props}
         >
@@ -50,7 +50,7 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
           />
         </button>
         {label && (
-          <span className="text-base font-bold uppercase tracking-wide">
+          <span className="text-base font-semibold">
             {label}
           </span>
         )}

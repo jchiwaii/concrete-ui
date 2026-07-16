@@ -11,7 +11,7 @@ export default function CheckboxPage() {
         <Badge variant="primary" className="mb-4">
           COMPONENT
         </Badge>
-        <h1 className="text-brutal-4xl font-extrabold uppercase tracking-tight mb-4">
+        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em] mb-3">
           CHECKBOX
         </h1>
         <p className="text-brutal-lg max-w-2xl">
@@ -65,7 +65,7 @@ export default function CheckboxPage() {
       {/* Full Code */}
       <div className="source-panel bg-white">
         <div className="p-4 border-b-4 border-black bg-black text-white">
-          <h3 className="text-xl font-extrabold uppercase tracking-tight">
+          <h3 className="text-xl font-semibold tracking-[-0.03em]">
             FULL COMPONENT CODE
           </h3>
         </div>
@@ -100,11 +100,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               w-7 h-7
               bg-white
               border-4 border-black
-              shadow-[3px_3px_0_0_#000]
+              shadow-[var(--ui-shadow)]
               transition-all duration-100 ease-out
               group-hover:translate-x-[-2px] group-hover:translate-y-[-2px]
-              group-hover:shadow-[5px_5px_0_0_#000]
-              peer-checked:bg-[#ffde00]
+              group-hover:shadow-[var(--ui-shadow-md)]
+              peer-checked:bg-[var(--ui-accent)]
               peer-disabled:opacity-50 peer-disabled:cursor-not-allowed
             \`}
           />
