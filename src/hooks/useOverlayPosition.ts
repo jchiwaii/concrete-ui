@@ -9,7 +9,7 @@ export function useOverlayPosition(
   open: boolean,
   placement: Placement = "bottom"
 ): Position {
-  const [position, setPosition] = useState<Position>({ top: 0, left: 0 });
+  const [position, setPosition] = useState<Position>({ top: -9999, left: -9999 });
 
   const updatePosition = useCallback(() => {
     if (!open || !triggerRef.current || !contentRef.current) return;

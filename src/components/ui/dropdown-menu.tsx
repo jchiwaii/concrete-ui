@@ -54,7 +54,7 @@ export interface DropdownMenuTriggerProps
 const DropdownMenuTrigger = forwardRef<
   HTMLButtonElement,
   DropdownMenuTriggerProps
->(({ children, asChild = false, className = "", ...props }, ref) => {
+>(({ children, asChild = false, className = "", onClick, type = "button", ...props }, ref) => {
   const context = useContext(DropdownMenuContext);
   if (!context) {
     throw new Error("DropdownMenuTrigger must be used within DropdownMenu");
@@ -62,8 +62,8 @@ const DropdownMenuTrigger = forwardRef<
 
   const { isOpen, setIsOpen, triggerRef } = context;
 
-  const handleClick = () => {
-    setIsOpen(!isOpen);
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
+    if (!event.defaultPrevented) setIsOpen(!isOpen);
   };
 
   if (asChild && isValidElement(children)) {
@@ -81,7 +81,8 @@ const DropdownMenuTrigger = forwardRef<
         },
         onClick: (event: MouseEvent<HTMLElement>) => {
           child.props.onClick?.(event);
-          handleClick();
+          onClick?.(event as unknown as React.MouseEvent<HTMLButtonElement>);
+          handleClick(event);
         },
         className: `${child.props.className ?? ""} ${className}`,
         "aria-haspopup": "menu",
@@ -98,16 +99,20 @@ const DropdownMenuTrigger = forwardRef<
         else if (ref) ref.current = node;
         triggerRef.current = node;
       }}
-      onClick={handleClick}
+      type={type}
+      onClick={(event) => {
+        onClick?.(event);
+        handleClick(event);
+      }}
       className={`
         px-6 py-3
-        bg-white
+        bg-[var(--ui-surface)]
         border-2 border-black
-        shadow-[4px_4px_0_0_#000]
-        font-bold uppercase tracking-wider
+        shadow-[var(--ui-shadow)]
+        font-semibold
         transition-all duration-100 ease-out
-        hover:translate-x-[-2px] hover:translate-y-[-2px]
-        hover:shadow-[6px_6px_0_0_#000]
+        hover:-translate-x-px hover:-translate-y-px
+        hover:shadow-[var(--ui-shadow-md)]
         ${className}
       `}
       aria-haspopup="menu"
@@ -161,9 +166,9 @@ const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>
           fixed
           z-50
           min-w-[200px]
-          bg-white
+          bg-[var(--ui-surface)]
           border-2 border-black
-          shadow-[6px_6px_0_0_#000]
+          shadow-[var(--ui-shadow-lg)]
           animate-brutal-slide-down
           ${className}
         `}
@@ -214,12 +219,12 @@ const DropdownMenuItem = forwardRef<HTMLDivElement, DropdownMenuItemProps>(
         className={`
           px-6 py-3
           border-b-4 border-black last:border-b-0
-          font-bold uppercase tracking-wider
+          font-semibold
           transition-all duration-100 ease-out
           ${
             disabled
               ? "opacity-50 cursor-not-allowed bg-gray-200"
-              : "cursor-pointer hover:bg-[#ffde00]"
+              : "cursor-pointer hover:bg-[var(--ui-accent)]"
           }
           ${className}
         `}
@@ -266,7 +271,7 @@ const DropdownMenuLabel = forwardRef<HTMLDivElement, DropdownMenuLabelProps>(
         ref={ref}
         className={`
           px-6 py-2
-          font-bold uppercase tracking-wider
+          font-semibold
           text-xs
           text-gray-600
           border-b-4 border-black

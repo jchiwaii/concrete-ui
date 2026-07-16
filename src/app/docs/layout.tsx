@@ -7,10 +7,16 @@ export default function DocsLayout({
 }) {
   return (
     <div className="docs-shell min-h-screen md:flex">
+      <a
+        href="#docs-content"
+        className="fixed left-4 top-3 z-[100] -translate-y-20 rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-accent)] px-3 py-2 text-sm font-semibold shadow-[var(--ui-shadow)] focus:translate-y-0"
+      >
+        Skip to content
+      </a>
       <Sidebar />
-      <main className="min-h-screen flex-1 overflow-y-auto">
-        <div className="mx-auto w-full max-w-6xl px-4 py-6 md:px-8 md:py-8">
-          <div className="docs-panel p-6 md:p-8">{children}</div>
+      <main id="docs-content" className="min-h-screen min-w-0 flex-1">
+        <div className="mx-auto w-full max-w-[1120px] px-4 py-8 sm:px-6 md:px-10 md:py-12">
+          {children}
         </div>
       </main>
     </div>

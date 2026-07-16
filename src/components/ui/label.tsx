@@ -11,14 +11,14 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>(
     <label
       ref={ref}
       className={cn(
-        "inline-flex items-center gap-1 text-sm font-bold uppercase tracking-wide",
-        error ? "text-[#ef4444]" : "text-black",
+        "inline-flex items-center gap-1 text-sm font-semibold tracking-[-0.01em]",
+        error ? "text-[var(--ui-danger)]" : "text-black",
         className
       )}
       {...props}
     >
       {children}
-      {required && <span aria-hidden="true">*</span>}
+      {required && <span className="text-[var(--ui-danger)]" aria-hidden="true">*</span>}
     </label>
   )
 );

@@ -4,9 +4,12 @@ import { ToastProvider } from "@/context/ToastContext";
 import { Toaster } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Concrete UI - Neo Brutalist Component Library",
+  title: {
+    default: "Concrete UI - Modern Neo-Brutalist React Components",
+    template: "%s | Concrete UI",
+  },
   description:
-    "Bold, unapologetic UI components with thick borders, hard shadows, and raw aesthetics. Copy & paste React components for the brutalist web.",
+    "Accessible React components with strong structure, restrained color, and a modern neo-brutalist visual language.",
   keywords: [
     "ui library",
     "react components",
@@ -23,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-display antialiased">
+      <body className="antialiased">
         <ToastProvider>
           {children}
           <Toaster />

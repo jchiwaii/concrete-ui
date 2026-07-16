@@ -30,15 +30,15 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
           <div
             key={step.title}
             className={cn(
-              "relative rounded-lg border-2 border-black bg-white p-4 shadow-[4px_4px_0_0_#000]",
-              done && "bg-[#22c55e]",
-              active && "bg-[#ffde00]"
+              "relative rounded-lg border-2 border-black bg-[var(--ui-surface)] p-4 shadow-[var(--ui-shadow)]",
+              done && "bg-[var(--ui-success)]",
+              active && "bg-[var(--ui-accent)]"
             )}
           >
-            <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-md border-2 border-black bg-white text-sm font-black shadow-[2px_2px_0_0_#000]">
+            <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-md border-2 border-black bg-[var(--ui-surface)] text-sm font-bold shadow-[var(--ui-shadow-sm)]">
               {done ? "✓" : index + 1}
             </div>
-            <h3 className="text-sm font-extrabold uppercase tracking-wide">{step.title}</h3>
+            <h3 className="text-sm font-semibold tracking-wide">{step.title}</h3>
             {step.description && <p className="mt-1 text-xs font-medium text-gray-700">{step.description}</p>}
           </div>
         );

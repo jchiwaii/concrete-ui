@@ -1,15 +1,19 @@
 "use client";
 
 import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 import { useToast, Toast as ToastType } from "@/context/ToastContext";
 
 export function Toaster() {
   const { toasts, dismiss } = useToast();
+  const [mounted, setMounted] = useState(false);
 
-  if (typeof window === "undefined") return null;
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return null;
 
   return createPortal(
-    <div className="fixed top-4 right-4 z-[9999] flex flex-col gap-3 max-w-sm w-full pointer-events-none">
+    <div className="pointer-events-none fixed left-4 right-4 top-4 z-[9999] flex flex-col gap-3 sm:left-auto sm:w-full sm:max-w-sm">
       {toasts.map((toast) => (
         <ToastComponent key={toast.id} toast={toast} onDismiss={dismiss} />
       ))}
@@ -27,11 +31,11 @@ function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
   const { id, variant = "default", title, description, action } = toast;
 
   const variantStyles = {
-    default: "bg-white border-black",
-    success: "bg-[#dcfce7] border-black",
-    error: "bg-[#fee2e2] border-black",
-    warning: "bg-[#fef3c7] border-black",
-    info: "bg-[#dbeafe] border-black",
+    default: "bg-[var(--ui-surface)] border-black",
+    success: "bg-[var(--ui-success-soft)] border-black",
+    error: "bg-[var(--ui-danger-soft)] border-black",
+    warning: "bg-[var(--ui-warning-soft)] border-black",
+    info: "bg-[var(--ui-info-soft)] border-black",
   };
 
   const iconStyles = {
@@ -76,7 +80,7 @@ function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
         relative
         p-4
         border-2
-        shadow-[4px_4px_0_0_#000]
+        shadow-[var(--ui-shadow)]
         rounded-lg
         animate-brutal-slide-in
         pointer-events-auto
@@ -86,6 +90,7 @@ function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
       aria-live="polite"
     >
       <button
+        type="button"
         onClick={() => onDismiss(id)}
         className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors"
         aria-label="Close"
@@ -106,6 +111,7 @@ function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
           )}
           {action && (
             <button
+              type="button"
               onClick={action.onClick}
               className="mt-3 px-3 py-1.5 text-xs font-semibold bg-black text-white rounded-md hover:bg-gray-800 transition-colors"
             >

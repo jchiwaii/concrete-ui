@@ -1,11 +1,20 @@
 # Concrete UI
 
-**Neo Brutalist Component Library for React**
+Modern neo-brutalist React components with strong structure, restrained color, and accessible behavior.
 
-Bold, unapologetic UI components with thick borders, hard shadows, and raw aesthetics. Copy & paste into your React + Tailwind CSS projects.
+Concrete UI is a copy-and-own component library built with React 19, TypeScript, Tailwind CSS 4, and Next.js 16. It uses two-pixel outlines and hard shadows as structural tools rather than applying visual noise to every element.
 
-## Repository
+## What Is Included
 
-[GitHub Repository](https://github.com/jchiwaii/concrete-ui)
+- 55 documented React components
+- Searchable, categorized component catalog
+- Keyboard navigation and focus management for interactive primitives
+- Controlled and uncontrolled APIs where both patterns are useful
+- Responsive documentation and mobile navigation
+- React-only page templates with static image previews
+- Semantic color, radius, typography, and depth tokens
+- Reduced-motion support
 
-Still building...in progress
+Still work in progress>>>
+
+[github.com/jchiwaii/concrete-ui](https://github.com/jchiwaii/concrete-ui)

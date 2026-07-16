@@ -1,11 +1,10 @@
 "use client";
 
 import {
+  ButtonHTMLAttributes,
   HTMLAttributes,
   MutableRefObject,
   forwardRef,
-  useEffect,
-  useCallback,
   useRef,
 } from "react";
 import { createPortal } from "react-dom";
@@ -21,22 +20,6 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
   ({ className = "", open, onClose, size = "md", children, ...props }, ref) => {
     const contentRef = useRef<HTMLDivElement>(null);
-    const handleEscape = useCallback(
-      (e: KeyboardEvent) => {
-        if (e.key === "Escape") onClose();
-      },
-      [onClose]
-    );
-
-    useEffect(() => {
-      if (!open) return;
-
-      document.addEventListener("keydown", handleEscape);
-      return () => {
-        document.removeEventListener("keydown", handleEscape);
-      };
-    }, [open, handleEscape]);
-
     useBodyScrollLock(open);
     useFocusTrap(contentRef, open, onClose);
 
@@ -71,10 +54,11 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           className={`
             relative z-10
             w-full ${sizes[size]}
-            bg-white
+            max-h-[calc(100dvh-2rem)] overflow-y-auto
+            bg-[var(--ui-surface)]
             border-2 border-black
-            shadow-[6px_6px_0_0_#000]
-            rounded-lg
+            shadow-[var(--ui-shadow-lg)]
+            rounded-[var(--ui-radius-lg)]
             animate-brutal-scale-in
             ${className}
           `}
@@ -94,7 +78,7 @@ const ModalHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`px-6 py-5 border-b-2 border-black ${className}`}
+      className={`border-b-2 border-black px-5 py-4 sm:px-6 sm:py-5 ${className}`}
       {...props}
     >
       {children}
@@ -110,7 +94,7 @@ const ModalTitle = forwardRef<
 >(({ className = "", children, ...props }, ref) => (
   <h2
     ref={ref}
-    className={`text-xl font-bold tracking-tight ${className}`}
+    className={`text-xl font-semibold tracking-[-0.03em] ${className}`}
     {...props}
   >
     {children}
@@ -132,7 +116,7 @@ ModalDescription.displayName = "ModalDescription";
 
 const ModalContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
-    <div ref={ref} className={`px-6 py-5 ${className}`} {...props}>
+    <div ref={ref} className={`px-5 py-5 sm:px-6 ${className}`} {...props}>
       {children}
     </div>
   )
@@ -144,7 +128,7 @@ const ModalFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`px-6 py-4 border-t-2 border-black flex items-center justify-end gap-3 bg-gray-50 rounded-b-lg ${className}`}
+      className={`flex flex-col-reverse gap-3 border-t-2 border-black bg-[var(--ui-surface-muted)] px-5 py-4 sm:flex-row sm:items-center sm:justify-end sm:px-6 ${className}`}
       {...props}
     >
       {children}
@@ -154,19 +138,20 @@ const ModalFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 
 ModalFooter.displayName = "ModalFooter";
 
-export interface ModalCloseProps extends HTMLAttributes<HTMLButtonElement> {}
+export interface ModalCloseProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>(
   ({ className = "", onClick, ...props }, ref) => (
     <button
       ref={ref}
+      type="button"
       className={`
         absolute top-4 right-4
         w-8 h-8
         flex items-center justify-center
         text-xl font-bold
         text-gray-500
-        rounded-lg
+        rounded-[var(--ui-radius-sm)]
         transition-all duration-100 ease-out
         hover:bg-gray-100 hover:text-black
         ${className}

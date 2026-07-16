@@ -1,6 +1,6 @@
 // UI Components
-export { Button } from "./button";
-export type { ButtonProps } from "./button";
+export { Button, buttonStyles } from "./button";
+export type { ButtonProps, ButtonSize, ButtonVariant } from "./button";
 
 export { ButtonGroup } from "./button-group";
 export type { ButtonGroupProps } from "./button-group";

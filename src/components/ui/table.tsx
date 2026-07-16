@@ -7,7 +7,6 @@ import {
   forwardRef,
   createContext,
   useContext,
-  useState,
 } from "react";
 
 interface TableContextValue {
@@ -36,7 +35,8 @@ const Table = forwardRef<HTMLDivElement, TableProps>(
           className={`
             overflow-x-auto
             border-2 border-black
-            shadow-[6px_6px_0_0_#000]
+            rounded-[var(--ui-radius-lg)] bg-[var(--ui-surface)]
+            shadow-[var(--ui-shadow)]
             ${className}
           `}
           {...props}
@@ -88,25 +88,15 @@ export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
 
 const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
   ({ children, selected = false, className = "", ...props }, ref) => {
-    const [isHovered, setIsHovered] = useState(false);
-
     return (
       <tr
         ref={ref}
         className={`
-          border-b-4 border-black last:border-b-0
-          transition-all duration-100 ease-out
-          ${
-            selected
-              ? "bg-[#06b6d4]"
-              : isHovered
-              ? "bg-[#ffde00]"
-              : "even:bg-gray-100 odd:bg-white"
-          }
+          border-b-2 border-black last:border-b-0
+          transition-colors duration-150 ease-out
+          ${selected ? "bg-[var(--ui-info)]" : "even:bg-gray-100 odd:bg-[var(--ui-surface)] hover:bg-[var(--ui-accent-soft)]"}
           ${className}
         `}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
         {...props}
       >
         {children}
@@ -142,14 +132,12 @@ const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
       <th
         ref={ref}
         className={`
-          px-6 py-4
+          px-5 py-3.5
           text-left
-          font-bold uppercase tracking-wider
-          border-r-4 border-black last:border-r-0
-          ${sortable ? "cursor-pointer hover:bg-gray-800" : ""}
+          text-sm font-semibold
+          border-r-2 border-black last:border-r-0
           ${className}
         `}
-        onClick={handleClick}
         aria-sort={
           isSorted
             ? sortDirection === "asc"
@@ -159,14 +147,20 @@ const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
         }
         {...props}
       >
-        <div className="flex items-center gap-2">
-          {children}
-          {sortable && (
-            <span className="text-sm">
-              {isSorted ? (sortDirection === "asc" ? "▲" : "▼") : "⬍"}
+        {sortable ? (
+          <button
+            type="button"
+            onClick={handleClick}
+            className="-m-2 flex w-[calc(100%+1rem)] items-center gap-2 rounded-md p-2 text-left hover:bg-white/10 focus-visible:outline-white"
+          >
+            <span>{children}</span>
+            <span className="text-xs" aria-hidden="true">
+              {isSorted ? (sortDirection === "asc" ? "▲" : "▼") : "↕"}
             </span>
-          )}
-        </div>
+          </button>
+        ) : (
+          children
+        )}
       </th>
     );
   }
@@ -190,9 +184,9 @@ const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
       <td
         ref={ref}
         className={`
-          px-6 py-4
-          border-r-4 border-black last:border-r-0
-          font-medium
+          px-5 py-3.5
+          border-r-2 border-black last:border-r-0
+          text-sm font-medium
           ${alignmentStyles[align]}
           ${className}
         `}

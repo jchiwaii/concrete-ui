@@ -432,7 +432,7 @@ export default function JobHubLandingReact() {
                   style={{ border: "3px solid #000", background: BLUE, boxShadow: SHADOW }}
                 />
                 <div className="hero-visual-photo absolute overflow-hidden" style={{ background: "#bab6b6" }}>
-                  <img src="/jobhub/hero.jpg" alt="" loading="eager" decoding="async" className="w-full h-full block object-cover object-top" />
+                  <img src="/templates/jobhub-landing/preview/hero.jpg" alt="" loading="eager" decoding="async" className="w-full h-full block object-cover object-top" />
                 </div>
 
                 {/* badge – Spotify */}
@@ -756,7 +756,7 @@ export default function JobHubLandingReact() {
                 className="absolute inset-x-3 top-0 bottom-[2px] overflow-hidden"
                 style={{ border: "3px solid #000", background: "#98a5b2" }}
               >
-                <img src="/jobhub/cta.jpg" alt="" loading="lazy" decoding="async" className="w-full h-full block object-cover" />
+                <img src="/templates/jobhub-landing/preview/cta.jpg" alt="" loading="lazy" decoding="async" className="w-full h-full block object-cover" />
               </div>
             </div>
 

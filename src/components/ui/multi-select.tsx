@@ -127,8 +127,8 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
           aria-expanded={open}
           onClick={() => !disabled && setOpen((next) => !next)}
           className={cn(
-            "flex min-h-11 w-full items-center justify-between gap-3 rounded-md border-2 border-black bg-white px-3 py-2 text-left shadow-[4px_4px_0_0_#000] transition-all duration-100",
-            !disabled && "hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#000]",
+            "flex min-h-11 w-full items-center justify-between gap-3 rounded-md border-2 border-black bg-[var(--ui-surface)] px-3 py-2 text-left shadow-[var(--ui-shadow)] transition-all duration-100",
+            !disabled && "hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--ui-shadow-md)]",
             disabled && "cursor-not-allowed opacity-50"
           )}
         >
@@ -139,7 +139,7 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
               selectedOptions.map((option) => (
                 <span
                   key={option.value}
-                  className="inline-flex items-center gap-1 rounded-md border-2 border-black bg-[#ffde00] px-2 py-1 text-xs font-bold uppercase tracking-wide"
+                  className="inline-flex items-center gap-1 rounded-md border-2 border-black bg-[var(--ui-accent)] px-2 py-1 text-xs font-semibold"
                 >
                   {option.label}
                 </span>
@@ -155,7 +155,7 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
               ref={contentRef}
               role="listbox"
               aria-multiselectable="true"
-              className="fixed z-50 max-h-80 min-w-64 overflow-hidden rounded-md border-2 border-black bg-white shadow-[6px_6px_0_0_#000] animate-brutal-slide-down"
+              className="fixed z-50 max-h-80 min-w-64 overflow-hidden rounded-md border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)] animate-brutal-slide-down"
               style={{ top: position.top, left: position.left, width: triggerRef.current?.offsetWidth }}
             >
               <div className="border-b-2 border-black p-2">
@@ -180,16 +180,16 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                       aria-selected={selected}
                       onClick={() => toggle(option)}
                       className={cn(
-                        "flex cursor-pointer items-center gap-3 border-b-2 border-black px-4 py-3 last:border-b-0 hover:bg-[#fff4ab]",
-                        selectedIndex === index && "bg-[#fff4ab]",
-                        selected && "bg-[#ffde00]",
+                        "flex cursor-pointer items-center gap-3 border-b-2 border-black px-4 py-3 last:border-b-0 hover:bg-[var(--ui-accent-soft)]",
+                        selectedIndex === index && "bg-[var(--ui-accent-soft)]",
+                        selected && "bg-[var(--ui-accent)]",
                         option.disabled && "cursor-not-allowed bg-gray-100 opacity-50"
                       )}
                     >
-                      <span className="flex h-5 w-5 items-center justify-center rounded-md border-2 border-black bg-white text-xs font-bold shadow-[2px_2px_0_0_#000]">
+                      <span className="flex h-5 w-5 items-center justify-center rounded-md border-2 border-black bg-[var(--ui-surface)] text-xs font-bold shadow-[var(--ui-shadow-sm)]">
                         {selected ? "✓" : ""}
                       </span>
-                      <span className="text-sm font-bold uppercase tracking-wide">{option.label}</span>
+                      <span className="text-sm font-semibold">{option.label}</span>
                     </div>
                   );
                 })}

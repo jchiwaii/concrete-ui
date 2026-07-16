@@ -63,8 +63,8 @@ const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
           onDragLeave={() => setDragging(false)}
           onDrop={onDrop}
           className={cn(
-            "flex min-h-44 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-black bg-white p-8 text-center shadow-[4px_4px_0_0_#000] transition-all duration-100",
-            dragging && "-translate-x-0.5 -translate-y-0.5 bg-[#ffde00] shadow-[6px_6px_0_0_#000]",
+            "flex min-h-44 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-black bg-[var(--ui-surface)] p-8 text-center shadow-[var(--ui-shadow)] transition-all duration-100",
+            dragging && "-translate-x-0.5 -translate-y-0.5 bg-[var(--ui-accent)] shadow-[var(--ui-shadow-lg)]",
             disabled && "cursor-not-allowed opacity-50"
           )}
         >
@@ -79,26 +79,26 @@ const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
             onChange={onInputChange}
             {...props}
           />
-          <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-lg border-2 border-black bg-[#06b6d4] text-2xl font-black shadow-[3px_3px_0_0_#000]">
+          <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-lg border-2 border-black bg-[var(--ui-info)] text-2xl font-bold shadow-[var(--ui-shadow)]">
             ↑
           </span>
-          <span className="text-lg font-extrabold uppercase tracking-tight">{label}</span>
+          <span className="text-lg font-semibold tracking-tight">{label}</span>
           <span className="mt-1 text-sm font-medium text-gray-600">{description}</span>
-          {accept && <span className="mt-3 rounded-md border-2 border-black bg-gray-100 px-2 py-1 text-xs font-bold uppercase">{accept}</span>}
+          {accept && <span className="mt-3 rounded-md border-2 border-black bg-gray-100 px-2 py-1 text-xs font-semibold">{accept}</span>}
         </label>
 
         {files.length > 0 && (
-          <div className="overflow-hidden rounded-lg border-2 border-black bg-white shadow-[4px_4px_0_0_#000]">
+          <div className="overflow-hidden rounded-lg border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow)]">
             {files.map((file, index) => (
               <div key={`${file.name}-${index}`} className="flex items-center justify-between gap-3 border-b-2 border-black px-4 py-3 last:border-b-0">
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-bold uppercase tracking-wide">{file.name}</p>
+                  <p className="truncate text-sm font-semibold">{file.name}</p>
                   <p className="text-xs font-medium text-gray-500">{Math.ceil(file.size / 1024)} KB</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => removeFile(index)}
-                  className="rounded-md border-2 border-black bg-white px-2 py-1 text-xs font-bold uppercase shadow-[2px_2px_0_0_#000] hover:bg-[#ef4444] hover:text-white"
+                  className="rounded-md border-2 border-black bg-[var(--ui-surface)] px-2 py-1 text-xs font-semibold shadow-[var(--ui-shadow-sm)] hover:bg-[var(--ui-danger)] hover:text-white"
                 >
                   Remove
                 </button>

@@ -10,8 +10,8 @@ const Item = forwardRef<HTMLDivElement, ItemProps>(
     <div
       ref={ref}
       className={cn(
-        "flex items-start gap-4 rounded-lg border-2 border-black bg-white p-4 shadow-[4px_4px_0_0_#000]",
-        interactive && "cursor-pointer transition-all duration-100 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[#fff4ab] hover:shadow-[6px_6px_0_0_#000]",
+        "flex items-start gap-4 rounded-lg border-2 border-black bg-[var(--ui-surface)] p-4 shadow-[var(--ui-shadow)]",
+        interactive && "cursor-pointer transition-all duration-100 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[var(--ui-accent-soft)] hover:shadow-[var(--ui-shadow-md)]",
         className
       )}
       {...props}
@@ -23,7 +23,7 @@ Item.displayName = "Item";
 
 const ItemMedia = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", ...props }, ref) => (
-    <div ref={ref} className={cn("flex h-12 w-12 shrink-0 items-center justify-center rounded-md border-2 border-black bg-[#ffde00] text-lg font-black shadow-[2px_2px_0_0_#000]", className)} {...props} />
+    <div ref={ref} className={cn("flex h-12 w-12 shrink-0 items-center justify-center rounded-md border-2 border-black bg-[var(--ui-accent)] text-lg font-bold shadow-[var(--ui-shadow-sm)]", className)} {...props} />
   )
 );
 
@@ -36,7 +36,7 @@ const ItemContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 ItemContent.displayName = "ItemContent";
 
 const ItemTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
-  ({ className = "", ...props }, ref) => <h3 ref={ref} className={cn("font-extrabold uppercase tracking-tight", className)} {...props} />
+  ({ className = "", ...props }, ref) => <h3 ref={ref} className={cn("font-semibold tracking-tight", className)} {...props} />
 );
 
 ItemTitle.displayName = "ItemTitle";

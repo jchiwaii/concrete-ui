@@ -21,8 +21,8 @@ const TimelineItem = forwardRef<HTMLLIElement, TimelineItemProps>(
     <li ref={ref} className={cn("relative", className)} {...props}>
       <span
         className={cn(
-          "absolute -left-[46px] top-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-white text-xs font-black shadow-[3px_3px_0_0_#000]",
-          active && "bg-[#ffde00]"
+          "absolute -left-[46px] top-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-[var(--ui-surface)] text-xs font-bold shadow-[var(--ui-shadow)]",
+          active && "bg-[var(--ui-accent)]"
         )}
       >
         {marker ?? ""}
@@ -36,7 +36,7 @@ TimelineItem.displayName = "TimelineItem";
 
 const TimelineTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
   ({ className = "", ...props }, ref) => (
-    <h3 ref={ref} className={cn("text-lg font-extrabold uppercase tracking-tight", className)} {...props} />
+    <h3 ref={ref} className={cn("text-lg font-semibold tracking-tight", className)} {...props} />
   )
 );
 
@@ -52,7 +52,7 @@ TimelineDescription.displayName = "TimelineDescription";
 
 const TimelineContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", ...props }, ref) => (
-    <div ref={ref} className={cn("rounded-lg border-2 border-black bg-white p-4 shadow-[4px_4px_0_0_#000]", className)} {...props} />
+    <div ref={ref} className={cn("rounded-lg border-2 border-black bg-[var(--ui-surface)] p-4 shadow-[var(--ui-shadow)]", className)} {...props} />
   )
 );
 

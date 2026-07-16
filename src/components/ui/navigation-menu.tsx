@@ -32,8 +32,8 @@ const NavigationMenuLink = forwardRef<HTMLAnchorElement, NavigationMenuLinkProps
     <a
       ref={ref}
       className={cn(
-        "inline-flex rounded-md border-2 border-transparent px-4 py-2 text-sm font-bold uppercase tracking-wide transition-all duration-100 hover:border-black hover:bg-white hover:shadow-[3px_3px_0_0_#000]",
-        active && "border-black bg-[#ffde00] shadow-[3px_3px_0_0_#000]",
+        "inline-flex rounded-md border-2 border-transparent px-4 py-2 text-sm font-semibold transition-all duration-100 hover:border-black hover:bg-[var(--ui-surface)] hover:shadow-[var(--ui-shadow)]",
+        active && "border-black bg-[var(--ui-accent)] shadow-[var(--ui-shadow)]",
         className
       )}
       {...props}

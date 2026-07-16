@@ -9,16 +9,16 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     const baseStyles = `
       p-4
       border-2 border-black
-      shadow-[4px_4px_0_0_#000]
-      rounded-lg
+      shadow-[var(--ui-shadow)]
+      rounded-[var(--ui-radius-lg)]
     `;
 
     const variants = {
-      default: "bg-white",
-      info: "bg-[#dbeafe]",
-      success: "bg-[#dcfce7]",
-      warning: "bg-[#fef3c7]",
-      danger: "bg-[#fee2e2]",
+      default: "bg-[var(--ui-surface)]",
+      info: "bg-[var(--ui-info-soft)]",
+      success: "bg-[var(--ui-success-soft)]",
+      warning: "bg-[var(--ui-warning-soft)]",
+      danger: "bg-[var(--ui-danger-soft)]",
     };
 
     const icons = {

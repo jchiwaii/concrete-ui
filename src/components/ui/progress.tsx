@@ -25,10 +25,10 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
 
     const colors = {
       default: "bg-black",
-      primary: "bg-[#ffde00]",
-      success: "bg-[#22c55e]",
-      warning: "bg-[#f97316]",
-      danger: "bg-[#ef4444]",
+      primary: "bg-[var(--ui-accent)]",
+      success: "bg-[var(--ui-success)]",
+      warning: "bg-[var(--ui-warning)]",
+      danger: "bg-[var(--ui-danger)]",
     };
 
     const sizes = {

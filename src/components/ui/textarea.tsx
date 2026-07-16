@@ -1,4 +1,5 @@
 import { TextareaHTMLAttributes, forwardRef } from "react";
+import { cn } from "@/lib/utils";
 
 export interface TextareaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -7,30 +8,18 @@ export interface TextareaProps
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className = "", error = false, ...props }, ref) => {
-    const baseStyles = `
-      w-full px-4 py-3
-      text-base font-medium
-      bg-white
-      border-2 border-black
-      shadow-[4px_4px_0_0_#000]
-      outline-none
-      transition-all duration-100 ease-out
-      placeholder:text-gray-400 placeholder:uppercase
-      focus:translate-x-[-2px] focus:translate-y-[-2px]
-      focus:shadow-[6px_6px_0_0_#000]
-      disabled:opacity-50 disabled:cursor-not-allowed
-      resize-none
-      min-h-[120px]
-    `;
+    const baseStyles =
+      "min-h-28 w-full resize-y rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface)] px-3.5 py-3 text-[15px] font-medium shadow-[var(--ui-shadow)] outline-none transition-[transform,box-shadow,border-color] duration-150 ease-out placeholder:font-normal placeholder:text-gray-400 focus:-translate-x-px focus:-translate-y-px focus:shadow-[var(--ui-shadow-md)] disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50";
 
     const errorStyles = error
-      ? "border-[#ef4444] shadow-[4px_4px_0_0_#ef4444] focus:shadow-[6px_6px_0_0_#ef4444]"
+      ? "border-[var(--ui-danger)] shadow-[3px_3px_0_var(--ui-danger)] focus:shadow-[4px_4px_0_var(--ui-danger)]"
       : "";
 
     return (
       <textarea
         ref={ref}
-        className={`${baseStyles} ${errorStyles} ${className}`}
+        aria-invalid={error || props["aria-invalid"] || undefined}
+        className={cn(baseStyles, errorStyles, className)}
         {...props}
       />
     );

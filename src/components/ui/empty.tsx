@@ -9,8 +9,8 @@ const Empty = forwardRef<HTMLDivElement, EmptyProps>(
   ({ className = "", variant = "default", ...props }, ref) => {
     const variants = {
       default: "",
-      boxed: "border-2 border-black bg-white shadow-[4px_4px_0_0_#000]",
-      dashed: "border-2 border-dashed border-black bg-[#fff7cc]",
+      boxed: "border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow)]",
+      dashed: "border-2 border-dashed border-black bg-[var(--ui-accent-soft)]",
     };
 
     return (
@@ -34,7 +34,7 @@ const EmptyIcon = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     <div
       ref={ref}
       className={cn(
-        "flex h-16 w-16 items-center justify-center rounded-lg border-2 border-black bg-[#ffde00] text-black shadow-[4px_4px_0_0_#000]",
+        "flex h-16 w-16 items-center justify-center rounded-lg border-2 border-black bg-[var(--ui-accent)] text-black shadow-[var(--ui-shadow)]",
         className
       )}
       {...props}
@@ -46,7 +46,7 @@ EmptyIcon.displayName = "EmptyIcon";
 
 const EmptyTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
   ({ className = "", ...props }, ref) => (
-    <h3 ref={ref} className={cn("text-xl font-extrabold uppercase tracking-tight", className)} {...props} />
+    <h3 ref={ref} className={cn("text-xl font-semibold tracking-tight", className)} {...props} />
   )
 );
 

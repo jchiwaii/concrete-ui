@@ -12,8 +12,10 @@
   "homepage": "https://github.com/jchiwaii/concrete-ui#readme",
   "scripts": {
     "dev": "next dev",
+    "typecheck": "tsc --noEmit",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "check": "npm run typecheck && npm run build"
   },
   "dependencies": {
     "next": "16.1.1",

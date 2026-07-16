@@ -1,108 +1,116 @@
 import Link from "next/link";
-import { Badge, Button, Card, CardContent } from "@/components/ui";
+import { Badge, buttonStyles } from "@/components/ui";
+import { componentCategories, componentRegistry, getComponentHref } from "@/lib/component-registry";
+
+const featuredSlugs = ["button", "field", "modal", "command", "table", "tooltip"];
 
 const principles = [
   {
-    title: "Clear hierarchy",
-    description:
-      "Strong type scale, visible structure, and predictable spacing across every component.",
+    number: "01",
+    title: "Structure first",
+    description: "Two-pixel outlines and hard depth clarify grouping instead of decorating every surface.",
   },
   {
-    title: "Confident surfaces",
-    description:
-      "Bold outlines and hard shadows give interfaces identity while staying clean and usable.",
+    number: "02",
+    title: "Quiet typography",
+    description: "A compact, readable scale lets the component behavior carry more weight than display type.",
   },
   {
-    title: "Fast composition",
-    description:
-      "Copy components, adapt tokens, and ship screens quickly without losing consistency.",
+    number: "03",
+    title: "Own the code",
+    description: "Components are typed, composable, and designed to be copied into a real product codebase.",
   },
 ];
 
 export default function DocsPage() {
+  const featured = featuredSlugs
+    .map((slug) => componentRegistry.find((component) => component.slug === slug))
+    .filter((component) => component !== undefined);
+
   return (
-    <div className="space-y-12">
-      <section className="docs-panel p-7 md:p-8">
-        <Badge variant="primary" className="mb-4 uppercase">
-          Documentation
-        </Badge>
-        <h1 className="font-heading text-[clamp(3rem,8vw,5.5rem)] uppercase leading-[0.9]">
-          Concrete UI Guide
+    <div className="space-y-16">
+      <section className="border-b-2 border-black pb-10 md:pb-14">
+        <Badge variant="primary" className="mb-5">Documentation</Badge>
+        <h1 className="text-brutal-5xl max-w-4xl text-balance font-bold tracking-[-0.055em]">
+          Build interfaces with clarity and character.
         </h1>
-        <p className="mt-4 max-w-3xl text-brutal-lg text-gray-700">
-          Concrete UI is a modern neo-brutalist component system for React.
-          Clean layout, bold identity, and practical copy-paste workflows.
+        <p className="mt-5 max-w-2xl text-base leading-7 text-gray-600 md:text-lg">
+          Concrete UI is a modern neo-brutalist component system for React. It pairs
+          strong structure with restrained color, practical APIs, and accessible behavior.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
-          <Link href="/docs/installation">
-            <Button variant="primary" size="lg">
-              Installation
-            </Button>
+          <Link href="/docs/installation" className={buttonStyles({ variant: "primary", size: "lg" })}>
+            Install Concrete UI
           </Link>
-          <Link href="/docs/components/button">
-            <Button variant="outline" size="lg">
-              Browse Components
-            </Button>
-          </Link>
-          <Link href="/docs/templates">
-            <Button variant="outline" size="lg">
-              Browse Templates
-            </Button>
+          <Link href="/docs/components" className={buttonStyles({ variant: "outline", size: "lg" })}>
+            Browse components
           </Link>
         </div>
       </section>
 
-      <section className="grid gap-6 md:grid-cols-3">
-        {principles.map((item) => (
-          <Card key={item.title} hover>
-            <CardContent className="p-6">
-              <h2 className="text-xl font-extrabold uppercase tracking-tight">
-                {item.title}
-              </h2>
-              <p className="mt-3 text-sm text-gray-700">{item.description}</p>
-            </CardContent>
-          </Card>
+      <section aria-labelledby="library-overview">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">Library overview</p>
+            <h2 id="library-overview" className="mt-2 text-brutal-3xl font-bold tracking-[-0.04em]">
+              Small system, broad coverage.
+            </h2>
+          </div>
+          <Link href="/docs/components" className="text-sm font-semibold underline decoration-2 underline-offset-4 hover:no-underline">
+            View all {componentRegistry.length} components
+          </Link>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-3">
+          <div className="rounded-[var(--ui-radius-lg)] border-2 border-black bg-[var(--ui-accent)] p-5 shadow-[var(--ui-shadow)]">
+            <p className="text-3xl font-bold tracking-[-0.05em]">{componentRegistry.length}</p>
+            <p className="mt-1 text-sm font-medium">React components</p>
+          </div>
+          <div className="rounded-[var(--ui-radius-lg)] border-2 border-black bg-[var(--ui-info)] p-5 shadow-[var(--ui-shadow)]">
+            <p className="text-3xl font-bold tracking-[-0.05em]">{componentCategories.length}</p>
+            <p className="mt-1 text-sm font-medium">Focused categories</p>
+          </div>
+          <div className="rounded-[var(--ui-radius-lg)] border-2 border-black bg-[var(--ui-surface)] p-5 shadow-[var(--ui-shadow)]">
+            <p className="text-3xl font-bold tracking-[-0.05em]">A11y</p>
+            <p className="mt-1 text-sm font-medium">Keyboard-first patterns</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="featured-components">
+        <div className="mb-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">Start here</p>
+          <h2 id="featured-components" className="mt-2 text-brutal-3xl font-bold tracking-[-0.04em]">
+            Essential building blocks.
+          </h2>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {featured.map((component) => (
+            <Link
+              key={component.slug}
+              href={getComponentHref(component.slug)}
+              className="group rounded-[var(--ui-radius-lg)] border-2 border-black bg-[var(--ui-surface)] p-5 shadow-[var(--ui-shadow)] transition-[transform,box-shadow,background-color] hover:-translate-x-px hover:-translate-y-px hover:bg-[var(--ui-accent-soft)] hover:shadow-[var(--ui-shadow-md)]"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <h3 className="font-semibold tracking-[-0.025em]">{component.name}</h3>
+                <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-gray-600">{component.description}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="grid border-y-2 border-black md:grid-cols-3" aria-label="Design principles">
+        {principles.map((principle, index) => (
+          <div
+            key={principle.number}
+            className={`py-6 md:p-6 ${index > 0 ? "border-t-2 border-black md:border-l-2 md:border-t-0" : ""}`}
+          >
+            <span className="font-mono text-xs font-bold text-gray-500">{principle.number}</span>
+            <h2 className="mt-3 text-lg font-semibold tracking-[-0.03em]">{principle.title}</h2>
+            <p className="mt-2 text-sm leading-6 text-gray-600">{principle.description}</p>
+          </div>
         ))}
-      </section>
-
-      <section className="docs-panel p-7 md:p-8">
-        <h2 className="text-2xl font-extrabold uppercase tracking-tight">
-          Core style language
-        </h2>
-        <div className="mt-5 grid gap-3 md:grid-cols-2">
-          <div className="rounded-lg border-2 border-black bg-gray-50 p-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-gray-500">
-              Borders + depth
-            </p>
-            <p className="mt-2 text-sm font-medium text-gray-700">
-              Thick black outlines and hard shadows across controls and layout blocks.
-            </p>
-          </div>
-          <div className="rounded-lg border-2 border-black bg-gray-50 p-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-gray-500">
-              Color strategy
-            </p>
-            <p className="mt-2 text-sm font-medium text-gray-700">
-              Neutral base with focused accent usage: yellow for primary, cyan for secondary.
-            </p>
-          </div>
-          <div className="rounded-lg border-2 border-black bg-gray-50 p-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-gray-500">
-              Motion
-            </p>
-            <p className="mt-2 text-sm font-medium text-gray-700">
-              Short transitions and clear interaction feedback without decorative overload.
-            </p>
-          </div>
-          <div className="rounded-lg border-2 border-black bg-gray-50 p-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-gray-500">
-              Shape language
-            </p>
-            <p className="mt-2 text-sm font-medium text-gray-700">
-              Rounded modern corners with brutalist contrast and structural weight.
-            </p>
-          </div>
-        </div>
       </section>
     </div>
   );

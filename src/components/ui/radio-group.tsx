@@ -7,6 +7,7 @@ import {
   useContext,
   InputHTMLAttributes,
   useId,
+  useState,
 } from "react";
 
 interface RadioGroupContextValue {
@@ -22,6 +23,7 @@ const RadioGroupContext = createContext<RadioGroupContextValue | undefined>(
 
 export interface RadioGroupProps extends HTMLAttributes<HTMLDivElement> {
   value?: string;
+  defaultValue?: string;
   onValueChange?: (value: string) => void;
   name?: string;
   disabled?: boolean;
@@ -32,6 +34,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
   (
     {
       value,
+      defaultValue,
       onValueChange,
       name,
       disabled = false,
@@ -44,6 +47,13 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
   ) => {
     const generatedName = useId();
     const groupName = name || generatedName;
+    const [internalValue, setInternalValue] = useState(defaultValue);
+    const currentValue = value ?? internalValue;
+
+    const handleValueChange = (nextValue: string) => {
+      if (value === undefined) setInternalValue(nextValue);
+      onValueChange?.(nextValue);
+    };
 
     const baseStyles = `
       ${orientation === "vertical" ? "flex flex-col gap-4" : "flex flex-row flex-wrap gap-6"}
@@ -51,7 +61,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
 
     return (
       <RadioGroupContext.Provider
-        value={{ value, onChange: onValueChange, name: groupName, disabled }}
+        value={{ value: currentValue, onChange: handleValueChange, name: groupName, disabled }}
       >
         <div
           ref={ref}
@@ -88,19 +98,6 @@ const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
     const isChecked = groupValue === value;
     const radioId = id || `${name}-${value}`;
 
-    const handleClick = () => {
-      if (!isDisabled && onChange) {
-        onChange(value);
-      }
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (e.key === " " || e.key === "Enter") {
-        e.preventDefault();
-        handleClick();
-      }
-    };
-
     const containerStyles = `
       flex items-center gap-3
       cursor-pointer
@@ -111,15 +108,15 @@ const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
       relative
       w-7 h-7
       border-2 border-black
-      shadow-[3px_3px_0_0_#000]
+      shadow-[var(--ui-shadow)]
       transition-all duration-100 ease-out
       flex items-center justify-center
       ${
         !isDisabled
-          ? "hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0_0_#000]"
+          ? "hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)]"
           : ""
       }
-      ${isChecked ? "bg-white" : "bg-white"}
+      ${isChecked ? "bg-[var(--ui-surface)]" : "bg-[var(--ui-surface)]"}
     `;
 
     const innerBoxStyles = `
@@ -130,15 +127,12 @@ const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
     `;
 
     const labelStyles = `
-      font-bold
-      uppercase
-      tracking-wider
-      text-base
+      text-sm font-medium
       select-none
     `;
 
     return (
-      <label className={`${containerStyles} ${className}`}>
+      <label htmlFor={radioId} className={`${containerStyles} ${className}`}>
         <input
           ref={ref}
           type="radio"
@@ -147,17 +141,13 @@ const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
           value={value}
           checked={isChecked}
           disabled={isDisabled}
-          onChange={() => handleClick()}
-          className="sr-only"
-          role="radio"
-          aria-checked={isChecked}
+          onChange={() => !isDisabled && onChange?.(value)}
+          className="peer sr-only"
           {...props}
         />
         <div
-          className={boxStyles}
-          onClick={handleClick}
-          onKeyDown={handleKeyDown}
-          tabIndex={isDisabled ? -1 : 0}
+          className={`${boxStyles} peer-focus-visible:outline peer-focus-visible:outline-3 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-black`}
+          aria-hidden="true"
         >
           <div className={innerBoxStyles} />
         </div>

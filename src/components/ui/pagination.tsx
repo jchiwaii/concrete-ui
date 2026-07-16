@@ -73,15 +73,15 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
       w-10 h-10
       flex items-center justify-center
       border-2 border-black
-      shadow-[3px_3px_0_0_#000]
-      font-bold uppercase
+      shadow-[var(--ui-shadow)]
+      font-semibold
       transition-all duration-100 ease-out
       ${
         isDisabled
           ? "opacity-50 cursor-not-allowed bg-gray-200"
           : isActive
-          ? "bg-[#ffde00] text-black"
-          : "bg-white text-black hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0_0_#000] cursor-pointer"
+          ? "bg-[var(--ui-accent)] text-black"
+          : "bg-[var(--ui-surface)] text-black hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)] cursor-pointer"
       }
     `;
 
@@ -89,13 +89,13 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
       px-4 h-10
       flex items-center justify-center
       border-2 border-black
-      shadow-[3px_3px_0_0_#000]
-      font-bold uppercase text-sm
+      shadow-[var(--ui-shadow)]
+      font-semibold text-sm
       transition-all duration-100 ease-out
       ${
         isDisabled
           ? "opacity-50 cursor-not-allowed bg-gray-200"
-          : "bg-white text-black hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0_0_#000] cursor-pointer"
+          : "bg-[var(--ui-surface)] text-black hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)] cursor-pointer"
       }
     `;
 
@@ -111,12 +111,13 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
         ref={ref}
         role="navigation"
         aria-label="Pagination"
-        className={`flex items-center gap-2 ${className}`}
+        className={`flex flex-wrap items-center gap-2 ${className}`}
         {...props}
       >
         {/* First Page */}
         {showFirstLast && (
           <button
+            type="button"
             onClick={() => onPageChange(1)}
             disabled={currentPage === 1}
             className={arrowButtonStyles(currentPage === 1)}
@@ -128,6 +129,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
 
         {/* Previous Page */}
         <button
+          type="button"
           onClick={() => onPageChange(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
           className={arrowButtonStyles(currentPage === 1)}
@@ -154,6 +156,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
 
           return (
             <button
+              type="button"
               key={page}
               onClick={() => onPageChange(page)}
               disabled={isActive}
@@ -168,6 +171,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
 
         {/* Next Page */}
         <button
+          type="button"
           onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
           className={arrowButtonStyles(currentPage === totalPages)}
@@ -179,6 +183,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
         {/* Last Page */}
         {showFirstLast && (
           <button
+            type="button"
             onClick={() => onPageChange(totalPages)}
             disabled={currentPage === totalPages}
             className={arrowButtonStyles(currentPage === totalPages)}

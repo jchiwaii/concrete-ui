@@ -1,299 +1,188 @@
 import Link from "next/link";
-import { Badge, Button, Card, CardContent, Input } from "@/components/ui";
+import { SiteHeader } from "@/components/site/site-header";
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  Field,
+  FieldDescription,
+  FieldLabel,
+  Input,
+  Switch,
+  buttonStyles,
+} from "@/components/ui";
+import { componentRegistry, getComponentHref } from "@/lib/component-registry";
 
-const signalStrip = [
-  "55 Components",
-  "TypeScript First",
-  "React 19 + Next 16",
-  "Copy + Paste Workflow",
-  "Hard Shadows + Thick Borders",
-  "Keyboard Friendly Patterns",
-];
+const featuredSlugs = ["button", "field", "command", "modal", "table", "tabs"];
 
-const pillars = [
+const principles = [
   {
-    title: "Modern Neo-Brutal",
-    description:
-      "Strong outlines and hard depth with cleaner spacing and readable layouts.",
-    color: "white" as const,
+    index: "01",
+    title: "Brutal, not noisy",
+    description: "Hard edges establish hierarchy. Color and shadow are reserved for the moments that need emphasis.",
   },
   {
-    title: "Build Fast",
-    description:
-      "Composable primitives designed to move from docs to production quickly.",
-    color: "yellow" as const,
+    index: "02",
+    title: "Behavior included",
+    description: "Keyboard navigation, focus management, and controlled or uncontrolled state are part of the primitive.",
   },
   {
-    title: "Consistent System",
-    description:
-      "Shared color, spacing, and interaction language across every component.",
-    color: "cyan" as const,
+    index: "03",
+    title: "Designed to be owned",
+    description: "Readable TypeScript and small APIs make every component practical to copy, adapt, and maintain.",
   },
 ];
 
 export default function Home() {
-  return (
-    <div className="min-h-screen overflow-x-hidden bg-gray-50 text-black">
-      <header className="sticky top-0 z-50 border-b-2 border-black bg-white/95 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-4">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl font-bold tracking-tight">
-              Concrete
-              <span className="ml-0.5 rounded bg-black px-1.5 py-0.5 text-white">
-                UI
-              </span>
-            </span>
-            <Badge
-              variant="primary"
-              size="sm"
-              className="hidden md:inline-flex"
-            >
-              v0.1
-            </Badge>
-          </Link>
+  const featured = featuredSlugs
+    .map((slug) => componentRegistry.find((component) => component.slug === slug))
+    .filter((component) => component !== undefined);
 
-          <nav className="hidden items-center gap-2 md:flex">
-            <Link
-              href="/docs"
-              className="rounded-lg px-4 py-2 text-sm font-semibold uppercase tracking-wide transition-colors hover:bg-gray-100"
-            >
-              Docs
-            </Link>
-            <Link
-              href="/docs/components/button"
-              className="rounded-lg px-4 py-2 text-sm font-semibold uppercase tracking-wide transition-colors hover:bg-gray-100"
-            >
-              Components
-            </Link>
-            <a
-              href="https://github.com/jchiwaii/concrete-ui"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-2 rounded-lg bg-black px-4 py-2 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-gray-800"
-            >
-              GitHub
-            </a>
-          </nav>
-        </div>
-      </header>
+  return (
+    <div className="min-h-screen bg-[var(--ui-canvas)] text-[var(--ui-ink)]">
+      <SiteHeader />
 
       <main>
-        <section className="relative px-6 pb-20 pt-16 md:pb-24 md:pt-20">
-          <div className="pointer-events-none absolute inset-0 -z-10 bg-grid-pattern opacity-70" />
-          <div className="mx-auto w-full max-w-7xl">
-            <Badge variant="primary" size="lg" className="mb-6 uppercase">
-              Neo Brutalist Component Library
-            </Badge>
-
-            <h1 className="font-heading text-[clamp(4rem,16vw,12rem)] leading-[0.8] uppercase tracking-[0.01em]">
-              Build
-              <span className="mx-2 inline-block rounded-md border-2 border-black bg-[#ffde00] px-3 py-1 shadow-[6px_6px_0_0_#000]">
-                Loud
-              </span>
-              Interfaces
-              <span className="mx-2 inline-block rounded-md border-2 border-black bg-[#06b6d4] px-3 py-1 shadow-[6px_6px_0_0_#000]">
-                Fast
-              </span>
-            </h1>
-
-            <p className="mt-7 max-w-3xl text-brutal-lg text-gray-700">
-              Concrete UI gives you production-ready components with thick
-              borders, hard shadows, and modern neo-brutal clarity.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/docs">
-                <Button variant="primary" size="xl">
-                  Read The Docs
-                </Button>
-              </Link>
-              <Link href="/docs/components/button">
-                <Button variant="outline" size="xl">
-                  Browse Components
-                </Button>
-              </Link>
+        <section className="relative overflow-hidden border-b-2 border-black">
+          <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-45" />
+          <div className="relative mx-auto grid w-full max-w-[1200px] gap-12 px-4 py-16 sm:px-6 md:py-24 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:py-28">
+            <div>
+              <Badge variant="primary" className="mb-6">React component library</Badge>
+              <h1 className="text-brutal-6xl max-w-[12ch] text-balance font-bold tracking-[-0.065em]">
+                UI with enough edge to be remembered.
+              </h1>
+              <p className="mt-6 max-w-xl text-base leading-7 text-gray-600 sm:text-lg">
+                Concrete UI is a modern neo-brutalist system for React: strong structure,
+                restrained color, accessible behavior, and code you can actually own.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/docs/installation" className={buttonStyles({ variant: "primary", size: "lg" })}>
+                  Get started
+                </Link>
+                <Link href="/docs/components" className={buttonStyles({ variant: "outline", size: "lg" })}>
+                  Explore components
+                </Link>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-gray-600">
+                <span>{componentRegistry.length} components</span>
+                <span>React 19</span>
+                <span>TypeScript first</span>
+              </div>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Badge variant="default" size="lg" className="uppercase">
-                Consistent colors
-              </Badge>
-              <Badge variant="default" size="lg" className="uppercase">
-                Clean layouts
-              </Badge>
-              <Badge variant="default" size="lg" className="uppercase">
-                Brutal character
-              </Badge>
+            <div className="lg:pl-8" aria-label="Component example">
+              <div className="overflow-hidden rounded-[var(--ui-radius-xl)] border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)]">
+                <div className="flex items-center justify-between border-b-2 border-black bg-[var(--ui-surface-muted)] px-4 py-3">
+                  <div className="flex items-center gap-2" aria-hidden="true">
+                    <span className="h-2.5 w-2.5 rounded-full border border-black bg-[var(--ui-danger)]" />
+                    <span className="h-2.5 w-2.5 rounded-full border border-black bg-[var(--ui-accent)]" />
+                    <span className="h-2.5 w-2.5 rounded-full border border-black bg-[var(--ui-success)]" />
+                  </div>
+                  <span className="font-mono text-[11px] font-semibold text-gray-500">profile-card.tsx</span>
+                </div>
+                <div className="p-5 sm:p-7">
+                  <div className="mb-6 flex items-start justify-between gap-4">
+                    <div>
+                      <Badge variant="secondary" size="sm">Live primitive</Badge>
+                      <h2 className="mt-3 text-xl font-semibold tracking-[-0.04em]">Profile settings</h2>
+                      <p className="mt-1 text-sm text-gray-600">A small form composed from library parts.</p>
+                    </div>
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border-2 border-black bg-[var(--ui-accent)] font-bold shadow-[var(--ui-shadow-sm)]">
+                      CU
+                    </span>
+                  </div>
+
+                  <div className="grid gap-5">
+                    <Field>
+                      <FieldLabel htmlFor="demo-name">Display name</FieldLabel>
+                      <Input id="demo-name" defaultValue="Maya Chen" />
+                      <FieldDescription>Shown on your public profile.</FieldDescription>
+                    </Field>
+                    <div className="flex items-center justify-between gap-4 rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface-muted)] p-4">
+                      <div>
+                        <p className="text-sm font-semibold">Weekly digest</p>
+                        <p className="mt-1 text-xs leading-5 text-gray-600">One useful summary, every Friday.</p>
+                      </div>
+                      <Switch defaultChecked aria-label="Enable weekly digest" />
+                    </div>
+                    <div className="flex flex-wrap justify-end gap-2 border-t-2 border-black pt-5">
+                      <Button variant="ghost">Cancel</Button>
+                      <Button variant="primary">Save changes</Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="border-y-2 border-black bg-black py-6">
-          <div className="overflow-hidden">
-            <div className="flex min-w-max items-center gap-5 animate-brutal-marquee px-6">
-              {[...signalStrip, ...signalStrip].map((item, index) => (
-                <span
-                  key={`${item}-${index}`}
-                  className={`inline-flex items-center rounded-md border-2 border-black px-6 py-3 text-lg font-extrabold uppercase tracking-[0.08em] shadow-[4px_4px_0_0_#000] md:text-2xl ${
-                    index % 2 === 0
-                      ? "bg-[#ffde00] text-black"
-                      : "bg-[#06b6d4] text-black"
-                  }`}
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-6 py-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-10">
-              <Badge variant="neutral" className="mb-4 uppercase">
-                Why Concrete UI
-              </Badge>
-              <h2 className="text-4xl font-bold uppercase tracking-tight">
-                Clean, Modern, Neo-Brutal
+        <section className="mx-auto w-full max-w-[1200px] px-4 py-16 sm:px-6 md:py-24">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">The essentials</p>
+              <h2 className="mt-2 text-brutal-4xl max-w-xl font-bold tracking-[-0.05em]">
+                Familiar primitives, clearer character.
               </h2>
             </div>
+            <Link href="/docs/components" className="text-sm font-semibold underline decoration-2 underline-offset-4 hover:no-underline">
+              Browse all components
+            </Link>
+          </div>
 
-            <div className="grid gap-6 md:grid-cols-3">
-              {pillars.map((item) => (
-                <Card key={item.title} color={item.color} hover>
-                  <CardContent className="p-7">
-                    <h3 className="text-2xl font-extrabold uppercase tracking-tight">
-                      {item.title}
-                    </h3>
-                    <p className="mt-4 text-sm text-gray-800">
-                      {item.description}
-                    </p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {featured.map((component) => (
+              <Link key={component.slug} href={getComponentHref(component.slug)} className="group">
+                <Card hover className="h-full">
+                  <CardContent className="p-5">
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="font-semibold tracking-[-0.025em]">{component.name}</h3>
+                      <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-gray-600">{component.description}</p>
                   </CardContent>
                 </Card>
-              ))}
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="border-y-2 border-black bg-[var(--ui-surface)]">
+          <div className="mx-auto grid w-full max-w-[1200px] md:grid-cols-3">
+            {principles.map((principle, index) => (
+              <article
+                key={principle.index}
+                className={`px-4 py-8 sm:px-6 md:py-12 ${index > 0 ? "border-t-2 border-black md:border-l-2 md:border-t-0" : ""}`}
+              >
+                <span className="font-mono text-xs font-bold text-gray-500">{principle.index}</span>
+                <h2 className="mt-4 text-xl font-semibold tracking-[-0.035em]">{principle.title}</h2>
+                <p className="mt-3 text-sm leading-6 text-gray-600">{principle.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto w-full max-w-[1200px] px-4 py-16 sm:px-6 md:py-24">
+          <div className="rounded-[var(--ui-radius-xl)] border-2 border-black bg-[var(--ui-ink)] px-6 py-10 text-white shadow-[5px_5px_0_var(--ui-accent)] md:flex md:items-center md:justify-between md:gap-10 md:px-10">
+            <div>
+              <Badge variant="primary" className="mb-4">Ready when you are</Badge>
+              <h2 className="text-brutal-3xl max-w-xl font-bold tracking-[-0.045em]">Start with the system. Make it yours.</h2>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-gray-300">Install the foundation, copy a component, and adapt the tokens to your product.</p>
             </div>
-          </div>
-        </section>
-
-        <section className="border-y-2 border-black bg-white px-6 py-20">
-          <div className="mx-auto max-w-7xl">
-            <Card variant="elevated" color="white">
-              <CardContent className="p-7">
-                <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <Badge variant="primary" className="mb-3 uppercase">
-                      Component Preview
-                    </Badge>
-                    <h3 className="text-3xl font-extrabold uppercase tracking-tight">
-                      Mix, Match, Compose
-                    </h3>
-                  </div>
-                  <Badge variant="neutral">Copy Friendly</Badge>
-                </div>
-
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="rounded-lg border-2 border-black bg-gray-50 p-4">
-                    <p className="mb-3 text-xs font-bold uppercase tracking-widest text-gray-500">
-                      Buttons
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <Button variant="primary" size="sm">
-                        Primary
-                      </Button>
-                      <Button variant="secondary" size="sm">
-                        Secondary
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        Outline
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="rounded-lg border-2 border-black bg-gray-50 p-4">
-                    <p className="mb-3 text-xs font-bold uppercase tracking-widest text-gray-500">
-                      Form
-                    </p>
-                    <div className="space-y-3">
-                      <Input placeholder="name@project.com" />
-                      <Input placeholder="Missing value example" error />
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        <section className="px-6 py-20">
-          <div className="mx-auto max-w-5xl">
-            <Card color="yellow" variant="elevated">
-              <CardContent className="p-8 md:p-10 text-center">
-                <Badge variant="neutral" className="mb-4 uppercase">
-                  Ship with confidence
-                </Badge>
-                <h2 className="text-4xl font-extrabold uppercase tracking-tight md:text-5xl">
-                  Keep your UI bold and clean
-                </h2>
-                <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-800">
-                  Use the docs, copy components, and build consistent interfaces
-                  fast.
-                </p>
-                <div className="mt-8 flex flex-wrap justify-center gap-4">
-                  <Link href="/docs">
-                    <Button variant="neutral" size="lg">
-                      Go To Docs
-                    </Button>
-                  </Link>
-                  <a
-                    href="https://github.com/jchiwaii/concrete-ui"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button variant="default" size="lg">
-                      Star on GitHub
-                    </Button>
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
+            <Link href="/docs/installation" className={buttonStyles({ variant: "primary", size: "lg", className: "mt-7 md:mt-0" })}>
+              Read installation
+            </Link>
           </div>
         </section>
       </main>
 
-      <footer className="border-t-2 border-black bg-black px-6 py-12 text-white">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-          <div>
-            <span className="text-xl font-bold tracking-tight">
-              Concrete
-              <span className="ml-0.5 rounded bg-[#ffde00] px-1.5 py-0.5 text-black">
-                UI
-              </span>
-            </span>
-            <p className="mt-2 text-sm text-gray-400">
-              Modern neo-brutalist components for expressive web products.
-            </p>
+      <footer className="border-t-2 border-black bg-[var(--ui-surface)]">
+        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3 px-4 py-6 text-sm text-gray-600 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <p>Concrete UI. Modern neo-brutal primitives for React.</p>
+          <div className="flex gap-5 font-semibold text-black">
+            <Link href="/docs">Docs</Link>
+            <a href="https://github.com/jchiwaii/concrete-ui" target="_blank" rel="noreferrer">GitHub</a>
           </div>
-
-          <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-gray-300">
-            <Link href="/docs" className="hover:text-white">
-              Documentation
-            </Link>
-            <Link href="/docs/components/button" className="hover:text-white">
-              Components
-            </Link>
-            <a
-              href="https://github.com/jchiwaii/concrete-ui"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white"
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
-        <div className="mx-auto mt-8 w-full max-w-7xl border-t border-gray-800 pt-8 text-sm text-gray-500">
-          © {new Date().getFullYear()} Concrete UI. Open source under MIT
-          license.
         </div>
       </footer>
     </div>
