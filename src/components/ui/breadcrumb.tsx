@@ -11,7 +11,7 @@ const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
       <nav
         ref={ref}
         aria-label="breadcrumb"
-        className={`flex items-center gap-2 ${className}`}
+        className={`flex w-full min-w-0 max-w-full items-center gap-2 overflow-x-auto whitespace-nowrap ${className}`}
         {...props}
       >
         {children}
@@ -35,9 +35,9 @@ const BreadcrumbItem = forwardRef<HTMLAnchorElement, BreadcrumbItemProps>(
     ref
   ) => {
     const itemStyles = `
-      font-bold
-     
-      tracking-wider
+      shrink-0
+      font-semibold
+      tracking-[0.02em]
       text-sm
       ${
         current
@@ -47,7 +47,7 @@ const BreadcrumbItem = forwardRef<HTMLAnchorElement, BreadcrumbItemProps>(
     `;
 
     const separatorStyles = `
-      mx-2
+      mx-1 shrink-0
       font-bold
       text-black
       select-none

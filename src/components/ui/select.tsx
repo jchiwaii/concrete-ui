@@ -179,7 +179,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       setSearchTerm("");
     };
 
-    const radiusStyles = rounded ? "rounded-full" : "rounded-md";
+    const radiusStyles = rounded ? "rounded-full" : "rounded-[var(--ui-radius-sm)]";
 
     return (
       <div ref={ref} className={`relative inline-block w-full ${className}`} {...props}>
@@ -210,11 +210,11 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           aria-haspopup="listbox"
           aria-expanded={isOpen}
         >
-          <span className={`truncate ${!selectedOption ? "text-gray-400" : "text-black"}`}>
+          <span className={`truncate ${!selectedOption ? "text-[var(--ui-muted)]" : "text-black"}`}>
             {displayValue}
           </span>
           <svg
-            className={`w-4 h-4 text-gray-500 transition-transform duration-100 ${isOpen ? "rotate-180" : ""}`}
+            className={`w-4 h-4 text-[var(--ui-muted)] transition-transform duration-100 ${isOpen ? "rotate-180" : ""}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -237,7 +237,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 bg-[var(--ui-surface)]
                 border-2 border-black
                 shadow-[var(--ui-shadow-lg)]
-                rounded-md
+                rounded-[var(--ui-radius-sm)]
                 animate-brutal-slide-down
               `}
               style={{
@@ -260,13 +260,13 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                     }}
                     onKeyDown={handleSearchKeyDown}
                     placeholder="Search..."
-                    className="w-full px-3 py-2 text-sm border-2 border-black rounded-md outline-none focus:ring-2 focus:ring-black/20"
+                    className="w-full px-3 py-2 text-sm border-2 border-black rounded-[var(--ui-radius-sm)] outline-none focus:ring-2 focus:ring-black/20"
                   />
                 </div>
               )}
 
               {filteredOptions.length === 0 ? (
-                <div className="px-4 py-3 text-sm text-gray-400">
+                <div className="px-4 py-3 text-sm text-[var(--ui-muted)]">
                   No options found
                 </div>
               ) : (
@@ -284,7 +284,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                           index === selectedIndex && !option.disabled
                             ? "bg-[var(--ui-accent)]"
                             : option.value === value
-                            ? "bg-gray-100"
+                            ? "bg-[var(--ui-surface-muted)]"
                             : "hover:bg-[var(--ui-surface-muted)]"
                         }
                       `}

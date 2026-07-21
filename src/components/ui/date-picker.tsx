@@ -49,12 +49,12 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           disabled={disabled}
           onClick={() => !disabled && setOpen((next) => !next)}
           className={cn(
-            "flex w-full items-center justify-between gap-3 rounded-md border-2 border-black bg-[var(--ui-surface)] px-4 py-2.5 text-left font-semibold shadow-[var(--ui-shadow)] transition-all duration-100",
+            "flex w-full items-center justify-between gap-3 rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-surface)] px-4 py-2.5 text-left font-semibold shadow-[var(--ui-shadow)] transition-all duration-100",
             !disabled && "hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--ui-shadow-md)]",
             disabled && "cursor-not-allowed opacity-50"
           )}
         >
-          <span className={cn(!value && "text-gray-400")}>{value ? formatDate(value) : placeholder}</span>
+          <span className={cn(!value && "text-[var(--ui-muted)]")}>{value ? formatDate(value) : placeholder}</span>
           <span aria-hidden="true">▦</span>
         </button>
         {open && typeof window !== "undefined" &&

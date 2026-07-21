@@ -75,8 +75,10 @@ const TabsList = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
         role="tablist"
         aria-orientation={context.orientation}
         className={cn(
-          "inline-flex gap-1 rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface-muted)] p-1",
-          context.orientation === "vertical" && "flex-col",
+          "gap-1 rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface-muted)] p-1",
+          context.orientation === "horizontal"
+            ? "flex w-full min-w-0 max-w-full overflow-x-auto"
+            : "inline-flex flex-col",
           className
         )}
         {...props}
@@ -142,10 +144,10 @@ const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
         }}
         onKeyDown={handleKeyDown}
         className={cn(
-          "rounded-[var(--ui-radius-sm)] border-2 px-3.5 py-2 text-sm font-semibold transition-[background-color,color,box-shadow] duration-150",
+          "shrink-0 rounded-[var(--ui-radius-sm)] border-2 px-3.5 py-2 text-sm font-semibold transition-[background-color,color,box-shadow] duration-150",
           isActive
             ? "border-black bg-[var(--ui-surface)] text-black shadow-[var(--ui-shadow-sm)]"
-            : "border-transparent bg-transparent text-gray-600 hover:bg-black/5 hover:text-black",
+            : "border-transparent bg-transparent text-[var(--ui-muted)] hover:bg-black/5 hover:text-black",
           className
         )}
         {...props}

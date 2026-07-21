@@ -123,7 +123,7 @@ const HoverCardContent = forwardRef<HTMLDivElement, HoverCardContentProps>(
         onMouseEnter={() => context.setOpen(true)}
         onMouseLeave={() => context.setOpen(false)}
         className={cn(
-          "fixed z-50 max-w-sm rounded-lg border-2 border-black bg-[var(--ui-surface)] p-5 shadow-[var(--ui-shadow-lg)] animate-brutal-scale-in",
+          "fixed z-50 max-w-sm rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface)] p-5 shadow-[var(--ui-shadow-lg)] animate-brutal-scale-in",
           className
         )}
         style={{ top: position.top, left: position.left }}

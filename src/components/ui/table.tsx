@@ -94,7 +94,7 @@ const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
         className={`
           border-b-2 border-black last:border-b-0
           transition-colors duration-150 ease-out
-          ${selected ? "bg-[var(--ui-info)]" : "even:bg-gray-100 odd:bg-[var(--ui-surface)] hover:bg-[var(--ui-accent-soft)]"}
+          ${selected ? "bg-[var(--ui-info)]" : "even:bg-[var(--ui-surface-muted)] odd:bg-[var(--ui-surface)] hover:bg-[var(--ui-accent-soft)]"}
           ${className}
         `}
         {...props}
@@ -151,7 +151,7 @@ const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
           <button
             type="button"
             onClick={handleClick}
-            className="-m-2 flex w-[calc(100%+1rem)] items-center gap-2 rounded-md p-2 text-left hover:bg-white/10 focus-visible:outline-white"
+            className="-m-2 flex w-[calc(100%+1rem)] items-center gap-2 rounded-[var(--ui-radius-sm)] p-2 text-left hover:bg-[var(--ui-surface)]/10 focus-visible:outline-white"
           >
             <span>{children}</span>
             <span className="text-xs" aria-hidden="true">

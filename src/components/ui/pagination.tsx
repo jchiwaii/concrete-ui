@@ -78,7 +78,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
       transition-all duration-100 ease-out
       ${
         isDisabled
-          ? "opacity-50 cursor-not-allowed bg-gray-200"
+          ? "opacity-50 cursor-not-allowed bg-[var(--ui-surface-muted)]"
           : isActive
           ? "bg-[var(--ui-accent)] text-black"
           : "bg-[var(--ui-surface)] text-black hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)] cursor-pointer"
@@ -94,7 +94,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
       transition-all duration-100 ease-out
       ${
         isDisabled
-          ? "opacity-50 cursor-not-allowed bg-gray-200"
+          ? "opacity-50 cursor-not-allowed bg-[var(--ui-surface-muted)]"
           : "bg-[var(--ui-surface)] text-black hover:-translate-x-px hover:-translate-y-px hover:shadow-[var(--ui-shadow-md)] cursor-pointer"
       }
     `;

@@ -41,7 +41,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
       <div className={`w-full ${className}`}>
         {showValue && (
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-gray-600">Progress</span>
+            <span className="text-sm font-medium text-[var(--ui-muted)]">Progress</span>
             <span className="text-sm font-semibold">{Math.round(percentage)}%</span>
           </div>
         )}
@@ -53,7 +53,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
           aria-valuemax={max}
           className={`
             w-full
-            bg-gray-100
+            bg-[var(--ui-surface-muted)]
             border-2 border-black
             rounded-full
             overflow-hidden

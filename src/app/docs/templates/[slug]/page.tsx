@@ -1,138 +1,70 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Badge, Card, CardContent, buttonStyles } from "@/components/ui";
+import { buttonStyles } from "@/components/ui";
 import { getTemplate, templates } from "@/lib/templates";
 
-type TemplatePageProps = {
-  params: Promise<{ slug: string }>;
-};
+type TemplatePageProps = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   return templates.map((template) => ({ slug: template.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: TemplatePageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: TemplatePageProps): Promise<Metadata> {
   const { slug } = await params;
   const template = getTemplate(slug);
-
-  if (!template) {
-    return { title: "Template Not Found" };
-  }
-
-  return {
-    title: `${template.title} Template`,
-    description: template.description,
-  };
+  return template ? { title: `${template.title} Template`, description: template.description } : { title: "Template Not Found" };
 }
 
 export default async function TemplateDetailPage({ params }: TemplatePageProps) {
   const { slug } = await params;
   const template = getTemplate(slug);
-
-  if (!template) {
-    notFound();
-  }
+  if (!template) notFound();
 
   return (
-    <div className="space-y-8">
-      <section>
-        <Badge variant="primary" className="mb-4">
-          Template
-        </Badge>
-        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em]">
-          {template.title}
-        </h1>
-        <p className="mt-3 max-w-3xl text-base leading-7 text-gray-700 md:text-lg">
-          {template.description}
-        </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Badge variant="secondary" size="sm">
-            {template.category}
-          </Badge>
-          <Badge variant="success" size="sm">
-            React Only
-          </Badge>
-          {template.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border-2 border-black bg-white px-3 py-1 text-xs font-semibold"
-            >
-              {tag}
-            </span>
-          ))}
+    <div className="docs-page-stack">
+      <header className="docs-page-header">
+        <p className="docs-kicker">Template record / {template.status}</p>
+        <h1 className="docs-page-title">{template.title}</h1>
+        <p className="docs-page-copy">{template.description}</p>
+        <div className="docs-component-meta" aria-label="Template metadata">
+          <span className="docs-meta-tag is-live">React route active</span>
+          <span className="docs-meta-tag">{template.category}</span>
+          {template.tags.map((tag) => <span key={tag} className="docs-meta-tag">{tag}</span>)}
+        </div>
+        <div className="docs-actions">
+          <a href={template.reactHref} target="_blank" rel="noopener noreferrer" className={buttonStyles({ variant: "primary", size: "lg" })}>Launch React template ↗</a>
+          <a href="#preview" className={buttonStyles({ variant: "outline", size: "lg" })}>View image record</a>
+        </div>
+      </header>
+
+      <section aria-labelledby="source-heading">
+        <div className="docs-section-heading">
+          <div><p className="docs-kicker">01 / Source location</p><h2 id="source-heading">React source</h2></div>
+        </div>
+        <div className="grid border border-[#d8d5c8]/20 bg-[#111410] lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
+          <p className="m-0 p-5 text-sm leading-6 text-[#999c92] lg:border-r lg:border-[#d8d5c8]/20">
+            This record references the standalone React route only. Static HTML is intentionally excluded so implementation and documentation cannot drift.
+          </p>
+          <code className="m-5 self-center overflow-x-auto border border-[#d8d5c8]/20 bg-[#080a08] px-4 py-3 font-mono text-xs text-[#f2c230]">{template.sourcePath}</code>
         </div>
       </section>
 
-      <Card>
-        <CardContent className="space-y-5 p-6">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-semibold tracking-[-0.035em]">
-              React Source
-            </h2>
-            <p className="max-w-3xl text-sm leading-6 text-gray-700">
-              This template is served only from the React route. The old static
-              HTML preview has been removed from the template flow so the docs
-              and live page stay aligned.
-            </p>
-          </div>
-
-          <div className="rounded-md border-2 border-black bg-gray-100 px-4 py-3 font-mono text-xs font-bold text-gray-800">
-            {template.sourcePath}
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <a
-              href={template.reactHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonStyles({ variant: "primary", size: "lg" })}
-            >
-              Open React Template
+      <section id="preview" aria-labelledby="preview-heading">
+        <div className="docs-section-heading">
+          <div><p className="docs-kicker">02 / Visual reconnaissance</p><h2 id="preview-heading">Image record</h2></div>
+          <span className="docs-section-link">Static capture / opens live route</span>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2">
+          {template.previewImages.map((image, index) => (
+            <a key={image.src} href={template.reactHref} target="_blank" rel="noopener noreferrer" className="group overflow-hidden border border-[#d8d5c8]/25 bg-[#111410]">
+              <img src={image.src} alt={image.alt} loading="lazy" className="h-72 w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.015]" />
+              <div className="flex items-center justify-between border-t border-[#d8d5c8]/20 px-4 py-3 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-[#999c92]">
+                <span>{String(index + 1).padStart(2, "0")} / {image.label}</span><span className="text-[#f2c230]">Open ↗</span>
+              </div>
             </a>
-            <a href="#preview" className={buttonStyles({ variant: "outline", size: "lg" })}>
-              View Preview Images
-            </a>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card id="preview">
-        <CardContent className="space-y-4 p-6">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-semibold tracking-[-0.035em]">
-              Image Preview
-            </h2>
-            <p className="text-sm leading-6 text-gray-700">
-              These are static screenshots of the React template. Click any
-              image to open the React page in a new tab.
-            </p>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            {template.previewImages.map((image) => (
-              <a
-                key={image.src}
-                href={template.reactHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group overflow-hidden rounded-lg border-2 border-black bg-white shadow-[var(--ui-shadow)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--ui-shadow-lg)]"
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  loading="lazy"
-                  className="h-64 w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
-                />
-                <div className="border-t-2 border-black bg-gray-100 px-3 py-2 text-xs font-semibold">
-                  {image.label}
-                </div>
-              </a>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

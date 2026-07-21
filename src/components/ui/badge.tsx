@@ -21,14 +21,14 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       className = "",
       variant = "default",
       size = "md",
-      rounded = true,
+      rounded = false,
       children,
       ...props
     },
     ref
   ) => {
     const baseStyles =
-      "inline-flex items-center justify-center whitespace-nowrap border-2 border-black font-semibold tracking-[0.01em] shadow-[var(--ui-shadow-sm)]";
+      "inline-flex items-center justify-center whitespace-nowrap border-2 border-black font-semibold uppercase tracking-[0.06em] shadow-[var(--ui-shadow-sm)]";
 
     const variants = {
       default: "bg-[var(--ui-surface)] text-black",
@@ -38,13 +38,13 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       success: "bg-[var(--ui-success)] text-black",
       warning: "bg-[var(--ui-warning)] text-black",
       info: "bg-[var(--concrete-blue)] text-white",
-      neutral: "bg-gray-900 text-white",
+      neutral: "bg-[var(--ui-ink)] text-white",
     };
 
     const sizes = {
-      sm: "px-2.5 py-0.5 text-[10px]",
-      md: "px-3 py-1 text-xs",
-      lg: "px-3.5 py-1.5 text-[13px]",
+      sm: "px-2 py-0.5 text-[9px]",
+      md: "px-2.5 py-1 text-[10px]",
+      lg: "px-3 py-1.5 text-xs",
     };
 
     const radiusStyles = rounded ? "rounded-full" : "rounded-[var(--ui-radius-sm)]";

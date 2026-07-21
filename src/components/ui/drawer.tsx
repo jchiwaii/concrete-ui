@@ -153,7 +153,7 @@ const DrawerDescription = forwardRef<HTMLParagraphElement, DrawerDescriptionProp
           mt-2
           text-sm
           font-medium
-          text-gray-600
+          text-[var(--ui-muted)]
           ${className}
         `}
         {...props}

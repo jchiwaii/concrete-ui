@@ -28,22 +28,30 @@ export function ComponentCatalog() {
     });
   }, [category, query]);
 
+  const groupedResults = componentCategories
+    .map((group) => ({
+      category: group,
+      components: results.filter((component) => component.category === group),
+    }))
+    .filter((group) => group.components.length > 0);
+
   return (
-    <div className="space-y-6">
-      <div className="grid gap-3 rounded-[var(--ui-radius-lg)] border-2 border-black bg-[var(--ui-surface-muted)] p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+    <div className="space-y-8">
+      <div className="grid gap-4 border-y border-[#d8d5c8]/20 bg-[#111410] p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
         <Input
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search by name or use case"
           aria-label="Search components"
+          className="border-[#d8d5c8]/30 bg-[#181c16] text-[#efede4] shadow-none placeholder:text-[#777b72] focus:border-[#f2c230] focus:translate-x-0 focus:translate-y-0 focus:shadow-none"
         />
-        <span className="text-sm font-medium text-gray-600">
-          {results.length} of {componentRegistry.length}
+        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#999c92]">
+          Indexed {String(results.length).padStart(2, "0")} / {String(componentRegistry.length).padStart(2, "0")}
         </span>
       </div>
 
-      <div className="flex flex-wrap gap-2" aria-label="Filter components by category">
+      <div className="flex flex-wrap gap-px border border-[#d8d5c8]/20 bg-[#d8d5c8]/20" aria-label="Filter components by category">
         {(["All", ...componentCategories] as CategoryFilter[]).map((filter) => (
           <button
             key={filter}
@@ -51,10 +59,10 @@ export function ComponentCatalog() {
             aria-pressed={category === filter}
             onClick={() => setCategory(filter)}
             className={cn(
-              "rounded-full border-2 border-black px-3 py-1.5 text-xs font-semibold transition-colors",
+              "min-h-9 flex-1 bg-[#111410] px-3 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] transition-colors",
               category === filter
-                ? "bg-black text-white"
-                : "bg-[var(--ui-surface)] text-black hover:bg-[var(--ui-accent-soft)]"
+                ? "!bg-[#f2c230] text-[#080a08]"
+                : "text-[#999c92] hover:!bg-[#181c16] hover:text-[#efede4]"
             )}
           >
             {filter}
@@ -63,28 +71,35 @@ export function ComponentCatalog() {
       </div>
 
       {results.length > 0 ? (
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          {results.map((component) => (
-            <Link
-              key={component.slug}
-              href={getComponentHref(component.slug)}
-              className="group rounded-[var(--ui-radius-lg)] border-2 border-black bg-[var(--ui-surface)] p-5 shadow-[var(--ui-shadow)] transition-[transform,box-shadow,background-color] hover:-translate-x-px hover:-translate-y-px hover:bg-[var(--ui-accent-soft)] hover:shadow-[var(--ui-shadow-md)]"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <h2 className="text-base font-semibold tracking-[-0.025em]">{component.name}</h2>
-                <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+        <div className="space-y-10">
+          {groupedResults.map((group, groupIndex) => (
+            <section key={group.category} aria-labelledby={`catalog-${groupIndex}`}>
+              <div className="mb-3 flex items-center justify-between font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-[#777b72]">
+                <h2 id={`catalog-${groupIndex}`} className="font-mono text-[9px] font-semibold">{String(groupIndex + 1).padStart(2, "0")} / {group.category}</h2>
+                <span>{String(group.components.length).padStart(2, "0")} units</span>
               </div>
-              <p className="mt-2 text-sm leading-6 text-gray-600">{component.description}</p>
-              <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-500">
-                {component.category}
-              </p>
-            </Link>
+              <div className="docs-rows">
+                {group.components.map((component) => {
+                  const index = componentRegistry.findIndex((item) => item.slug === component.slug) + 1;
+                  return (
+                    <Link key={component.slug} href={getComponentHref(component.slug)} className="docs-row group">
+                      <span className="docs-row-code">{String(index).padStart(2, "0")}</span>
+                      <span className="docs-row-copy">
+                        <h3>{component.name}</h3>
+                        <p>{component.description}</p>
+                      </span>
+                      <span className="docs-row-arrow" aria-hidden="true">→</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
           ))}
         </div>
       ) : (
-        <div className="rounded-[var(--ui-radius-lg)] border-2 border-black bg-[var(--ui-surface)] p-8 text-center shadow-[var(--ui-shadow)]">
-          <h2 className="font-semibold">No components found</h2>
-          <p className="mt-2 text-sm text-gray-600">Try a shorter search or another category.</p>
+        <div className="border border-[#d8d5c8]/20 bg-[#111410] p-10 text-center">
+          <h2 className="font-['Barlow_Condensed'] text-xl font-semibold uppercase text-[#efede4]">No components found</h2>
+          <p className="mt-2 text-sm text-[#999c92]">Try a shorter search or another category.</p>
         </div>
       )}
     </div>

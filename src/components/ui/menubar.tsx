@@ -52,7 +52,7 @@ const Menubar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
             else if (ref) ref.current = node;
           }}
           role="menubar"
-          className={cn("inline-flex rounded-lg border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow)]", className)}
+          className={cn("inline-flex rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow)]", className)}
           {...props}
         />
       </MenubarContext.Provider>
@@ -118,7 +118,7 @@ const MenubarContent = forwardRef<HTMLDivElement, MenubarContentProps>(
       <div
         ref={ref}
         role="menu"
-        className={cn("absolute left-0 top-full z-50 mt-2 min-w-52 overflow-hidden rounded-lg border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)] animate-brutal-slide-down", className)}
+        className={cn("absolute left-0 top-full z-50 mt-2 min-w-52 overflow-hidden rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)] animate-brutal-slide-down", className)}
         {...props}
       />
     );

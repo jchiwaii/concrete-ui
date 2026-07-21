@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/context/ToastContext";
+import { componentRegistry } from "@/lib/component-registry";
 import { ComponentPreview } from "./component-preview";
 import {
   Accordion,
@@ -268,7 +269,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     drawer: {
       title: "Drawer",
       description: "A responsive edge panel with focus trapping and Escape dismissal.",
-      demo: <><Button variant="primary" onClick={() => setDrawerOpen(true)}>Open drawer</Button><Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}><DrawerContent><DrawerHeader><DrawerTitle>Project details</DrawerTitle><DrawerClose onClose={() => setDrawerOpen(false)} /></DrawerHeader><DrawerBody><p className="text-sm leading-6 text-gray-600">Use drawers for contextual tasks that should not replace the current page.</p></DrawerBody></DrawerContent></Drawer></>,
+      demo: <><Button variant="primary" onClick={() => setDrawerOpen(true)}>Open drawer</Button><Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}><DrawerContent><DrawerHeader><DrawerTitle>Project details</DrawerTitle><DrawerClose onClose={() => setDrawerOpen(false)} /></DrawerHeader><DrawerBody><p className="text-sm leading-6 text-[var(--ui-muted)]">Use drawers for contextual tasks that should not replace the current page.</p></DrawerBody></DrawerContent></Drawer></>,
       code: `<Drawer open={open} onClose={() => setOpen(false)}>\n  <DrawerContent>...</DrawerContent>\n</Drawer>`,
     },
     "dropdown-menu": {
@@ -298,7 +299,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     popover: {
       title: "Popover",
       description: "Anchored interactive content that closes outside or with Escape.",
-      demo: <Popover><PopoverTrigger asChild><Button variant="outline">Open settings</Button></PopoverTrigger><PopoverContent><h3 className="font-semibold">Quick settings</h3><p className="mt-2 max-w-xs text-sm text-gray-600">Keep short, contextual tasks close to their trigger.</p></PopoverContent></Popover>,
+      demo: <Popover><PopoverTrigger asChild><Button variant="outline">Open settings</Button></PopoverTrigger><PopoverContent><h3 className="font-semibold">Quick settings</h3><p className="mt-2 max-w-xs text-sm text-[var(--ui-muted)]">Keep short, contextual tasks close to their trigger.</p></PopoverContent></Popover>,
       code: `<Popover>\n  <PopoverTrigger asChild><Button>Open</Button></PopoverTrigger>\n  <PopoverContent>Settings</PopoverContent>\n</Popover>`,
     },
     progress: {
@@ -322,7 +323,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     separator: {
       title: "Separator",
       description: "A semantic visual divider for horizontal and vertical layouts.",
-      demo: <div className="w-full max-w-lg rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface)] p-5"><p className="font-semibold">Account</p><Separator className="my-4" /><p className="text-sm text-gray-600">Manage identity and security preferences.</p></div>,
+      demo: <div className="w-full max-w-lg rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface)] p-5"><p className="font-semibold">Account</p><Separator className="my-4" /><p className="text-sm text-[var(--ui-muted)]">Manage identity and security preferences.</p></div>,
       code: `<Separator className="my-4" />`,
     },
     skeleton: {
@@ -346,7 +347,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     tabs: {
       title: "Tabs",
       description: "Keyboard-managed content switching with controlled or uncontrolled state.",
-      demo: <Tabs defaultValue="overview" className="w-full max-w-xl"><TabsList><TabsTrigger value="overview">Overview</TabsTrigger><TabsTrigger value="activity">Activity</TabsTrigger><TabsTrigger value="settings">Settings</TabsTrigger></TabsList><TabsContent value="overview"><p className="text-sm leading-6 text-gray-600">A concise overview of the workspace.</p></TabsContent><TabsContent value="activity"><p className="text-sm leading-6 text-gray-600">Recent updates and project events.</p></TabsContent><TabsContent value="settings"><p className="text-sm leading-6 text-gray-600">Configuration and access controls.</p></TabsContent></Tabs>,
+      demo: <Tabs defaultValue="overview" className="w-full max-w-xl"><TabsList><TabsTrigger value="overview">Overview</TabsTrigger><TabsTrigger value="activity">Activity</TabsTrigger><TabsTrigger value="settings">Settings</TabsTrigger></TabsList><TabsContent value="overview"><p className="text-sm leading-6 text-[var(--ui-muted)]">A concise overview of the workspace.</p></TabsContent><TabsContent value="activity"><p className="text-sm leading-6 text-[var(--ui-muted)]">Recent updates and project events.</p></TabsContent><TabsContent value="settings"><p className="text-sm leading-6 text-[var(--ui-muted)]">Configuration and access controls.</p></TabsContent></Tabs>,
       code: `<Tabs defaultValue="overview">\n  <TabsList><TabsTrigger value="overview">Overview</TabsTrigger></TabsList>\n  <TabsContent value="overview">Content</TabsContent>\n</Tabs>`,
     },
     textarea: {
@@ -401,7 +402,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     "aspect-ratio": {
       title: "Aspect Ratio",
       description: "A simple media wrapper that preserves proportional layouts.",
-      demo: <AspectRatio ratio={16 / 9} className="max-w-md rounded-lg border-2 border-black bg-[var(--ui-info)] shadow-[var(--ui-shadow)]" />,
+      demo: <AspectRatio ratio={16 / 9} className="max-w-md rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-info)] shadow-[var(--ui-shadow)]" />,
       code: `<AspectRatio ratio={16 / 9} />`,
     },
     "button-group": {
@@ -422,7 +423,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
       demo: (
         <Carousel className="w-full max-w-xl">
           {["Design", "Build", "Ship"].map((item) => (
-            <CarouselItem key={item}><div className="rounded-lg border-2 border-black bg-[var(--ui-accent)] p-8 text-xl font-semibold shadow-[var(--ui-shadow)]">{item}</div></CarouselItem>
+            <CarouselItem key={item}><div className="rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-accent)] p-8 text-xl font-semibold shadow-[var(--ui-shadow)]">{item}</div></CarouselItem>
           ))}
         </Carousel>
       ),
@@ -431,7 +432,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     collapsible: {
       title: "Collapsible",
       description: "A controlled disclosure primitive for compact sections.",
-      demo: <Collapsible defaultOpen><CollapsibleTrigger className="rounded-md border-2 border-black bg-[var(--ui-accent)] px-4 py-2 font-bold shadow-[var(--ui-shadow)]">Toggle Details</CollapsibleTrigger><CollapsibleContent className="mt-4 rounded-lg border-2 border-black bg-[var(--ui-surface)] p-4 shadow-[var(--ui-shadow)]">Concrete UI keeps the mechanics sharp and visible.</CollapsibleContent></Collapsible>,
+      demo: <Collapsible defaultOpen><CollapsibleTrigger className="rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-accent)] px-4 py-2 font-bold shadow-[var(--ui-shadow)]">Toggle Details</CollapsibleTrigger><CollapsibleContent className="mt-4 rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface)] p-4 shadow-[var(--ui-shadow)]">Concrete UI keeps the mechanics sharp and visible.</CollapsibleContent></Collapsible>,
       code: `<Collapsible><CollapsibleTrigger /> <CollapsibleContent /></Collapsible>`,
     },
     combobox: {
@@ -443,7 +444,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     "context-menu": {
       title: "Context Menu",
       description: "Right-click actions with a brutal command surface.",
-      demo: <ContextMenu><ContextMenuTrigger className="rounded-lg border-2 border-dashed border-black bg-[var(--ui-surface)] p-10 text-center font-bold shadow-[var(--ui-shadow)]">Right click this panel</ContextMenuTrigger><ContextMenuContent><ContextMenuLabel>Actions</ContextMenuLabel><ContextMenuItem>Duplicate</ContextMenuItem><ContextMenuItem>Rename</ContextMenuItem><ContextMenuSeparator /><ContextMenuItem>Archive</ContextMenuItem></ContextMenuContent></ContextMenu>,
+      demo: <ContextMenu><ContextMenuTrigger className="rounded-[var(--ui-radius)] border-2 border-dashed border-black bg-[var(--ui-surface)] p-10 text-center font-bold shadow-[var(--ui-shadow)]">Right click this panel</ContextMenuTrigger><ContextMenuContent><ContextMenuLabel>Actions</ContextMenuLabel><ContextMenuItem>Duplicate</ContextMenuItem><ContextMenuItem>Rename</ContextMenuItem><ContextMenuSeparator /><ContextMenuItem>Archive</ContextMenuItem></ContextMenuContent></ContextMenu>,
       code: `<ContextMenu><ContextMenuTrigger>Right click</ContextMenuTrigger><ContextMenuContent>...</ContextMenuContent></ContextMenu>`,
     },
     "date-picker": {
@@ -473,7 +474,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     "hover-card": {
       title: "Hover Card",
       description: "A richer tooltip for previews, profiles, and metadata.",
-      demo: <HoverCard><HoverCardTrigger className="rounded-md border-2 border-black bg-[var(--ui-accent)] px-4 py-2 font-bold shadow-[var(--ui-shadow)]">Hover profile</HoverCardTrigger><HoverCardContent><h3 className="font-semibold">Concrete Designer</h3><p className="mt-2 text-sm text-gray-600">Builds bold, accessible surfaces with hard shadows.</p></HoverCardContent></HoverCard>,
+      demo: <HoverCard><HoverCardTrigger className="rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-accent)] px-4 py-2 font-bold shadow-[var(--ui-shadow)]">Hover profile</HoverCardTrigger><HoverCardContent><h3 className="font-semibold">Concrete Designer</h3><p className="mt-2 text-sm text-[var(--ui-muted)]">Builds bold, accessible surfaces with hard shadows.</p></HoverCardContent></HoverCard>,
       code: `<HoverCard><HoverCardTrigger /><HoverCardContent /></HoverCard>`,
     },
     "input-group": {
@@ -503,7 +504,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     marquee: {
       title: "Marquee",
       description: "A reusable ticker for logos, stats, and announcements.",
-      demo: <Marquee className="w-full max-w-xl rounded-lg border-2 border-black bg-black p-4" speed={12}>{["Fast", "Bold", "Composable", "Accessible"].map((item) => <Badge key={item} variant="primary" size="lg">{item}</Badge>)}</Marquee>,
+      demo: <Marquee className="w-full max-w-xl rounded-[var(--ui-radius)] border-2 border-black bg-black p-4" speed={12}>{["Fast", "Bold", "Composable", "Accessible"].map((item) => <Badge key={item} variant="primary" size="lg">{item}</Badge>)}</Marquee>,
       code: `<Marquee><Badge>Fast</Badge><Badge>Bold</Badge></Marquee>`,
     },
     menubar: {
@@ -533,7 +534,7 @@ export function ComponentExplorerPage({ component }: { component: string }) {
     "scroll-area": {
       title: "Scroll Area",
       description: "Custom brutal scroll containers for panels and menus.",
-      demo: <ScrollArea className="h-48 w-72 rounded-lg border-2 border-black bg-[var(--ui-surface)] p-4 shadow-[var(--ui-shadow)]"><div className="grid gap-3">{Array.from({ length: 12 }, (_, index) => <div key={index} className="rounded-md border-2 border-black bg-[var(--ui-accent-soft)] p-3 text-sm font-bold">Item {index + 1}</div>)}</div></ScrollArea>,
+      demo: <ScrollArea className="h-48 w-72 rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface)] p-4 shadow-[var(--ui-shadow)]"><div className="grid gap-3">{Array.from({ length: 12 }, (_, index) => <div key={index} className="rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-accent-soft)] p-3 text-sm font-bold">Item {index + 1}</div>)}</div></ScrollArea>,
       code: `<ScrollArea className="h-48">...</ScrollArea>`,
     },
     spinner: {
@@ -569,20 +570,30 @@ export function ComponentExplorerPage({ component }: { component: string }) {
   };
 
   const config = demos[component];
+  const meta = componentRegistry.find((item) => item.slug === component);
+  const componentIndex = componentRegistry.findIndex((item) => item.slug === component) + 1;
 
   if (!config) {
-    return <div className="docs-panel p-8">Component documentation not found.</div>;
+    return <div className="docs-panel p-8 text-[#d8d5c8]">Component documentation not found.</div>;
   }
 
   return (
-    <div className="docs-component-page space-y-10">
-      <div>
-        <Badge variant="primary" className="mb-4">Component</Badge>
-        <h1>{config.title}</h1>
-        <p className="text-brutal-lg">{config.description}</p>
-      </div>
+    <div className="docs-component-page">
+      <header className="docs-component-page-header">
+        <div>
+          <p className="docs-kicker">Component / {String(componentIndex).padStart(2, "0")}</p>
+          <h1>{config.title}</h1>
+          <div className="docs-component-meta" aria-label="Component metadata">
+            <span className="docs-meta-tag is-live">Live</span>
+            <span className="docs-meta-tag">TypeScript</span>
+            <span className="docs-meta-tag">Keyboard protocol</span>
+            {meta && <span className="docs-meta-tag">{meta.category}</span>}
+          </div>
+        </div>
+        <p>{config.description}</p>
+      </header>
 
-      <ComponentPreview title={`${config.title} Preview`} description={config.description} code={config.code}>
+      <ComponentPreview title={`${config.title} specimen`} description="Interact with the live control, then inspect the smallest representative source." code={config.code}>
         {config.demo}
       </ComponentPreview>
     </div>

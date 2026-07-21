@@ -21,7 +21,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const baseStyles =
-  "relative inline-flex shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap border-2 border-black font-semibold tracking-[-0.01em] transition-[transform,box-shadow,background-color,color] duration-150 ease-out focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-black disabled:pointer-events-none disabled:opacity-45";
+  "relative inline-flex shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap border-2 border-black font-semibold tracking-[0.01em] transition-[transform,box-shadow,background-color,color] duration-150 ease-out focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-black disabled:pointer-events-none disabled:opacity-45";
 
 const variantStyles: Record<ButtonVariant, string> = {
   default:
@@ -43,10 +43,10 @@ const variantStyles: Record<ButtonVariant, string> = {
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "h-9 px-3 text-[13px]",
+  sm: "h-[34px] px-3 text-xs",
   md: "h-10 px-4 text-sm",
-  lg: "h-12 px-5 text-[15px]",
-  xl: "h-14 px-6 text-base",
+  lg: "h-11 px-5 text-sm",
+  xl: "h-12 px-6 text-[15px]",
 };
 
 export function buttonStyles({

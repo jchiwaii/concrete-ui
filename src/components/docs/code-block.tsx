@@ -31,25 +31,25 @@ export function CodeBlock({
     <div
       className={`
         relative overflow-hidden
-        ${embedded ? "" : "rounded-[var(--ui-radius-lg)] border-2 border-black shadow-[var(--ui-shadow)]"}
+        ${embedded ? "" : "border border-[#d8d5c8]/20 bg-[#111410]"}
       `}
     >
-      <div className="flex items-center justify-between border-b-2 border-black bg-[var(--ui-accent)] px-4 py-2.5">
-        <span className="rounded-[var(--ui-radius-sm)] border-2 border-black bg-white px-2 py-0.5 font-mono text-[11px] font-semibold text-black">
-          {language}
+      <div className="flex items-center justify-between border-b border-[#d8d5c8]/20 bg-[#181c16] px-4 py-2.5">
+        <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-[#999c92]">
+          Source / {language}
         </span>
         <button
           type="button"
           onClick={copyToClipboard}
           aria-live="polite"
           className={`
-            flex items-center gap-1.5 rounded-md border-2 px-2.5 py-1
-            text-xs font-semibold
-            transition-all duration-100
+            flex min-h-8 items-center gap-1.5 border px-2.5 py-1
+            font-mono text-[9px] font-semibold uppercase tracking-[0.1em]
+            transition-colors duration-100
             ${
               copied
-                ? "border-black bg-[var(--ui-success)] text-black"
-                : "border-black bg-white text-black hover:bg-black hover:text-white"
+                ? "border-[#9cad72] bg-[#9cad72] text-[#080a08]"
+                : "border-[#d8d5c8]/30 bg-transparent text-[#d8d5c8] hover:border-[#f2c230] hover:text-[#f2c230]"
             }
           `}
         >
@@ -72,7 +72,7 @@ export function CodeBlock({
           )}
         </button>
       </div>
-      <pre className="m-0 overflow-x-auto rounded-none border-0 bg-[var(--ui-ink)] p-4 font-mono text-[13px] leading-6 text-gray-100 sm:p-5">
+      <pre className="m-0 overflow-x-auto rounded-none border-0 bg-[#080a08] p-4 font-mono text-[12px] leading-6 text-[#d8d5c8] sm:p-5">
         <code>{code}</code>
       </pre>
     </div>

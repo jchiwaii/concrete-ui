@@ -127,19 +127,19 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
           aria-expanded={open}
           onClick={() => !disabled && setOpen((next) => !next)}
           className={cn(
-            "flex min-h-11 w-full items-center justify-between gap-3 rounded-md border-2 border-black bg-[var(--ui-surface)] px-3 py-2 text-left shadow-[var(--ui-shadow)] transition-all duration-100",
+            "flex min-h-11 w-full items-center justify-between gap-3 rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-surface)] px-3 py-2 text-left shadow-[var(--ui-shadow)] transition-all duration-100",
             !disabled && "hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--ui-shadow-md)]",
             disabled && "cursor-not-allowed opacity-50"
           )}
         >
           <span className="flex flex-1 flex-wrap gap-2">
             {selectedOptions.length === 0 ? (
-              <span className="px-1 text-sm font-semibold text-gray-400">{placeholder}</span>
+              <span className="px-1 text-sm font-semibold text-[var(--ui-muted)]">{placeholder}</span>
             ) : (
               selectedOptions.map((option) => (
                 <span
                   key={option.value}
-                  className="inline-flex items-center gap-1 rounded-md border-2 border-black bg-[var(--ui-accent)] px-2 py-1 text-xs font-semibold"
+                  className="inline-flex items-center gap-1 rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-accent)] px-2 py-1 text-xs font-semibold"
                 >
                   {option.label}
                 </span>
@@ -155,7 +155,7 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
               ref={contentRef}
               role="listbox"
               aria-multiselectable="true"
-              className="fixed z-50 max-h-80 min-w-64 overflow-hidden rounded-md border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)] animate-brutal-slide-down"
+              className="fixed z-50 max-h-80 min-w-64 overflow-hidden rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)] animate-brutal-slide-down"
               style={{ top: position.top, left: position.left, width: triggerRef.current?.offsetWidth }}
             >
               <div className="border-b-2 border-black p-2">
@@ -167,7 +167,7 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                     setSelectedIndex(0);
                   }}
                   placeholder={searchPlaceholder}
-                  className="w-full rounded-md border-2 border-black px-3 py-2 text-sm font-semibold outline-none placeholder:text-gray-400"
+                  className="w-full rounded-[var(--ui-radius-sm)] border-2 border-black px-3 py-2 text-sm font-semibold outline-none placeholder:text-[var(--ui-muted)]"
                 />
               </div>
               <div className="max-h-64 overflow-y-auto brutal-scroll-area">
@@ -183,10 +183,10 @@ const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                         "flex cursor-pointer items-center gap-3 border-b-2 border-black px-4 py-3 last:border-b-0 hover:bg-[var(--ui-accent-soft)]",
                         selectedIndex === index && "bg-[var(--ui-accent-soft)]",
                         selected && "bg-[var(--ui-accent)]",
-                        option.disabled && "cursor-not-allowed bg-gray-100 opacity-50"
+                        option.disabled && "cursor-not-allowed bg-[var(--ui-surface-muted)] opacity-50"
                       )}
                     >
-                      <span className="flex h-5 w-5 items-center justify-center rounded-md border-2 border-black bg-[var(--ui-surface)] text-xs font-bold shadow-[var(--ui-shadow-sm)]">
+                      <span className="flex h-5 w-5 items-center justify-center rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-surface)] text-xs font-bold shadow-[var(--ui-shadow-sm)]">
                         {selected ? "✓" : ""}
                       </span>
                       <span className="text-sm font-semibold">{option.label}</span>

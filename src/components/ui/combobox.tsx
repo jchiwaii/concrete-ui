@@ -121,12 +121,12 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           aria-expanded={open}
           onClick={() => !disabled && setOpen((next) => !next)}
           className={cn(
-            "flex w-full items-center justify-between gap-3 rounded-md border-2 border-black bg-[var(--ui-surface)] px-4 py-2.5 text-left font-semibold shadow-[var(--ui-shadow)] transition-all duration-100",
+            "flex w-full items-center justify-between gap-3 rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-surface)] px-4 py-2.5 text-left font-semibold shadow-[var(--ui-shadow)] transition-all duration-100",
             !disabled && "hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--ui-shadow-md)]",
             disabled && "cursor-not-allowed opacity-50"
           )}
         >
-          <span className={cn("truncate", !selected && "text-gray-400")}>{selected?.label ?? placeholder}</span>
+          <span className={cn("truncate", !selected && "text-[var(--ui-muted)]")}>{selected?.label ?? placeholder}</span>
           <span className={cn("text-lg leading-none transition-transform", open && "rotate-180")}>⌄</span>
         </button>
 
@@ -135,7 +135,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
             <div
               ref={contentRef}
               role="listbox"
-              className="fixed z-50 max-h-80 min-w-64 overflow-hidden rounded-md border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)] animate-brutal-slide-down"
+              className="fixed z-50 max-h-80 min-w-64 overflow-hidden rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow-lg)] animate-brutal-slide-down"
               style={{ top: position.top, left: position.left, width: triggerRef.current?.offsetWidth }}
             >
               <div className="border-b-2 border-black p-2">
@@ -147,12 +147,12 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                     setSelectedIndex(0);
                   }}
                   placeholder={searchPlaceholder}
-                  className="w-full rounded-md border-2 border-black px-3 py-2 text-sm font-semibold outline-none placeholder:text-gray-400"
+                  className="w-full rounded-[var(--ui-radius-sm)] border-2 border-black px-3 py-2 text-sm font-semibold outline-none placeholder:text-[var(--ui-muted)]"
                 />
               </div>
               <div className="max-h-64 overflow-y-auto brutal-scroll-area">
                 {filtered.length === 0 ? (
-                  <div className="px-4 py-6 text-center text-sm font-semibold text-gray-500">{emptyMessage}</div>
+                  <div className="px-4 py-6 text-center text-sm font-semibold text-[var(--ui-muted)]">{emptyMessage}</div>
                 ) : (
                   filtered.map((option, index) => (
                     <div
@@ -165,14 +165,14 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                         "cursor-pointer border-b-2 border-black px-4 py-3 last:border-b-0",
                         index === selectedIndex && "bg-[var(--ui-accent)]",
                         option.value === value && "font-bold",
-                        option.disabled && "cursor-not-allowed bg-gray-100 opacity-50"
+                        option.disabled && "cursor-not-allowed bg-[var(--ui-surface-muted)] opacity-50"
                       )}
                     >
                       <div className="flex items-center justify-between gap-3">
                         <span className="text-sm font-semibold">{option.label}</span>
                         {option.value === value && <span aria-hidden="true">✓</span>}
                       </div>
-                      {option.description && <p className="mt-1 text-xs font-medium text-gray-600">{option.description}</p>}
+                      {option.description && <p className="mt-1 text-xs font-medium text-[var(--ui-muted)]">{option.description}</p>}
                     </div>
                   ))
                 )}

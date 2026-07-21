@@ -44,7 +44,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               w-5 h-5
               bg-[var(--ui-surface)]
               border-2 border-black
-              rounded-md
+              rounded-[var(--ui-radius-sm)]
               shadow-[var(--ui-shadow-sm)]
               transition-all duration-150 ease-out
               group-hover:translate-x-[-1px] group-hover:translate-y-[-1px]

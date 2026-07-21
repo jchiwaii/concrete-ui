@@ -17,7 +17,7 @@ const Empty = forwardRef<HTMLDivElement, EmptyProps>(
       <div
         ref={ref}
         className={cn(
-          "flex flex-col items-center justify-center gap-4 rounded-lg p-8 text-center",
+          "flex flex-col items-center justify-center gap-4 rounded-[var(--ui-radius)] p-8 text-center",
           variants[variant],
           className
         )}
@@ -34,7 +34,7 @@ const EmptyIcon = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     <div
       ref={ref}
       className={cn(
-        "flex h-16 w-16 items-center justify-center rounded-lg border-2 border-black bg-[var(--ui-accent)] text-black shadow-[var(--ui-shadow)]",
+        "flex h-16 w-16 items-center justify-center rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-accent)] text-black shadow-[var(--ui-shadow)]",
         className
       )}
       {...props}
@@ -54,7 +54,7 @@ EmptyTitle.displayName = "EmptyTitle";
 
 const EmptyDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
   ({ className = "", ...props }, ref) => (
-    <p ref={ref} className={cn("max-w-md text-sm font-medium text-gray-600", className)} {...props} />
+    <p ref={ref} className={cn("max-w-md text-sm font-medium text-[var(--ui-muted)]", className)} {...props} />
   )
 );
 

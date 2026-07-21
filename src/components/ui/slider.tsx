@@ -188,7 +188,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
       bg-[var(--ui-surface)]
       border-2 border-black
       shadow-[var(--ui-shadow)]
-      ${orientation === "horizontal" ? "h-10 w-full rounded-lg" : "w-10 h-full rounded-lg"}
+      ${orientation === "horizontal" ? "h-10 w-full rounded-[var(--ui-radius)]" : "w-10 h-full rounded-[var(--ui-radius)]"}
       ${!disabled ? "hover:shadow-[var(--ui-shadow-md)]" : ""}
     `;
 

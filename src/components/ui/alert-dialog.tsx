@@ -72,7 +72,7 @@ AlertDialogHeader.displayName = "AlertDialogHeader";
 
 const AlertDialogTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
   ({ className = "", ...props }, ref) => (
-    <h2 ref={ref} className={cn("text-2xl font-semibold tracking-[-0.035em]", className)} {...props} />
+    <h2 ref={ref} className={cn("text-xl font-semibold tracking-[-0.025em]", className)} {...props} />
   )
 );
 
@@ -80,7 +80,7 @@ AlertDialogTitle.displayName = "AlertDialogTitle";
 
 const AlertDialogDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
   ({ className = "", ...props }, ref) => (
-    <p ref={ref} className={cn("mt-2 text-sm font-medium text-gray-600", className)} {...props} />
+    <p ref={ref} className={cn("mt-2 text-sm font-medium text-[var(--ui-muted)]", className)} {...props} />
   )
 );
 
