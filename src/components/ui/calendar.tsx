@@ -48,12 +48,12 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
     }, [visibleMonth]);
 
     return (
-      <div ref={ref} className={cn("w-full max-w-sm rounded-lg border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow)]", className)} {...props}>
+      <div ref={ref} className={cn("w-full max-w-sm rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface)] shadow-[var(--ui-shadow)]", className)} {...props}>
         <div className="flex items-center justify-between border-b-2 border-black bg-[var(--ui-accent)] p-3">
           <button
             type="button"
             onClick={() => setMonth(new Date(visibleMonth.getFullYear(), visibleMonth.getMonth() - 1, 1))}
-            className="flex h-9 w-9 items-center justify-center rounded-md border-2 border-black bg-[var(--ui-surface)] text-lg font-bold shadow-[var(--ui-shadow-sm)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5"
+            className="flex h-9 w-9 items-center justify-center rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-surface)] text-lg font-bold shadow-[var(--ui-shadow-sm)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5"
             aria-label="Previous month"
           >
             ‹
@@ -62,15 +62,15 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
           <button
             type="button"
             onClick={() => setMonth(new Date(visibleMonth.getFullYear(), visibleMonth.getMonth() + 1, 1))}
-            className="flex h-9 w-9 items-center justify-center rounded-md border-2 border-black bg-[var(--ui-surface)] text-lg font-bold shadow-[var(--ui-shadow-sm)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5"
+            className="flex h-9 w-9 items-center justify-center rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-surface)] text-lg font-bold shadow-[var(--ui-shadow-sm)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5"
             aria-label="Next month"
           >
             ›
           </button>
         </div>
-        <div className="grid grid-cols-7 border-b-2 border-black bg-gray-100">
+        <div className="grid grid-cols-7 border-b-2 border-black bg-[var(--ui-surface-muted)]">
           {weekDays.map((day) => (
-            <div key={day} className="p-2 text-center text-[11px] font-semibold tracking-widest text-gray-500">
+            <div key={day} className="p-2 text-center text-[11px] font-semibold tracking-widest text-[var(--ui-muted)]">
               {day}
             </div>
           ))}
@@ -87,7 +87,7 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                 disabled={disabled}
                 onClick={() => date && onSelect?.(date)}
                 className={cn(
-                  "m-0.5 flex h-10 items-center justify-center rounded-md border-2 text-sm font-bold transition-all duration-100",
+                  "m-0.5 flex h-10 items-center justify-center rounded-[var(--ui-radius-sm)] border-2 text-sm font-bold transition-all duration-100",
                   date ? "border-black" : "border-transparent",
                   active ? "bg-black text-white shadow-[2px_2px_0_var(--ui-accent)]" : today ? "bg-[var(--ui-info)] text-black" : "bg-[var(--ui-surface)] text-black hover:bg-[var(--ui-accent-soft)]",
                   disabled && "cursor-not-allowed opacity-30 hover:bg-[var(--ui-surface)]"

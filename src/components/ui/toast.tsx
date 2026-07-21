@@ -39,7 +39,7 @@ function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
   };
 
   const iconStyles = {
-    default: "text-gray-600",
+    default: "text-[var(--ui-muted)]",
     success: "text-green-600",
     error: "text-red-600",
     warning: "text-amber-600",
@@ -81,7 +81,7 @@ function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
         p-4
         border-2
         shadow-[var(--ui-shadow)]
-        rounded-lg
+        rounded-[var(--ui-radius)]
         animate-brutal-slide-in
         pointer-events-auto
         ${variantStyles[variant]}
@@ -92,7 +92,7 @@ function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
       <button
         type="button"
         onClick={() => onDismiss(id)}
-        className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors"
+        className="absolute top-3 right-3 text-[var(--ui-muted)] hover:text-[var(--ui-muted)] transition-colors"
         aria-label="Close"
       >
         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -107,13 +107,13 @@ function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
         <div className="flex-1 min-w-0">
           <div className="text-sm font-semibold text-black">{title}</div>
           {description && (
-            <div className="text-sm text-gray-600 mt-1">{description}</div>
+            <div className="text-sm text-[var(--ui-muted)] mt-1">{description}</div>
           )}
           {action && (
             <button
               type="button"
               onClick={action.onClick}
-              className="mt-3 px-3 py-1.5 text-xs font-semibold bg-black text-white rounded-md hover:bg-gray-800 transition-colors"
+              className="mt-3 px-3 py-1.5 text-xs font-semibold bg-black text-white rounded-[var(--ui-radius-sm)] hover:bg-[var(--ui-ink)] transition-colors"
             >
               {action.label}
             </button>

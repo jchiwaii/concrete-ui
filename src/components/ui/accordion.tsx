@@ -132,7 +132,7 @@ const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
         <span>{children}</span>
         <svg
           className={cn(
-            "h-4 w-4 shrink-0 text-gray-500 transition-transform duration-150",
+            "h-4 w-4 shrink-0 text-[var(--ui-muted)] transition-transform duration-150",
             isOpen && "rotate-180"
           )}
           fill="none"
@@ -168,7 +168,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
         role="region"
         aria-labelledby={`${context.baseId}-trigger-${value}`}
         className={cn(
-          "border-t-2 border-black px-5 py-4 text-sm leading-6 text-gray-600 animate-brutal-fade-in",
+          "border-t-2 border-black px-5 py-4 text-sm leading-6 text-[var(--ui-muted)] animate-brutal-fade-in",
           className
         )}
         {...props}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Badge, buttonStyles } from "@/components/ui";
+import { buttonStyles } from "@/components/ui";
 import { CodeBlock } from "@/components/docs";
 
 const requirements = ["React 19", "Tailwind CSS 4", "TypeScript"];
@@ -8,107 +8,70 @@ const steps = [
   {
     number: "01",
     title: "Load the typefaces",
-    description: "Space Grotesk handles interface text; JetBrains Mono is reserved for code and numeric detail.",
+    description: "Barlow handles interface copy, Barlow Condensed carries command headings, and JetBrains Mono is reserved for technical data.",
     language: "css",
-    code: `@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap");
-
-body {
-  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-}`,
+    code: `@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");\n\nbody {\n  font-family: "Barlow", ui-sans-serif, system-ui, sans-serif;\n}`,
   },
   {
     number: "02",
-    title: "Add the semantic foundation",
-    description: "Keep the visual identity in tokens so component APIs stay independent from a specific palette.",
+    title: "Establish the field palette",
+    description: "Keep structure in semantic tokens so components remain adaptable without losing state contrast.",
     language: "css",
-    code: `:root {
-  --ui-ink: #171714;
-  --ui-canvas: #f4f1e8;
-  --ui-surface: #fffef9;
-  --ui-surface-muted: #ebe8df;
-  --ui-muted: #6d6c64;
-  --ui-accent: #ffd84d;
-  --ui-accent-soft: #fff1ad;
-  --ui-info: #9ed9f3;
-  --ui-success: #8fd694;
-  --ui-danger: #ff6b62;
-
-  --ui-radius-sm: 6px;
-  --ui-radius: 10px;
-  --ui-radius-lg: 14px;
-  --ui-shadow-sm: 2px 2px 0 var(--ui-ink);
-  --ui-shadow: 3px 3px 0 var(--ui-ink);
-  --ui-shadow-md: 4px 4px 0 var(--ui-ink);
-}`,
+    code: `:root {\n  --ui-ink: #080a08;\n  --ui-canvas: #d8d5c8;\n  --ui-surface: #efede4;\n  --ui-surface-muted: #d0cec3;\n  --ui-muted: #5c6058;\n  --ui-accent: #f2c230;\n  --ui-info: #a7afa0;\n  --ui-success: #9cad72;\n  --ui-danger: #b85039;\n\n  --ui-radius: 0px;\n  --ui-shadow: 3px 3px 0 var(--ui-ink);\n}`,
   },
   {
     number: "03",
-    title: "Copy the shared utility",
-    description: "Components use a tiny class-name helper instead of requiring another runtime dependency.",
+    title: "Add the shared utility",
+    description: "The components only need a tiny class-name helper; there is no styling runtime to maintain.",
     language: "ts",
-    code: `// src/lib/utils.ts
-export type ClassValue = string | number | false | null | undefined;
-
-export function cn(...values: ClassValue[]): string {
-  return values.filter(Boolean).join(" ");
-}`,
+    code: `// src/lib/utils.ts\nexport type ClassValue = string | number | false | null | undefined;\n\nexport function cn(...values: ClassValue[]): string {\n  return values.filter(Boolean).join(" ");\n}`,
   },
   {
     number: "04",
-    title: "Own the components",
-    description: "Copy only what the product needs, keep it in one predictable directory, and adapt it locally.",
+    title: "Deploy only what you need",
+    description: "Copy primitives into one predictable directory, then adapt their API and tokens locally.",
     language: "text",
-    code: `src/
-  components/
-    ui/
-      button.tsx
-      card.tsx
-      field.tsx
-      input.tsx
-  lib/
-    utils.ts`,
+    code: `src/\n  components/\n    ui/\n      button.tsx\n      field.tsx\n      input.tsx\n  lib/\n    utils.ts`,
   },
 ];
 
 export default function InstallationPage() {
   return (
-    <div className="space-y-12">
-      <header className="border-b-2 border-black pb-8">
-        <Badge variant="secondary" className="mb-4">Getting started</Badge>
-        <h1 className="text-brutal-4xl font-bold tracking-[-0.045em]">Installation</h1>
-        <p className="mt-4 max-w-2xl text-base leading-7 text-gray-600">
-          Concrete UI follows a copy-and-own workflow. Add the shared foundation once,
-          then bring individual components into your project as you need them.
+    <div className="docs-page-stack">
+      <header className="docs-page-header">
+        <p className="docs-kicker">Getting started / Deployment</p>
+        <h1 className="docs-page-title">Initialize<br />the system.</h1>
+        <p className="docs-page-copy">
+          Concrete UI follows a copy-and-own workflow. Establish the visual protocol once,
+          then bring individual React components into the project as they become necessary.
         </p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          {requirements.map((requirement) => (
-            <span key={requirement} className="rounded-full border-2 border-black bg-[var(--ui-surface)] px-3 py-1.5 text-xs font-semibold">
-              {requirement}
-            </span>
-          ))}
+        <div className="docs-component-meta" aria-label="Requirements">
+          {requirements.map((requirement) => <span key={requirement} className="docs-meta-tag">{requirement}</span>)}
         </div>
       </header>
 
-      <div className="space-y-12">
+      <div>
         {steps.map((step) => (
-          <section key={step.number} className="grid gap-5 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-10">
-            <div>
-              <span className="font-mono text-xs font-bold text-gray-500">{step.number}</span>
-              <h2 className="mt-3 text-xl font-semibold tracking-[-0.035em]">{step.title}</h2>
-              <p className="mt-3 text-sm leading-6 text-gray-600">{step.description}</p>
+          <section key={step.number} className="docs-install-step">
+            <span className="docs-install-step-number">{step.number}</span>
+            <div className="docs-install-step-copy">
+              <h2>{step.title}</h2>
+              <p>{step.description}</p>
             </div>
-            <CodeBlock language={step.language} code={step.code} />
+            <div className="docs-install-step-code">
+              <CodeBlock language={step.language} code={step.code} />
+            </div>
           </section>
         ))}
       </div>
 
-      <section className="rounded-[var(--ui-radius-lg)] border-2 border-black bg-[var(--ui-accent)] p-6 shadow-[var(--ui-shadow)] sm:flex sm:items-center sm:justify-between sm:gap-6">
+      <section className="border border-[#f2c230] bg-[#f2c230] p-6 text-[#080a08] sm:flex sm:items-center sm:justify-between sm:gap-8">
         <div>
-          <h2 className="text-lg font-semibold tracking-[-0.03em]">Choose a component and start composing.</h2>
-          <p className="mt-2 text-sm leading-6 text-gray-700">Each page includes a working preview and the smallest useful implementation.</p>
+          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em]">Deployment window open</p>
+          <h2 className="mt-2 font-['Barlow_Condensed'] text-2xl font-bold uppercase">Choose a component and begin composition.</h2>
         </div>
         <Link href="/docs/components" className={buttonStyles({ variant: "neutral", size: "lg", className: "mt-5 sm:mt-0" })}>
-          Browse components
+          Open component index →
         </Link>
       </section>
     </div>

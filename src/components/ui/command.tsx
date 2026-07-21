@@ -104,9 +104,8 @@ const Command = forwardRef<HTMLDivElement, CommandProps>(
             top-1/2 left-1/2
             -translate-x-1/2 -translate-y-1/2
             z-[9999]
-            w-full
+            w-[calc(100%_-_2rem)]
             max-w-2xl
-            mx-4
           "
         >
           <CommandContext.Provider
@@ -120,8 +119,8 @@ const Command = forwardRef<HTMLDivElement, CommandProps>(
               }}
               className={`
                 bg-[var(--ui-surface)]
-                border-6 border-black
-                shadow-[var(--ui-shadow-xl)]
+                border-2 border-black
+                shadow-[var(--ui-shadow-lg)]
                 animate-brutal-slide-up
                 ${className}
               `}
@@ -171,14 +170,13 @@ const CommandInput = forwardRef<HTMLInputElement, CommandInputProps>(
           setSelectedIndex(0);
         }}
         onKeyDown={handleKeyDown}
-        autoFocus
         className={`
           w-full
-          px-6 py-4
-          border-b-4 border-black
+          px-4 py-3.5 sm:px-5
+          border-b-2 border-black
           outline-none
-          font-semibold text-lg
-          placeholder:text-gray-400 
+          font-semibold text-base
+          placeholder:text-[var(--ui-muted)]
           ${className}
         `}
         role="searchbox"
@@ -274,12 +272,13 @@ const CommandGroup = forwardRef<HTMLDivElement, CommandGroupProps>(
         {heading && (
           <div
             className="
-              px-6 py-2
-              text-xs
+              px-4 py-2 sm:px-5
+              text-[10px]
               font-semibold
-              text-gray-600
-              bg-gray-100
-              border-b-4 border-t-4 border-black
+              uppercase tracking-[0.08em]
+              text-[var(--ui-muted)]
+              bg-[var(--ui-surface-muted)]
+              border-b-2 border-t-2 border-black
             "
           >
             {heading}
@@ -354,14 +353,14 @@ const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(
           }
         }}
         className={`
-          px-6 py-3
-          border-b-4 border-black last:border-b-0
-          font-semibold
+          px-4 py-3 sm:px-5
+          border-b-2 border-black last:border-b-0
+          text-sm font-semibold
           flex items-center gap-3
           transition-all duration-100 ease-out
           ${
             disabled
-              ? "opacity-50 cursor-not-allowed bg-gray-200"
+              ? "opacity-50 cursor-not-allowed bg-[var(--ui-surface-muted)]"
               : "cursor-pointer"
           }
           ${isSelected && !disabled ? "bg-[var(--ui-accent)] text-black" : "bg-[var(--ui-surface)] text-black hover:bg-[var(--ui-accent-soft)]"}
@@ -378,7 +377,7 @@ const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(
         aria-disabled={disabled}
         {...props}
       >
-        {icon && <span className="text-xl">{icon}</span>}
+        {icon && <span className="text-base">{icon}</span>}
         <span>{children}</span>
       </div>
     );
@@ -394,7 +393,7 @@ const CommandSeparator = forwardRef<HTMLDivElement, CommandSeparatorProps>(
     return (
       <div
         ref={ref}
-        className={`h-1 bg-black ${className}`}
+        className={`h-0.5 bg-black ${className}`}
         role="separator"
         {...props}
       />

@@ -107,7 +107,7 @@ const ModalDescription = forwardRef<
   HTMLParagraphElement,
   HTMLAttributes<HTMLParagraphElement>
 >(({ className = "", children, ...props }, ref) => (
-  <p ref={ref} className={`mt-1.5 text-sm text-gray-600 ${className}`} {...props}>
+  <p ref={ref} className={`mt-1.5 text-sm text-[var(--ui-muted)] ${className}`} {...props}>
     {children}
   </p>
 ));
@@ -150,10 +150,10 @@ const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>(
         w-8 h-8
         flex items-center justify-center
         text-xl font-bold
-        text-gray-500
+        text-[var(--ui-muted)]
         rounded-[var(--ui-radius-sm)]
         transition-all duration-100 ease-out
-        hover:bg-gray-100 hover:text-black
+        hover:bg-[var(--ui-surface-muted)] hover:text-black
         ${className}
       `}
       onClick={onClick}

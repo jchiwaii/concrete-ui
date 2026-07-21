@@ -1,47 +1,56 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import {
-  Drawer,
-  DrawerBody,
-  DrawerClose,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  buttonStyles,
-} from "@/components/ui";
+import { useEffect, useState } from "react";
 
 const links = [
-  { label: "Documentation", href: "/docs" },
+  { label: "Docs", href: "/docs" },
   { label: "Components", href: "/docs/components" },
   { label: "Templates", href: "/docs/templates" },
 ];
 
-function Logo() {
+function ConcreteMark() {
   return (
-    <Link href="/" className="inline-flex items-center gap-2" aria-label="Concrete UI home">
-      <span className="text-xl font-bold tracking-[-0.045em]">Concrete</span>
-      <span className="rounded-[4px] bg-black px-1.5 py-0.5 text-xs font-bold text-white">UI</span>
-    </Link>
+    <svg viewBox="0 0 36 36" aria-hidden="true">
+      <path d="M18 2 33 10.5v15L18 34 3 25.5v-15L18 2Z" />
+      <path d="m18 9 8.5 4.8v8.4L18 27l-8.5-4.8v-8.4L18 9Z" />
+      <path d="M3 10.5 18 19l15-8.5M18 19v15" />
+    </svg>
   );
 }
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
-  return (
-    <header className="sticky top-0 z-30 border-b-2 border-black bg-[color:var(--ui-surface)/0.94] backdrop-blur-md">
-      <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between px-4 sm:px-6">
-        <Logo />
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary navigation">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-[var(--ui-radius-sm)] px-3 py-2 text-sm font-semibold text-gray-600 transition-colors hover:bg-black/5 hover:text-black"
-            >
+  return (
+    <header className="tactical-header">
+      <div className="tactical-header-inner">
+        <Link href="/" className="tactical-brand" aria-label="Concrete UI home">
+          <ConcreteMark />
+          <span>
+            <strong>Concrete</strong>
+            <small>Interface systems</small>
+          </span>
+        </Link>
+
+        <div className="tactical-header-status" aria-label="Build status">
+          <span />
+          Network stable
+        </div>
+
+        <nav className="tactical-desktop-nav" aria-label="Primary navigation">
+          {links.map((link, index) => (
+            <Link key={link.href} href={link.href}>
+              <span>0{index + 1}</span>
               {link.label}
             </Link>
           ))}
@@ -49,55 +58,53 @@ export function SiteHeader() {
             href="https://github.com/jchiwaii/concrete-ui"
             target="_blank"
             rel="noreferrer"
-            className={buttonStyles({ variant: "neutral", size: "sm", className: "ml-2" })}
+            className="tactical-header-cta"
           >
-            GitHub
+            Source ↗
           </a>
         </nav>
 
         <button
           type="button"
-          aria-label="Open navigation"
+          className="tactical-menu-button"
+          aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
-          onClick={() => setOpen(true)}
-          className="grid h-10 w-10 place-items-center rounded-[var(--ui-radius-sm)] border-2 border-black bg-[var(--ui-accent)] shadow-[var(--ui-shadow-sm)] md:hidden"
+          aria-controls="mobile-navigation"
+          onClick={() => setOpen((current) => !current)}
         >
-          <span className="grid gap-1" aria-hidden="true">
-            <span className="h-0.5 w-5 bg-black" />
-            <span className="h-0.5 w-5 bg-black" />
-            <span className="h-0.5 w-5 bg-black" />
-          </span>
+          <span>{open ? "Close" : "Menu"}</span>
+          <i aria-hidden="true" className={open ? "is-open" : ""}>
+            <b />
+            <b />
+          </i>
         </button>
       </div>
 
-      <Drawer open={open} onClose={() => setOpen(false)} direction="right" ariaLabel="Site navigation">
-        <DrawerContent>
-          <DrawerHeader>
-            <DrawerTitle>Navigate</DrawerTitle>
-            <DrawerClose onClose={() => setOpen(false)} />
-          </DrawerHeader>
-          <DrawerBody className="flex flex-col gap-2">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface)] px-4 py-3 text-base font-semibold shadow-[var(--ui-shadow-sm)]"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <a
-              href="https://github.com/jchiwaii/concrete-ui"
-              target="_blank"
-              rel="noreferrer"
-              className={buttonStyles({ variant: "neutral", size: "lg", className: "mt-3" })}
-            >
-              View on GitHub
-            </a>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <nav
+        id="mobile-navigation"
+        className={`tactical-mobile-nav ${open ? "is-open" : ""}`}
+        aria-label="Mobile navigation"
+        hidden={!open}
+      >
+        <span className="tactical-mobile-label">Select destination</span>
+        {links.map((link, index) => (
+          <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
+            <span>0{index + 1}</span>
+            {link.label}
+            <b aria-hidden="true">→</b>
+          </Link>
+        ))}
+        <a
+          href="https://github.com/jchiwaii/concrete-ui"
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => setOpen(false)}
+        >
+          <span>04</span>
+          GitHub source
+          <b aria-hidden="true">↗</b>
+        </a>
+      </nav>
     </header>
   );
 }

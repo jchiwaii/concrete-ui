@@ -54,7 +54,7 @@ export interface DropdownMenuTriggerProps
 const DropdownMenuTrigger = forwardRef<
   HTMLButtonElement,
   DropdownMenuTriggerProps
->(({ children, asChild = false, className = "", onClick, type = "button", ...props }, ref) => {
+>(({ children, asChild = false, className = "", onClick, onKeyDown, type = "button", ...props }, ref) => {
   const context = useContext(DropdownMenuContext);
   if (!context) {
     throw new Error("DropdownMenuTrigger must be used within DropdownMenu");
@@ -69,6 +69,7 @@ const DropdownMenuTrigger = forwardRef<
   if (asChild && isValidElement(children)) {
     const child = children as ReactElement<{
       onClick?: (event: MouseEvent<HTMLElement>) => void;
+      onKeyDown?: (event: React.KeyboardEvent<HTMLElement>) => void;
       className?: string;
     }>;
 
@@ -83,6 +84,14 @@ const DropdownMenuTrigger = forwardRef<
           child.props.onClick?.(event);
           onClick?.(event as unknown as React.MouseEvent<HTMLButtonElement>);
           handleClick(event);
+        },
+        onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => {
+          child.props.onKeyDown?.(event);
+          onKeyDown?.(event as unknown as React.KeyboardEvent<HTMLButtonElement>);
+          if (!event.defaultPrevented && event.key === "ArrowDown") {
+            event.preventDefault();
+            setIsOpen(true);
+          }
         },
         className: `${child.props.className ?? ""} ${className}`,
         "aria-haspopup": "menu",
@@ -104,8 +113,15 @@ const DropdownMenuTrigger = forwardRef<
         onClick?.(event);
         handleClick(event);
       }}
+      onKeyDown={(event) => {
+        onKeyDown?.(event);
+        if (!event.defaultPrevented && event.key === "ArrowDown") {
+          event.preventDefault();
+          setIsOpen(true);
+        }
+      }}
       className={`
-        px-6 py-3
+        min-h-10 px-4 py-2
         bg-[var(--ui-surface)]
         border-2 border-black
         shadow-[var(--ui-shadow)]
@@ -131,7 +147,7 @@ export interface DropdownMenuContentProps extends HTMLAttributes<HTMLDivElement>
 }
 
 const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>(
-  ({ children, align = "start", className = "", ...props }, ref) => {
+  ({ children, align = "start", className = "", onKeyDown, ...props }, ref) => {
     const context = useContext(DropdownMenuContext);
     if (!context) {
       throw new Error("DropdownMenuContent must be used within DropdownMenu");
@@ -144,6 +160,21 @@ const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>
     useClickOutside([contentRef, triggerRef], () => {
       if (isOpen) setIsOpen(false);
     }, isOpen);
+
+    useEffect(() => {
+      if (!isOpen) return;
+
+      const frame = requestAnimationFrame(() => {
+        contentRef.current
+          ?.querySelector<HTMLElement>('[role="menuitem"]:not([aria-disabled="true"])')
+          ?.focus();
+      });
+
+      return () => {
+        cancelAnimationFrame(frame);
+        triggerRef.current?.focus();
+      };
+    }, [isOpen, triggerRef]);
 
     // Handle escape key
     useEffect(() => {
@@ -177,6 +208,27 @@ const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>
           left: `${position.left}px`,
         }}
         role="menu"
+        onKeyDown={(event) => {
+          onKeyDown?.(event);
+          if (event.defaultPrevented) return;
+
+          const items = Array.from(
+            contentRef.current?.querySelectorAll<HTMLElement>('[role="menuitem"]:not([aria-disabled="true"])') ?? []
+          );
+          if (items.length === 0) return;
+
+          const currentIndex = items.indexOf(document.activeElement as HTMLElement);
+          let nextIndex = currentIndex;
+
+          if (event.key === "ArrowDown") nextIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
+          else if (event.key === "ArrowUp") nextIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
+          else if (event.key === "Home") nextIndex = 0;
+          else if (event.key === "End") nextIndex = items.length - 1;
+          else return;
+
+          event.preventDefault();
+          items[nextIndex]?.focus();
+        }}
         {...props}
       >
         {children}
@@ -217,20 +269,20 @@ const DropdownMenuItem = forwardRef<HTMLDivElement, DropdownMenuItemProps>(
       <div
         ref={ref}
         className={`
-          px-6 py-3
-          border-b-4 border-black last:border-b-0
-          font-semibold
+          px-4 py-2.5
+          border-b-2 border-black last:border-b-0
+          text-sm font-semibold
           transition-all duration-100 ease-out
           ${
             disabled
-              ? "opacity-50 cursor-not-allowed bg-gray-200"
+              ? "opacity-50 cursor-not-allowed bg-[var(--ui-surface-muted)]"
               : "cursor-pointer hover:bg-[var(--ui-accent)]"
           }
           ${className}
         `}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        tabIndex={disabled ? -1 : 0}
+        tabIndex={-1}
         role="menuitem"
         aria-disabled={disabled}
         {...props}
@@ -253,7 +305,7 @@ const DropdownMenuSeparator = forwardRef<
   return (
     <div
       ref={ref}
-      className={`h-1 bg-black ${className}`}
+      className={`h-0.5 bg-black ${className}`}
       role="separator"
       {...props}
     />
@@ -270,12 +322,12 @@ const DropdownMenuLabel = forwardRef<HTMLDivElement, DropdownMenuLabelProps>(
       <div
         ref={ref}
         className={`
-          px-6 py-2
+          px-4 py-2
           font-semibold
-          text-xs
-          text-gray-600
-          border-b-4 border-black
-          bg-gray-100
+          text-[10px] uppercase tracking-[0.08em]
+          text-[var(--ui-muted)]
+          border-b-2 border-black
+          bg-[var(--ui-surface-muted)]
           ${className}
         `}
         {...props}

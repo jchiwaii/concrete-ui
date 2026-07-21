@@ -11,7 +11,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
       ref={ref}
       role="group"
       className={cn(
-        "inline-flex overflow-hidden rounded-lg border-2 border-black shadow-[var(--ui-shadow)] [&_button]:rounded-none [&_button]:border-0 [&_button]:shadow-none",
+        "inline-flex overflow-hidden rounded-[var(--ui-radius)] border-2 border-black shadow-[var(--ui-shadow)] [&_button]:rounded-none [&_button]:border-0 [&_button]:shadow-none",
         orientation === "horizontal"
           ? "flex-row [&_button]:border-r-2 [&_button]:border-black [&_button:last-child]:border-r-0"
           : "flex-col [&_button]:border-b-2 [&_button]:border-black [&_button:last-child]:border-b-0",

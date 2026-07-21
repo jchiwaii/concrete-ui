@@ -86,7 +86,7 @@ const AlertDescription = forwardRef<
   HTMLParagraphElement,
   HTMLAttributes<HTMLParagraphElement>
 >(({ className = "", children, ...props }, ref) => (
-  <p ref={ref} className={`text-sm text-gray-700 ${className}`} {...props}>
+  <p ref={ref} className={`text-sm text-[var(--ui-ink-soft)] ${className}`} {...props}>
     {children}
   </p>
 ));

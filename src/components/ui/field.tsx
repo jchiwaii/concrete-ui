@@ -45,7 +45,7 @@ const FieldDescription = forwardRef<HTMLParagraphElement, FieldDescriptionProps>
   ({ className = "", ...props }, ref) => (
     <p
       ref={ref}
-      className={cn("text-sm font-medium text-gray-600", className)}
+      className={cn("text-sm font-medium text-[var(--ui-muted)]", className)}
       {...props}
     />
   )

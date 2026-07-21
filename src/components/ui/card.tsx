@@ -15,7 +15,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       variant = "default",
       color = "white",
       hover = false,
-      rounded = "lg",
+      rounded = "none",
       children,
       ...props
     },
@@ -110,7 +110,7 @@ const CardDescription = forwardRef<
 >(({ className = "", children, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("mt-1.5 text-sm leading-6 text-gray-600", className)}
+    className={cn("mt-1.5 text-sm leading-6 text-[var(--ui-muted)]", className)}
     {...props}
   >
     {children}

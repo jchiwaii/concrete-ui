@@ -5,7 +5,7 @@ export interface TimelineProps extends HTMLAttributes<HTMLOListElement> {}
 
 const Timeline = forwardRef<HTMLOListElement, TimelineProps>(
   ({ className = "", ...props }, ref) => (
-    <ol ref={ref} className={cn("relative grid gap-6 border-l-4 border-black pl-8", className)} {...props} />
+    <ol ref={ref} className={cn("relative grid gap-6 border-l-2 border-black pl-8", className)} {...props} />
   )
 );
 
@@ -44,7 +44,7 @@ TimelineTitle.displayName = "TimelineTitle";
 
 const TimelineDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
   ({ className = "", ...props }, ref) => (
-    <p ref={ref} className={cn("mt-1 text-sm font-medium text-gray-600", className)} {...props} />
+    <p ref={ref} className={cn("mt-1 text-sm font-medium text-[var(--ui-muted)]", className)} {...props} />
   )
 );
 
@@ -52,7 +52,7 @@ TimelineDescription.displayName = "TimelineDescription";
 
 const TimelineContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className = "", ...props }, ref) => (
-    <div ref={ref} className={cn("rounded-lg border-2 border-black bg-[var(--ui-surface)] p-4 shadow-[var(--ui-shadow)]", className)} {...props} />
+    <div ref={ref} className={cn("rounded-[var(--ui-radius)] border-2 border-black bg-[var(--ui-surface)] p-4 shadow-[var(--ui-shadow)]", className)} {...props} />
   )
 );
 

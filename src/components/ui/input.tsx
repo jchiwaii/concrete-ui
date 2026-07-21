@@ -10,12 +10,12 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className = "", error = false, rounded = false, sizeVariant = "md", ...props }, ref) => {
     const baseStyles =
-      "w-full border-2 border-black bg-[var(--ui-surface)] font-medium shadow-[var(--ui-shadow)] outline-none transition-[transform,box-shadow,border-color] duration-150 ease-out placeholder:font-normal placeholder:text-gray-400 focus:-translate-x-px focus:-translate-y-px focus:shadow-[var(--ui-shadow-md)] disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50";
+      "w-full border-2 border-black bg-[var(--ui-surface)] font-medium shadow-[var(--ui-shadow)] outline-none transition-[transform,box-shadow,border-color] duration-150 ease-out placeholder:font-normal placeholder:text-[var(--ui-muted)] focus:-translate-x-px focus:-translate-y-px focus:shadow-[var(--ui-shadow-md)] disabled:cursor-not-allowed disabled:bg-[var(--ui-surface-muted)] disabled:text-[var(--ui-muted)] disabled:opacity-70";
 
     const sizeStyles = {
-      sm: "h-9 px-3 text-sm",
-      md: "h-11 px-3.5 text-[15px]",
-      lg: "h-12 px-4 text-base",
+      sm: "h-[34px] px-3 text-[13px]",
+      md: "h-10 px-3.5 text-sm",
+      lg: "h-11 px-4 text-[15px]",
     };
 
     const errorStyles = error

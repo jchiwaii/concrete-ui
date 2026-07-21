@@ -6,7 +6,7 @@ const Skeleton = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
       <div
         ref={ref}
         className={`
-          bg-gray-200
+          bg-[var(--ui-surface-muted)]
           border-2 border-black
           animate-pulse
           ${className}
